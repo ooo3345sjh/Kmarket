@@ -18,7 +18,7 @@
 회원가입 : chhak.or.kr/Kmarket/member/join.html ○
 약관동의 : chhak.or.kr/Kmarket/member/signup.html ○
 회원가입 : chhak.or.kr/Kmarket/member/register.html (일반회원) ○
-회원가입 : chhak.or.kr/Kmarket/member/registerSeller.html (판매회원)
+회원가입 : chhak.or.kr/Kmarket/member/registerSeller.html (판매회원) ○
 
 // admin
 관리자 메인 : chhak.or.kr/Kmarket/admin/index.html
