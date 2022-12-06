@@ -35,6 +35,10 @@
             padding: 0 10px;
             color: #646464;
         }
+        header > div.top > nav > a:hover{
+            color: #333;
+            border-bottom: 1px solid #444;
+        }
         header > div.logo {height: 115px;}
         header > div.logo > a {
             display: inline-block;
@@ -137,7 +141,19 @@
             box-sizing: border-box;
             font-weight: bold;
         }
-        footer{
+
+        #member > .login > form > a {display: inline-block;}
+        #member > .login > form > a > img{
+            position: absolute;
+            top: 21px;
+            right: 0PX;
+        }
+        #member > .login > img {
+            display: block;
+            margin: 36px auto;
+        }
+
+        footer {
             width: 100%;
             height: 192px;
             background: #f8f8f8;
@@ -146,6 +162,29 @@
             border: 1px solid black;
             box-sizing: border-box;
         }
+        footer > div {
+            width: 1200px;
+            height: auto;
+            margin: 0px auto;
+            border-bottom: 1px solid #e9e9e9;
+            padding: 15px 0;
+            overflow: hidden;
+        }
+        footer >  div > ul {
+            float: right;
+            margin-right: 300px;
+            
+        }
+        
+        footer > div > ul > li {float: left;}
+        footer > div > ul > li > a {
+            display: inline-block;
+            border-left: 1px solid #d7d7d7;
+            padding: 0px 13px;
+        }
+        footer > div > ul > li:nth-child(4) > a {border-right:1px solid #d7d7d7}
+        
+
 
 
     </style>
@@ -200,19 +239,24 @@
                         <a href="#">비밀번호 찾기</a>
                         <a href="#">회원가입</a>
                     </div>
-                    <img src="./img/member_login_banner.jpg" alt="휴대폰번호로 편리하게 로그인">
+                    <a href="#">
+                        <img src="./img/member_login_banner.jpg" alt="휴대폰번호로 편리하게 로그인">
+                    </a>
                 </form>
+                <img src="./img/member_certifi_logo.gif" alt="banner">
             </div>
         </main>
         <footer>
-            <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
             <div>
-                <p></p>
+                <ul>
+                    <li><a href="#">회사소개</a></li>
+                    <li><a href="#">서비스이용약관</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                    <li><a href="#">전자금융거래약관</a></li>
+                </ul>
+            </div>
+            <div>
+                <img src="./img/footer_logo.png" alt="">
                 <p></p>
                 <p></p>
             </div>
