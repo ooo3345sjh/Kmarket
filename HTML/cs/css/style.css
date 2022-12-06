@@ -209,24 +209,97 @@ header > .logo a {
     background-position: -644px -92px;
 }
 
-#cs > .main > .qna > .ask {}
-#cs > .main > .tel {}
-#cs > .main > .tel > article {}
-#cs > .main > .tel > article > div{}
-#cs > .main > .tel > article h3 {}
-#cs > .main > .tel > article p {}
-#cs > .main > .tel > article span {}
-#cs > .main > .tel > article strong {}
-#cs > .main > .tel > article a {}
+#cs > .main > .qna > .ask {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #0078ff;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+#cs > .main > .tel {
+    overflow: hidden;
+}
+#cs > .main > .tel > article {
+    float: left;
+    width: 50%;
+    height: 300px;
+    padding: 16px;
+    box-sizing: border-box;
+}
+#cs > .main > .tel > article > div{
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    border-radius: 5px;
+}
+#cs > .main > .tel > article h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+#cs > .main > .tel > article p {
+    margin-top: 10px;
+}
+#cs > .main > .tel > article span {
+    
+    font-size: 14px;
+}
+#cs > .main > .tel > article strong {
+    font-size: 30px;
+    font-weight: bold;
+}
+#cs > .main > .tel > article a {
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 25px;
+}
 
 /* 푸터 영역 */
-footer {}
-footer > ul {}
-footer > ul > li {}
-footer > div {}
-footer p {}
+footer {
+    width: 100%;
+    height: 192px;
+    background: #f8f8f8;
+    border-top: 1px solid #e9e9e9;
+}
+footer > ul {
+    width: 1200px;
+    height: 39px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #e9e9e9;
+}
+footer > ul > li {
+    padding: 0 10px;
+    display: inline-block;
+    border-right: 1px solid #d7d7d7;
+}
+footer > ul > li:first-child(1) {
+    border-left: 1px solid #d7d7d7;
+}
+footer > ul > li:first-child(2) {}
+footer > ul > li:first-child(3) {}
+footer > ul > li:first-child(4) {}
+footer > div {
+    width: 1200px;
+    height: auto;
+    padding-top: 20px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+footer p {
+    float: left;
+    
+}
 footer p:nth-of-type(2) {}
-footer p > strong {}
+footer p > strong {
+    padding: 6px 15px 7px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+}
 
 /* 버튼 공통 */
 .btnWrite {
@@ -585,31 +658,111 @@ footer p > strong {}
     border-bottom: 1px solid #e9e9e9;
     box-sizing: border-box;
 }
-#cs > .faq > .view > article > nav > .title {}
-#cs > .faq > .view > article > nav > .title > span {}
-#cs > .faq > .view > article > nav > .date {}
-#cs > .faq > .view > article > .content {}
-#cs > .faq > .view > article > .content *{}
+#cs > .faq > .view > article > nav > .title {
+    margin-bottom: 6px;
+    font-size: 32px;
+    font-weight: bold;
+}
+#cs > .faq > .view > article > nav > .title > span {
+    font-family: sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    color: #006cff;
+    margin-right: 6px;
+}
+#cs > .faq > .view > article > nav > .date {
+    font-size: 14px;
+    color: #777;
+}
+#cs > .faq > .view > article > .content {
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid #e9e9e9;
+    padding: 26px;
+    box-sizing: border-box;
+}
+#cs > .faq > .view > article > .content *{
+    font-size: 16px;
+    line-height: 32px;
+}
 
 /* qna 공통 */
 #cs > .qna {}
-#cs > .qna > nav{}
-#cs > .qna > nav > div {}
-#cs > .qna > nav p {}
-#cs > .qna > nav p > span{}
-#cs > .qna > section {}
-#cs > .qna > section > aside {}
-#cs > .qna > section > article {}
-#cs > .qna > section > aside > h2 {}
+#cs > .qna > nav{
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #e9e9e9;
+    box-sizing: border-box;
+}
+#cs > .qna > nav > div {
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto
+}
+#cs > .qna > nav p {
+    float: left;
+    margin-top: 16px;
+    font-size: 16px;
+}
+#cs > .qna > nav p > span{
+    font-size: 12px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #777;
+}
+#cs > .qna > section {
+    position: relative;
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+    overflow: hidden;
+}
+#cs > .qna > section > aside {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 220px;
+    height: 100%;
+    border-right: 1px solid #e9e9e9;
+    box-sizing: border-box;
+}
+#cs > .qna > section > article {
+    float: right;
+    width: 980px;
+    min-height: 600px;
+}
+#cs > .qna > section > aside > h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 26px 0;
+}
 #cs > .qna > section > aside > ul {}
-#cs > .qna > section > aside > ul > li {}
-#cs > .qna > section > aside > ul > li > a{}
-#cs > .qna > section > aside > ul > li > a:hover {}
-#cs > .qna > section > aside > ul > .on > a {}
-#cs > .qna > section > article {}
+#cs > .qna > section > aside > ul > li {
+    margin-bottom: 16px;
+}
+#cs > .qna > section > aside > ul > li > a {
+    font-size: 16px;
+    font-weight: bold;
+    color: #9e9e9e;
+}
+#cs > .qna > section > aside > ul > li > a:hover {
+    color: #111;
+    text-decoration: underline;
+}
+#cs > .qna > section > aside > ul > .on > a {
+    color: #111;
+    text-decoration: underline;
+}
+#cs > .qna > section > article {
+    padding: 26px;
+    box-sizing: border-box;
+}
 
 /* qna - 글목록 */
-#cs > .qna > .list > article > table {}
+#cs > .qna > .list > article > table {
+    width: 100%;
+    border-collapse: collapse;
+}
 #cs > .qna > .list > article > table tr{}
 #cs > .qna > .list > article > table tr:hover{}
 #cs > .qna > .list > article > table td {}
