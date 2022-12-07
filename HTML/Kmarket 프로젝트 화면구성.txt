@@ -21,17 +21,17 @@
 회원가입 : chhak.or.kr/Kmarket/member/registerSeller.html (판매회원) ○
 
 // admin
-관리자 메인 : chhak.or.kr/Kmarket/admin/index.html
+관리자 메인 : chhak.or.kr/Kmarket/admin/index.html ○
 상품관리/목록 : chhak.or.kr/Kmarket/admin/product/list.html
 상품관리/등록 : chhak.or.kr/Kmarket/admin/product/register.html
 
 /*** 조광호 ***/
 // cs 
-고객센터 메인 : chhak.or.kr/Kmarket/cs/index.html
-공지사항 목록 : chhak.or.kr/Kmarket/cs/notice/list.html
-공지사항 보기 : chhak.or.kr/Kmarket/cs/notice/view.html
-자주묻는질문 목록 : chhak.or.kr/Kmarket/cs/faq/list.html
-자주묻는질문 보기 : chhak.or.kr/Kmarket/cs/faq/view.html
-문의하기 목록 : chhak.or.kr/Kmarket/cs/qna/list.html
-문의하기 보기 : chhak.or.kr/Kmarket/cs/qna/view.html
-문의하기 쓰기 : chhak.or.kr/Kmarket/cs/qna/write.html
+고객센터 메인 : chhak.or.kr/Kmarket/cs/index.html ○
+공지사항 목록 : chhak.or.kr/Kmarket/cs/notice/list.html ○
+공지사항 보기 : chhak.or.kr/Kmarket/cs/notice/view.html ○
+자주묻는질문 목록 : chhak.or.kr/Kmarket/cs/faq/list.html ○
+자주묻는질문 보기 : chhak.or.kr/Kmarket/cs/faq/view.html ○
+문의하기 목록 : chhak.or.kr/Kmarket/cs/qna/list.html ○
+문의하기 보기 : chhak.or.kr/Kmarket/cs/qna/view.html ○
+문의하기 쓰기 : chhak.or.kr/Kmarket/cs/qna/write.html ○

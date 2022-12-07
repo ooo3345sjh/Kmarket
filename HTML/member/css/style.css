@@ -251,36 +251,82 @@ header > div.logo > div > a {
     margin-top: 20px;
     margin-bottom: 10px;
     margin-left: 10px;
-        }
-        #member > .register > section > table tr {border-bottom: 1px solid #dfe5ed;}
-        #member > .register > section > table th {
-            width: 200px;
-            height: 54px;
-            padding: 0 20px;
-            font-size: 14px;
-            box-sizing: border-box;
-            background: #f4f6f9;
-            text-align: left;
-        }
-        #member > .register > section > table th > .essential{color: #ef3f43;}
-        #member > .register > section > table td {padding-left: 10px;}
-        #member > .register > section > table input {
-            vertical-align: middle;
-            padding: 0 5px;
-            height: 31px;
-            font-size: 14px;
-            border: 1px solid #dfe5ed;
-        }
-        #member > .register > section > table input > span {}
-        #member > .register > section > table label {font-size: 14px;}
-        #member > .register > section > table .radio input {
-            vertical-align: middle;
-            height: auto;
-        }
-        #member > .register > section > table .addr > td {padding-top: 10px;}
-        #member > .register > section > table .addr > td > input {margin-bottom: 6px;}
-        #member > .register > section > table .addr > td > input:nth-of-type(2) {width: 370px;}
-        #member > .register > section > table .addr > td > input:nth-of-type(3) {width: 370px;}
+}
+#member > .register > section > table tr {border-bottom: 1px solid #dfe5ed;}
+#member > .register > section > table th {
+    width: 200px;
+    height: 54px;
+    padding: 0 20px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background: #f4f6f9;
+    text-align: left;
+}
+#member > .register > section > table th > .essential{color: #ef3f43;}
+#member > .register > section > table td {padding-left: 10px;}
+#member > .register > section > table input {
+    vertical-align: middle;
+    padding: 0 5px;
+    height: 31px;
+    font-size: 14px;
+    border: 1px solid #dfe5ed;
+}
+#member > .register > section > table input > span {}
+#member > .register > section > table label {font-size: 14px;}
+#member > .register > section > table .radio input {
+    vertical-align: middle;
+    height: auto;
+}
+#member > .register > section > table .addr > td {padding-top: 10px;}
+#member > .register > section > table .addr > td > input {margin-bottom: 6px;}
+#member > .register > section > table .addr > td > input:nth-of-type(2) {width: 370px;}
+#member > .register > section > table .addr > td > input:nth-of-type(3) {width: 370px;}
+
+
+/* 회원가입 - registerSeller */
+#member > .registerSeller {}
+#member > .registerSeller > section {}
+#member > .registerSeller > section > table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-top: 1px solid #b6bdc7;
+}
+#member > .registerSeller > section > table > caption {
+    text-align: left;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+#member > .registerSeller > section > table tr {border-bottom: 1px solid #dfe5ed;}
+#member > .registerSeller > section > table th {
+    width: 200px;
+    height: 54px;
+    padding: 0 20px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background: #f4f6f9;
+    text-align: left;
+}
+#member > .registerSeller > section > table th > .essential{color: #ef3f43;}
+#member > .registerSeller > section > table td {padding-left: 10px;}
+#member > .registerSeller > section > table input {
+    vertical-align: middle;
+    padding: 0 5px;
+    height: 31px;
+    font-size: 14px;
+    border: 1px solid #dfe5ed;
+}
+#member > .registerSeller > section > table label {font-size: 14px;}
+#member > .registerSeller > section > table .radio input {
+    vertical-align: middle;
+    height: auto;
+}
+#member > .registerSeller > section > table .addr > td {padding-top: 10px;}
+#member > .registerSeller > section > table .addr > td > input {margin-bottom: 6px;}
+#member > .registerSeller > section > table .addr > td > input:nth-of-type(2) {width: 370px;}
+#member > .registerSeller > section > table .addr > td > input:nth-of-type(3) {width: 370px;}
 
 /*** 푸터 ***/
 footer {
