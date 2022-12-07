@@ -2,7 +2,11 @@
  $(function(){
     $(document).on('click', '#gnb > li', function(){
         $('#gnb > li').not($(this)).children('ol').slideUp(200);
-        $(this).children('ol').slideDown(200);
-
+        let display = $(this).children('ol').css('display');
+        if(display == 'block'){
+            $(this).children('ol').slideUp(200);
+        } else {
+            $(this).children('ol').slideDown(200);
+        }
     });
 })

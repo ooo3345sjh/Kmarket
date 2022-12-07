@@ -181,6 +181,165 @@ main > div > aside > #gnb ol > li > a {
 }
 
 
+/*** 관리자 상품목록 ***/
+#admin-product-list {height: 100%;}
+#admin-product-list > select {
+    width: 80px;
+    border: 1px solid #d6d6d6;
+    box-sizing:border-box;
+    height: 30px;
+    text-indent: 5px;
+}
+
+#admin-product-list > input {
+    height: 30px;
+    border: 1px solid #d6d6d6;
+    box-sizing:border-box;
+    margin: 25px 0 10px;
+    text-indent: 5px;
+}
+#admin-product-list > table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-top: 2px solid #8798a3;
+}
+#admin-product-list > table tr:first-child > th {
+    background: #f6f6f6;
+    padding: 15px;
+    border-bottom: 1px solid #e6e6e6;
+}
+#admin-product-list > table tr:first-child > th > input[type=checkbox] {margin-top: 1.5px;}
+#admin-product-list > table tr > td {padding: 10px;}
+#admin-product-list > table td {
+    border-bottom: 1px solid #e6e6e6;
+    text-align: center;
+}
+#admin-product-list > table td > img {width: 60px;}
+#admin-product-list > input[type=button] {
+    float: left;
+    background: #fff;
+    height: auto;
+    cursor: pointer;
+    text-indent: 0;
+    padding: 10px 15px;
+    border: 1px solid #d6d6d6;
+    box-sizing: border-box;
+}
+#admin-product-list > .paging {
+    display: block;
+    width: auto;
+    height: 32px;
+    margin-top: 28px;
+    text-align: center;
+}
+#admin-product-list > .paging > a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #d6d6d6;
+    background-repeat: no-repeat;
+    border-radius: 3px;
+    color: #999;
+}
+#admin-product-list > .paging > a:nth-child(1) {
+    background-image: url('../img/admin_paging_end_on.JPG');
+    background-position: 3px 1px;
+}
+#admin-product-list > .paging > a:nth-child(2) {
+    background-image: url('../img/admin_paging_next_on.JPG');
+    background-position: 2px 3px;
+}
+#admin-product-list > .paging > a:nth-child(13) {
+    background-image: url('../img/admin_paging_next_off.JPG');
+    background-position: 4px 3px;
+}
+#admin-product-list > .paging > a:nth-child(14) {
+    background-image: url('../img/admin_paging_end_off.JPG');
+    background-position: 5px 1px;
+}
+#admin-product-list > .paging > .pageNum {
+    position: relative;
+    top: -11px;
+}
+#admin-product-list > .paging > .on {
+    border: 1px solid #6699cc;
+    background: #6699cc;
+    color: #fff;
+    font-weight: bold;
+}
+#admin-product-list > .paging > .pageNum:not(.on):hover {background-color: #e7f2fb;}
+p.ico  {
+    padding: 25px 50px;
+    margin-top: 50px;
+    border: 1px solid #8497BF;
+    background: no-repeat #A8B2C5 url('../img/admin_ico_info.png') scroll 15px 20px;
+}
+
+/*** 관리자 상품등록 ***/
+#admin-product-register > form > table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+#admin-product-register > form > h2 {
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+#admin-product-register > form > p {
+    background: #eaeaea;
+    padding: 10px;
+    margin: 10px 0;
+}
+#admin-product-register table > caption {text-align: left;}
+#admin-product-register table  tr:nth-child(1) {
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+}
+#admin-product-register table  tr:not(:first-child) {border-bottom: 1px solid #e6e6e6;}
+#admin-product-register table  th {
+    width: 200px;
+    padding: 20px;
+    background: #f6f6f6;
+}
+#admin-product-register table  td {padding: 10px;}
+#admin-product-register table  td > select {
+    width: 140px; 
+    height: 35px; 
+    text-indent: 5px;
+    border: 1px solid #959595;
+}
+#admin-product-register table  td > input:not('input[type=file]') {border: 1px solid #959595;}
+#admin-product-register table  td > input[type=text] {
+    width: 200px; 
+    height: 35px; 
+    text-indent: 5px; 
+    box-sizing: border-box;
+}
+#admin-product-register table  td > p {
+    text-indent: 5px;
+    margin: 10px 0 5px;
+}
+#admin-product-register table  td > p:nth-child(1) {margin-top: 0;}
+#admin-product-register table  td > span {margin-left: 5px;}
+#admin-product-register > form > input[type=submit] {
+    float: right;
+    background: none;
+    border: 1px solid #959595;
+    border-radius: 2px;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+#admin-product-register > p.ico  {
+    padding: 25px 50px;
+    margin-top: 80px;
+    border: 1px solid #FDD845;
+    background: no-repeat #FFF6BF  url('../img/admin_ico_alert.png') scroll 15px 20px;
+}
 
 /*** 푸터 ***/
 footer {

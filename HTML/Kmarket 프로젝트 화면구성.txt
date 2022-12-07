@@ -22,8 +22,8 @@
 
 // admin
 관리자 메인 : chhak.or.kr/Kmarket/admin/index.html ○
-상품관리/목록 : chhak.or.kr/Kmarket/admin/product/list.html
-상품관리/등록 : chhak.or.kr/Kmarket/admin/product/register.html
+상품관리/목록 : chhak.or.kr/Kmarket/admin/product/list.html ○
+상품관리/등록 : chhak.or.kr/Kmarket/admin/product/register.html ○
 
 /*** 조광호 ***/
 // cs 
