@@ -211,6 +211,7 @@ main > div > aside > #gnb ol > li > a {
 }
 #admin-product-list > table tr:first-child > th > input[type=checkbox] {margin-top: 1.5px;}
 #admin-product-list > table tr > td {padding: 10px;}
+#admin-product-list > table tr:not(:first-child) > td:nth-child(4) {width: 300px;text-align: left;}
 #admin-product-list > table td {
     border-bottom: 1px solid #e6e6e6;
     text-align: center;
@@ -311,16 +312,33 @@ p.ico  {
     text-indent: 5px;
     border: 1px solid #959595;
 }
-#admin-product-register table  td > input:not('input[type=file]') {border: 1px solid #959595;}
-#admin-product-register table  td > input[type=text] {
+#admin-product-register table  td > div {overflow: hidden;}
+#admin-product-register table  td > div:nth-child(2) {margin: 15px 0;}
+#admin-product-register table  td  input[type=file] {float: left; width: 180px;}
+#admin-product-register table  td > input:not(input[type=file])  {
+    float: left;
     width: 200px; 
     height: 35px; 
     text-indent: 5px; 
+    border: 1px solid #959595;
     box-sizing: border-box;
 }
-#admin-product-register table  td > p {
+#admin-product-register table  td > span {float: left; line-height: 35px; font-weight: bold;}
+#admin-product-register table tr:not(:nth-child(9)) td > p {
+    float: left;
     text-indent: 5px;
-    margin: 10px 0 5px;
+    margin: 10px 0 5px 10px;
+}
+#admin-product-register table tr:nth-child(9) td > div > p {
+    float: left;
+    line-height: 23px;
+    margin-left: 52px;
+}
+#admin-product-register table tr:nth-child(10) td > p {
+    line-height: 20px;;
+    margin: 0;
+    text-indent: 0;
+    margin-left: 52px;
 }
 #admin-product-register table  td > p:nth-child(1) {margin-top: 0;}
 #admin-product-register table  td > span {margin-left: 5px;}
