@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>faq :: view</title>
+    <title>qna :: write</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -30,16 +30,15 @@
             </div>
         </header>
         <section id="cs">
-            <div class="faq">
+            <div class="qna">
                 <nav>
                     <div>
-                      <p>홈<span>></span>공지사항</p>
+                      <p>홈<span>></span>문의하기</p>
                     </div>
                 </nav>
-
-                <section class="view">
+                <section class="write">
                     <aside>
-                        <h2>자주묻는 질문</h2>
+                        <h2>문의하기</h2>
                         <ul>
                             <li class="on"><a href="#">회원</a></li>
                             <li><a href="#">쿠폰/이벤트</a></li>
@@ -51,26 +50,37 @@
                         </ul>
                     </aside>
                     <article>
-                        <nav>
-                            <h2 class="title"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</h2>
-                        </nav>
-                        <div class="content">
-                            <p>
-                                개인회원에서 법인회원(사업자 회원)으로 전환은 불가하므로 법인회원(사업자 회원) 전환은<br/>
-                                신규 가입으로 진행을 해야 합니다.<br/>
-                            </p>
-                            <p>
-                                ※ 피싱 관련 피해신고<br/>
-                                ▶ 경찰청 사이버수사국 (국번없이)182 : http://cyberbureau.police.go.kr<br/>
-                                ▶ KISA 인터넷침해대응센터 (국번없이)118 : http://www.krcert.or.kr<br/>
-                                감사합니다.
-                            </p>
-                        </div>
-                        <a href="./list.html" class="btnList">목록보기</a>
+                        <form action="#">
+                            <table>
+                                <tr>
+                                    <td>문의유형</td>
+                                    <td>
+                                        <select name="type">
+                                            <option value="0">선택</option>
+                                            <option>가입</option>
+                                            <option>탈퇴</option>
+                                            <option>회원정보</option>
+                                            <option>로그인</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>문의제목</td>
+                                    <td><input type="text" name="title" placeholder="제목을 입력하세요"></td>
+                                </tr>
+                                <tr>
+                                    <td>문의내용</td>
+                                    <td><textarea name="content" placeholder="내용을 입력하세요"></textarea></td>
+                                </tr>
+                            </table>
+                        </form>
+                        <a href="#" class="btnList">취소하기</a>
+                        <a href="#" class="btnSubmit">등록하기</a>
                     </article>
                 </section>
             </div>
         </section>
+
         <footer>
             <ul>
                 <li><a href="#">회사소개</a></li>
