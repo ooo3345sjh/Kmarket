@@ -409,7 +409,7 @@ main > section > section > h3 > span {
 /* 푸터 */
 
 footer {
-    width: 100%;
+    min-width: 1200px;
     height: 192px;
     background: #f8f8f8;
     border-top: 1px solid #e9e9e9;
@@ -473,7 +473,7 @@ footer p > strong {
     margin-left: 600px;
     width: 42px;
     height: 42px;
-    background-image: url('./img/top.png');
+    background-image: url('/img/top.png');
     border: none;
     font-size: 0;
     cursor: pointer;
