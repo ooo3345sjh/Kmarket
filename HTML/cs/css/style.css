@@ -552,6 +552,7 @@ footer p > strong {
     color: #777;
 }
 #cs > .faq > section {
+    margin: 0 auto;
     position: relative;
     width: 1200px;
     height: 0 auto;
