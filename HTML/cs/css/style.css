@@ -164,48 +164,28 @@ header > .logo a {
     position: relative;
     top: 100px;
     font-size: 14px;
-}
-#cs > .main > .faq > ol > li:nth-child(1) {
-    background-position: 0 0;
-}
-#cs > .main > .faq > ol > li:nth-child(2) {
-    background-position: -184px 0px;
-}
-#cs > .main > .faq > ol > li:nth-child(3) {
-    background-position: -92px 0px;
-}
-#cs > .main > .faq > ol > li:nth-child(4) {
-    background-position: -276px 0px;
-}
-#cs > .main > .faq > ol > li:nth-child(5) {
-    background-position: -368px 0px;
-}
-#cs > .main > .faq > ol > li:nth-child(6) {
-    background-position: -92px -485px;
-}
-#cs > .main > .faq > ol > li:nth-child(7) {
-    background-position: -644px 0px;
+    white-space:nowrap;
 }
 
-#cs > .main > .faq > ol > li:nth-child(1) > a:hover {
+#cs > .main > .faq > ol > li:nth-child(1) > a {
     background-position: 0 -92px;
 }
-#cs > .main > .faq > ol > li:nth-child(2) > a:hover {
+#cs > .main > .faq > ol > li:nth-child(2) > a {
     background-position: -184px -92px;
 }
-#cs > .main > .faq > ol > li:nth-child(3) > a:hover {
+#cs > .main > .faq > ol > li:nth-child(3) > a {
     background-position: -92px -92px;
 }
-#cs > .main > .faq > ol > li:nth-child(4) > a:hover {
+#cs > .main > .faq > ol > li:nth-child(4) > a {
     background-position: -276px -92px;
 }
-#cs > .main > .faq > ol > li:nth-child(5) > a:hover {
+#cs > .main > .faq > ol > li:nth-child(5) > a {
     background-position: -368px -92px;
 }
-#cs > .main > .faq > ol > li:nth-child(6) > a:hover {
+#cs > .main > .faq > ol > li:nth-child(6) > a {
     background-position: -92px -577px;
 }
-#cs > .main > .faq > ol > li:nth-child(7) > a:hover {
+#cs > .main > .faq > ol > li:nth-child(7) > a {
     background-position: -644px -92px;
 }
 
@@ -870,8 +850,14 @@ footer p > strong {
     text-indent: 10px;
     box-sizing: border-box;
 }
-#cs > .qna > .write > article table select {}
-#cs > .qna > .write > article table select * {}
+#cs > .qna > .write > article table select {
+    width: 100px;
+    height: 30px;
+    text-indent: 5px;
+}
+#cs > .qna > .write > article table select * {
+    font-size: 14px;
+}
 #cs > .qna > .write > article table textarea {
     width: 100%;
     height: 360px;
