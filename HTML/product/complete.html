@@ -36,6 +36,8 @@
             padding: 10px;
         }
 
+        #product > .complete > .message > h2 > i {font-size: 26px;}
+
         #product > .complete > .message > p {
             font-size: 18px;
             font-weight: bold;
@@ -44,13 +46,38 @@
         }
 
         #product > .complete > .info table tr > td {text-align: center;}
+        #product > .complete > .info table tr > td div {
+            float: left;
+            margin-left: 10px;
+            text-align: left;
+        }
+
+        #product > .complete > .info table tr > td div > p {
+            text-align: left;
+            color: #777;
+            margin-top: 4px;
+        }
+
+        #product > .complete > .info table tr > td img {float: left; width: 80px;}
         #product > .complete > .info table tr > td:last-child {
             color: #ff006c;
             font-weight: bold;
             text-align: right;
         }
+        #product > .complete > .info table tr > td > article {
+            overflow: hidden;
+            padding: 6px;
+        }
+
+        #product > .complete > .info .total > td > table {border: none;}
+        
         #product > .complete > .info .total > td > table {border: none;}
         #product > .complete > .info .total > td > table tr {border: none;}
+        #product > .complete > .info .total > td > table tr:last-child span {
+            font-weight: bold;
+            color: #ff006c;
+        }
+
         #product > .complete > .info .total > td > table td {
             text-align: right;
             color: #111;
@@ -93,14 +120,33 @@
         }
 
         #product > .complete > .order table span {font-weight: bold; color: #ff006c;}
-        #product > .complete > .delivery table tr > td {}
-        #product > .complete > .delivery table tr > td:nth-child(1) {}
-        #product > .complete > .delivery table tr > td:nth-child(3) {}
-        #product > .complete > .alert {}
-        #product > .complete > .alert > h1 {}
-        #product > .complete > .alert > ul {}
-        #product > .complete > .alert > ul > li {}
-        #product > .complete > .alert > ul > li > span {}
+        #product > .complete > .delivery table tr > td {
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        #product > .complete > .delivery table tr > td:nth-child(1) {
+            width: 160px;
+            background: #f2f2f2;
+        }
+        #product > .complete > .delivery table tr > td:nth-child(3) {
+            width: 200px;
+            background: #f2f2f2;
+        }
+
+        #product > .complete > .alert {
+            width: 100%;
+            background-color: #f7f7f7;
+            padding: 10px;
+            padding-left: 24px;
+            color: #999;
+            box-sizing: border-box;
+        }
+
+        #product > .complete > .alert > h1 {margin-left: -12px;}
+        #product > .complete > .alert > ul {list-style: inherit;}
+        #product > .complete > .alert > ul > li {line-height: 20px;}
+        #product > .complete > .alert > ul > li > span {position: relative; left: -6px;}
     </style>
 </head>
 <body>
@@ -217,7 +263,7 @@
                 <nav>
                     <h1>주문완료</h1>
                     <p>
-                        HOME > 장바구니 > 주문결제
+                        HOME > 장바구니 > 주문결제 >
                         <strong>주문완료</strong>
                     </p>
                 </nav>
