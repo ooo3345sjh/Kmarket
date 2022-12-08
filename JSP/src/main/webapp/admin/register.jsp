@@ -77,24 +77,25 @@
                             <tr>
                                 <th>1차 분류</th>
                                 <td>
-                                    <select name="category2" required>
+                                    <select name="category1" class="category1" required onchange="optionChange();">
                                         <option value="none" disabled selected>1차 분류 선택</option>
-                                        <option value="cate0">남성의류</option>
-                                        <option value="cate1">여성의류</option>
-                                        <option value="cate1">잡화</option>
-                                        <option value="cate1">뷰티</option>
+                                        <option value="10">브랜드패션</option>
+                                        <option value="11">패션의류·잡화·뷰티</option>
+                                        <option value="12">유아동</option>
+                                        <option value="13">식품·생필품</option>
+                                        <option value="14">홈데코·문구·취미·반려</option>
+                                        <option value="15">컴퓨터·디지털·가전</option>
+                                        <option value="16">스포츠·건강·렌탈</option>
+                                        <option value="17">자동차·공구</option>
+                                        <option value="18">여행·도서·티켓·e쿠폰</option>
                                     </select>
                                 </td>
                             </tr>
                             <tr>
                                 <th>2차 분류</th>
                                 <td>
-                                    <select name="category1" required>
+                                    <select name="category2" class="category2" required>
                                         <option value="none" disabled selected>2차 분류 선택</option>
-                                        <option value="cate0">패션·의류·뷰티</option>
-                                        <option value="cate1">가전·디지털</option>
-                                        <option value="cate1">식품·생필품</option>
-                                        <option value="cate1">홈·문구·취미</option>
                                     </select>
                                 </td>
                             </tr>
