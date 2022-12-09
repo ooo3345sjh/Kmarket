@@ -3,8 +3,8 @@ package kr.co.Kmarket.vo;
 public class ProductVO {
 	
 	private int prodNo;
-	private int prodCate1;
-	private int prodCate2;
+	private int cate1;
+	private int cate2;
 	private String prodName;
 	private String descript;
 	private String company;
@@ -37,17 +37,17 @@ public class ProductVO {
 	public void setProdNo(int prodNo) {
 		this.prodNo = prodNo;
 	}
-	public int getProdCate1() {
-		return prodCate1;
+	public int getCate1() {
+		return cate1;
 	}
-	public void setProdCate1(int prodCate1) {
-		this.prodCate1 = prodCate1;
+	public void setCate1(int cate1) {
+		this.cate1 = cate1;
 	}
-	public int getProdCate2() {
-		return prodCate2;
+	public int getCate2() {
+		return cate2;
 	}
-	public void setProdCate2(int prodCate2) {
-		this.prodCate2 = prodCate2;
+	public void setCate2(int cate2) {
+		this.cate2 = cate2;
 	}
 	public String getProdName() {
 		return prodName;
@@ -193,6 +193,7 @@ public class ProductVO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
+	
 	
 	
 }
