@@ -10,7 +10,7 @@
 상품상세 : chhak.or.kr/Kmarket/product/view.html ○
 장바구니 : chhak.or.kr/Kmarket/product/cart.html ○
 주문결제 : chhak.or.kr/Kmarket/product/order.html ○
-주문완료 : chhak.or.kr/Kmarket/product/complete.html
+주문완료 : chhak.or.kr/Kmarket/product/complete.html ○
 
 /*** 서정현 ***/
 //member
