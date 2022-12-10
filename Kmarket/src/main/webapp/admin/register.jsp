@@ -70,7 +70,7 @@
                         <h1>상품등록</h1>
                         <p>HOME > 상품관리 > <span>상품등록</span></p>
                     </nav>
-                    <form action="/JSP/admin/register.do" method="post" enctype="multipart/form-data">
+                    <form action="/Kmarket/admin/register.do" method="post" enctype="multipart/form-data">
                         <h2>상품분류</h2>
                         <p>기본분류는 반드시 선택하셔야 합니다. 하나의 상품에 1개의 분류를 지정 합니다.</p>
                         <table border="0">

@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -23,6 +26,7 @@ public class RegisterController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private ProductService service = ProductService.INSTANCE;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public void init() throws ServletException {
@@ -30,12 +34,14 @@ public class RegisterController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		logger.info("RegisterController doGet...");
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/register.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		logger.info("RegisterController doPost...");
 		ServletContext ctx = req.getServletContext();
 		String path = ctx.getRealPath("/file");
 		

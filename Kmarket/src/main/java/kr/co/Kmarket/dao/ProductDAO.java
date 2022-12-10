@@ -4,15 +4,21 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kr.co.Kmarket.db.DBCP;
 import kr.co.Kmarket.db.Sql;
 import kr.co.Kmarket.vo.ProductVO;
 
 public class ProductDAO extends DBCP {
 	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	public void insertProduct (ProductVO vo) {
 		
 		try {
+			logger.info("insertProduct...");
 			Connection conn = getConnection();
 			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_PRODUCT);
 			psmt.setInt(1, vo.getCate1());
@@ -41,7 +47,7 @@ public class ProductDAO extends DBCP {
 			conn.close();
 		
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 	}
 	public void selectProduct () {}
