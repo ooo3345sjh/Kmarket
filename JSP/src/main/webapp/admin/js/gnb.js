@@ -62,7 +62,7 @@ function optionChange(){
 	$('.category2').empty();
 	
 	for (let i=0; i < change.length; i++){
-		let option = $('<option>'+change[i]+'</option>');
+		let option = $("<option value="+[i]+">"+change[i]+"</option>");
 		$('.category2').append(option);
 	}
 }
