@@ -15,6 +15,7 @@
 // select box 동적 추가
 function optionChange(){
 	
+	// category2에 속하는 것들 배열로 추가
 	let brand = ['브랜드 여성의류', '브랜드 남성의류', '브랜드 진/캐쥬얼', '브랜드 신발/가방', '브랜드 쥬얼리/시계', '브랜드 아웃도어'];
 	let cloth = ['여성의류', '남성의류', '언더웨어', '신발', '가방/잡화', '쥬얼리/시계', '화장품/향수', '바디/헤어'];
 	let kids = ['출산/육아', '장난감/완구', '유아동 의류', '유아동 신발/잡화'];
@@ -25,6 +26,8 @@ function optionChange(){
 	let car = ['자동차용품', '공구/안전/산업용품'];
 	let ticket = ['여행/항공권', '도서/음반/e교육', '공연티켓', 'e쿠폰', '상품권'];
 	
+	// category1의 select option에서 value값 받아오기
+	// 여기서 value값 = DB에 들어갈 cate1의 고유번호
 	let cate1 = $('.category1').val();
 	
 	let change;
@@ -59,6 +62,7 @@ function optionChange(){
 			break;
 	}
 	
+	// 옵션을 추가하기 전에 select box를 비워준다.
 	$('.category2').empty();
 	
 	for (let i=0; i < change.length; i++){
