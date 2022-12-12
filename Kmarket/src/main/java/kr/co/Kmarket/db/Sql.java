@@ -25,5 +25,7 @@ public class Sql {
 												+ "`origin`=?, "
 												+ "`ip`=?, "
 												+ "`rdate`=NOW()";
+	
+	public static final String SELECT_COUNT_TOTAL_PROD = "SELECT COUNT(`no`) FROM `km_product";
 
 }
