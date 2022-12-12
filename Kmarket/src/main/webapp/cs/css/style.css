@@ -1,5 +1,5 @@
 
-/* 메인 */
+/* 硫붿씤 */
 #cs {
     width: 100%;
     height: auto;
@@ -93,25 +93,25 @@
     top: 100px;
     font-size: 14px;
 }
-#cs > .main > .faq > ol > li:nth-child(1) {
+#cs > .main > .faq > ol > li:nth-child(1) > a{
     background-position: 0 0;
 }
-#cs > .main > .faq > ol > li:nth-child(2) {
+#cs > .main > .faq > ol > li:nth-child(2) > a{
     background-position: -184px 0px;
 }
-#cs > .main > .faq > ol > li:nth-child(3) {
+#cs > .main > .faq > ol > li:nth-child(3) > a{
     background-position: -92px 0px;
 }
-#cs > .main > .faq > ol > li:nth-child(4) {
+#cs > .main > .faq > ol > li:nth-child(4) > a{
     background-position: -276px 0px;
 }
-#cs > .main > .faq > ol > li:nth-child(5) {
+#cs > .main > .faq > ol > li:nth-child(5) > a{
     background-position: -368px 0px;
 }
-#cs > .main > .faq > ol > li:nth-child(6) {
+#cs > .main > .faq > ol > li:nth-child(6) > a{
     background-position: -92px -485px;
 }
-#cs > .main > .faq > ol > li:nth-child(7) {
+#cs > .main > .faq > ol > li:nth-child(7) > a{
     background-position: -644px 0px;
 }
 
@@ -183,7 +183,7 @@
     font-size: 23px;
 }
 
-/* 버튼 공통 */
+/* 踰꾪듉 怨듯넻 */
 .btnWrite {
     float: right;
     padding: 10px 20px;
@@ -234,7 +234,7 @@
     background-color: #0954f6;
 }
 
-/* 고객센터 sub 공통 */
+/* 怨좉컼�꽱�꽣 sub 怨듯넻 */
 
 #cs > div > section > article > nav {
     width: 100%;
@@ -250,7 +250,7 @@
 }
 
 
-/* notice 공통 */
+/* notice 怨듯넻 */
 #cs > .notice {}
 #cs > .notice > nav{
     width: 100%;
@@ -322,7 +322,7 @@
     box-sizing: border-box;
 }
 
-/* notice - 글목록 */
+/* notice - 湲�紐⑸줉 */
 #cs > .notice > .list > article > table {
     width: 100%;
     border-collapse: collapse;
@@ -378,7 +378,7 @@
     color: #fff;
 }
 
-/* notice - 글보기 */
+/* notice - 湲�蹂닿린 */
 #cs > .notice > .view {}
 #cs > .notice > .view > article {}
 #cs > .notice > .view > article > nav {
@@ -410,7 +410,7 @@
     line-height: 32px;
 }
 
-/* faq 공통 */
+/* faq 怨듯넻 */
 #cs > .faq {}
 #cs > .faq > nav{
     width: 100%;
@@ -482,7 +482,7 @@
     box-sizing: border-box;
 }
 
-/* faq - 글목록 */
+/* faq - 湲�紐⑸줉 */
 #cs > .faq > .list > article > div {
     margin-top: 26px;
 }
@@ -530,7 +530,7 @@
     text-align: center;
 }
 
-/* faq - 글보기 */
+/* faq - 湲�蹂닿린 */
 #cs > .faq > .view {}
 #cs > .faq > .view > article {}
 #cs > .faq > .view > article > nav {
@@ -569,7 +569,7 @@
     line-height: 32px;
 }
 
-/* qna 공통 */
+/* qna 怨듯넻 */
 #cs > .qna {}
 #cs > .qna > nav{
     width: 100%;
@@ -641,7 +641,7 @@
     box-sizing: border-box;
 }
 
-/* qna - 글목록 */
+/* qna - 湲�紐⑸줉 */
 #cs > .qna > .list > article > table {
     width: 100%;
     border-collapse: collapse;
@@ -695,7 +695,7 @@
     color: #fff;
 }
 
-/* qna - 글보기 */
+/* qna - 湲�蹂닿린 */
 #cs > .qna > .view {}
 #cs > .qna > .view > article {}
 #cs > .qna > .view > article > nav{
@@ -727,7 +727,7 @@
     line-height: 30px;
 }
 
-/* qna - 글쓰기 */
+/* qna - 湲��벐湲� */
 #cs > .qna > .write > article table {
     width: 100%;
     border-collapse: collapse;
@@ -752,8 +752,16 @@
     text-indent: 10px;
     box-sizing: border-box;
 }
-#cs > .qna > .write > article table select {}
-#cs > .qna > .write > article table select * {}
+#cs > .qna > .write > article table select {
+	width: 100px;
+    height: 40px;
+    text-indent: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+#cs > .qna > .write > article table select * {
+	font-size: 16px;
+}
 #cs > .qna > .write > article table textarea {
     width: 100%;
     height: 360px;

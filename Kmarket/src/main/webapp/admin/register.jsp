@@ -122,12 +122,15 @@
                                     <input type="text" name="productCompany" required>
                                 </td>
                             </tr>
+                            
+                            <!-- 정규 표현식과 replace 함수를 이용하여 숫자외의 값을 입력 못하게 막아두었습니다. -->
                             <tr>
                                 <th>판매가격</th>
                                 <td>
-                                    <input type="number" name="sellPrice" required><span>원</span>
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="sellPrice" required><span>원</span>
                                 </td>
                             </tr>
+                            
                             <tr>
                                 <th>할인율</th>
                                 <td>

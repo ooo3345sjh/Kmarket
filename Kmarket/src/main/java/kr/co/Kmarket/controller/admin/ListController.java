@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.Kmarket.service.ProductService;
+import kr.co.Kmarket.vo.ProductVO;
 
 import kr.co.Kmarket.vo.ProductVO;
 
@@ -22,7 +23,6 @@ public class ListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductService service = new ProductService();
 
-	
 	@Override
 	public void init() throws ServletException {
 	}
@@ -53,6 +53,13 @@ public class ListController extends HttpServlet {
 		}
 		
 		// 페이지 그룹 계산
+		int pageGroupCurrent = (int) Math.ceil(currentPage / 10.0);
+		int pageGroupStart = (pageGroupCurrent - 1) * 10 + 1;
+		int pageGroupEnd = pageGroupCurrent * 10;
+		
+		if (pageGroupEnd > lastPageNum) {
+			pageGroupEnd = lastPageNum;
+		}
 		
 		// 페이지 시작 번호 계산
 		start = (currentPage - 1) * 10;
@@ -65,6 +72,8 @@ public class ListController extends HttpServlet {
 		req.setAttribute("vo", vo);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("lastPageNum", lastPageNum);
+		req.setAttribute("pageGroupStart", pageGroupStart);
+		req.setAttribute("pageGroupEnd", pageGroupEnd);
 		req.setAttribute("pageStartNum", pageStartNum);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/list.jsp");

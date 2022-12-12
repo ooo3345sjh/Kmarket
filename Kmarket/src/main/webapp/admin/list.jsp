@@ -94,7 +94,7 @@
                         <tr>
                             <td><input type="checkbox" name="상품코드"></td>
                             <td>
-                                <img src="./img/sample_thumb.jpg" alt="thumb">
+                                <img src='<c:url value='/admin/img/sample_thumb.jpg'/>' alt="thumb">
                             </td>
                             <td>201603292</td>
                             <td>FreeMovement BLUEFORCE</td>
@@ -112,7 +112,7 @@
                         <tr>
                             <td><input type="checkbox" name="상품코드"></td>
                             <td>
-                                <img src="./img/sample_thumb.jpg" alt="thumb">
+                                <img src='<c:url value='/admin/img/sample_thumb.jpg'/>' alt="thumb">
                             </td>
                             <td>201603292</td>
                             <td>FreeMovement BLUEFORCE</td>
@@ -130,7 +130,7 @@
                         <tr>
                             <td><input type="checkbox" name="상품코드"></td>
                             <td>
-                                <img src="./img/sample_thumb.jpg" alt="thumb">
+                                <img src='<c:url value='/admin/img/sample_thumb.jpg'/>' alt="thumb">
                             </td>
                             <td>201603292</td>
                             <td>FreeMovement BLUEFORCE</td>
