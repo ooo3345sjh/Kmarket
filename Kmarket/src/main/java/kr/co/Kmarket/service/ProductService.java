@@ -16,6 +16,9 @@ public enum ProductService {
 	}
 	public void selectProduct () {}
 	public void selectProducts () {}
+	public void selectCountTotal() {
+		dao.selectCountTotal();
+	}
 	public void updateProduct () {}
 	public void deleteProduct () {}
 	

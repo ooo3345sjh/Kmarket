@@ -8,10 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.db.DBCP;
+import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.db.Sql;
 import kr.co.Kmarket.vo.ProductVO;
 
-public class ProductDAO extends DBCP {
+public class ProductDAO extends DBHelper {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -52,6 +53,15 @@ public class ProductDAO extends DBCP {
 	}
 	public void selectProduct () {}
 	public void selectProducts () {}
+	public void selectCountTotal() {
+		int total = 0;
+		try {
+			logger.info("selectCountTotal...");
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
 	public void updateProduct () {}
 	public void deleteProduct () {}
 
