@@ -1,10 +1,11 @@
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>qna :: view</title>
+    <title>qna :: list</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -36,8 +37,7 @@
                       <p>홈<span>></span>문의하기</p>
                     </div>
                 </nav>
-
-                <section class="view">
+                <section class="list">
                     <aside>
                         <h2>문의하기</h2>
                         <ul>
@@ -52,25 +52,58 @@
                     </aside>
                     <article>
                         <nav>
-                            <h2 class="title">[가입] 가입 문의내용</h2>
-                            <p>
-                                <span>leta**</span>
-                                <span>2022-11-21</span>
-                            </p>
+                            <h1>회원</h1>
+                            <h2>회원관련 문의 내용입니다.</h2>
                         </nav>
-                        <div class="content">
-                            <p>
-                                개인회원에서 법인회원(사업자 회원)으로 전환은 불가하므로 법인회원(사업자 회원) 전환은<br/>
-                                신규 가입으로 진행을 해야 합니다.<br/><br/>
-                            </p>
-                            <p>
-                                ※ 피싱 관련 피해신고<br/>
-                                ▶ 경찰청 사이버수사국 (국번없이)182 : http://cyberbureau.police.go.kr<br/>
-                                ▶ KISA 인터넷침해대응센터 (국번없이)118 : http://www.krcert.or.kr<br/>
-                                감사합니다.
-                            </p>
+                        <table>
+                            <tr>
+                                <td><a href="#">[가입] 가입 문의내용</a></td>
+                                <td>leta**</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">[탈퇴] 탈퇴 문의내용</a></td>
+                                <td>leta**</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">[회원정보] 회원정보 문의내용</a></td>
+                                <td>leta**</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">[로그인] 회원정보 문의내용</a></td>
+                                <td>leta**</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">[로그인] 회원정보 문의내용</a></td>
+                                <td>leta**</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">[로그인] 회원정보 문의내용</a></td>
+                                <td>leta**</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">[탈퇴] 탈퇴 문의내용</a></td>
+                                <td>leta**</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">[탈퇴] 탈퇴 문의내용</a></td>
+                                <td>leta**</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">[가입] 가입 문의내용</a></td>
+                                <td>leta**</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">[탈퇴] 탈퇴 문의내용</a></td>
+                                <td>leta**</td>
+                            </tr>
+                        </table>
+                        <div class="page">
+                            <a href="#" class="prev">이전</a>
+                            <a href="#" class="num on">1</a>
+                            <a href="#" class="num">2</a>
+                            <a href="#" class="num">3</a>
+                            <a href="#" class="next">다음</a>
                         </div>
-                        <a href="./list.html" class="btnList">목록보기</a>
                     </article>
                 </section>
             </div>

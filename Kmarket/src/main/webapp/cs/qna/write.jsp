@@ -1,10 +1,11 @@
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>qna :: list</title>
+    <title>qna :: write</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -36,7 +37,7 @@
                       <p>홈<span>></span>문의하기</p>
                     </div>
                 </nav>
-                <section class="list">
+                <section class="write">
                     <aside>
                         <h2>문의하기</h2>
                         <ul>
@@ -50,63 +51,37 @@
                         </ul>
                     </aside>
                     <article>
-                        <nav>
-                            <h1>회원</h1>
-                            <h2>회원관련 문의 내용입니다.</h2>
-                        </nav>
-                        <table>
-                            <tr>
-                                <td><a href="#">[가입] 가입 문의내용</a></td>
-                                <td>leta**</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">[탈퇴] 탈퇴 문의내용</a></td>
-                                <td>leta**</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">[회원정보] 회원정보 문의내용</a></td>
-                                <td>leta**</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">[로그인] 회원정보 문의내용</a></td>
-                                <td>leta**</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">[로그인] 회원정보 문의내용</a></td>
-                                <td>leta**</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">[로그인] 회원정보 문의내용</a></td>
-                                <td>leta**</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">[탈퇴] 탈퇴 문의내용</a></td>
-                                <td>leta**</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">[탈퇴] 탈퇴 문의내용</a></td>
-                                <td>leta**</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">[가입] 가입 문의내용</a></td>
-                                <td>leta**</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">[탈퇴] 탈퇴 문의내용</a></td>
-                                <td>leta**</td>
-                            </tr>
-                        </table>
-                        <div class="page">
-                            <a href="#" class="prev">이전</a>
-                            <a href="#" class="num on">1</a>
-                            <a href="#" class="num">2</a>
-                            <a href="#" class="num">3</a>
-                            <a href="#" class="next">다음</a>
-                        </div>
+                        <form action="#">
+                            <table>
+                                <tr>
+                                    <td>문의유형</td>
+                                    <td>
+                                        <select name="type">
+                                            <option value="0">선택</option>
+                                            <option>가입</option>
+                                            <option>탈퇴</option>
+                                            <option>회원정보</option>
+                                            <option>로그인</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>문의제목</td>
+                                    <td><input type="text" name="title" placeholder="제목을 입력하세요"></td>
+                                </tr>
+                                <tr>
+                                    <td>문의내용</td>
+                                    <td><textarea name="content" placeholder="내용을 입력하세요"></textarea></td>
+                                </tr>
+                            </table>
+                        </form>
+                        <a href="#" class="btnList">취소하기</a>
+                        <a href="#" class="btnSubmit">등록하기</a>
                     </article>
                 </section>
             </div>
         </section>
+
         <footer>
             <ul>
                 <li><a href="#">회사소개</a></li>
