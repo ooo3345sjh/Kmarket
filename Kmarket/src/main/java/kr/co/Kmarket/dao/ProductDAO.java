@@ -51,6 +51,7 @@ public class ProductDAO extends DBHelper {
 	}
 	public void selectProduct () {}
 	public void selectProducts () {}
+
 	public int selectCountTotalProduct() {
 		int total = 0;
 		try {
