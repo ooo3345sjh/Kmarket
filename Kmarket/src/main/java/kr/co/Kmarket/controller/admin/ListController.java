@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.Kmarket.service.ProductService;
-import kr.co.Kmarket.vo.ArticleVO;
+import kr.co.Kmarket.vo.ProductVO;
 
 @WebServlet("/admin/list.do")
 public class ListController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private ProductService service = ProductService.INSTANCE;
+	private ProductService service = new ProductService();
 	
 	@Override
 	public void init() throws ServletException {
@@ -32,15 +32,37 @@ public class ListController extends HttpServlet {
 		int start = 0;
 		int currentPage = 1;
 		int lastPageNum = 0;
-		int PageStartNum = 0;
+		int pageStartNum = 0;
 		
-		// 현재 페이지 게시물 limit 시작값 계산
-			if (pg != null) {
-				currentPage = Integer.parseInt(pg);
-			}
+		// 현재 페이지 상품 limit 시작값 계산
+		if (pg != null) {
+			currentPage = Integer.parseInt(pg);
+		}
 			
-		// 전체 게시물 갯수 구하기
-				
+		// 전체 상품 갯수 구하기
+		int total = service.selectCountTotalProduct();
+		
+		// 페이지 마지막 번호 계산
+		if (total % 1 == 0) {
+			lastPageNum = (total/10);
+		} else {
+			lastPageNum = (total/10) + 1;
+		}
+		
+		// 페이지 그룹 계산
+		
+		// 페이지 시작 번호 계산
+		start = (currentPage - 1) * 10;
+		pageStartNum = total - start;
+		start = (currentPage - 1) * 10;
+		
+		// 현재 페이지 게시물 가져오기
+		List<ProductVO> vo = null;
+		
+		req.setAttribute("vo", vo);
+		req.setAttribute("currentPage", currentPage);
+		req.setAttribute("lastPageNum", lastPageNum);
+		req.setAttribute("pageStartNum", pageStartNum);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/list.jsp");
 		dispatcher.forward(req, resp);
