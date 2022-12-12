@@ -32,7 +32,7 @@ import kr.co.Kmarket.service.ProductService;
 public class RegisterAutoController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private ProductService service = ProductService.INSTANCE;
+	private ProductService service = new ProductService();
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
