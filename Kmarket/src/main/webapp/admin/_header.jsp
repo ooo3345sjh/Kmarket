@@ -19,7 +19,7 @@
         <header>
             <div>
                 <a href="#">
-                    <img src='<c:url value='/img/admin_logo.png'/>' alt="ADMINSTRATOR">
+                    <img src='<c:url value='/admin/img/admin_logo.png'/>' alt="ADMINSTRATOR">
                 </a>
                 <nav>
                     <span>홍길동님 반갑습니다.</span>
