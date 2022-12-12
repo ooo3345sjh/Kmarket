@@ -70,7 +70,7 @@
                         <h1>상품등록</h1>
                         <p>HOME > 상품관리 > <span>상품등록</span></p>
                     </nav>
-                    <form action="/Kmarket/admin/register.do" method="post" enctype="multipart/form-data">
+                    <form action='<c:url value='/admin/register.do'/>' method="post" enctype="multipart/form-data">
                         <h2>상품분류</h2>
                         <p>기본분류는 반드시 선택하셔야 합니다. 하나의 상품에 1개의 분류를 지정 합니다.</p>
                         <table border="0">
@@ -122,12 +122,15 @@
                                     <input type="text" name="productCompany" required>
                                 </td>
                             </tr>
+                            
+                            <!-- 정규 표현식과 replace 함수를 이용하여 숫자외의 값을 입력 못하게 막아두었습니다. -->
                             <tr>
                                 <th>판매가격</th>
                                 <td>
-                                    <input type="number" name="sellPrice" required><span>원</span>
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="sellPrice" required><span>원</span>
                                 </td>
                             </tr>
+                            
                             <tr>
                                 <th>할인율</th>
                                 <td>

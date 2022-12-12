@@ -1,0 +1,36 @@
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>케이마켓:: 대한민국 1등 온라인 쇼핑몰</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="<c:url value='/member/css/style.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/cs/css/style.css'/>">
+    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <header>
+            <div class="top">
+                <div>
+                    <nav>
+                        <a href="#">로그인</a>
+                        <a href="#">회원가입</a>
+                        <a href="#">마이페이지</a>
+                        <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="logo">
+                <div>
+                    <a href="#">
+                        <img src='<c:url value='/member/img/header_logo.png'/>' alt="Kmarket 대한민국 1등 온라인 쇼핑">
+                    </a>
+                </div>
+            </div>
+        </header>

@@ -32,7 +32,7 @@ import kr.co.Kmarket.service.ProductService;
 public class RegisterAutoController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private ProductService service = ProductService.INSTANCE;
+	private ProductService service = new ProductService();
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
@@ -54,146 +54,142 @@ public class RegisterAutoController extends HttpServlet {
 		String cate2 = "1" + req.getParameter("category2");
 		System.out.println("cate1 : " + cate1);
 		System.out.println("cate2 : " + cate2);
-		List<XmlVO> list = new ArrayList<>();
-		
-		String cate1Path = ctx.getRealPath("/file/" + cate1 + "/");
-		String cate2Path = cate1Path + cate2;
-		
-		File cate1Dir = new File(cate1Path);
-		File cate2Dir = new File(cate2Path);
-		
-		if(!cate1Dir.exists()) cate1Dir.mkdirs();
-		if(!cate2Dir.exists()) cate2Dir.mkdirs();
-		
-		String path = "C:/Users/ooo33.DESKTOP-56U45AS/Desktop/workspace/Kmarket/product_image/product_image/" 
-					+ cate1 + "/" + cate2 + "/";
-		String fileNm = cate1 + "-" + cate2 + ".xlsx";
-		
-		/*** 엑셀 파일 읽어오기 START ***/
-		try {
-			FileInputStream file = new FileInputStream(new File(path + fileNm));
+		cate1 = "10";
+		for(int k=10; k<=15; k++) {
+			cate2 = k + "";
 			
-			System.out.println((new File(path + fileNm)).exists());
-            // 엑셀 파일로 Workbook instance를 생성한다.
-            XSSFWorkbook workbook = new XSSFWorkbook(file);
+			List<XmlVO> list = new ArrayList<>();
+			
+			String cate1Path = ctx.getRealPath("/file/" + cate1 + "/");
+			String cate2Path = cate1Path + cate2;
+			
+			File cate1Dir = new File(cate1Path);
+			File cate2Dir = new File(cate2Path);
+			
+			if(!cate1Dir.exists()) cate1Dir.mkdirs();
+			if(!cate2Dir.exists()) cate2Dir.mkdirs();
+			
+			String path = "C:/Users/java2/Desktop/workspace/Kmarket/product_image/product_image/" 
+						+ cate1 + "/" + cate2 + "/";
+			String fileNm = cate1 + "-" + cate2 + ".xlsx";
+			
+			/*** 엑셀 파일 읽어오기 START ***/
+			try {
+				FileInputStream file = new FileInputStream(new File(path + fileNm));
+				
+				System.out.println((new File(path + fileNm)).exists());
+	            // 엑셀 파일로 Workbook instance를 생성한다.
+	            XSSFWorkbook workbook = new XSSFWorkbook(file);
 
-            // workbook의 첫번째 sheet를 가저온다.
-            XSSFSheet sheet = workbook.getSheetAt(0);
+	            // workbook의 첫번째 sheet를 가저온다.
+	            XSSFSheet sheet = workbook.getSheetAt(0);
 
-            // 만약 특정 이름의 시트를 찾는다면 workbook.getSheet("찾는 시트의 이름");
-            // 만약 모든 시트를 순회하고 싶으면
-            // for(Integer sheetNum : workbook.getNumberOfSheets()) {
-            //      XSSFSheet sheet = workbook.getSheetAt(i);
-            // }
-            // 아니면 Iterator<Sheet> s = workbook.iterator() 를 사용해서 조회해도 좋다.
+	            // 만약 특정 이름의 시트를 찾는다면 workbook.getSheet("찾는 시트의 이름");
+	            // 만약 모든 시트를 순회하고 싶으면
+	            // for(Integer sheetNum : workbook.getNumberOfSheets()) {
+	            //      XSSFSheet sheet = workbook.getSheetAt(i);
+	            // }
+	            // 아니면 Iterator<Sheet> s = workbook.iterator() 를 사용해서 조회해도 좋다.
 
-            // 모든 행(row)들을 조회한다.
-            int i = 0;
-            XmlVO xv = null;
-            
-            A: for (Row row : sheet) {
-                // 각각의 행에 존재하는 모든 열(cell)을 순회한다.
-                Iterator<Cell> cellIterator = row.cellIterator();
-                if(i++ == 0) continue;
-                
-                xv = new XmlVO();
-                while (cellIterator.hasNext()) {
-                    Cell cell = cellIterator.next();
-                    
-                    // cell의 타입을 하고, 값을 가져온다.
-                    switch (cell.getCellType()) {
+	            // 모든 행(row)들을 조회한다.
+	            int i = 0;
+	            XmlVO xv = null;
+	            
+	            A: for (Row row : sheet) {
+	                // 각각의 행에 존재하는 모든 열(cell)을 순회한다.
+	                Iterator<Cell> cellIterator = row.cellIterator();
+	                if(i++ == 0) continue;
+	                
+	                xv = new XmlVO();
+	                while (cellIterator.hasNext()) {
+	                    Cell cell = cellIterator.next();
+	                    
+	                    // cell의 타입을 하고, 값을 가져온다.
+	                    switch (cell.getCellType()) {
 
-                        case NUMERIC:
-                            //getNumericCellValue 메서드는 기본으로 double형 반환
-                        	if(cell.getColumnIndex() == 0 && ((int)cell.getNumericCellValue()) == 99999999) {
-                        		break A;
-                        	} else if(cell.getColumnIndex() == 0) {
-                            	xv.setNO((int) cell.getNumericCellValue());
-                            	System.out.println("no : " + xv.getNO());
-                            } else {
-                            	xv.setPrice((int) cell.getNumericCellValue());
-                            	System.out.println("price : " + xv.getPrice());
-                            }
-                            break;
+	                        case NUMERIC:
+	                            //getNumericCellValue 메서드는 기본으로 double형 반환
+	                        	if(cell.getColumnIndex() == 0 && ((int)cell.getNumericCellValue()) == 99999999) {
+	                        		break A;
+	                        	} else if(cell.getColumnIndex() == 0) {
+	                            	xv.setNO((int) cell.getNumericCellValue());
+	                            	System.out.println("no : " + xv.getNO());
+	                            } else {
+	                            	xv.setPrice((int) cell.getNumericCellValue());
+	                            	System.out.println("price : " + xv.getPrice());
+	                            }
+	                            break;
 
-                        case STRING:
-                        	if(cell.getColumnIndex() == 1) {
-                        		xv.setCompany(cell.getStringCellValue());
-                        		System.out.println("company : " + xv.getCompany());
-                        	} else {
-                        		xv.setTitle(cell.getStringCellValue());
-                        		System.out.println("title : " + xv.getTitle());
-                        	}
-                            break;
-                    }
-                }
-                
-                list.add(xv);
-            }
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-		/*** 엑셀 파일 읽어오기 END ***/
-		System.out.println("뭐냐 "+((XmlVO)list.get(0)).getTitle());
-		String discount = "0";
-		String point = "0";
-		String stock = "0";
-		String delivery = "0";
-		String status = "새상품";
-		String duty = "과세상품";
-		String receipt = "발행가능 - 신용카드 전표, 온라인 현금영수증";
-		String bizType = "사업자 판매자";
-		String origin = "국내산";
-		String ip = req.getRemoteAddr();
-		
-		String[] thumb1FileNames = new File(path + "120/").list();
-		String[] thumb2FileNames = new File(path + "460/").list();
-		String[] thumb3FileNames = new File(path + "860").list();
-		String[] detailFileNames = new File(path + "940/").list();
-		
-		thumb1FileNames = sorting(thumb1FileNames);
-		thumb2FileNames = sorting(thumb2FileNames);
-		thumb3FileNames = sorting(thumb3FileNames);
-		detailFileNames = sorting(detailFileNames);
-		
-		int count = 0;
-		for(XmlVO xv : list) {
+	                        case STRING:
+	                        	if(cell.getColumnIndex() == 1) {
+	                        		xv.setCompany(cell.getStringCellValue());
+	                        		System.out.println("company : " + xv.getCompany());
+	                        	} else {
+	                        		xv.setTitle(cell.getStringCellValue());
+	                        		System.out.println("title : " + xv.getTitle());
+	                        	}
+	                            break;
+	                    }
+	                }
+	                
+	                list.add(xv);
+	            }
+	            
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+			/*** 엑셀 파일 읽어오기 END ***/
 			
-			String thumbnail1Name = UUID.randomUUID().toString() + ".jpg";
-			String thumbnail2Name = UUID.randomUUID().toString() + ".jpg";
-			String thumbnail3Name = UUID.randomUUID().toString() + ".jpg";
-			String detailName = UUID.randomUUID().toString() + ".jpg";
-			xv.setThumb1(thumbnail1Name);
-			xv.setThumb2(thumbnail2Name);
-			xv.setThumb3(thumbnail3Name);
-			xv.setDetail(detailName);
-			// 목록 섬네일
-			File thumbnail1 = new File(path + "120/" + thumb1FileNames[count]);
-			File newThumbnail1 = new File(cate2Dir + "/" + thumbnail1Name);
-			Files.copy(thumbnail1.toPath(), newThumbnail1.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			String[] thumb1FileNames = new File(path + "120/").list();
+			String[] thumb2FileNames = new File(path + "460/").list();
+			String[] thumb3FileNames = new File(path + "860").list();
+			String[] detailFileNames = new File(path + "940/").list();
 			
-			// 메인 섬네일
-			File thumbnail2 = new File(path + "460/" + thumb2FileNames[count]);
-			File newThumbnail2 = new File(cate2Dir + "/" + thumbnail2Name);
-			Files.copy(thumbnail2.toPath(), newThumbnail2.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			thumb1FileNames = sorting(thumb1FileNames);
+			thumb2FileNames = sorting(thumb2FileNames);
+			thumb3FileNames = sorting(thumb3FileNames);
+			detailFileNames = sorting(detailFileNames);
 			
-			// 상세 섬네일
-			File thumbnail3 = new File(path + "860/" + thumb3FileNames[count]);
-			File newThumbnail3 = new File(cate2Dir + "/" + thumbnail3Name);
-			Files.copy(thumbnail3.toPath(), newThumbnail3.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			int count = 0;
+			for(XmlVO xv : list) {
+				
+				String thumbnail1Name = UUID.randomUUID().toString() + ".jpg";
+				String thumbnail2Name = UUID.randomUUID().toString() + ".jpg";
+				String thumbnail3Name = UUID.randomUUID().toString() + ".jpg";
+				String detailName = UUID.randomUUID().toString() + ".jpg";
+				xv.setThumb1(thumbnail1Name);
+				xv.setThumb2(thumbnail2Name);
+				xv.setThumb3(thumbnail3Name);
+				xv.setDetail(detailName);
+				// 목록 섬네일
+				File thumbnail1 = new File(path + "120/" + thumb1FileNames[count]);
+				File newThumbnail1 = new File(cate2Dir + "/" + thumbnail1Name);
+				Files.copy(thumbnail1.toPath(), newThumbnail1.toPath(), StandardCopyOption.REPLACE_EXISTING);
+				
+				// 메인 섬네일
+				File thumbnail2 = new File(path + "460/" + thumb2FileNames[count]);
+				File newThumbnail2 = new File(cate2Dir + "/" + thumbnail2Name);
+				Files.copy(thumbnail2.toPath(), newThumbnail2.toPath(), StandardCopyOption.REPLACE_EXISTING);
+				
+				// 상세 섬네일
+				File thumbnail3 = new File(path + "860/" + thumb3FileNames[count]);
+				File newThumbnail3 = new File(cate2Dir + "/" + thumbnail3Name);
+				Files.copy(thumbnail3.toPath(), newThumbnail3.toPath(), StandardCopyOption.REPLACE_EXISTING);
+				
+				// 상세정보
+				File detail = new File(path + "940/" + detailFileNames[count]);
+				File newDetail = new File(cate2Dir + "/" + detailName);
+				Files.copy(detail.toPath(), newDetail.toPath(), StandardCopyOption.REPLACE_EXISTING);
+				count++;
+				
+			}
 			
-			// 상세정보
-			File detail = new File(path + "940/" + detailFileNames[count]);
-			File newDetail = new File(cate2Dir + "/" + detailName);
-			Files.copy(detail.toPath(), newDetail.toPath(), StandardCopyOption.REPLACE_EXISTING);
-			count++;
-			
+			AutoUploadDAO dao = new AutoUploadDAO();
+			int result = dao.insertAutoUpload(list, cate1, cate2);
+			System.out.println("result : " + result);
 		}
 		
-		AutoUploadDAO dao = new AutoUploadDAO();
-		int result = dao.insertAutoUpload(list, cate1, cate2);
-		System.out.println("result : " + result);
+		
 		
 		
 		resp.sendRedirect("/Kmarket/admin/registerAuto.do");
@@ -227,6 +223,11 @@ public class RegisterAutoController extends HttpServlet {
 				}
 			}
 		}
+		
+		for(String str : fileNames) {
+			System.out.println(str);
+		}
+		System.out.println();
 		return fileNames;
 	}
 

@@ -7,11 +7,11 @@ import java.sql.ResultSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.co.Kmarket.db.DBCP;
+import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.db.Sql;
 import kr.co.Kmarket.vo.ProductVO;
 
-public class ProductDAO extends DBCP {
+public class ProductDAO extends DBHelper {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -19,8 +19,8 @@ public class ProductDAO extends DBCP {
 		
 		try {
 			logger.info("insertProduct...");
-			Connection conn = getConnection();
-			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_PRODUCT);
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.INSERT_PRODUCT);
 			psmt.setInt(1, vo.getCate1());
 			psmt.setInt(2, vo.getCate2() + 10);
 			psmt.setString(3, vo.getProdName());
@@ -43,8 +43,7 @@ public class ProductDAO extends DBCP {
 			psmt.setString(20, vo.getIp());
 			psmt.executeUpdate();
 
-			psmt.close();
-			conn.close();
+			close();
 		
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -52,6 +51,22 @@ public class ProductDAO extends DBCP {
 	}
 	public void selectProduct () {}
 	public void selectProducts () {}
+	public int selectCountTotalProduct() {
+		int total = 0;
+		try {
+			logger.info("selectCountTotal...");
+			con = getConnection();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(Sql.SELECT_COUNT_TOTAL_PROD);
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
+	}
 	public void updateProduct () {}
 	public void deleteProduct () {}
 
