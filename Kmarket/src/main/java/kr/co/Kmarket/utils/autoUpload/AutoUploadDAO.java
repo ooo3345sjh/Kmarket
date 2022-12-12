@@ -9,11 +9,11 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.co.Kmarket.db.DBCP;
+import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.db.Sql;
 import kr.co.Kmarket.vo.ProductVO;
 
-public class AutoUploadDAO extends DBCP {
+public class AutoUploadDAO extends DBHelper {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	

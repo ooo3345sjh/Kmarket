@@ -3,11 +3,11 @@ package kr.co.Kmarket.service;
 import kr.co.Kmarket.dao.ProductDAO;
 import kr.co.Kmarket.vo.ProductVO;
 
-public enum ProductService {
+public class ProductService {
 
-	INSTANCE;
 	private ProductDAO dao;
-	private ProductService() {
+	
+	public ProductService() {
 		dao = new ProductDAO();
 	}
 	
@@ -16,8 +16,10 @@ public enum ProductService {
 	}
 	public void selectProduct () {}
 	public void selectProducts () {}
-	public void selectCountTotal() {
-		dao.selectCountTotal();
+
+	public int selectCountTotalProduct() {
+		int total = dao.selectCountTotalProduct();
+		return total;
 	}
 	public void updateProduct () {}
 	public void deleteProduct () {}
