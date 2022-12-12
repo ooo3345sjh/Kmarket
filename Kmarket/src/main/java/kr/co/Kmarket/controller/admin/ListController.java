@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.Kmarket.service.ProductService;
+import kr.co.Kmarket.vo.ProductVO;
 
 import kr.co.Kmarket.vo.ProductVO;
 
@@ -22,7 +23,6 @@ public class ListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductService service = new ProductService();
 
-	
 	@Override
 	public void init() throws ServletException {
 	}
