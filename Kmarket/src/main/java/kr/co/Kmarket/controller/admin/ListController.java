@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.vo.ArticleVO;
 
 @WebServlet("/admin/list.do")
 public class ListController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private ProductService service = ProductService.INSTANCE;
 	
 	@Override
 	public void init() throws ServletException {
@@ -36,6 +38,8 @@ public class ListController extends HttpServlet {
 			if (pg != null) {
 				currentPage = Integer.parseInt(pg);
 			}
+			
+		// 전체 게시물 갯수 구하기
 				
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/list.jsp");
