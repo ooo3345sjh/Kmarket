@@ -54,8 +54,8 @@ public class RegisterAutoController extends HttpServlet {
 		String cate2 = "1" + req.getParameter("category2");
 		System.out.println("cate1 : " + cate1);
 		System.out.println("cate2 : " + cate2);
-		cate1 = "18";
-		for(int k=10; k<=14; k++) {
+		cate1 = "11";
+		for(int k=10; k<=17; k++) {
 			cate2 = k + "";
 			
 			List<XmlVO> list = new ArrayList<>();
