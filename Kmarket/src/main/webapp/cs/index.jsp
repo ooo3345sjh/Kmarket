@@ -135,4 +135,5 @@
                 </section>
             </div>
         </section>
+       </div>
 <jsp:include page="/_footer.jsp"/>
