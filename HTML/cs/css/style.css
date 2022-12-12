@@ -166,26 +166,47 @@ header > .logo a {
     font-size: 14px;
     white-space:nowrap;
 }
-
 #cs > .main > .faq > ol > li:nth-child(1) > a {
-    background-position: 0 -92px;
+    background-position: 0 0;
 }
 #cs > .main > .faq > ol > li:nth-child(2) > a {
-    background-position: -184px -92px;
+    background-position: -184px 0px;
 }
 #cs > .main > .faq > ol > li:nth-child(3) > a {
-    background-position: -92px -92px;
+    background-position: -92px 0px;
 }
 #cs > .main > .faq > ol > li:nth-child(4) > a {
+    background-position: -276px 0px;
+}
+#cs > .main > .faq > ol > li:nth-child(5) > a{
+    background-position: -368px 0px;
+}
+#cs > .main > .faq > ol > li:nth-child(6) > a{
+    background-position: -92px -485px;
+}
+#cs > .main > .faq > ol > li:nth-child(7) > a{
+    background-position: -644px 0px;
+}
+
+#cs > .main > .faq > ol > li:nth-child(1) > a:hover {
+    background-position: 0 -92px;
+}
+#cs > .main > .faq > ol > li:nth-child(2) > a:hover {
+    background-position: -184px -92px;
+}
+#cs > .main > .faq > ol > li:nth-child(3) > a:hover {
+    background-position: -92px -92px;
+}
+#cs > .main > .faq > ol > li:nth-child(4) > a:hover {
     background-position: -276px -92px;
 }
-#cs > .main > .faq > ol > li:nth-child(5) > a {
+#cs > .main > .faq > ol > li:nth-child(5) > a:hover {
     background-position: -368px -92px;
 }
-#cs > .main > .faq > ol > li:nth-child(6) > a {
+#cs > .main > .faq > ol > li:nth-child(6) > a:hover {
     background-position: -92px -577px;
 }
-#cs > .main > .faq > ol > li:nth-child(7) > a {
+#cs > .main > .faq > ol > li:nth-child(7) > a:hover {
     background-position: -644px -92px;
 }
 
