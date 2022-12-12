@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="<c:url value='/member/css/style.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/cs/css/style.css'/>">
-    <link rel="stylesheet" href="<c:url value='/product/css/style.css'/>">
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
 </head>
 <body>
