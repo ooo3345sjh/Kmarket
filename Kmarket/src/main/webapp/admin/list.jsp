@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
         <main>
             <div>
@@ -91,70 +92,36 @@
                             <th>조회</th>
                             <th>관리</th>
                         </tr>
+                        <c:forEach var="vo" items="${vo}">
                         <tr>
                             <td><input type="checkbox" name="상품코드"></td>
                             <td>
                                 <img src='<c:url value='/admin/img/sample_thumb.jpg'/>' alt="thumb">
                             </td>
-                            <td>201603292</td>
-                            <td>FreeMovement BLUEFORCE</td>
-                            <td>36,000</td>
-                            <td>10</td>
-                            <td>360</td>
-                            <td>400</td>
-                            <td>홍길동</td>
-                            <td>126</td>
+                            <td>${vo.prodNo}</td>
+                            <td>${vo.prodName}</td>
+                            <td>${vo.price}</td>
+                            <td>${vo.discount}</td>
+                            <td>${vo.point}</td>
+                            <td>${vo.stock}</td>
+                            <td>${vo.seller}</td>
+                            <td>${vo.hit}</td>
                             <td>
                                 <a href="#">[삭제]</a>
                                 <a href="#">[수정]</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td><input type="checkbox" name="상품코드"></td>
-                            <td>
-                                <img src='<c:url value='/admin/img/sample_thumb.jpg'/>' alt="thumb">
-                            </td>
-                            <td>201603292</td>
-                            <td>FreeMovement BLUEFORCE</td>
-                            <td>36,000</td>
-                            <td>10</td>
-                            <td>360</td>
-                            <td>400</td>
-                            <td>홍길동</td>
-                            <td>126</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="상품코드"></td>
-                            <td>
-                                <img src='<c:url value='/admin/img/sample_thumb.jpg'/>' alt="thumb">
-                            </td>
-                            <td>201603292</td>
-                            <td>FreeMovement BLUEFORCE</td>
-                            <td>36,000</td>
-                            <td>10</td>
-                            <td>360</td>
-                            <td>400</td>
-                            <td>홍길동</td>
-                            <td>126</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
+                        </c:forEach>
                     </table>
                     <input type="button" value="선택삭제">
                     <div class="paging">
                         <a href="#"></a>
                         <a href="#"></a>
-                        <a href="#" class="pageNum">1</a>
+                        <a href="#" class="pageNum on">1</a>
                         <a href="#" class="pageNum">2</a>
                         <a href="#" class="pageNum">3</a>
                         <a href="#" class="pageNum">4</a>
-                        <a href="#" class="pageNum on">5</a>
+                        <a href="#" class="pageNum">5</a>
                         <a href="#" class="pageNum">6</a>
                         <a href="#" class="pageNum">7</a>
                         <a href="#" class="pageNum">8</a>
