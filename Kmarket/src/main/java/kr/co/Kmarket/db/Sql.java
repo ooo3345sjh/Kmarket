@@ -46,5 +46,4 @@ public class Sql {
 													+ "UNION " 
 													+ "SELECT b.* FROM (SELECT 'new' AS `type`, a.* FROM `km_product` a ORDER BY `rdate` DESC LIMIT 8) as b ";
 
-
 }
