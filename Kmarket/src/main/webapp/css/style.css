@@ -167,7 +167,9 @@ main > aside > .category ol > li {
 }
 
 main > aside > .category ol > li > a {
-	font-size: 12px;
+	font-size: 13px;
+	color: #777; 
+	font-weight: bold;
 }
 main > aside > .category ol > li > a:hover {
     color: #41ab47;
@@ -277,16 +279,17 @@ main > aside > .best > ol > li > a > .thumb > i {
     top: 0;
     display: inline-block;
     width: 16px;
-    height: 20px;
+    height: 16px;
     font-size: 14px;
     padding: 0;
     color: white;
     font-weight: bold;
     font-style: italic;
     text-align: center;
-    line-height: 18px;
+    line-height: 15px;
     background: #00c01e;
-    border-radius: 10px;
+    border-radius: 50%;
+    padding-right: 3px;
 }
 
 main > aside > .best > ol > li > a > .thumb > img {width: 100%;}
@@ -314,7 +317,13 @@ main > aside > .best > ol > li:first-child > a > .thumb {
     margin: 0 auto;
 }
 
-main > aside > .best > ol > li:first-child > a > .thumb > i {width: 35px; height: 26px;}
+main > aside > .best > ol > li:first-child > a > .thumb > i {
+	top:3px;
+	left:3px;
+	width: 25px; 
+	height: 25px; 
+	line-height: 24px;
+}
 main > aside > .best > ol > li:first-child > a > article {
     float: left;
     width: 148px;
@@ -374,6 +383,11 @@ main > section > section > article .thumb {
     overflow: hidden;
     text-align: center;
 }
+main > section > section > article .thumb > img {
+    width: 230px;
+    height: 230px;
+    object-fit: contain;
+}
 
 main > section > section > article h2 {
     font-size: 15px;
@@ -391,6 +405,7 @@ main > section > section > article p {
     line-height: 16px;
     margin: 4px 0;
     text-overflow: ellipsis;
+    text-align:center;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -403,11 +418,10 @@ main > section > section > article .dis_price > ins {
     font-size: 14px;
     text-decoration: none;
 }
+main > section > section > article .dis_price > span > img {margin-left: 1px;}
 
 main > section > section > article .dis_price > .free {
     display: inline-block;
-    font-size: 0;
-    vertical-align: text-bottom;
     width: 55px;
     height: 13px;
     background: url('./img/ico_freeshipping.gif') no-repeat;
