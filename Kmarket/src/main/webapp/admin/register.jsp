@@ -71,7 +71,7 @@
                         <h1>상품등록</h1>
                         <p>HOME > 상품관리 > <span>상품등록</span></p>
                     </nav>
-                    <form action='<c:url value='/admin/register.do'/>' method="post" enctype="multipart/form-data">
+                    <form action='<c:url value="/admin/register.do"/>' name="form" method="post" enctype="multipart/form-data" onsubmit="return checkAll()">
                         <h2>상품분류</h2>
                         <p>기본분류는 반드시 선택하셔야 합니다. 하나의 상품에 1개의 분류를 지정 합니다.</p>
                         <table border="0">
@@ -123,7 +123,6 @@
                                     <input type="text" name="productCompany" required>
                                 </td>
                             </tr>
-                            
                             <!-- 정규 표현식과 replace 함수를 이용하여 숫자외의 값을 입력 못하게 막아두었습니다. -->
                             <tr>
                                 <th>판매가격</th>
@@ -135,27 +134,27 @@
                             <tr>
                                 <th>할인율</th>
                                 <td>
-                                    <input type="number" name="discountRate" required><span>%</span>
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="discountRate" required><span>%</span>
                                     <p>※ '0'을 입력하면 할인율 없음</p>
                                 </td>
                             </tr>
                             <tr>
                                 <th>포인트</th>
                                 <td>
-                                    <input type="number" name="point" required><span>점</span>
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="point" required><span>점</span>
                                     <p>※ '0'을 입력하면 포인트 없음</p>
                                 </td>
                             </tr>
                             <tr>
                                 <th>재고수량</th>
                                 <td>
-                                    <input type="number" name="stock" required><span>개</span>
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="stock" required><span>개</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>배송비</th>
                                 <td>
-                                    <input type="number" name="deliveryCharge" required><span>원</span>
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="deliveryCharge" required><span>원</span>
                                     <p>※ '0'을 입력하면 배송비 무료</p>
                                 </td>
                             </tr>
@@ -164,15 +163,15 @@
                                 <td>
                                     <div>
                                         <input type="file" name="ThumbnailList" required>
-                                        <p>※ 크기 190 x 190, 상품 목록에 출력될 이미지 입니다.</p>
+                                        <p>※ 크기 120 x 120, 상품 목록에 출력될 이미지 입니다.</p>
                                     </div>
                                     <div>
                                         <input type="file" name="ThumbnailMain" required>
-                                        <p>※ 크기 230 x 230, 상품 메인에 출력될 이미지 입니다.</p>
+                                        <p>※ 크기 460 x 460, 상품 메인에 출력될 이미지 입니다.</p>
                                     </div>
                                     <div>
                                         <input type="file" name="ThumbnailDetail" required>
-                                        <p>※ 크기 456 x 456, 상품 상세에 출력될 이미지 입니다.</p>
+                                        <p>※ 크기 가로 860px, 상품 상세에 출력될 이미지 입니다.</p>
                                     </div>
                                 </td>
                             </tr>
@@ -180,7 +179,7 @@
                                 <th>상세 상품정보</th>
                                 <td>
                                     <input type="file" name="detailInfo" required>
-                                    <p>※ 크기 가로 940px 높이 제약없음, 크기 최대 1MB, 상세페이지 상품정보에 출력될 이미지 입니다.</p>
+                                    <p>※ 크기 가로 860px 높이 제약없음, 크기 최대 1MB, 상세페이지 상품정보에 출력될 이미지 입니다.</p>
                                 </td>
                             </tr>
                         </table>
