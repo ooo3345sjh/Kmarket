@@ -21,17 +21,22 @@
                         </ul>
                     </aside>
                     <article>
-                        <form action="#">
+                    	<nav>
+                    		<h1>회원</h1>
+                    		<span>회원 관련 문의내용 입니다.</span>
+                    	</nav>
+                        <form action="<c:url value='/cs/qna/write.do'/>" method="post">
+                        <input type="hidden" name="uid" value="iamid">
                             <table>
                                 <tr>
                                     <td>문의유형</td>
                                     <td>
-                                        <select name="type">
-                                            <option value="0">선택</option>
-                                            <option>가입</option>
-                                            <option>탈퇴</option>
-                                            <option>회원정보</option>
-                                            <option>로그인</option>
+                                        <select name="type" class="type" required onchange="qnaOption()">
+                                            <option value="none" disabled selected>선택</option>
+                                            <option value="가입">가입</option>
+                                            <option value="탈퇴">탈퇴</option>
+                                            <option value="회원정보">회원정보</option>
+                                            <option value="로그인">로그인</option>
                                         </select>
                                     </td>
                                 </tr>
