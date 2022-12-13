@@ -32,7 +32,6 @@ public class Sql {
 												+ "LIMIT ?, 10";
 	
 	public static final String SELECT_COUNT_TOTAL_PROD = "SELECT COUNT(`no`) FROM `km_product`";
-	public static final String SELECT_COUNT_TOTAL_PROD = "SELECT COUNT(`no`) FROM `km_product";
 	
 	
 	/*** main ***/
@@ -46,6 +45,5 @@ public class Sql {
 													+ "SELECT b.* FROM (SELECT 'discount' AS `type`, a.* FROM `km_product` a ORDER BY `discount` DESC LIMIT 8) as b "
 													+ "UNION " 
 													+ "SELECT b.* FROM (SELECT 'new' AS `type`, a.* FROM `km_product` a ORDER BY `rdate` DESC LIMIT 8) as b ";
-
 
 }
