@@ -26,7 +26,12 @@ public class Sql {
 												+ "`ip`=?, "
 												+ "`rdate`=NOW()";
 	
-	public static final String SELECT_COUNT_TOTAL_PROD = "SELECT COUNT(`no`) FROM `km_product";
+
+	public static final String SELECT_PRODUCTS = "SELECT * FROM `km_product` "
+												+ "ORDER BY `prodNo` DESC "
+												+ "LIMIT ?, 10";
+	
+	public static final String SELECT_COUNT_TOTAL_PROD = "SELECT COUNT(`no`) FROM `km_product`";
 	
 	
 	/*** main ***/

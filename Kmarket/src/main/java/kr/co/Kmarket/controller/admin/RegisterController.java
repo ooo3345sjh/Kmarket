@@ -136,7 +136,7 @@ public class RegisterController extends HttpServlet {
 		
 		service.insertProduct(pv);
 		
-		resp.sendRedirect("/JSP/admin/list.do");
+		resp.sendRedirect("/Kmarket/admin/list.do");
 	}
 
 }

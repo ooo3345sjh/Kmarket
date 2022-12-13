@@ -54,6 +54,56 @@ public class ProductDAO extends DBHelper {
 		}
 	}
 	public void selectProduct () {}
+
+
+	public List<ProductVO> selectProducts (int start) {
+		
+		List<ProductVO> vo = new ArrayList<>();
+		try {
+			logger.info("selectProducts...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.SELECT_PRODUCTS);
+			psmt.setInt(1, start);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO prod = new ProductVO();
+				prod.setProdNo(rs.getInt(1));
+				prod.setCate1(rs.getInt(2));
+				prod.setCate2(rs.getInt(3));
+				prod.setProdName(rs.getString(4));
+				prod.setDescript(rs.getString(5));
+				prod.setCompany(rs.getString(6));
+				prod.setSeller(rs.getString(7));
+				prod.setPrice(rs.getInt(8));
+				prod.setDiscount(rs.getInt(9));
+				prod.setPoint(rs.getInt(10));
+				prod.setStock(rs.getInt(11));
+				prod.setSold(rs.getInt(12));
+				prod.setDelivery(rs.getInt(13));
+				prod.setHit(rs.getInt(14));
+				prod.setScore(rs.getInt(15));
+				prod.setReview(rs.getInt(16));
+				prod.setThumb1(rs.getString(17));
+				prod.setThumb2(rs.getString(18));
+				prod.setThumb3(rs.getString(19));
+				prod.setDetail(rs.getString(20));
+				prod.setStatus(rs.getString(21));
+				prod.setDuty(rs.getString(22));
+				prod.setReceipt(rs.getString(23));
+				prod.setBizType(rs.getString(24));
+				prod.setOrigin(rs.getString(25));
+				prod.setIp(rs.getString(26));
+				prod.setRdate(rs.getString(27));
+				vo.add(prod);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return vo;
+	}
+  
 	public int selectCountTotalProduct() {
 		int total = 0;
 		try {
