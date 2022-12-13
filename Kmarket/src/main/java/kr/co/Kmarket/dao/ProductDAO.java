@@ -3,6 +3,10 @@ package kr.co.Kmarket.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +54,56 @@ public class ProductDAO extends DBHelper {
 		}
 	}
 	public void selectProduct () {}
-	public void selectProducts () {}
+
+
+	public List<ProductVO> selectProducts (int start) {
+		
+		List<ProductVO> vo = new ArrayList<>();
+		try {
+			logger.info("selectProducts...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.SELECT_PRODUCTS);
+			psmt.setInt(1, start);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO prod = new ProductVO();
+				prod.setProdNo(rs.getInt(1));
+				prod.setCate1(rs.getInt(2));
+				prod.setCate2(rs.getInt(3));
+				prod.setProdName(rs.getString(4));
+				prod.setDescript(rs.getString(5));
+				prod.setCompany(rs.getString(6));
+				prod.setSeller(rs.getString(7));
+				prod.setPrice(rs.getInt(8));
+				prod.setDiscount(rs.getInt(9));
+				prod.setPoint(rs.getInt(10));
+				prod.setStock(rs.getInt(11));
+				prod.setSold(rs.getInt(12));
+				prod.setDelivery(rs.getInt(13));
+				prod.setHit(rs.getInt(14));
+				prod.setScore(rs.getInt(15));
+				prod.setReview(rs.getInt(16));
+				prod.setThumb1(rs.getString(17));
+				prod.setThumb2(rs.getString(18));
+				prod.setThumb3(rs.getString(19));
+				prod.setDetail(rs.getString(20));
+				prod.setStatus(rs.getString(21));
+				prod.setDuty(rs.getString(22));
+				prod.setReceipt(rs.getString(23));
+				prod.setBizType(rs.getString(24));
+				prod.setOrigin(rs.getString(25));
+				prod.setIp(rs.getString(26));
+				prod.setRdate(rs.getString(27));
+				vo.add(prod);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return vo;
+	}
+  
 	public int selectCountTotalProduct() {
 		int total = 0;
 		try {
@@ -69,5 +122,100 @@ public class ProductDAO extends DBHelper {
 	}
 	public void updateProduct () {}
 	public void deleteProduct () {}
-
+	
+	/*** main ***/
+	// 메인 페이지 베스트 상품, 히트 상품, 최신 상품, 할인 상품
+	public Map<String, Object> selectBestProducts () {
+		Map<String, Object> map = null;
+		List<ProductVO> bestList = null;
+		List<ProductVO> hitList = null;
+		List<ProductVO> scoreList = null;
+		List<ProductVO> discountList = null;
+		List<ProductVO> newList = null;
+		try {
+			logger.info("selectBestProducts...");
+			con = getConnection();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(Sql.SELECT_BEST_PRODUCTS);
+			
+			bestList = new ArrayList<>();
+			hitList = new ArrayList<>();
+			scoreList = new ArrayList<>();
+			discountList = new ArrayList<>();
+			newList = new ArrayList<>();
+			
+			while(rs.next()) {
+				ProductVO vo = new ProductVO();
+				String type  = rs.getString(1); // 타입 - 베스트:best , 히트:hit, 추천:score, 최신:new, 할인:discount
+				String cate1 = rs.getString("cate1");
+				String cate2 = rs.getString("cate2");
+				String path = "file/" + cate1 + "/" + cate2 + "/";
+				vo.setProdNo(rs.getInt("prodNo"));
+				vo.setCate1(cate1);
+				vo.setCate2(cate2);
+				vo.setProdName(rs.getString("prodName"));
+				vo.setDescript(rs.getString("descript"));
+				vo.setCompany(rs.getString("company"));
+				vo.setSeller(rs.getString("seller"));
+				vo.setPrice(rs.getString("price"));
+				vo.setDiscount(rs.getInt("discount"));
+				vo.setPoint(rs.getInt("point"));
+				vo.setStock(rs.getInt("stock"));
+				vo.setSold(rs.getInt("sold"));
+				vo.setDelivery(rs.getInt("delivery"));
+				vo.setHit(rs.getInt("hit"));
+				vo.setScore(rs.getInt("score"));
+				vo.setReview(rs.getInt("review"));
+				vo.setThumb1(path + rs.getString("thumb1"));
+				vo.setThumb2(path + rs.getString("thumb2"));
+				vo.setThumb3(path + rs.getString("thumb3"));
+				vo.setDetail(path + rs.getString("detail"));
+				vo.setStatus(rs.getString("status"));
+				vo.setDuty(rs.getString("duty"));
+				vo.setReceipt(rs.getString("receipt"));
+				vo.setBizType(rs.getString("bizType"));
+				vo.setOrigin(rs.getString("origin"));
+				vo.setIp(rs.getString("ip"));
+				vo.setRdate(rs.getString("rdate"));
+				
+				switch(type) {
+					case "best":
+						bestList.add(vo);
+						break;
+					case "hit":
+						hitList.add(vo);
+						break;
+					case "score":
+						scoreList.add(vo);
+						break;
+					case "discount":
+						discountList.add(vo);
+						break;
+					case "new":
+						newList.add(vo);
+						break;
+				}
+				
+				
+			}
+			map = new HashMap<>();
+			map.put("best", bestList);
+			map.put("hit", hitList);
+			map.put("score", scoreList);
+			map.put("discount", discountList);
+			map.put("new", newList);
+			
+			logger.debug("bestListSize : " + bestList.size());
+			logger.debug("hitListSize : " + hitList.size());
+			logger.debug("scoreListSize : " + scoreList.size());
+			logger.debug("discountListSize : " + discountList.size());
+			logger.debug("newListSize : " + newList.size());
+			
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("map : " + map);
+		return map;
+	}
 }

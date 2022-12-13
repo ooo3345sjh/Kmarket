@@ -175,6 +175,7 @@ main > aside > .category ol > li > a:hover {
 }
 
 main > aside > .category i {
+	text-align: center;
     width: 22px;
     font-size: 16px;
     margin-right: 8px;
@@ -267,6 +268,7 @@ main > aside > .best > ol > li > a > .thumb {
     overflow: hidden;
     margin: 0 auto;
     box-sizing: border-box;
+    margin-right: 5px;
 }
 
 main > aside > .best > ol > li > a > .thumb > i {
@@ -278,12 +280,13 @@ main > aside > .best > ol > li > a > .thumb > i {
     height: 20px;
     font-size: 14px;
     padding: 0;
-    color: #ef3e42;
-    border-bottom: 1px solid #ef3e42;
+    color: white;
     font-weight: bold;
     font-style: italic;
     text-align: center;
     line-height: 18px;
+    background: #00c01e;
+    border-radius: 10px;
 }
 
 main > aside > .best > ol > li > a > .thumb > img {width: 100%;}
@@ -338,6 +341,10 @@ main > section > .slider > .bx-wrapper {
     background: #fff;
 }
 
+.bx-pager {
+	position: absolute;
+	top: 380px;
+}
 main > section > section {
     width: 100%;
     height: auto;

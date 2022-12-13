@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_header.jsp"/>
+<script src="<c:url value='/cs/js/cs.js'/>"></script>
         <section id="cs">
             <div class="qna">
                 <nav>
@@ -25,20 +27,27 @@
                     		<h1>회원</h1>
                     		<span>회원 관련 문의내용 입니다.</span>
                     	</nav>
-                        <form action="<c:url value='/cs/qna/write.do'/>" method="post">
+                        <form action="<c:url value='/cs/board/write.do'/>" method="post">
                         <input type="hidden" name="uid" value="iamid">
                             <table>
                                 <tr>
                                     <td>문의유형</td>
                                     <td>
-                                        <select name="type" class="type" required onchange="qnaOption()">
-                                            <option value="none" disabled selected>선택</option>
-                                            <option value="가입">가입</option>
-                                            <option value="탈퇴">탈퇴</option>
-                                            <option value="회원정보">회원정보</option>
-                                            <option value="로그인">로그인</option>
+                                        <select name="cate2" class="cate2" required onchange="qnaOption()">
+                                            <option value="none" disabled selected>1차 선택</option>
+                                            <option>회원</option>
+                                            <option>쿠폰/혜택/이벤트</option>
+                                            <option>주문/결제</option>
+                                            <option>배송</option>
+                                            <option>취소/반품/교환</option>
+                                            <option>여행/숙박/항공</option>
+                                            <option>안전거래</option>
+                                        </select>
+                                        <select name="type" class="type" required>
+                                            <option value="0" disabled selected>2차 선택</option>
                                         </select>
                                     </td>
+                                    
                                 </tr>
                                 <tr>
                                     <td>문의제목</td>

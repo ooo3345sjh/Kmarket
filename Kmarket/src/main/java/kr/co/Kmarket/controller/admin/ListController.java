@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.vo.ProductVO;
 
-import kr.co.Kmarket.vo.ProductVO;
-
 
 @WebServlet("/admin/list.do")
 public class ListController extends HttpServlet {
@@ -69,6 +67,8 @@ public class ListController extends HttpServlet {
 		// 현재 페이지 게시물 가져오기
 		List<ProductVO> vo = null;
 		
+		vo = service.selectProducts(start);
+		
 		req.setAttribute("vo", vo);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("lastPageNum", lastPageNum);
@@ -83,8 +83,6 @@ public class ListController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		ServletContext ctx = req.getServletContext();
-		String path = ctx.getRealPath("/file");
 	
 	}
 

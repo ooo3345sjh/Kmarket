@@ -2,6 +2,7 @@ package kr.co.Kmarket.controller.cs;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,6 +31,9 @@ public class IndexController extends HttpServlet{
 		if(sess != null) {
 			sess.setAttribute("sessUser", sess);
 		}
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/index.jsp");
+		dispatcher.forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
