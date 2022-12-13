@@ -154,6 +154,7 @@ main > aside > .category ol {
     background: #fff;
     box-sizing: border-box;
     z-index: 10000;
+    padding: 10px 15px;
 }
 
 main > aside > .category ol:hover {display: block;}
@@ -161,10 +162,13 @@ main > aside > .category ol:hover {display: block;}
 main > aside > .category ol > li {
     width: 100%;
     height: 24px;
-    padding: 10px;
+    padding: 15px;
     box-sizing: border-box;
 }
 
+main > aside > .category ol > li > a {
+	font-size: 12px;
+}
 main > aside > .category ol > li > a:hover {
     color: #41ab47;
     text-decoration: underline;
