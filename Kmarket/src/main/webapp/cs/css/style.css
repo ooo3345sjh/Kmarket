@@ -600,6 +600,7 @@
     margin: 0 auto;
     overflow: hidden;
 }
+
 #cs > .qna > section > aside {
     position: absolute;
     left: 0;
@@ -609,11 +610,7 @@
     border-right: 1px solid #e9e9e9;
     box-sizing: border-box;
 }
-#cs > .qna > section > article {
-    float: right;
-    width: 980px;
-    min-height: 600px;
-}
+
 #cs > .qna > section > aside > h2 {
     font-size: 24px;
     font-weight: bold;
@@ -636,9 +633,22 @@
     color: #111;
     text-decoration: underline;
 }
+
 #cs > .qna > section > article {
+    float: right;
+    width: 980px;
+    min-height: 600px;
     padding: 26px;
     box-sizing: border-box;
+}
+
+#cs > .qna > section > article > nav > h1 {
+    margin-bottom: 7px;
+}
+
+#cs > .qna > section > article > nav > span {
+	font-size: 16px;
+    color: gray;
 }
 
 /* qna - 湲�紐⑸줉 */
