@@ -1,4 +1,4 @@
-package kr.co.Kmarket.controller.cs.notice;
+package kr.co.Kmarket.controller.cs;
 
 import java.io.IOException;
 
@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.service.CsService;
 
-@WebServlet("/cs/notice/list.do")
-public class ListController extends HttpServlet{
+@WebServlet("/cs/qna/view.do")
+public class ViewController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private CsService service = new CsService();
@@ -27,7 +27,7 @@ public class ListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/notice/list.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/view.jsp");
 		dispatcher.forward(req, resp);
 	}
 	@Override
