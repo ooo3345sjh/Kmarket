@@ -225,6 +225,7 @@ main > aside > .best {
     border: 1px solid #dbdbdb;
     box-sizing: border-box;
     box-shadow: 0 0 5px rgb(55 55 5 / 20%);
+    z-index: 0;
 }
 
 main > aside > .best > h1 {
@@ -336,6 +337,9 @@ main > section {
     width: 985px;
     height: auto;
     box-sizing: border-box;
+    background: white;
+    position: relative;
+    z-index: 1;
 }
 
 main > section > .slider {

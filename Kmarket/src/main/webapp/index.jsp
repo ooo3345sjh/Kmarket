@@ -33,37 +33,19 @@
                 if(scrollBottom <= 5.5){
                 	best.css({
                 		position: "absolute",
-                        top: "2820px" 	
+                        top: "2805px"
                 	});
                 } else if(t > 620){
                     best.css({
                         position: "fixed",
                         top: "0"
+                        
                     });
                 } else {
                     best.css({position: "static"});
                 }
             });
         });
-/*
-        $(function(){
-
-            let $w = $(window);
-            footerHei = $('footer').outerHeight();
-            $banner = $('.best');
-            
-            
-
-            $w.on('scroll', function(){
-
-                let sT = $w.scrollTop();
-                console.log("footerHei : " + footerHei);
-                console.log("$(document).height() : " + $(document).height());
-                console.log("$w.height() : " + $w.height());
-                console.log("$w.scrollTop()-sT : " + $w.scrollTop());
-
-            });
-        });*/
     </script>
 </head>
 <body>
