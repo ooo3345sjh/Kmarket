@@ -24,7 +24,6 @@ public class CsDAO extends DBHelper {
 			psmt.setString(5, cvo.getTitle());
 			psmt.setString(6, cvo.getContent());
 			psmt.setString(7, cvo.getRegip());
-			psmt.setString(8, cvo.getRdate());
 			
 			result = psmt.executeUpdate();
 			

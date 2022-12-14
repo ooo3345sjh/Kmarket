@@ -19,7 +19,7 @@ public class DBHelper {
 	
 	public Connection getConnection() {
 		try {
-			DataSource ds = (DataSource) new InitialContext().lookup("java:comp/env/dbcp_java2_kmarket");
+			DataSource ds = (DataSource) new InitialContext().lookup("java:comp/env/dbcp_kmarket");
 			con = ds.getConnection();
 		}catch (Exception e) {
 			e.printStackTrace();
