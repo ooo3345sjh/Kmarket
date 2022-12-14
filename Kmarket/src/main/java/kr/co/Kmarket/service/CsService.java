@@ -1,6 +1,7 @@
 package kr.co.Kmarket.service;
 
 import kr.co.Kmarket.dao.CsDAO;
+import kr.co.Kmarket.vo.CsVO;
 
 public class CsService {
 	
@@ -10,8 +11,8 @@ public class CsService {
 		dao = new CsDAO();
 	}
 	
-	public void insertArticle() {
-		
+	public int insertQnaArticle(CsVO cvo) {
+		return dao.insertQnaArticle(cvo);
 	}
 	public void select() {}
 	public void selects() {}
