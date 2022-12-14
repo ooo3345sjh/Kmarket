@@ -43,4 +43,10 @@ public class ProductService {
 		return dao.selectBestProducts();
 	}
 	
+	//====== list ======//
+	/*** 검색 조건에 해당하는 상품 목록 전체 개수 구하는 서비스 ***/ 
+	public void countProducts(Map<String, Object> map) {
+		dao.countProducts(map);
+	}
+	
 }
