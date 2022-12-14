@@ -30,7 +30,15 @@ public class ProductVO {
 	private String ip;
 	private String rdate;
 	
+	// 추가 컬럼
+	private int discountPrice;
 	
+	public int getDiscountPrice() {
+		return discountPrice;
+	}
+	public void setDiscountPrice(int discountPrice) {
+		this.discountPrice = discountPrice;
+	}
 	public int getProdNo() {
 		return prodNo;
 	}

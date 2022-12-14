@@ -147,9 +147,16 @@ public class ProductDAO extends DBHelper {
 			while(rs.next()) {
 				ProductVO vo = new ProductVO();
 				String type  = rs.getString(1); // 타입 - 베스트:best , 히트:hit, 추천:score, 최신:new, 할인:discount
-				String cate1 = rs.getString("cate1");
-				String cate2 = rs.getString("cate2");
-				String path = "file/" + cate1 + "/" + cate2 + "/";
+				String cate1 = rs.getString("cate1");              // 카테고리1
+				String cate2 = rs.getString("cate2");			   // 카테고리2
+				String path = "file/" + cate1 + "/" + cate2 + "/"; // 이미지 저장경로
+				int price = rs.getInt("price");                    // 상품 가격
+				int discount = rs.getInt("discount");			   // 할인율
+				int discountPrice = (int)(price - (price * (discount/100.0))); // 상품 할인 적용된 가격
+				logger.debug("discount : " + discount);
+				logger.debug("discountPrice : " + discountPrice);				
+				logger.debug("price : " + price);				
+				vo.setDiscountPrice(discountPrice);
 				vo.setProdNo(rs.getInt("prodNo"));
 				vo.setCate1(cate1);
 				vo.setCate2(cate2);
@@ -157,8 +164,8 @@ public class ProductDAO extends DBHelper {
 				vo.setDescript(rs.getString("descript"));
 				vo.setCompany(rs.getString("company"));
 				vo.setSeller(rs.getString("seller"));
-				vo.setPrice(rs.getString("price"));
-				vo.setDiscount(rs.getInt("discount"));
+				vo.setPrice(price);
+				vo.setDiscount(discount);
 				vo.setPoint(rs.getInt("point"));
 				vo.setStock(rs.getInt("stock"));
 				vo.setSold(rs.getInt("sold"));
@@ -203,7 +210,7 @@ public class ProductDAO extends DBHelper {
 			map.put("hit", hitList);
 			map.put("score", scoreList);
 			map.put("discount", discountList);
-			map.put("new", newList);
+			map.put("newProd", newList);
 			
 			logger.debug("bestListSize : " + bestList.size());
 			logger.debug("hitListSize : " + hitList.size());
