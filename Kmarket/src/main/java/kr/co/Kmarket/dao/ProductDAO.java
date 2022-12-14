@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.db.Sql;
 import kr.co.Kmarket.vo.ProductVO;
+import kr.co.farmStory2.vo.ArticleVO;
 
 public class ProductDAO extends DBHelper {
 	
@@ -140,7 +141,7 @@ public class ProductDAO extends DBHelper {
 	}
 	
 	/*** main ***/
-	// 메인 페이지 베스트 상품, 히트 상품, 최신 상품, 할인 상품
+	// 메인 페이지 베스트 상품, 히트 상품, 최신 상품, 할인 상품, 인기상품
 	public Map<String, Object> selectBestProducts () {
 		Map<String, Object> map = null;
 		List<ProductVO> bestList = null;
@@ -148,6 +149,7 @@ public class ProductDAO extends DBHelper {
 		List<ProductVO> scoreList = null;
 		List<ProductVO> discountList = null;
 		List<ProductVO> newList = null;
+		List<ProductVO> favoriteList = null;
 		try {
 			logger.info("selectBestProducts...");
 			con = getConnection();
@@ -159,10 +161,11 @@ public class ProductDAO extends DBHelper {
 			scoreList = new ArrayList<>();
 			discountList = new ArrayList<>();
 			newList = new ArrayList<>();
+			favoriteList = new ArrayList<>();
 			
 			while(rs.next()) {
 				ProductVO vo = new ProductVO();
-				String type  = rs.getString(1); // 타입 - 베스트:best , 히트:hit, 추천:score, 최신:new, 할인:discount
+				String type  = rs.getString(1); // 타입 - 베스트:best , 히트:hit, 추천:score, 최신:new, 할인:discount, 인기:favorite
 				String cate1 = rs.getString("cate1");              // 카테고리1
 				String cate2 = rs.getString("cate2");			   // 카테고리2
 				String path = "file/" + cate1 + "/" + cate2 + "/"; // 이미지 저장경로
@@ -217,6 +220,9 @@ public class ProductDAO extends DBHelper {
 					case "new":
 						newList.add(vo);
 						break;
+					case "favorite":
+						favoriteList.add(vo);
+						break;
 				}
 				
 				
@@ -227,12 +233,14 @@ public class ProductDAO extends DBHelper {
 			map.put("score", scoreList);
 			map.put("discount", discountList);
 			map.put("newProd", newList);
+			map.put("favorite", favoriteList);
 			
 			logger.debug("bestListSize : " + bestList.size());
 			logger.debug("hitListSize : " + hitList.size());
 			logger.debug("scoreListSize : " + scoreList.size());
 			logger.debug("discountListSize : " + discountList.size());
 			logger.debug("newListSize : " + newList.size());
+			logger.debug("favoriteListSize : " + favoriteList.size());
 			
 			close();
 		} catch (Exception e) {
@@ -240,5 +248,89 @@ public class ProductDAO extends DBHelper {
 		}
 		logger.debug("map : " + map);
 		return map;
+	}
+	
+	
+	//====== list ======//
+	/*** 검색 조건에 해당하는 상품 목록 전체 개수 구하는 메서드 ***/
+	public void countProducts(Map<String, Object> map) {
+		int totalCount = 0; // 전체 게시물 저장 변수 
+		
+		try {
+			
+			logger.info("countProducts...");
+			
+			String searchField = (String)map.get("searchField");
+			String searchWord = (String)map.get("searchWord");
+			String cate1 = (String)map.get("cate1");
+			String cate2 = (String)map.get("cate2");
+		
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT COUNT(`ProdNo`) FROM `km_product` "
+						+ "WHERE `cate1` = '" + cate1 + "' AND `cate2`= '" + cate2 + "'");
+			if(searchWord != null) {	// 검색 단어가 있을 경우
+				sql.append(" AND a.`" + searchField  + "` ");
+				sql.append("LIKE '%" + searchWord   + "%'");  
+			}
+				
+		
+			con = getConnection();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql.toString());
+			if(rs.next()) {
+				totalCount = rs.getInt(1);
+			}
+			
+			close();
+		
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("totalCount : " + totalCount);
+		
+		map.put("totalCount", totalCount);
+	};
+	
+	/*** 검색 조건에 맞는 상품 목록을 반환하는 메서드 ***/
+	public void selectProduct(Map<String, Object> map){
+		List<ProductVO> list = null;
+		
+		String cate1 = (String)map.get("cate1");
+		String cate2 = (String)map.get("cate2");
+		
+		String sql = "SELECT a.*, u.`nick` FROM `board_article` a JOIN "
+				   + "`board_user` u ON a.`uid` = u.`uid` "
+				   + "WHERE `parent`=0   AND `cate` = '" + cate1 + cate2 + "'";
+		
+		// 검색 조건이 있다면 WHERE절 추가
+		if(map.get("searchField") != null) {
+			sql += " AND `" + map.get("searchField") + "` LIKE '%" + map.get("searchWord") + "%' ";
+		}
+		
+		sql += " ORDER BY `no` desc  LIMIT ?, 10";
+		
+		try {
+			logger.info("selectListPage...");
+			con = getConnection();
+			psmt = con.prepareStatement(sql);
+			psmt.setInt(1, (int)map.get("limitStart"));
+			list = new ArrayList<>();
+			
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO vo = new ProductVO();
+				
+				list.add(vo);
+			}
+			
+			map.put("products : ", list);
+			close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+				
+		logger.debug("map : " + map);
 	}
 }

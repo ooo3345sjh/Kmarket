@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/_header.jsp"/>
-<jsp:include page="./_${cate1}.jsp"/>
                         <table>
                             <tr>
                                 <td><a href="#">[안내] 해외결제 사칭 문자 주의</a></td>
@@ -45,9 +44,9 @@
                         </table>
                         <div class="page">
                             <a href="#" class="prev">이전</a>
-                            <a href="#" class="num on">1</a>
-                            <a href="#" class="num">2</a>
-                            <a href="#" class="num">3</a>
+                            <a href="#" class="on">1</a>
+                            <a href="#" >2</a>
+                            <a href="#" >3</a>
                             <a href="#" class="next">다음</a>
                         </div>
                     </article>

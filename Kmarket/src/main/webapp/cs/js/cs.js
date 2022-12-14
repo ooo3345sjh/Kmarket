@@ -11,37 +11,36 @@ function qnaOption(){
 	
 	// cate2 select > option Value값 받아오기
 	let cate2 = $('.cate2').val();
-	console.log(cate2);
+	let type;	
 	
-	let cate2sub;	
-	
+	console.log(cate2)
 	switch(cate2){
 		case '회원':
-			cate2sub = user;
+			type = user;
 			break;
 		
 		case '쿠폰/혜택/이벤트':
-			cate2sub = event;
+			type = event;
 			break;
 			
 		case '주문/결제':
-			cate2sub = order;
+			type = order;
 			break;
 			
 		case '배송':
-			cate2sub = delivery;
+			type = delivery;
 			break;			
 		
 		case '취소/반품/교환':
-			cate2sub = cancel;
+			type = cancel;
 			break;	
 			
 		case '여행/숙박/항공':
-			cate2sub = travel;
+			type = travel;
 			break;	
 			
 		case '안전거래':
-			cate2sub = safeDeal;
+			type = safeDeal;
 			break;
 				
 	}
@@ -49,8 +48,8 @@ function qnaOption(){
 	// select box 비워주기
 	$('.type').empty();
 	
-	for(let i = 0; i < cate2sub.length; i++){
-		let option = $("<option value>"+cate2sub[i]+"</option>");
+	for(let i = 0; i < type.length; i++){
+		let option = $("<option value>"+type[i]+"</option>");
 		$('.type').append(option);
 	}
 	

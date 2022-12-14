@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/_header.jsp"/>
-<jsp:include page="./_${cate1}.jsp"/>
+
                         <div>
                             <h3>가입</h3>
                             <ul>
