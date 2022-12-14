@@ -50,4 +50,14 @@ public class Sql {
 													+ "UNION " 
 													+ "SELECT b.* FROM (SELECT 'favorite' AS `type`, a.* FROM `km_product` a ORDER BY `review` DESC LIMIT 8) as b ";
 
+	/*** QnaArticle ***/
+	public static final String INSERT_QNA_ARTICLE = "INSERT `km_cs` SET "
+													+ "`uid`=?, "
+													+ "`cate1`=?, "
+													+ "`cate2`=?, "
+													+ "`type`=?, "
+													+ "`title`=?, "
+													+ "`content`=?, "
+													+ "`regip`=?, "
+													+ "`rdate`=NOW()";
 }
