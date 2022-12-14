@@ -244,22 +244,61 @@ main > div > aside > #gnb ol > li > a {
     border-radius: 3px;
     color: #999;
 }
-#admin-product-list > .paging > a:nth-child(1) {
+
+
+#admin-product-list > .paging > .starton {
     background-image: url('../img/admin_paging_end_on.JPG');
     background-position: 3px 1px;
 }
-#admin-product-list > .paging > a:nth-child(2) {
+
+#admin-product-list > .paging > .startoff {
+    background-image: url('../img/admin_paging_end_off.JPG');
+    background-position: 5px 1px;
+    transform: rotate(180deg);
+    pointer-events: none;
+}
+
+#admin-product-list > .paging > .prevon {
     background-image: url('../img/admin_paging_next_on.JPG');
     background-position: 2px 3px;
 }
-#admin-product-list > .paging > a:nth-child(13) {
+
+#admin-product-list > .paging > .prevoff {
     background-image: url('../img/admin_paging_next_off.JPG');
     background-position: 4px 3px;
+    transform: rotate(180deg);
+    pointer-events: none;
 }
-#admin-product-list > .paging > a:nth-child(14) {
+
+#admin-product-list > .paging > .nexton {
+    background-image: url('../img/admin_paging_next_on.JPG');
+    background-position: 2px 3px;
+    transform: rotate(180deg);
+}
+
+#admin-product-list > .paging > .nextoff {
+    background-image: url('../img/admin_paging_next_off.JPG');
+    background-position: 4px 3px;
+    pointer-events: none;
+}
+
+#admin-product-list > .paging > .endon {
+    background-image: url('../img/admin_paging_end_on.JPG');
+    background-position: 3px 1px;
+    transform: rotate(180deg);
+}
+
+#admin-product-list > .paging > .endoff {
     background-image: url('../img/admin_paging_end_off.JPG');
     background-position: 5px 1px;
+    pointer-events: none;
 }
+
+
+
+
+
+
 #admin-product-list > .paging > .pageNum {
     position: relative;
     top: -11px;
