@@ -16,7 +16,7 @@
 
 -- 테이블 데이터 kmarket.km_product_cate1:~9 rows (대략적) 내보내기
 INSERT INTO `km_product_cate1` (`cate1`, `c1Name`) VALUES
-	(10, '브랜드패션'),
+	(10, '브랜드패션'),kmarket
 	(11, '패션의류·잡화·뷰티'),
 	(12, '유아동'),
 	(13, '식품·생필품'),

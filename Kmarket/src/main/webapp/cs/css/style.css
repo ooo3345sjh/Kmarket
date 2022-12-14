@@ -1,5 +1,5 @@
 
-/* 筌롫뗄�뵥 */
+/* 嶺뚮∥�뾼占쎈데 */
 #cs {
     width: 100%;
     height: auto;
@@ -183,7 +183,7 @@
     font-size: 23px;
 }
 
-/* 甕곌쑵�뱣 �⑤벏�꽰 */
+/* �뵓怨뚯뫓占쎈괏 占썩뫀踰륅옙苑� */
 .btnWrite {
     float: right;
     padding: 10px 20px;
@@ -234,7 +234,7 @@
     background-color: #0954f6;
 }
 
-/* �⑥쥒而쇽옙苑깍옙苑� sub �⑤벏�꽰 */
+/* 占썩뫁伊믦�뚯눦�삕�땻源띿삕�땻占� sub 占썩뫀踰륅옙苑� */
 
 #cs > div > section > article > nav {
     width: 100%;
@@ -250,7 +250,7 @@
 }
 
 
-/* notice �⑤벏�꽰 */
+/* notice 占썩뫀踰륅옙苑� */
 #cs > .notice {}
 #cs > .notice > nav{
     width: 100%;
@@ -322,7 +322,7 @@
     box-sizing: border-box;
 }
 
-/* notice - 疫뀐옙筌뤴뫖以� */
+/* notice - �뼨�먯삕嶺뚮ㅄ維뽨빳占� */
 #cs > .notice > .list > article > table {
     width: 100%;
     border-collapse: collapse;
@@ -378,7 +378,7 @@
     color: #fff;
 }
 
-/* notice - 疫뀐옙癰귣떯由� */
+/* notice - �뼨�먯삕�솻洹ｋ뼬�뵳占� */
 #cs > .notice > .view {}
 #cs > .notice > .view > article {}
 #cs > .notice > .view > article > nav {
@@ -410,7 +410,7 @@
     line-height: 32px;
 }
 
-/* faq �⑤벏�꽰 */
+/* faq 占썩뫀踰륅옙苑� */
 #cs > .faq {}
 #cs > .faq > nav{
     width: 100%;
@@ -482,7 +482,7 @@
     box-sizing: border-box;
 }
 
-/* faq - 疫뀐옙筌뤴뫖以� */
+/* faq - �뼨�먯삕嶺뚮ㅄ維뽨빳占� */
 #cs > .faq > .list > article > div {
     margin-top: 26px;
 }
@@ -530,7 +530,7 @@
     text-align: center;
 }
 
-/* faq - 疫뀐옙癰귣떯由� */
+/* faq - �뼨�먯삕�솻洹ｋ뼬�뵳占� */
 #cs > .faq > .view {}
 #cs > .faq > .view > article {}
 #cs > .faq > .view > article > nav {
@@ -569,7 +569,7 @@
     line-height: 32px;
 }
 
-/* qna �⑤벏�꽰 */
+/* qna 占썩뫀踰륅옙苑� */
 #cs > .qna {}
 #cs > .qna > nav{
     width: 100%;
@@ -663,7 +663,7 @@
     color: gray;
 }
 
-/* qna - 疫뀐옙筌뤴뫖以� */
+/* qna - �뼨�먯삕嶺뚮ㅄ維뽨빳占� */
 #cs > .qna > .list > article > table {
     width: 100%;
     border-collapse: collapse;
@@ -717,7 +717,7 @@
     color: #fff;
 }
 
-/* qna - 疫뀐옙癰귣떯由� */
+/* qna - �뼨�먯삕�솻洹ｋ뼬�뵳占� */
 #cs > .qna > .view {}
 #cs > .qna > .view > article {}
 #cs > .qna > .view > article > nav{
@@ -749,7 +749,7 @@
     line-height: 30px;
 }
 
-/* qna - 疫뀐옙占쎈쾺疫뀐옙 */
+/* qna - �뼨�먯삕�뜝�럥苡븀뼨�먯삕 */
 #cs > .qna > .write > article table {
     width: 100%;
     border-collapse: collapse;

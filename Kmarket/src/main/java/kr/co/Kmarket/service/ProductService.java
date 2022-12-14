@@ -36,7 +36,10 @@ public class ProductService {
 		return total;
 	}
 	public void updateProduct () {}
-	public void deleteProduct () {}
+	public int deleteProduct (String prodNo) {
+		int result = dao.deleteProduct(prodNo);
+		return result;
+	}
 	
 	
 	public Map<String, Object> selectBestProducts () {

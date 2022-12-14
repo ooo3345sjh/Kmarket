@@ -1,6 +1,33 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
+<script>
+	$(document).on('click', '.remove', function(e){
+		e.preventDefault();
+		
+		let isDeleteOk = confirm("정말 삭제하시겠습니까?");
+				
+			if (isDeleteOk){
+				let product = $(this).closest('product');
+				let no = $(this).attr('data-prodNo');
+			}
+			
+			let jsonData = {"no" : prodNo};
+			
+			$.ajax ({
+				url: '/Kmarket/admin/list.do',
+				type: 'POST',
+				data: jsonData,
+				dataType: 'json',
+				success: function(data){
+					if(data.result == 1){
+						alert('상품이 삭제되었습니다.');
+						product.hide();
+					}
+				}
+			});
+	});
+</script>
         <main>
             <div>
                 <aside>
@@ -96,7 +123,7 @@
                         <tr>
                             <td><input type="checkbox" name="상품코드"></td>
                             <td>
-                                <img src='<c:url value='/admin/img/sample_thumb.jpg'/>' alt="thumb">
+                                <img src="<c:url value='${vo.thumb1}'/>" alt="thumb">
                             </td>
                             <td>${vo.prodNo}</td>
                             <td>${vo.prodName}</td>
@@ -107,28 +134,19 @@
                             <td>${vo.seller}</td>
                             <td>${vo.hit}</td>
                             <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
+                                <a href="#" class="remove" data-prodNo="${vo.prodNo}">[삭제]</a>
+                                <a href="#" class="modify">[수정]</a>
                             </td>
                         </tr>
                         </c:forEach>
                     </table>
                     <input type="button" value="선택삭제">
                     <div class="paging">
-                        <a href="#"></a>
-                        <a href="#"></a>
-                        <a href="#" class="pageNum on">1</a>
-                        <a href="#" class="pageNum">2</a>
-                        <a href="#" class="pageNum">3</a>
-                        <a href="#" class="pageNum">4</a>
-                        <a href="#" class="pageNum">5</a>
-                        <a href="#" class="pageNum">6</a>
-                        <a href="#" class="pageNum">7</a>
-                        <a href="#" class="pageNum">8</a>
-                        <a href="#" class="pageNum">9</a>
-                        <a href="#" class="pageNum">10</a>
-                        <a href="#"></a>
-                        <a href="#"></a>
+                        <a href='<c:url value='/admin/list.do?pg=${pageGroupStart - 1}'/>' class="${pageGroupStart > 1 ? 'prevon' : 'prevoff'}"></a>
+                        <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
+                        	<a href='<c:url value='/admin/list.do?pg=${i}'/>' class="pageNum ${currentPage == i ? 'on' : 'off'}">${i}</a>
+                        </c:forEach>
+                        <a href='<c:url value='/admin/list.do?pg=${pageGroupEnd + 1}'/>' class="${pageGroupEnd < lastPageNum ? 'nexton' : 'nextoff'}"></a>
                     </div>
                     <p class = "ico info">
                         <strong>Tip!</strong>

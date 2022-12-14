@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.service.CsService;
+import kr.co.Kmarket.vo.CsVO;
 
 @WebServlet("/cs/board/write.do")
 public class WriteController extends HttpServlet{
@@ -26,6 +27,11 @@ public class WriteController extends HttpServlet{
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String cate1 = req.getParameter("cate1");
+		String cate2 = req.getParameter("cate2");
+		
+		req.setAttribute("cate1", cate1);
+		req.setAttribute("cate2", cate2);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/board/write.jsp");
 		dispatcher.forward(req, resp);
@@ -33,11 +39,23 @@ public class WriteController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uid	 = req.getParameter("uid");
+		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
 		String type	 = req.getParameter("type");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
+		String regip = req.getRemoteAddr();
 		
+		CsVO cvo = new CsVO();
+		cvo.setUid(uid);
+		cvo.setCate1(cate1);
+		cvo.setCate2(cate2);
+		cvo.setType(type);
+		cvo.setTitle(title);
+		cvo.setContent(content);
+		cvo.setRegip(regip);
+		
+		int result = service.insertQnaArticle(cvo);
 		
 	}
 }
