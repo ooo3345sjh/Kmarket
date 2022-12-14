@@ -732,6 +732,8 @@ footer p > strong {
     float: right;
     width: 980px;
     min-height: 600px;
+    padding: 26px;
+    box-sizing: border-box;
 }
 #cs > .qna > section > aside > h2 {
     font-size: 24px;
@@ -755,9 +757,13 @@ footer p > strong {
     color: #111;
     text-decoration: underline;
 }
-#cs > .qna > section > article {
-    padding: 26px;
-    box-sizing: border-box;
+#cs > .qna > section > article > nav > h1 {
+    margin-bottom: 7px;
+}
+
+#cs > .qna > section > article > nav > span {
+	font-size: 16px;
+    color: gray;
 }
 
 /* qna - 글목록 */
