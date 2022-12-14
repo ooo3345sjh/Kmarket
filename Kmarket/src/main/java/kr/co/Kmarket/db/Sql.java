@@ -31,7 +31,9 @@ public class Sql {
 												+ "ORDER BY `prodNo` DESC "
 												+ "LIMIT ?, 10";
 	
-	public static final String SELECT_COUNT_TOTAL_PROD = "SELECT COUNT(`no`) FROM `km_product`";
+	public static final String SELECT_COUNT_TOTAL_PROD = "SELECT COUNT(`prodNo`) FROM `km_product`";
+	
+	public static final String DELETE_PRODUCT = "DELETE * FROM `km_product` WHERE `prodNo`=?";
 	
 	
 	/*** main ***/
