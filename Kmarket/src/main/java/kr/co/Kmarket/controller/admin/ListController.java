@@ -1,6 +1,7 @@
 package kr.co.Kmarket.controller.admin;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -90,6 +91,9 @@ public class ListController extends HttpServlet {
 		
 		JsonObject json = new JsonObject();
 		json.addProperty("result", result);
+		
+		PrintWriter writer = resp.getWriter();
+		writer.print(json.toString());
 	
 	}
 

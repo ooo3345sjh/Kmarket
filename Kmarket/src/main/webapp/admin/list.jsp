@@ -8,24 +8,23 @@
 		let isDeleteOk = confirm("정말 삭제하시겠습니까?");
 				
 			if (isDeleteOk){
-				let product = $(this).closest('product');
+				let product = $(this).closest('.tr');
 				let no = $(this).attr('data-prodNo');
-			}
+				let jsonData = {"no" : no};
 			
-			let jsonData = {"no" : prodNo};
-			
-			$.ajax ({
-				url: '/Kmarket/admin/list.do',
-				type: 'POST',
-				data: jsonData,
-				dataType: 'json',
-				success: function(data){
-					if(data.result == 1){
-						alert('상품이 삭제되었습니다.');
-						product.hide();
+				$.ajax ({
+					url: '/Kmarket/admin/list.do',
+					type: 'POST',
+					data: jsonData,
+					dataType: 'json',
+					success: function(data){
+						if(data.result == 1){
+							alert('상품이 삭제되었습니다.');
+							product.hide();
+						}
 					}
-				}
-			});
+				});
+			}
 	});
 </script>
         <main>
