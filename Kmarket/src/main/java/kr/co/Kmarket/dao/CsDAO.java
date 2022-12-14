@@ -4,20 +4,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.db.DBHelper;
-<<<<<<< HEAD
-=======
 import kr.co.Kmarket.db.Sql;
 import kr.co.Kmarket.vo.CsVO;
->>>>>>> 5761965c04c3cb5e695714adf2ef4ecb5f245dbf
 
 public class CsDAO extends DBHelper {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-<<<<<<< HEAD
-	public void insertArticle() {
 		
-=======
 	public int insertQnaArticle(CsVO cvo) {
 		int result = 0;
 		try {
@@ -39,10 +33,17 @@ public class CsDAO extends DBHelper {
 			logger.error(e.getMessage());
 		}
 		return result;
->>>>>>> 5761965c04c3cb5e695714adf2ef4ecb5f245dbf
 	}
 	public void select() {}
-	public void selects() {}
+	public void selectQnaArticles() {
+		try {
+			logger.info("selectQnaArticles...");
+			con = getConnection();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
 	public void update() {}
 	public void delete() {}
 	

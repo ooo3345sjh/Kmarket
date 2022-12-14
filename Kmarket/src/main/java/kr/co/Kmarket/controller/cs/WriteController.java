@@ -60,8 +60,6 @@ public class WriteController extends HttpServlet{
 		int result = service.insertQnaArticle(cvo);
 		if(result > 0) {
 			resp.sendRedirect("/Kmarket/cs/board/list.do?cate1="+cate1+"&cate2="+cate2);
-		}else {
-			resp.sendRedirect("/Kmarket/cs/board/write.do?cate1="+cate1+"&cate2="+cate2);
 		}
 	}
 }

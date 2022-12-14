@@ -5,7 +5,29 @@
             <div class="faq">
                 <nav>
                     <div>
-                      <p>홈<span>></span>자주묻는 질문</p>
+                      <p>홈<span>></span>자주묻는 질문 > 
+                      <c:if test="${cate2 eq 'user'}">
+              		  	회원
+              		  </c:if>
+                      <c:if test="${cate2 eq 'coupon'}">
+              		  	쿠폰/이벤트
+              		  </c:if>
+              		  <c:if test="${cate2 eq 'order'}">
+              		  	주문/결제
+              		  </c:if>
+              		  <c:if test="${cate2 eq 'delivery'}">
+              		  	배송
+              		  </c:if>
+              		  <c:if test="${cate2 eq 'cancel'}">
+              		  	취소/반품/교환
+              		  </c:if>
+              		  <c:if test="${cate2 eq 'travel'}">
+              		  	여행/숙박/항공
+              		  </c:if>
+              		  <c:if test="${cate2 eq 'safeDeal'}">
+              		  	안전거래
+              		  </c:if>
+                      </p>
                     </div>
                 </nav>
                 

@@ -51,7 +51,8 @@ public class Sql {
 													+ "SELECT b.* FROM (SELECT 'favorite' AS `type`, a.* FROM `km_product` a ORDER BY `review` DESC LIMIT 8) as b ";
 
 	/*** QnaArticle ***/
-	public static final String INSERT_QNA_ARTICLE = "INSERT `km_cs` SET "
+	// 문의하기 글쓰기, 카테고리 별 목록(회원, 쿠폰/이벤트, 주문/결제, 배송, 취소/반품/교환, 여행/숙박/항공, 안전거래)
+	public static final String INSERT_QNA_ARTICLE = "INSERT INTO `km_cs` SET "
 													+ "`uid`=?, "
 													+ "`cate1`=?, "
 													+ "`cate2`=?, "
@@ -60,4 +61,12 @@ public class Sql {
 													+ "`content`=?, "
 													+ "`regip`=?, "
 													+ "`rdate`=NOW()";
+	
+	public static final String SELECT_QNA_ARTICLES = ""
+													+ ""
+													+ ""
+													+ ""
+													+ ""
+													+ ""
+													+ "";
 }

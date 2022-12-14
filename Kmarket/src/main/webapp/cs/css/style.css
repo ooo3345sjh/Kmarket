@@ -1,5 +1,5 @@
 
-/* 嶺뚮∥�뾼占쎈데 */
+/* 메인 */
 #cs {
     width: 100%;
     height: auto;
@@ -184,7 +184,7 @@
     font-size: 23px;
 }
 
-/* �뵓怨뚯뫓占쎈괏 占썩뫀踰륅옙苑� */
+/* 버튼공통 */
 .btnWrite {
     float: right;
     padding: 10px 20px;
@@ -235,7 +235,7 @@
     background-color: #0954f6;
 }
 
-/* 占썩뫁伊믦�뚯눦�삕�땻源띿삕�땻占� sub 占썩뫀踰륅옙苑� */
+/* 고객센터 sub 공통 */
 
 #cs > div > section > article > nav {
     width: 100%;
@@ -251,7 +251,7 @@
 }
 
 
-/* notice 占썩뫀踰륅옙苑� */
+/* notice 공통 */
 #cs > .notice {}
 #cs > .notice > nav{
     width: 100%;
@@ -323,7 +323,7 @@
     box-sizing: border-box;
 }
 
-/* notice - �뼨�먯삕嶺뚮ㅄ維뽨빳占� */
+/* notice - 글목록 */
 #cs > .notice > .list > article > table {
     width: 100%;
     border-collapse: collapse;
@@ -379,7 +379,7 @@
     color: #fff;
 }
 
-/* notice - �뼨�먯삕�솻洹ｋ뼬�뵳占� */
+/* notice - 글보기 */
 #cs > .notice > .view {}
 #cs > .notice > .view > article {}
 #cs > .notice > .view > article > nav {
@@ -411,7 +411,7 @@
     line-height: 32px;
 }
 
-/* faq 占썩뫀踰륅옙苑� */
+/* faq 공통 */
 #cs > .faq {}
 #cs > .faq > nav{
     width: 100%;
@@ -483,7 +483,7 @@
     box-sizing: border-box;
 }
 
-/* faq - �뼨�먯삕嶺뚮ㅄ維뽨빳占� */
+/* faq - 글목록 */
 #cs > .faq > .list > article > div {
     margin-top: 26px;
 }
@@ -531,7 +531,7 @@
     text-align: center;
 }
 
-/* faq - �뼨�먯삕�솻洹ｋ뼬�뵳占� */
+/* faq - 글보기 */
 #cs > .faq > .view {}
 #cs > .faq > .view > article {}
 #cs > .faq > .view > article > nav {
@@ -570,7 +570,7 @@
     line-height: 32px;
 }
 
-/* qna 占썩뫀踰륅옙苑� */
+/* qna 공통 */
 #cs > .qna {}
 #cs > .qna > nav{
     width: 100%;
@@ -601,8 +601,6 @@
     margin: 0 auto;
     overflow: hidden;
 }
-<<<<<<< HEAD
-=======
 #cs > .qna > .list > article > a {
     float: right;
     font-size: 20px;
@@ -615,7 +613,6 @@
     border-radius: 2px;
     padding: 8px;
 }
->>>>>>> 5761965c04c3cb5e695714adf2ef4ecb5f245dbf
 
 #cs > .qna > section > aside {
     position: absolute;
@@ -667,11 +664,7 @@
     color: gray;
 }
 
-<<<<<<< HEAD
-/* qna - 湲�紐⑸줉 */
-=======
-/* qna - �뼨�먯삕嶺뚮ㅄ維뽨빳占� */
->>>>>>> 5761965c04c3cb5e695714adf2ef4ecb5f245dbf
+/*** qna - 글목록 ***/
 #cs > .qna > .list > article > table {
     width: 100%;
     border-collapse: collapse;
@@ -725,7 +718,7 @@
     color: #fff;
 }
 
-/* qna - �뼨�먯삕�솻洹ｋ뼬�뵳占� */
+/* qna - 글보기 */
 #cs > .qna > .view {}
 #cs > .qna > .view > article {}
 #cs > .qna > .view > article > nav{
@@ -757,7 +750,7 @@
     line-height: 30px;
 }
 
-/* qna - �뼨�먯삕�뜝�럥苡븀뼨�먯삕 */
+/* qna - 글쓰기 */
 #cs > .qna > .write > article table {
     width: 100%;
     border-collapse: collapse;
