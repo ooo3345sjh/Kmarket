@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.db.Sql;
 import kr.co.Kmarket.vo.ProductVO;
-import kr.co.farmStory2.vo.ArticleVO;
 
 public class ProductDAO extends DBHelper {
 	

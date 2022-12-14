@@ -32,11 +32,37 @@
                     </aside>
                     <article>
                     	<nav>
-                    		<h1>회원</h1>
-                    		<span>회원 관련 문의내용 입니다.</span>
+                    		<c:if test="${cate2 eq 'user'}">
+	                            <h1>회원</h1>
+	                            <h2>회원관련 문의 내용입니다.</h2>
+                            </c:if>
+                            <c:if test="${cate2 eq 'coupon'}">
+	                            <h1>쿠폰/이벤트</h1>
+	                            <h2>쿠폰/이벤트 문의 내용입니다.</h2>
+                            </c:if>
+                            <c:if test="${cate2 eq 'order'}">
+	                            <h1>주문/결제</h1>
+	                            <h2>주문/결제 문의 내용입니다.</h2>
+                            </c:if>
+                            <c:if test="${cate2 eq 'delivery'}">
+	                            <h1>배송</h1>
+	                            <h2>배송 문의 내용입니다.</h2>
+                            </c:if>
+                            <c:if test="${cate2 eq 'cancel'}">
+	                            <h1>취소/반품/교환</h1>
+	                            <h2>취소/반품/교환 문의 내용입니다.</h2>
+                            </c:if>
+                            <c:if test="${cate2 eq 'travel'}">
+	                            <h1>여행/숙박/항공</h1>
+	                            <h2>여행/숙박/항공 문의 내용입니다.</h2>
+                            </c:if>
+                            <c:if test="${cate2 eq 'safeDeal'}">
+	                            <h1>안전거래</h1>
+	                            <h2>안전거래 문의 내용입니다.</h2>
+                            </c:if>
                     	</nav>
-                        <form action="<c:url value='/cs/board/write.do'/>" method="post">
-                        <input type="hidden" name="uid" value="iamid">
+                        <form action="<c:url value='/cs/board/write.do?cate1=${cate1}&cate2=${cate2}'/>" method="post">
+                        	<input type="hidden" name="uid" value="iamid">
                             <table>
                                 <tr>
                                     <td>문의유형</td>
@@ -66,9 +92,10 @@
                                     <td><textarea name="content" placeholder="내용을 입력하세요"></textarea></td>
                                 </tr>
                             </table>
+                            
+                            <a href="#" class="btnList">취소하기</a>
+                            <input type="submit" class="btnSubmit" value="등록하기"/>
                         </form>
-                        <a href="#" class="btnList">취소하기</a>
-                        <a href="<c:url value='/cs/board/list.do?cate1=${cate1}&cate2=${cate2}'/>" class="btnSubmit">등록하기</a>
                     </article>
                 </section>
             </div>

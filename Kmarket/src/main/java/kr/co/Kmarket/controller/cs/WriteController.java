@@ -45,6 +45,7 @@ public class WriteController extends HttpServlet{
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String regip = req.getRemoteAddr();
+		String rdate = req.getParameter("rdate");
 		
 		CsVO cvo = new CsVO();
 		cvo.setUid(uid);
@@ -54,8 +55,13 @@ public class WriteController extends HttpServlet{
 		cvo.setTitle(title);
 		cvo.setContent(content);
 		cvo.setRegip(regip);
+		cvo.setRdate(rdate);
 		
 		int result = service.insertQnaArticle(cvo);
-		
+		if(result > 0) {
+			resp.sendRedirect("/Kmarket/cs/board/list.do?cate1="+cate1+"&cate2="+cate2);
+		}else {
+			resp.sendRedirect("/Kmarket/cs/board/write.do?cate1="+cate1+"&cate2="+cate2);
+		}
 	}
 }
