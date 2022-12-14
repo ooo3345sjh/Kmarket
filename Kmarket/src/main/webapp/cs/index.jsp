@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_header.jsp"/>
         <section id="cs">
             <div class="main">
@@ -6,7 +7,7 @@
                     <strong>케이마켓</strong>이 도와드릴게요!
                 </h1>
                 <section class="notice">
-                    <h1>공지사항<a href="./notice/list.html">전체보기</a></h1>
+                    <h1>공지사항<a href="<c:url value='/cs/board/list.do?cate1=notice&cate2=all'/>">전체보기</a></h1>
                     <ul>
                         <li>
                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
@@ -31,28 +32,28 @@
                     </ul>
                 </section>
                 <section class="faq">
-                    <h1>자주 묻는 질문<a href="./faq/list.html">전체보기</a></h1>
+                    <h1>자주 묻는 질문<a href="<c:url value='/cs/board/list.do?cate1=faq&cate2=user'/>">전체보기</a></h1>
                     <ol>
                         <li>
-                            <a href="#"><span>회원</span></a>
+                            <a href="<c:url value='/cs/board/list.do?cate1=faq&cate2=user'/>"><span>회원</span></a>
                         </li>
                         <li>
-                            <a href="#"><span>쿠폰/이벤트</span></a>
+                            <a href="<c:url value='/cs/board/list.do?cate1=faq&cate2=coupon'/>"><span>쿠폰/이벤트</span></a>
                         </li>
                         <li>
-                            <a href="#"><span>주문/결제</span></a>
+                            <a href="<c:url value='/cs/board/list.do?cate1=faq&cate2=order'/>"><span>주문/결제</span></a>
                         </li>
                         <li>
-                            <a href="#"><span>배송</span></a>
+                            <a href="<c:url value='/cs/board/list.do?cate1=faq&cate2=delivery'/>"><span>배송</span></a>
                         </li>
                         <li>
-                            <a href="#"><span>취소/반품/교환</span></a>
+                            <a href="<c:url value='/cs/board/list.do?cate1=faq&cate2=cancel'/>"><span>취소/반품/교환</span></a>
                         </li>
                         <li>
-                            <a href="#"><span>여행/숙박/항공</span></a>
+                            <a href="<c:url value='/cs/board/list.do?cate1=faq&cate2=travel'/>"><span>여행/숙박/항공</span></a>
                         </li>
                         <li>
-                            <a href="#"><span>안전거래</span></a>
+                            <a href="<c:url value='/cs/board/list.do?cate1=faq&cate2=safeDeal'/>"><span>안전거래</span></a>
                         </li>
 
                     </ol>
@@ -60,7 +61,7 @@
                 <section class="qna">
                     <h1>
                         문의하기
-                        <a href="#">전체보기</a>
+                        <a href="<c:url value='/cs/board/list.do?cate1=qna&cate2=user'/>">전체보기</a>
                     </h1>
                     <ul>
                         <li>
@@ -99,7 +100,7 @@
                             </p>
                         </li>
                     </ul>
-                    <a href="#" class="ask">문의글 작성 ></a>
+                    <a href="<c:url value='/cs/board/write.do?cate1=qna&cate2=user'/>" class="ask">문의글 작성 ></a>
                 </section>
 
                 <section class="tel">

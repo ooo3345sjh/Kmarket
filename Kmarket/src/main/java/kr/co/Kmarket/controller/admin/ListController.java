@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.Kmarket.service.ProductService;
-import kr.co.Kmarket.vo.ProductVO;
+import com.google.gson.JsonObject;
 
+import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.vo.ProductVO;
 
 
@@ -46,7 +46,7 @@ public class ListController extends HttpServlet {
 		int total = service.selectCountTotalProduct();
 		
 		// 페이지 마지막 번호 계산
-		if (total % 1 == 0) {
+		if (total % 10 == 0) {
 			lastPageNum = (total/10);
 		} else {
 			lastPageNum = (total/10) + 1;
@@ -64,10 +64,11 @@ public class ListController extends HttpServlet {
 		// 페이지 시작 번호 계산
 		start = (currentPage - 1) * 10;
 		pageStartNum = total - start;
-		start = (currentPage - 1) * 10;
 		
 		// 현재 페이지 게시물 가져오기
 		List<ProductVO> vo = null;
+		
+		vo = service.selectProducts(start);
 		
 		req.setAttribute("vo", vo);
 		req.setAttribute("currentPage", currentPage);
@@ -83,8 +84,12 @@ public class ListController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		ServletContext ctx = req.getServletContext();
-		String path = ctx.getRealPath("/file");
+		String prodNo = req.getParameter("no");
+		
+		int result = service.deleteProduct(prodNo);
+		
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
 	
 	}
 

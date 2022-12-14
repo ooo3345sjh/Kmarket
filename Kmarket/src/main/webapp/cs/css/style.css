@@ -1,5 +1,5 @@
 
-/* 硫붿씤 */
+/* 嶺뚮∥�뾼占쎈데 */
 #cs {
     width: 100%;
     height: auto;
@@ -183,7 +183,7 @@
     font-size: 23px;
 }
 
-/* 踰꾪듉 怨듯넻 */
+/* �뵓怨뚯뫓占쎈괏 占썩뫀踰륅옙苑� */
 .btnWrite {
     float: right;
     padding: 10px 20px;
@@ -234,7 +234,7 @@
     background-color: #0954f6;
 }
 
-/* 怨좉컼�꽱�꽣 sub 怨듯넻 */
+/* 占썩뫁伊믦�뚯눦�삕�땻源띿삕�땻占� sub 占썩뫀踰륅옙苑� */
 
 #cs > div > section > article > nav {
     width: 100%;
@@ -250,7 +250,7 @@
 }
 
 
-/* notice 怨듯넻 */
+/* notice 占썩뫀踰륅옙苑� */
 #cs > .notice {}
 #cs > .notice > nav{
     width: 100%;
@@ -322,7 +322,7 @@
     box-sizing: border-box;
 }
 
-/* notice - 湲�紐⑸줉 */
+/* notice - �뼨�먯삕嶺뚮ㅄ維뽨빳占� */
 #cs > .notice > .list > article > table {
     width: 100%;
     border-collapse: collapse;
@@ -378,7 +378,7 @@
     color: #fff;
 }
 
-/* notice - 湲�蹂닿린 */
+/* notice - �뼨�먯삕�솻洹ｋ뼬�뵳占� */
 #cs > .notice > .view {}
 #cs > .notice > .view > article {}
 #cs > .notice > .view > article > nav {
@@ -410,7 +410,7 @@
     line-height: 32px;
 }
 
-/* faq 怨듯넻 */
+/* faq 占썩뫀踰륅옙苑� */
 #cs > .faq {}
 #cs > .faq > nav{
     width: 100%;
@@ -482,7 +482,7 @@
     box-sizing: border-box;
 }
 
-/* faq - 湲�紐⑸줉 */
+/* faq - �뼨�먯삕嶺뚮ㅄ維뽨빳占� */
 #cs > .faq > .list > article > div {
     margin-top: 26px;
 }
@@ -530,7 +530,7 @@
     text-align: center;
 }
 
-/* faq - 湲�蹂닿린 */
+/* faq - �뼨�먯삕�솻洹ｋ뼬�뵳占� */
 #cs > .faq > .view {}
 #cs > .faq > .view > article {}
 #cs > .faq > .view > article > nav {
@@ -569,7 +569,7 @@
     line-height: 32px;
 }
 
-/* qna 怨듯넻 */
+/* qna 占썩뫀踰륅옙苑� */
 #cs > .qna {}
 #cs > .qna > nav{
     width: 100%;
@@ -600,6 +600,21 @@
     margin: 0 auto;
     overflow: hidden;
 }
+<<<<<<< HEAD
+=======
+#cs > .qna > .list > article > a {
+    float: right;
+    font-size: 20px;
+    background-color: #067dfd;
+    color: #fff;
+    border: 1px solid #0063ce;
+    margin-top: -40px;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 2px;
+    padding: 8px;
+}
+>>>>>>> 5761965c04c3cb5e695714adf2ef4ecb5f245dbf
 
 #cs > .qna > section > aside {
     position: absolute;
@@ -651,7 +666,11 @@
     color: gray;
 }
 
+<<<<<<< HEAD
 /* qna - 湲�紐⑸줉 */
+=======
+/* qna - �뼨�먯삕嶺뚮ㅄ維뽨빳占� */
+>>>>>>> 5761965c04c3cb5e695714adf2ef4ecb5f245dbf
 #cs > .qna > .list > article > table {
     width: 100%;
     border-collapse: collapse;
@@ -705,7 +724,7 @@
     color: #fff;
 }
 
-/* qna - 湲�蹂닿린 */
+/* qna - �뼨�먯삕�솻洹ｋ뼬�뵳占� */
 #cs > .qna > .view {}
 #cs > .qna > .view > article {}
 #cs > .qna > .view > article > nav{
@@ -737,7 +756,7 @@
     line-height: 30px;
 }
 
-/* qna - 湲��벐湲� */
+/* qna - �뼨�먯삕�뜝�럥苡븀뼨�먯삕 */
 #cs > .qna > .write > article table {
     width: 100%;
     border-collapse: collapse;
@@ -763,7 +782,7 @@
     box-sizing: border-box;
 }
 #cs > .qna > .write > article table select {
-	width: 100px;
+	width: 150px;
     height: 40px;
     text-indent: 5px;
     box-sizing: border-box;

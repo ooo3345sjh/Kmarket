@@ -1,59 +1,81 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>케이마켓::대한민국 1등 온라인 쇼핑몰</title>
-    <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href='<c:url value='/img/favicon.ico'/>'>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href='<c:url value='/css/style.css'/>'>
+    <link rel="stylesheet" href='<c:url value='/product/css/style.css'/>'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $(".slider > ul").bxSlider({
-                easing: "linear",
-            });
-        });
-
         $(function(){
-            let best = $("aside > .best");
-
+        	
+        	// 슬라이더 플러그인 함수
+        	$(".slider > ul").bxSlider({
+                controls: true,
+                auto: true,
+            });
+            
+            // 베스트 상품 사이드메뉴바 이동시키는 함수
             $(window).scroll(function(){
-                let t = $(this).scrollTop();
-
-                if(t > 620){
+	            let best = $("aside > .best");
+                let t = $(this).scrollTop(); // 스크롤바 TOP 높이
+				console.log(t);
+				
+                if(t > 620){ 
+                	if(t > 2900){
+                		return;
+                	}
                     best.css({
-                        position: "fixed",
-                        top: "0",
+                        position: "absolute",
+                        top: t
+                        
                     });
                 } else {
                     best.css({position: "static"});
                 }
             });
-        });
-
-        $(function(){
-
-            let $w = $(window),
-            footerHei = $('footer').outerHeight(),
-            $banner = $('.best');
-
-            $w.on('scroll', function(){
-
-                let sT = $w.scrollTop();
-                let val = $(document).height() - $w.height() - footerHei;
-
-                if(sT >= val)
-                    $banner.addClass('on')
-                else   
-                    $banner.removeClass('on')
-
-            });
+            
+            
+            let type = null;
+			let w = $(window); 
+            
+            // class="menu" 에 해당하는 링크 버튼 클릭시 해당 화면으로 이동하는 함수
+            $('.move  a').click(function (e) {
+				e.preventDefault();
+				let cate = $(this).attr('id');
+				switch(cate){
+					case 'hit': w.scrollTop(623); break;
+					case 'score': w.scrollTop(1344); break;
+					case 'newProd': w.scrollTop(2089); break;
+					case 'favorite': w.scrollTop(2818); break;
+					case 'discount': w.scrollTop(3542); break;
+				}
+			})
+			
+			// 메인페이지가 아닌 곳에서 class="menu" 에 해당하는 링크 버튼을 클릭시 사용되는 함수
+			$(document).ready(function () {
+				const url = new URL(window.location.href); // URL 객체 생성
+				const urlParams = url.searchParams; // URLSearchParams 객체
+				type = urlParams.get('type') // type value 값을 가져온다.
+				
+				switch(type){
+					case 'hit': w.scrollTop(623); break;
+					case 'score': w.scrollTop(1344); break;
+					case 'newProd': w.scrollTop(2089); break;
+					case 'favorite': w.scrollTop(2818); break;
+					case 'discount': w.scrollTop(3542); break;
+				}
+			})
         });
     </script>
 </head>
@@ -62,7 +84,7 @@
         <header>
             <div class="top">
                 <div>
-                    <a href="./member/login.html">로그인</a>
+                    <a href="<c:url value='#'/>">로그인</a>
                     <a href="#">회원가입</a>
                     <a href="#">마이페이지</a>
                     <a href="#">
@@ -74,7 +96,7 @@
             <div class="logo">
                 <div>
                     <a href="#">
-                        <img src="./img/header_logo.png" alt="로고">
+                        <img src='<c:url value='/img/header_logo.png'/>' alt="로고">
                     </a>
                     <form action="#">
                         <input type="text" name="search">
@@ -86,12 +108,12 @@
             </div>
             <div class="menu">
                 <div>
-                    <ul>
-                        <li><a href="#">히트상품</a></li>
-                        <li><a href="#">추천상품</a></li>
-                        <li><a href="#">최신상품</a></li>
-                        <li><a href="#">인기상품</a></li>
-                        <li><a href="#">할인상품</a></li>
+                    <ul class="move">
+                        <li><a href='<c:url value='/index.do?type=hit'/>' id='hit'>히트상품</a></li>
+                        <li><a href='<c:url value='/index.do?type=score'/>' id='score'>추천상품</a></li>
+                        <li><a href='<c:url value='/index.do?type=newProd'/>' id='newProd'>최신상품</a></li>
+                        <li><a href='<c:url value='/index.do?type=favorite'/>' id='favorite'>인기상품</a></li>
+                        <li><a href='<c:url value='/index.do?type=discount'/>' id='discount'>할인상품</a></li>
                     </ul>
                     <ul>
                         <li><a href="#">공지사항</a></li>
@@ -113,28 +135,48 @@
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fas fa-tshirt" aria-hidden="true"></i>
-                            패션·의류·뷰티
+                            <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+                            브랜드패션
                             <i class="fas fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <ol>
-                            <li><a href="#">남성의류</a></li>
-                            <li><a href="#">여성의류</a></li>
-                            <li><a href="#">잡화</a></li>
-                            <li><a href="#">뷰티</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=10&cate=10'/>'>브랜드 여성의류</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=10&cate=11'/>'>브랜드 남성의류</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=10&cate=12'/>'>브랜드 진/캐쥬얼</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=10&cate=13'/>'>브랜드 신발/가방</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=10&cate=14'/>'>브랜드 신발/가방</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=10&cate=15'/>'>브랜드 쥬얼리/시계</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=10&cate=16'/>'>브랜드 아웃도어</a></li>
                         </ol>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fas fa-laptop" aria-hidden="true"></i>
-                            가전·디지털
+                            <i class="fas fa-tshirt" aria-hidden="true"></i>
+                            패션의류·잡화·뷰티
                             <i class="fas fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <ol>
-                            <li><a href="#">노트북/PC</a></li>
-                            <li><a href="#">가전</a></li>
-                            <li><a href="#">휴대폰</a></li>
-                            <li><a href="#">기타</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=11&cate=10'/>'>여성의류</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=11&cate=11'/>'>남성의류</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=11&cate=12'/>'>언더웨어</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=11&cate=13'/>'>신발</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=11&cate=14'/>'>가방/잡화</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=11&cate=15'/>'>쥬얼리/시계</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=11&cate=16'/>'>화장품/향수</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=11&cate=17'/>'>바디/헤어</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-baby-carriage" aria-hidden="true"></i>
+                            유아동
+                            <i class="fas fa-angle-right" aria-hidden="true"></i>
+                        </a>
+                        <ol>
+                            <li><a href='<c:url value='/product/list.do?cate1=12&cate=10'/>'>출산/육아</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=12&cate=11'/>'>장난감/완구</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=12&cate=12'/>'>유아동 의류</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=12&cate=13'/>'>유아동 신발/잡화</a></li>
                         </ol>
                     </li>
                     <li>
@@ -144,23 +186,95 @@
                             <i class="fas fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <ol>
-                            <li><a href="#">신선식품</a></li>
-                            <li><a href="#">가공식품</a></li>
-                            <li><a href="#">건강식품</a></li>
-                            <li><a href="#">생필품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=13&cate=10'/>'>신선식품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=13&cate=11'/>'>가공식품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=13&cate=12'/>'>건강식품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=13&cate=13'/>'>커피/음료</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=13&cate=14'/>'>생필품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=13&cate=15'/>'>바디/헤어</a></li>
                         </ol>
                     </li>
                     <li>
                         <a href="#">
                             <i class="fas fa-home" aria-hidden="true"></i>
-                            홈·문구·취미
+                            홈데코·문구·취미·반려
                             <i class="fas fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <ol>
-                            <li><a href="#">가구/DIY</a></li>
-                            <li><a href="#">침구·커튼</a></li>
-                            <li><a href="#">생활용품</a></li>
-                            <li><a href="#">사무용품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=10'/>'>가구/DIY</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=11'/>'>침구/커튼</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=12'/>'>조명/인테리어</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=13'/>'>생활용품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=14'/>'>주방용품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=15'/>'>문구/사무용품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=16'/>'>사무기기</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=17'/>'>악기/취미</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=18'/>'>반려동물용품</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-tv" aria-hidden="true"></i>
+                            컴퓨터·디지털·가전
+                            <i class="fas fa-angle-right" aria-hidden="true"></i>
+                        </a>
+                        <ol>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=10'/>'>노트북/PC</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=11'/>'>모니터/프린터</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=12'/>'>PC주변기기</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=13'/>'>모바일/태블릿</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=14'/>'>카메라</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=15'/>'>게임</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=16'/>'>영상가전</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=17'/>'>주방가전</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=18'/>'>계절가전</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=19'/>'>생활/미용가전</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=20'/>'>음향가전</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=21'/>'>건강가전</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-running" aria-hidden="true"></i>
+                            스포츠·건강·렌탈
+                            <i class="fas fa-angle-right" aria-hidden="true"></i>
+                        </a>
+                        <ol>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=10'/>'>스포츠의류/운동화</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=11'/>'>휘트니스/수영</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=12'/>'>구기/라켓</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=13'/>'>골프</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=14'/>'>자전거/보드/기타레저</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=15'/>'>캠핑/낚시</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=16'/>'>등산/아웃도어</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=17'/>'>건강/의료용품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=18'/>'>건강식품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=19'/>'>렌탈서비스</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-car" aria-hidden="true"></i>
+                            자동차·공구
+                            <i class="fas fa-angle-right" aria-hidden="true"></i>
+                        </a>
+                        <ol>
+                            <li><a href='<c:url value='/product/list.do?cate1=17&cate=10'/>'>자동차용품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=17&cate=11'/>'>공구/안전/산업용품</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-book" aria-hidden="true"></i>
+                            여행·도서·티켓·e쿠폰
+                            <i class="fas fa-angle-right" aria-hidden="true"></i>
+                        </a>
+                        <ol>
+                            <li><a href='<c:url value='/product/list.do?cate1=18&cate=10'/>'>여행/항공권</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=18&cate=11'/>'>도서/음반/e교육</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=18&cate=12'/>'>공연티켓</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=18&cate=13'/>'>e쿠폰</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=18&cate=14'/>'>상품권</a></li>
                         </ol>
                     </li>
                 </ul>
@@ -171,773 +285,213 @@
                         베스트상품
                     </h1>
                     <ol>
+                    <c:forEach items="${map.best}" end="4" var="row" varStatus="loop">
+                    	
                         <li>
                             <a href="#">
                                 <div class="thumb">
-                                    <i>1</i>
-                                    <img src="https://via.placeholder.com/230" alt="item1">
+                                    <i>${loop.count}</i>
+                                    <img src="${row.thumb1}" alt="item1" 
+                                    <c:if test="${loop.count eq 1}">width="201" height="201"</c:if>> <!-- 첫번째 상품만 사이즈 설정 -->
                                 </div>
-                                <h2>상품명</h2>
+                                <h2>${row.prodName}</h2>
                                 <div class="org_price">
-                                    <del>30,000</del>
-                                    <span>10%</span>
+                                    <del><fmt:formatNumber value="${row.price}" pattern="#,###"/></del>
+                                    <span>${row.discount}%</span>
                                 </div>
                                 <div class="dis_price">
-                                    <ins>27,000</ins>
+                                    <ins><fmt:formatNumber value="${row.discountPrice}" pattern="#,###"/></ins>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <div class="thumb">
-                                    <i>2</i>
-                                    <img src="https://via.placeholder.com/50" alt="item1">
-                                </div>
-                                <article>
-                                    <h2>상품명</h2>
-                                    <div class="org_price">
-                                        <del>30,000</del>
-                                        <span>10%</span>
-                                    </div>
-                                    <div class="dis_price">
-                                        <ins>27,000</ins>
-                                    </div>
-                                </article>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="thumb">
-                                    <i>3</i>
-                                    <img src="https://via.placeholder.com/50" alt="item1">
-                                </div>
-                                <article>
-                                    <h2>상품명</h2>
-                                    <div class="org_price">
-                                        <del>30,000</del>
-                                        <span>10%</span>
-                                    </div>
-                                    <div class="dis_price">
-                                        <ins>27,000</ins>
-                                    </div>
-                                </article>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="thumb">
-                                    <i>4</i>
-                                    <img src="https://via.placeholder.com/50" alt="item1">
-                                </div>
-                                <article>
-                                    <h2>상품명</h2>
-                                    <div class="org_price">
-                                        <del>30,000</del>
-                                        <span>10%</span>
-                                    </div>
-                                    <div class="dis_price">
-                                        <ins>27,000</ins>
-                                    </div>
-                                </article>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="thumb">
-                                    <i>5</i>
-                                    <img src="https://via.placeholder.com/50" alt="item1">
-                                </div>
-                                <article>
-                                    <h2>상품명</h2>
-                                    <div class="org_price">
-                                        <del>30,000</del>
-                                        <span>10%</span>
-                                    </div>
-                                    <div class="dis_price">
-                                        <ins>27,000</ins>
-                                    </div>
-                                </article>
-                            </a>
-                        </li>
+                    </c:forEach>
                     </ol>
                 </article>
             </aside>
             <section>
                 <!-- 슬라이더 영역 -->
                 <section class="slider">
-                    <div class="bx-wrapper" style="max-width: 100%;">
-                        <div class="bx-viewport" aria-live="polite" style="width: 100%; overflow: hidden; position: relative; height: 447px;">
-                            <ul style="width: 5215%; position: relative; transition-timing-function: linear; transition-duration: 0s; transform: translate3d(-985px, 0px, 0px);">
-                                <li style="float: left; list-style: none; position: relative; width: 985px;" class="bx-clone" aria-hidden="true">
-                                    <a href="#">
-                                        <img src="https://via.placeholder.com/985x447" alt="item5">
-                                    </a>
-                                </li>
-                                <li style="float: left; list-style: none; position: relative; width: 985px;" aria-hidden="false">
-                                    <a href="#">
-                                        <img src="https://via.placeholder.com/985x447" alt="item1">
-                                    </a>
-                                </li>
-                                <li aria-hidden="true" style="float: left; list-style: none; position: relative; width: 985px;">
-                                    <a href="#">
-                                        <img src="https://via.placeholder.com/985x447" alt="item2">
-                                    </a>
-                                </li>
-                                <li aria-hidden="true" style="float: left; list-style: none; position: relative; width: 985px;">
-                                    <a href="#">
-                                        <img src="https://via.placeholder.com/985x447" alt="item3">
-                                    </a>
-                                </li>
-                                <li aria-hidden="true" style="float: left; list-style: none; position: relative; width: 985px;">
-                                    <a href="#">
-                                        <img src="https://via.placeholder.com/985x447" alt="item4">
-                                    </a>
-                                </li>
-                                <li style="float: left; list-style: none; position: relative; width: 985px;" aria-hidden="true">
-                                    <a href="#">
-                                        <img src="https://via.placeholder.com/985x447" alt="item5">
-                                    </a>
-                                </li>
-                                <li style="float: left; list-style: none; position: relative; width: 985px;" class="bx-clone" aria-hidden="true">
-                                    <a href="#">
-                                        <img src="https://via.placeholder.com/985x447" alt="item1">
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="bx-controls bx-has-controls-direction bx-has-pager">
-                            <div class="bx-controls-direction">
-                                <a class="bx-prev" href>Prev</a>
-                                <a class="bx-next" href>Next</a>
-                            </div>
-                            <div class="bx-pager bx-default-pager">
-                                <div class="bx-pager-item">
-                                    <a href data-slide-index="0" class="bx-pager-link active">1</a>
-                                </div>
-                                <div class="bx-pager-item">
-                                    <a href data-slide-index="1" class="bx-pager-link">2</a>
-                                </div>
-                                <div class="bx-pager-item">
-                                    <a href data-slide-index="2" class="bx-pager-link">3</a>
-                                </div>
-                                <div class="bx-pager-item">
-                                    <a href data-slide-index="3" class="bx-pager-link">4</a>
-                                </div>
-                                <div class="bx-pager-item">
-                                    <a href data-slide-index="4" class="bx-pager-link">5</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+	                <ul>
+	                    <li>
+	                        <a href="#">
+	                            <img src='<c:url value='/img/slider_item1.jpg'/>' alt="item1">
+	                        </a>
+	                    </li>
+	                    <li>
+	                        <a href="#">
+	                            <img src='<c:url value='/img/slider_item2.jpg'/>' alt="item2">
+	                        </a>
+	                    </li>
+	                    <li>
+	                        <a href="#">
+	                            <img src='<c:url value='/img/slider_item3.jpg'/>' alt="item3">
+	                        </a>
+	                    </li>
+	                    <li>
+	                        <a href="#">
+	                            <img src='<c:url value='/img/slider_item4.jpg'/>' alt="item4">
+	                        </a>
+	                    </li>
+	                    <li>
+	                        <a href="#">
+	                            <img src='<c:url value='/img/slider_item5.jpg'/>' alt="item5">
+	                        </a>
+	                    </li>
+	                </ul>
                 </section>
                 <!-- 히트상품 영역 -->
                 <section class="hit">
                     <h3>
                         <span>히트상품</span>
                     </h3>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
+                    <c:forEach items="${map.hit}" end="7" var="row" varStatus='loop'>
+	                    <article>
+	                        <a href="#">
+	                            <div class="thumb">
+	                                <img src="${row.thumb2}" alt="t1">
+	                            </div>
+	                            <h2>${row.prodName}</h2>
+	                            <p>${row.prodName}</p>
+	                            <div class="org_price">
+	                                <del><fmt:formatNumber value="${row.price}" pattern="#,###"/></del>
+	                                <span>${row.discount}%</span>
+	                            </div>
+	                            <div class="dis_price">
+	                                <ins><fmt:formatNumber value="${row.discountPrice}" pattern="#,###"/></ins>
+	                                <c:choose>
+	                                	<c:when test="${row.delivery != 0}">
+			                                <span>배송비 <fmt:formatNumber value="${row.delivery}" pattern="#,###"/></span>
+	                                	</c:when>
+	                                	<c:otherwise>
+			                                <span><img alt="무료배송" src='<c:url value='/img/ico_freeshipping.gif'/>'></span>
+	                                	</c:otherwise>
+	                                </c:choose>
+	                            </div>
+	                        </a>
+	                    </article>
+                    </c:forEach>
                 </section>
                 <!-- 추천상품 영역 -->
                 <section class="recommend">
                     <h3><span>추천상품</span></h3>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span>배송비 2500</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span>배송비 2500</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span>배송비 2500</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span>배송비 2500</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span>배송비 2500</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span>배송비 2500</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span>배송비 2500</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span>배송비 2500</span>
-                            </div>
-                        </a>
-                    </article>
+                    <c:forEach items="${map.score}" end="7" var="row" varStatus="loop">
+	                    <article>
+	                        <a href="#">
+	                            <div class="thumb">
+	                                <img src="${row.thumb2}" alt="t1">
+	                            </div>
+	                            <h2>${row.prodName}</h2>
+	                            <p>${row.prodName}</p>
+	                            <div class="org_price">
+	                                <del><fmt:formatNumber value="${row.price}" pattern="#,###"/></del>
+	                                <span>${row.discount}%</span>
+	                            </div>
+	                            <div class="dis_price">
+	                                <ins><fmt:formatNumber value="${row.discountPrice}" pattern="#,###"/></ins>
+	                                <c:choose>
+	                                	<c:when test="${row.delivery != 0}">
+			                                <span>배송비 <fmt:formatNumber value="${row.delivery}" pattern="#,###"/></span>
+	                                	</c:when>
+	                                	<c:otherwise>
+			                                <span><img alt="무료배송" src='<c:url value='/img/ico_freeshipping.gif'/>'></span>
+	                                	</c:otherwise>
+	                                </c:choose>
+	                            </div>
+	                        </a>
+	                    </article>
+                    </c:forEach>
                 </section>
                 <!-- 최신상품 영역 -->
                 <section class="new">
                     <h3><span>최신상품</span></h3>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
+                    <c:forEach items="${map.newProd}" end="7" var="row" varStatus="loop">
+	                    <article>
+	                        <a href="#">
+	                            <div class="thumb">
+	                                <img src="${row.thumb2}" alt="t1">
+	                            </div>
+	                            <h2>${row.prodName}</h2>
+	                            <p>${row.descript}</p>
+	                            <div class="org_price">
+	                                <del><fmt:formatNumber value="${row.price}" pattern="#,###"/></del>
+	                                <span>${row.discount}%</span>
+	                            </div>
+	                            <div class="dis_price">
+	                                <ins><fmt:formatNumber value="${row.discountPrice}" pattern="#,###"/></ins>
+	                                <c:choose>
+	                                	<c:when test="${row.delivery != 0}">
+			                                <span>배송비 <fmt:formatNumber value="${row.delivery}" pattern="#,###"/></span>
+	                                	</c:when>
+	                                	<c:otherwise>
+			                                <span><img alt="무료배송" src='<c:url value='/img/ico_freeshipping.gif'/>'></span>
+	                                	</c:otherwise>
+	                                </c:choose>
+	                            </div>
+	                        </a>
+	                    </article>
+                    </c:forEach>
+                </section>
+                <!-- 인기상품 영역 -->
+                <section class="new">
+                    <h3><span>인기상품</span></h3>
+                    <c:forEach items="${map.favorite}" end="7" var="row" varStatus="loop">
+	                    <article>
+	                        <a href="#">
+	                            <div class="thumb">
+	                                <img src="${row.thumb2}" alt="t1">
+	                            </div>
+	                            <h2>${row.prodName}</h2>
+	                            <p>${row.descript}</p>
+	                            <div class="org_price">
+	                                <del><fmt:formatNumber value="${row.price}" pattern="#,###"/></del>
+	                                <span>${row.discount}%</span>
+	                            </div>
+	                            <div class="dis_price">
+	                                <ins><fmt:formatNumber value="${row.discountPrice}" pattern="#,###"/></ins>
+	                                <c:choose>
+	                                	<c:when test="${row.delivery != 0}">
+			                                <span>배송비 <fmt:formatNumber value="${row.delivery}" pattern="#,###"/></span>
+	                                	</c:when>
+	                                	<c:otherwise>
+			                                <span><img alt="무료배송" src='<c:url value='/img/ico_freeshipping.gif'/>'></span>
+	                                	</c:otherwise>
+	                                </c:choose>
+	                            </div>
+	                        </a>
+	                    </article>
+                    </c:forEach>
                 </section>
                 <!-- 할인상품 영역 -->
                 <section class="discount">
                     <h3><span>할인상품</span></h3>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="#">
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/230x230" alt="t1">
-                            </div>
-                            <h2>상품명</h2>
-                            <p>간단한 상품 설명</p>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                                <span class="free">무료배송</span>
-                            </div>
-                        </a>
-                    </article>
+					<c:forEach items="${map.discount}" end="7" var="row" varStatus="loop">
+	                    <article>
+	                        <a href="#">
+	                            <div class="thumb">
+	                                <img src="${row.thumb2}" alt="t1">
+	                            </div>
+	                            <h2>${row.prodName}</h2>
+	                            <p>${row.descript}</p>
+	                            <div class="org_price">
+	                                <del>${row.price}</del>
+	                                <span>${row.discount}%</span>
+	                            </div>
+	                            <div class="dis_price">
+	                                <ins>${row.discountPrice}</ins>
+	                                <c:choose>
+	                                	<c:when test="${row.delivery != 0}">
+			                                <span>배송비 <fmt:formatNumber value="${row.delivery}" pattern="#,###"/></span>
+	                                	</c:when>
+	                                	<c:otherwise>
+			                                <span><img alt="무료배송" src='<c:url value='/img/ico_freeshipping.gif'/>'></span>
+	                                	</c:otherwise>
+	                                </c:choose>
+	                            </div>
+	                        </a>
+	                    </article>
+                    </c:forEach>
                 </section>
             </section>
         </main>
-        <footer>
-            <ul>
-                <li>
-                    <a href="#">회사소개</a>
-                </li>
-                <li>
-                    <a href="#">서비스이용약관</a>
-                </li>
-                <li>
-                    <a href="#">개인정보처리방침</a>
-                </li>
-                <li>
-                    <a href="#">전자금융거래약관</a>
-                </li>
-            </ul>
-            <div>
-                <p>
-                    <img src="./img/footer_logo.png" alt="로고">
-                </p>
-                <p>
-                    <strong>(주)KMARKET</strong>
-                    <br/>
-                    부산시 강남구 테헤란로 152 (역삼동 강남파이낸스센터)
-                    <br/>
-                    대표이사 : 홍길동
-                    <br/>
-                    사업자등록번호 : 220-81-83676 사업자정보확인
-                    <br/>
-                    통신판매업신고 : 강남 10630호 Fax : 02-589-8842
-                </p>
-                <p>
-                    <strong>고객센터</strong>
-                    <br/>
-                    Tel : 1234-5678 (평일 09:00~18:00)
-                    <br/>
-                    스마일클럽/SVIP 전용 : 1522-5700 (365일 09:00~18:00)
-                    <br/>
-                    경기도 부천시 원미구 부일로 223(상동) 투나빌딩 6층
-                    <br/>
-                    Fax : 051-123-4567 | Mail : kmarket@kamrket.co.kr
-                </p>
-            </div>
-        </footer>
-        <button type="button" id="top">상단이동</button>
-    </div>
-</body>
-</html>
+        </div>
+<jsp:include page="/_footer.jsp"/>
