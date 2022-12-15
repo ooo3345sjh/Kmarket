@@ -1,6 +1,7 @@
 package kr.co.Kmarket.controller.admin;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -15,7 +16,6 @@ import com.google.gson.JsonObject;
 
 import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.vo.ProductVO;
-
 
 @WebServlet("/admin/list.do")
 public class ListController extends HttpServlet {
@@ -84,12 +84,15 @@ public class ListController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String prodNo = req.getParameter("no");
+		String prodNo = req.getParameter("prodNo");
 		
 		int result = service.deleteProduct(prodNo);
 		
 		JsonObject json = new JsonObject();
 		json.addProperty("result", result);
+		
+		PrintWriter writer = resp.getWriter();
+		writer.print(json.toString());
 	
 	}
 
