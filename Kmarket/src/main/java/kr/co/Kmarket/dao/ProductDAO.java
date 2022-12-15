@@ -263,7 +263,7 @@ public class ProductDAO extends DBHelper {
 			String group = (String)map.get("group");
 		
 			StringBuffer sql = new StringBuffer();
-			sql.append("SELECT COUNT(`ProdNo`) FROM `km_product` ");
+			sql.append("SELECT COUNT(`prodNo`) FROM `km_product` ");
 			
 
 			if(!group.equals("admin")) {	// 그룹명이 admin이 아니라면
@@ -305,7 +305,7 @@ public class ProductDAO extends DBHelper {
 		String cate2 = (String)map.get("cate2");
 		String group = (String)map.get("group");
 		
-		String sql = "SELECT a.*, u.`nick` FROM `km_product` ";
+		String sql = "SELECT * FROM `km_product` ";
 		
 		if(!group.equals("admin")) {	// 그룹명이 admin이 아니라면
 			sql += "WHERE `cate1` = '" + cate1 + "' AND `cate2`= '" + cate2 + "'";
@@ -318,7 +318,7 @@ public class ProductDAO extends DBHelper {
 			}
 		}
 		
-		sql += " ORDER BY `no` desc  LIMIT ?, 10";
+		sql += " ORDER BY `ProdNo` desc  LIMIT ?, 10";
 		
 		try {
 			logger.info("selectProducts...");
@@ -331,7 +331,7 @@ public class ProductDAO extends DBHelper {
 			
 			while(rs.next()) {
 				ProductVO vo = new ProductVO();
-				String path = "file/" + cate1 + "/" + cate2 + "/"; // 이미지 저장경로
+				String path = "/file/" + cate1 + "/" + cate2 + "/"; // 이미지 저장경로
 				int price = rs.getInt("price");                    // 상품 가격
 				int discount = rs.getInt("discount");			   // 할인율
 				int discountPrice = (int)(price - (price * (discount/100.0))); // 상품 할인 적용된 가격
@@ -376,7 +376,7 @@ public class ProductDAO extends DBHelper {
 			logger.error(e.getMessage());
 		}
 				
-		map.put("products : ", list);
-		logger.debug("map : " + map);
+		map.put("products", list);
+		logger.debug(" list : " + list);
 	}
 }

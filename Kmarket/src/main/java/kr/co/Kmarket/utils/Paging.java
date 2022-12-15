@@ -12,7 +12,7 @@ public class Paging {
 	/*** 페이징 처리 ***/
 	public static Map<String, Object> paging(Map<String, Object> map){
 		
-		HttpServletRequest req = (HttpServletRequest)map.get("request");
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		String searchField = (String)map.get("searchField"); // 검색 필드
 		String searchWord = (String)map.get("searchWord");   // 검색 단어
 		
@@ -74,7 +74,7 @@ public class Paging {
 		StringBuffer pageTags = new StringBuffer(); // 페이지 태그 모음
 		int prevPage = pageGroupStart - 1;    // 이전 페이지
 		int nextPage = pageGroupEnd + 1;      // 다음 페이지
-		String contextPath = ((HttpServletRequest)map.get("request")).getContextPath();
+		String contextPath = ((HttpServletRequest)map.get("req")).getContextPath();
 		
 		String group = (String)map.get("group");
 		String cate1 = (String)map.get("cate1");
