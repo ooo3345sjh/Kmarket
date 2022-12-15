@@ -249,6 +249,7 @@ main > div > aside > #gnb ol > li > a {
 #admin-product-list > .paging > .starton {
     background-image: url('../img/admin_paging_end_on.JPG');
     background-position: 3px 1px;
+    font-size: 0;
 }
 
 #admin-product-list > .paging > .startoff {
@@ -256,11 +257,13 @@ main > div > aside > #gnb ol > li > a {
     background-position: 5px 1px;
     transform: rotate(180deg);
     pointer-events: none;
+    font-size: 0;
 }
 
 #admin-product-list > .paging > .prevon {
     background-image: url('../img/admin_paging_next_on.JPG');
     background-position: 2px 3px;
+    font-size: 0;
 }
 
 #admin-product-list > .paging > .prevoff {
@@ -268,30 +271,35 @@ main > div > aside > #gnb ol > li > a {
     background-position: 4px 3px;
     transform: rotate(180deg);
     pointer-events: none;
+    font-size: 0;
 }
 
 #admin-product-list > .paging > .nexton {
     background-image: url('../img/admin_paging_next_on.JPG');
     background-position: 2px 3px;
     transform: rotate(180deg);
+    font-size: 0;
 }
 
 #admin-product-list > .paging > .nextoff {
     background-image: url('../img/admin_paging_next_off.JPG');
     background-position: 4px 3px;
     pointer-events: none;
+    font-size: 0;
 }
 
 #admin-product-list > .paging > .endon {
     background-image: url('../img/admin_paging_end_on.JPG');
     background-position: 3px 1px;
     transform: rotate(180deg);
+    font-size: 0;
 }
 
 #admin-product-list > .paging > .endoff {
     background-image: url('../img/admin_paging_end_off.JPG');
     background-position: 5px 1px;
     pointer-events: none;
+    font-size: 0;
 }
 
 

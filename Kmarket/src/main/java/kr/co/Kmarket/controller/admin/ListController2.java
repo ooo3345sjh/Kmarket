@@ -17,8 +17,8 @@ import com.google.gson.JsonObject;
 import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.vo.ProductVO;
 
-@WebServlet("/admin/list.do")
-public class ListController extends HttpServlet {
+@WebServlet("/admin/lists.do")
+public class ListController2 extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private ProductService service = new ProductService();
