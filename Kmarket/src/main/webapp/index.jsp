@@ -139,13 +139,13 @@
                             <i class="fas fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <ol>
-                            <li><a href='<c:url value='/product/list.do?cate1=10&cate=10'/>'>브랜드 여성의류</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=10&cate=11'/>'>브랜드 남성의류</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=10&cate=12'/>'>브랜드 진/캐쥬얼</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=10&cate=13'/>'>브랜드 신발/가방</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=10&cate=14'/>'>브랜드 신발/가방</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=10&cate=15'/>'>브랜드 쥬얼리/시계</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=10&cate=16'/>'>브랜드 아웃도어</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=10&cate2=10'/>'>브랜드 여성의류</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=10&cate2=11'/>'>브랜드 남성의류</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=10&cate2=12'/>'>브랜드 진/캐쥬얼</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=10&cate2=13'/>'>브랜드 신발/가방</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=10&cate2=14'/>'>브랜드 신발/가방</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=10&cate2=15'/>'>브랜드 쥬얼리/시계</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=10&cate2=16'/>'>브랜드 아웃도어</a></li>
                         </ol>
                     </li>
                     <li>
@@ -155,14 +155,14 @@
                             <i class="fas fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <ol>
-                            <li><a href='<c:url value='/product/list.do?cate1=11&cate=10'/>'>여성의류</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=11&cate=11'/>'>남성의류</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=11&cate=12'/>'>언더웨어</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=11&cate=13'/>'>신발</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=11&cate=14'/>'>가방/잡화</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=11&cate=15'/>'>쥬얼리/시계</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=11&cate=16'/>'>화장품/향수</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=11&cate=17'/>'>바디/헤어</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=11&cate2=10'/>'>여성의류</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=11&cate2=11'/>'>남성의류</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=11&cate2=12'/>'>언더웨어</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=11&cate2=13'/>'>신발</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=11&cate2=14'/>'>가방/잡화</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=11&cate2=15'/>'>쥬얼리/시계</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=11&cate2=16'/>'>화장품/향수</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=11&cate2=17'/>'>바디/헤어</a></li>
                         </ol>
                     </li>
                     <li>
@@ -172,10 +172,10 @@
                             <i class="fas fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <ol>
-                            <li><a href='<c:url value='/product/list.do?cate1=12&cate=10'/>'>출산/육아</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=12&cate=11'/>'>장난감/완구</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=12&cate=12'/>'>유아동 의류</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=12&cate=13'/>'>유아동 신발/잡화</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=12&cate2=10'/>'>출산/육아</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=12&cate2=11'/>'>장난감/완구</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=12&cate2=12'/>'>유아동 의류</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=12&cate2=13'/>'>유아동 신발/잡화</a></li>
                         </ol>
                     </li>
                     <li>
@@ -185,12 +185,12 @@
                             <i class="fas fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <ol>
-                            <li><a href='<c:url value='/product/list.do?cate1=13&cate=10'/>'>신선식품</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=13&cate=11'/>'>가공식품</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=13&cate=12'/>'>건강식품</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=13&cate=13'/>'>커피/음료</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=13&cate=14'/>'>생필품</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=13&cate=15'/>'>바디/헤어</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=13&cate2=10'/>'>신선식품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=13&cate2=11'/>'>가공식품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=13&cate2=12'/>'>건강식품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=13&cate2=13'/>'>커피/음료</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=13&cate2=14'/>'>생필품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=13&cate2=15'/>'>바디/헤어</a></li>
                         </ol>
                     </li>
                     <li>
@@ -200,15 +200,15 @@
                             <i class="fas fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <ol>
-                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=10'/>'>가구/DIY</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=11'/>'>침구/커튼</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=12'/>'>조명/인테리어</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=13'/>'>생활용품</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=14'/>'>주방용품</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=15'/>'>문구/사무용품</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=16'/>'>사무기기</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=17'/>'>악기/취미</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=14&cate=18'/>'>반려동물용품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate2=10'/>'>가구/DIY</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate2=11'/>'>침구/커튼</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate2=12'/>'>조명/인테리어</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate2=13'/>'>생활용품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate2=14'/>'>주방용품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate2=15'/>'>문구/사무용품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate2=16'/>'>사무기기</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate2=17'/>'>악기/취미</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=14&cate2=18'/>'>반려동물용품</a></li>
                         </ol>
                     </li>
                     <li>
@@ -218,18 +218,18 @@
                             <i class="fas fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <ol>
-                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=10'/>'>노트북/PC</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=11'/>'>모니터/프린터</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=12'/>'>PC주변기기</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=13'/>'>모바일/태블릿</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=14'/>'>카메라</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=15'/>'>게임</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=16'/>'>영상가전</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=17'/>'>주방가전</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=18'/>'>계절가전</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=19'/>'>생활/미용가전</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=20'/>'>음향가전</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=15&cate=21'/>'>건강가전</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate2=10'/>'>노트북/PC</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate2=11'/>'>모니터/프린터</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate2=12'/>'>PC주변기기</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate2=13'/>'>모바일/태블릿</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate2=14'/>'>카메라</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate2=15'/>'>게임</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate2=16'/>'>영상가전</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate2=17'/>'>주방가전</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate2=18'/>'>계절가전</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate2=19'/>'>생활/미용가전</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate2=20'/>'>음향가전</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=15&cate2=21'/>'>건강가전</a></li>
                         </ol>
                     </li>
                     <li>
@@ -239,16 +239,16 @@
                             <i class="fas fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <ol>
-                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=10'/>'>스포츠의류/운동화</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=11'/>'>휘트니스/수영</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=12'/>'>구기/라켓</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=13'/>'>골프</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=14'/>'>자전거/보드/기타레저</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=15'/>'>캠핑/낚시</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=16'/>'>등산/아웃도어</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=17'/>'>건강/의료용품</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=18'/>'>건강식품</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=16&cate=19'/>'>렌탈서비스</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate2=10'/>'>스포츠의류/운동화</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate2=11'/>'>휘트니스/수영</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate2=12'/>'>구기/라켓</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate2=13'/>'>골프</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate2=14'/>'>자전거/보드/기타레저</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate2=15'/>'>캠핑/낚시</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate2=16'/>'>등산/아웃도어</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate2=17'/>'>건강/의료용품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate2=18'/>'>건강식품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=16&cate2=19'/>'>렌탈서비스</a></li>
                         </ol>
                     </li>
                     <li>
@@ -258,8 +258,8 @@
                             <i class="fas fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <ol>
-                            <li><a href='<c:url value='/product/list.do?cate1=17&cate=10'/>'>자동차용품</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=17&cate=11'/>'>공구/안전/산업용품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=17&cate2=10'/>'>자동차용품</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=17&cate2=11'/>'>공구/안전/산업용품</a></li>
                         </ol>
                     </li>
                     <li>
@@ -269,11 +269,11 @@
                             <i class="fas fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <ol>
-                            <li><a href='<c:url value='/product/list.do?cate1=18&cate=10'/>'>여행/항공권</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=18&cate=11'/>'>도서/음반/e교육</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=18&cate=12'/>'>공연티켓</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=18&cate=13'/>'>e쿠폰</a></li>
-                            <li><a href='<c:url value='/product/list.do?cate1=18&cate=14'/>'>상품권</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=18&cate2=10'/>'>여행/항공권</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=18&cate2=11'/>'>도서/음반/e교육</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=18&cate2=12'/>'>공연티켓</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=18&cate2=13'/>'>e쿠폰</a></li>
+                            <li><a href='<c:url value='/product/list.do?cate1=18&cate2=14'/>'>상품권</a></li>
                         </ol>
                     </li>
                 </ul>
