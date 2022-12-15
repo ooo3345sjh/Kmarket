@@ -32,7 +32,14 @@ public class ProductVO {
 	
 	// 추가 컬럼
 	private int discountPrice;
+	private int sellerLevel;
 	
+	public int getSellerLevel() {
+		return sellerLevel;
+	}
+	public void setSellerLevel(int sellerLevel) {
+		this.sellerLevel = sellerLevel;
+	}
 	public int getDiscountPrice() {
 		return discountPrice;
 	}
