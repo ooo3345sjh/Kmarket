@@ -42,9 +42,10 @@ public class LIstController extends HttpServlet {
 		map.put("group", group);
 		map.put("req", req);
 		
-		service.countProducts(map); // 조건에 해당하는 전체 상품 목록의 갯수를 가져오는 서비스
-		Paging.paging(map);		    // 페이징 처리
-		Paging.getPageTags(map);  	// 페이징 처리된 정보를 토대로 태그 생성
+		service.countProducts(map);  // 조건에 해당하는 전체 상품 목록의 갯수를 가져오는 서비스
+		Paging.paging(map);		     // 페이징 처리
+		service.selectProducts(map); // 검색 조건에 맞는 상품 목록을 반환하는 메서드 
+		Paging.getPageTags(map);  	 // 페이징 처리된 정보를 토대로 태그 생성
 		
 		req.setAttribute("map", map);
 		req.getRequestDispatcher("/product/list.jsp").forward(req, resp);

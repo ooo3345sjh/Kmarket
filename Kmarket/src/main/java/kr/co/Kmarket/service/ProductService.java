@@ -29,8 +29,6 @@ public class ProductService {
 	}
 
 
-
-
 	public int selectCountTotalProduct() {
 		int total = dao.selectCountTotalProduct();
 		return total;
@@ -50,6 +48,11 @@ public class ProductService {
 	/*** 검색 조건에 해당하는 상품 목록 전체 개수 구하는 서비스 ***/ 
 	public void countProducts(Map<String, Object> map) {
 		dao.countProducts(map);
+	}
+	
+	/*** 검색 조건에 맞는 상품 목록을 반환하는 메서드 ***/
+	public void selectProducts(Map<String, Object> map) {
+		dao.selectProducts(map);
 	}
 	
 }
