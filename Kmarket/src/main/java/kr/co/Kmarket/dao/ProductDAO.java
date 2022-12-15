@@ -247,7 +247,7 @@ public class ProductDAO extends DBHelper {
 	}
 	
 	
-	//====== list ======//
+	//====== product-list ======//
 	/*** 검색 조건에 해당하는 상품 목록 전체 개수 구하는 메서드 ***/
 	public void countProducts(Map<String, Object> map) {
 		int totalCount = 0; // 전체 게시물 저장 변수 
@@ -305,20 +305,20 @@ public class ProductDAO extends DBHelper {
 		String cate2 = (String)map.get("cate2");
 		String group = (String)map.get("group");
 		
-		String sql = "SELECT * FROM `km_product` ";
+		String sql = "SELECT p.*, s.`level` FROM `km_product` p JOIN `km_member_seller` s on p.`seller` = s.`uid` ";
 		
 		if(!group.equals("admin")) {	// 그룹명이 admin이 아니라면
-			sql += "WHERE `cate1` = '" + cate1 + "' AND `cate2`= '" + cate2 + "'";
+			sql += "WHERE p.`cate1` = '" + cate1 + "' AND p.`cate2`= '" + cate2 + "'";
 		}
 		
 		else {	// 그룹명이 admin이라면
 			// 검색 조건이 있다면 WHERE절 추가
 			if(map.get("searchField") != null) {
-				sql += " WHERE `" + map.get("searchField") + "` LIKE '%" + map.get("searchWord") + "%' ";
+				sql += " WHERE p.`" + map.get("searchField") + "` LIKE '%" + map.get("searchWord") + "%' ";
 			}
 		}
 		
-		sql += " ORDER BY `ProdNo` desc  LIMIT ?, 10";
+		sql += " ORDER BY p.`ProdNo` desc  LIMIT ?, 10";
 		
 		try {
 			logger.info("selectProducts...");
@@ -368,6 +368,7 @@ public class ProductDAO extends DBHelper {
 				vo.setOrigin(rs.getString("origin"));
 				vo.setIp(rs.getString("ip"));
 				vo.setRdate(rs.getString("rdate"));
+				vo.setSellerLevel(rs.getInt("level"));
 				
 				list.add(vo);
 			}
@@ -381,5 +382,6 @@ public class ProductDAO extends DBHelper {
 
 		map.put("products", list);
 		logger.debug(" list : " + list);
+		logger.debug(" map : " + map);
 	}
 }
