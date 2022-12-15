@@ -119,7 +119,7 @@
                             <th>조회</th>
                             <th>관리</th>
                         </tr>
-                        <c:forEach var="vo" items="${vo}">
+                        <c:forEach var="vo" items="${map.products}">
                         <tr>
                             <td><input type="checkbox" name="상품코드"></td>
                             <td>
@@ -142,11 +142,14 @@
                     </table>
                     <input type="button" value="선택삭제">
                     <div class="paging">
+                    <%-- 
                         <a href='<c:url value='/admin/list.do?pg=${pageGroupStart - 1}'/>' class="${pageGroupStart > 1 ? 'prevon' : 'prevoff'}"></a>
                         <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
                         	<a href='<c:url value='/admin/list.do?pg=${i}'/>' class="pageNum ${currentPage == i ? 'on' : 'off'}">${i}</a>
                         </c:forEach>
                         <a href='<c:url value='/admin/list.do?pg=${pageGroupEnd + 1}'/>' class="${pageGroupEnd < lastPageNum ? 'nexton' : 'nextoff'}"></a>
+                    --%>
+                    	${map.pageTag}
                     </div>
                     <p class = "ico info">
                         <strong>Tip!</strong>
