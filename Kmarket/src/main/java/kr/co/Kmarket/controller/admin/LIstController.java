@@ -17,7 +17,7 @@ import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.utils.Paging;
 
 @WebServlet("/admin/list.do")
-public class LIstController extends HttpServlet {
+public class ListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private ProductService service = new ProductService();
