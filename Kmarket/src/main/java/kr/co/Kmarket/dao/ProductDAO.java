@@ -321,7 +321,8 @@ public class ProductDAO extends DBHelper {
 		sql += " ORDER BY p.`ProdNo` desc  LIMIT ?, 10";
 		
 		try {
-			logger.info("selectProducts...");
+			logger.info("s"
+					+ "electProducts...");
 			con = getConnection();
 			psmt = con.prepareStatement(sql);
 			psmt.setInt(1, (int)map.get("limitStart"));
@@ -331,7 +332,6 @@ public class ProductDAO extends DBHelper {
 			
 			while(rs.next()) {
 				ProductVO vo = new ProductVO();
-
 				String path = "/file/" + cate1 + "/" + cate2 + "/"; // 이미지 저장경로
 
 				int price = rs.getInt("price");                    // 상품 가격
@@ -342,8 +342,13 @@ public class ProductDAO extends DBHelper {
 				logger.debug("price : " + price);				
 				vo.setDiscountPrice(discountPrice);
 				vo.setProdNo(rs.getInt("prodNo"));
-				vo.setCate1(cate1);
-				vo.setCate2(cate2);
+				if(group.equals("admin")) {
+					String acate1 = rs.getString("cate1");
+					String acate2 = rs.getString("cate2");
+					path = "/file/" + acate1 + "/" + acate2 + "/"; // 이미지 저장경로
+				}
+				vo.setCate1(rs.getString("cate1"));
+				vo.setCate2(rs.getString("cate2"));					
 				vo.setProdName(rs.getString("prodName"));
 				vo.setDescript(rs.getString("descript"));
 				vo.setCompany(rs.getString("company"));
