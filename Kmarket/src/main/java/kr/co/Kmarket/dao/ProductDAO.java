@@ -321,7 +321,8 @@ public class ProductDAO extends DBHelper {
 		sql += " ORDER BY p.`ProdNo` desc  LIMIT ?, 10";
 		
 		try {
-			logger.info("selectProducts...");
+			logger.info("s"
+					+ "electProducts...");
 			con = getConnection();
 			psmt = con.prepareStatement(sql);
 			psmt.setInt(1, (int)map.get("limitStart"));
