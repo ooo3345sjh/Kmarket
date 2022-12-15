@@ -2,6 +2,10 @@ package kr.co.Kmarket.db;
 
 public class Sql {
 	
+	/*** member ***/
+	public static final String SELECT_TERMS = "SELECT * FROM `km_member_terms`";
+	
+	/*** product ***/
 	public static final String INSERT_PRODUCT = "INSERT INTO `km_product` SET "
 												+ "`cate1`=?, "
 												+ "`cate2`=?, "

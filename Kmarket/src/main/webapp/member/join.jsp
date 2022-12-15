@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_header.jsp"/>
         <main id="member">
             <div class="join">
@@ -8,14 +9,14 @@
                         <img src="./img/member_join_tit_normal.gif" alt="구매회원 가입">
                         <div>
                             <img src="./img/member_join_txt_normal.gif" alt="개인 구매회원(외국인 포함) 만14세 이상 가능">
-                            <a href="#"><img src="./img/member_join_btn1.gif" alt="회원가입"></a>
+                            <a href='<c:url value='/member/signup.do?type=normal'/>'><img src="./img/member_join_btn1.gif" alt="회원가입"></a>
                         </div>
                     </div>
                     <div class="seller">
                         <img src="./img/member_join_tit_seller.gif" alt="판매회원 가입/전환">
                         <div>
                             <img src="./img/member_join_txt_seller.gif" alt="사업자 판매회원 사업자등록증을 보유한 사업자판매회원(구매도 가능)">
-                            <a href="#"><img src="./img/member_join_btn2.gif" alt="회원가입"></a>
+                            <a href='<c:url value='/member/signup.do?type=seller'/>'><img src="./img/member_join_btn2.gif" alt="회원가입"></a>
                         </div>
                     </div>
                 </div>

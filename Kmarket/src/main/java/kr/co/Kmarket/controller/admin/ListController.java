@@ -17,7 +17,6 @@ import com.google.gson.JsonObject;
 import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.vo.ProductVO;
 
-
 @WebServlet("/admin/list.do")
 public class ListController extends HttpServlet {
 
@@ -85,7 +84,7 @@ public class ListController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String prodNo = req.getParameter("no");
+		String prodNo = req.getParameter("prodNo");
 		
 		int result = service.deleteProduct(prodNo);
 		
