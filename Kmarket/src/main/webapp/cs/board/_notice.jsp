@@ -5,7 +5,29 @@
     <div class="notice">
         <nav>
             <div>
-              <p>홈<span>></span>공지사항</p>
+              <p>홈<span>></span>공지사항 >
+              
+              <c:if test="${cate2 eq 'all'}">
+              전체
+              </c:if>
+              
+              <c:if test="${cate2 eq 'service'}">
+              고객서비스
+              </c:if>
+              
+              <c:if test="${cate2 eq 'safeDeal'}">
+              안전거래
+              </c:if>
+              
+              <c:if test="${cate2 eq 'xproduct'}">
+              위해상품
+              </c:if>
+              
+              <c:if test="${cate2 eq 'great'}">
+              이벤트당첨
+              </c:if>
+              
+              </p>
             </div>
         </nav>
         <section class="list">
