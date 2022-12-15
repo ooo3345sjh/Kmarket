@@ -18,10 +18,13 @@ public class Paging {
 		
 		map.put("searchField", searchField);
 		map.put("searchWord", searchWord);
-		
+		//asd435435gfg
 		int totalCount  = (int)map.get("totalCount"); // 전체 게시물 개수 
 		int pageSize    = 10; // 페이지당 출력할 페이지 개수
+		
 		int lastPageNum = (int)Math.ceil(totalCount / 10.0); // 마지막 페이지 번호 계산
+		System.out.println("totalCount : " + totalCount);
+		System.out.println("lastPageNum : " + lastPageNum);
 		int currentPage = 1;  // 기본값
 		int limitStart  = 0;  // 현재 페이지에서 시작하는 게시물 시작값
 		
@@ -30,8 +33,8 @@ public class Paging {
 		int pageGroupEnd     = 0; // 그룹에서 마지막 페이지
 		int pageStartNum     = 0; // 게시물의 번호 정렬
 		
-		if(req.getParameter("pageNum") != null && !req.getParameter("pageNum").equals("")) {
-			currentPage = Integer.parseInt(req.getParameter("pageNum"));
+		if(req.getParameter("pg") != null && !req.getParameter("pg").equals("")) {
+			currentPage = Integer.parseInt(req.getParameter("pg"));
 		}
 		
 		// 현재 페이지 기준 DB상의 첫번째 게시물의 번호 - limit 시작값 계산
@@ -60,7 +63,7 @@ public class Paging {
 	}
 	
 	/*** 페이지 태그 문자열을 반환하는 서비스  ***/
-	public static String getPageTags(Map<String, Object> map) {
+	public static void getPageTags(Map<String, Object> map) {
 		
 		String searchField   = (String)map.get("searchField");
 		String searchWord   = (String)map.get("searchWord");
@@ -80,15 +83,25 @@ public class Paging {
 		String cate1 = (String)map.get("cate1");
 		String cate2 = (String)map.get("cate2");
 		
+		/*** admin 변수 선언 start ***/
+		
+		int pageGroupLast = (int)Math.ceil(lastPageNum / 10.0); // 마지막 페이지 그룹번호
+		String start = pageGroupCurrent == 1? "startoff":"starton";
+		String prev = pageGroupCurrent <= 1? "prevoff":"prevon";
+		String next = pageGroupEnd < lastPageNum? "nexton":"nextoff";
+		String end = pageGroupCurrent < pageGroupLast? "endon":"endoff";
+		
+		/*** admin 변수 선언 end ***/
+		
 		// 그룹이 admin인 경우 첫페이지 tag 삽입
 		if(group.equals("admin")) {
 			String uri = "<a href=\"" + contextPath + "/" + group + "/list.do?pg=1";
 			
-			if(searchWord != null) {
+			if(searchWord != null) { // 검색어가 있다면
 				uri += "&searchField=" + searchField + "&searchWord=" + searchWord; 
 			}
 			
-			uri += "\" class=\"first\">이전</a>";
+			uri += "\" class=\"" + start + "\">첫 페이지</a>";
 			
 			pageTags.append(uri);
 		}
@@ -100,13 +113,18 @@ public class Paging {
 			
 			if(!group.equals("admin")) {
 				uri += "&cate1=" + cate1 + "&cate2=" + cate2;
+	
+				if(searchWord != null) {
+					uri += "&searchField=" + searchField + "&searchWord=" + searchWord; 
+				}
 			}
 			
-			if(searchWord != null) {
-				uri += "&searchField=" + searchField + "&searchWord=" + searchWord; 
-			}
 			
-			uri += "\" class=\"prev\"><&nbsp;이전</a>";
+			// group변수 값이 admin인 경우는 prev변수를 아닌경우 'prev' 문자열 삽입
+			String className = group.equals("admin")? prev:"prev";
+			
+			uri += "\" class=\"" + className + "\"><&nbsp;이전</a>";
+			
 
 			pageTags.append(uri);
 		}
@@ -115,36 +133,37 @@ public class Paging {
 			if(currentPage == i) { // 현재 페이지와 값이 같다면 링크X
 				pageTags.append("<a href=\"#\" class=\"pageNum on\">" + String.valueOf(i) + "</a>");
 			} else {
-				String uri = "<a href=\"" + contextPath + "/board/list.do?pg=" + i;
+				String uri = "<a href=\"" + contextPath + "/"+ group + "/list.do?pg=" + i;
 				
 				if(!group.equals("admin")) {
 					uri += "&cate1=" + cate1 + "&cate2=" + cate2;
-				}
-				
-				if(searchWord != null) {
-					uri += "&searchField=" + searchField + "&searchWord=" + searchWord; 
+		
+					if(searchWord != null) {
+						uri += "&searchField=" + searchField + "&searchWord=" + searchWord; 
+					}
 				}
 						
-				uri += "\" class=\"pageNum\">" + String.valueOf(i) + "</a>";
+				uri += "\" class=\"pg\">" + String.valueOf(i) + "</a>";
 				
 				pageTags.append(uri);
 			}
 		}
 		
-		// 다음 페이지 tag 
+		// 다음 페이지 tag
 		if(pageGroupEnd < lastPageNum) { // 반복문의 마지막이며 마지막 페이지 번호보다 작을 경우
-			String uri = "<a href=\"" + contextPath + "/board/list.do?pageNum=" + nextPage;
+			String uri = "<a href=\"" + contextPath + "/"+ group + "/list.do?pg=" + nextPage;
 			
 			if(!group.equals("admin")) {
 				uri += "&cate1=" + cate1 + "&cate2=" + cate2;
+		
+				if(searchWord != null) {
+					uri += "&searchField=" + searchField + "&searchWord=" + searchWord;
+				}
 			}
 					   
-			
-			if(searchWord != null) {
-				uri += "&searchField=" + searchField + "&searchWord=" + searchWord;
-			}
-			
-			uri += "\" class=\"next\">다음&nbsp;></a>";
+			// group변수 값이 admin인 경우는 next변수를 아닌경우 'next' 문자열 삽입
+			String className = group.equals("admin")? next:"next";
+			uri += "\" class=\"" + className +"\">다음&nbsp;></a>";
 			
 			pageTags.append(uri);
 		}
@@ -157,11 +176,11 @@ public class Paging {
 				uri += "&searchField=" + searchField + "&searchWord=" + searchWord; 
 			}
 			
-			uri += "\" class=\"first\">이전</a>";
+			uri += "\" class=\"" + end + "\">마지막 페이지</a>";
 			
 			pageTags.append(uri);
 		}
-		
-		return pageTags.toString();
+		System.out.println("pageTags : " + pageTags.toString());
+		map.put("pageTag", pageTags.toString());
 	}
 }

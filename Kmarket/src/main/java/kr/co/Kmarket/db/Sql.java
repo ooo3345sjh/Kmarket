@@ -2,6 +2,10 @@ package kr.co.Kmarket.db;
 
 public class Sql {
 	
+	/*** member ***/
+	public static final String SELECT_TERMS = "SELECT * FROM `km_member_terms`";
+	
+	/*** product ***/
 	public static final String INSERT_PRODUCT = "INSERT INTO `km_product` SET "
 												+ "`cate1`=?, "
 												+ "`cate2`=?, "
@@ -62,11 +66,8 @@ public class Sql {
 													+ "`regip`=?, "
 													+ "`rdate`=NOW()";
 	
-	public static final String SELECT_QNA_ARTICLES = ""
-													+ ""
-													+ ""
-													+ ""
-													+ ""
-													+ ""
-													+ "";
+	public static final String SELECT_QNA_ARTICLES = "SELECT * FROM `km_cs` "
+													+ "ORDER BY `csNo` DESC "
+													+ "LIMIT ?, 10";
+	public static final String SELECT_COUNT_TOTAL_CSNO = "SELECT COUNT(`csNo`) FROM `km_cs`";
 }

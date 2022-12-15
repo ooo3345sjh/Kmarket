@@ -1,32 +1,28 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <jsp:include page="./_header.jsp"/>
 <script>
-	$(document).on('click', '.remove', function(e){
-		e.preventDefault();
-		
-		let isDeleteOk = confirm("정말 삭제하시겠습니까?");
-				
-			if (isDeleteOk){
-				let product = $(this).closest('product');
-				let no = $(this).attr('data-prodNo');
-			}
+$(document).on('click', '.remove', function(e){
+	e.preventDefault();
+	
+	let isDeleteOk = confirm("정말 삭제하시겠습니까?");
+	let prodNo = "data-no";
 			
-			let jsonData = {"no" : prodNo};
-			
+		if (isDeleteOk){
 			$.ajax ({
 				url: '/Kmarket/admin/list.do',
 				type: 'POST',
-				data: jsonData,
+				data: {"prodNo" : prodNo},
 				dataType: 'json',
 				success: function(data){
 					if(data.result == 1){
 						alert('상품이 삭제되었습니다.');
-						product.hide();
 					}
 				}
 			});
-	});
+		}
+});
 </script>
         <main>
             <div>
@@ -119,7 +115,7 @@
                             <th>조회</th>
                             <th>관리</th>
                         </tr>
-                        <c:forEach var="vo" items="${vo}">
+                        <c:forEach var="vo" items="${map.products}">
                         <tr>
                             <td><input type="checkbox" name="상품코드"></td>
                             <td>
@@ -134,7 +130,7 @@
                             <td>${vo.seller}</td>
                             <td>${vo.hit}</td>
                             <td>
-                                <a href="#" class="remove" data-prodNo="${vo.prodNo}">[삭제]</a>
+                                <a href="#" class="remove" onclick="data-no=${vo.prodNo}">[삭제]</a>
                                 <a href="#" class="modify">[수정]</a>
                             </td>
                         </tr>
@@ -142,11 +138,14 @@
                     </table>
                     <input type="button" value="선택삭제">
                     <div class="paging">
+                    <%-- 
                         <a href='<c:url value='/admin/list.do?pg=${pageGroupStart - 1}'/>' class="${pageGroupStart > 1 ? 'prevon' : 'prevoff'}"></a>
                         <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
                         	<a href='<c:url value='/admin/list.do?pg=${i}'/>' class="pageNum ${currentPage == i ? 'on' : 'off'}">${i}</a>
                         </c:forEach>
                         <a href='<c:url value='/admin/list.do?pg=${pageGroupEnd + 1}'/>' class="${pageGroupEnd < lastPageNum ? 'nexton' : 'nextoff'}"></a>
+                    --%>
+                    	${map.pageTag}
                     </div>
                     <p class = "ico info">
                         <strong>Tip!</strong>
