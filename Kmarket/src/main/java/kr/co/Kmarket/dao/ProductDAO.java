@@ -263,14 +263,24 @@ public class ProductDAO extends DBHelper {
 			String searchWord = (String)map.get("searchWord");
 			String cate1 = (String)map.get("cate1");
 			String cate2 = (String)map.get("cate2");
+			String group = (String)map.get("group");
 		
 			StringBuffer sql = new StringBuffer();
-			sql.append("SELECT COUNT(`ProdNo`) FROM `km_product` "
-						+ "WHERE `cate1` = '" + cate1 + "' AND `cate2`= '" + cate2 + "'");
-			if(searchWord != null) {	// 검색 단어가 있을 경우
-				sql.append(" AND a.`" + searchField  + "` ");
-				sql.append("LIKE '%" + searchWord   + "%'");  
+			sql.append("SELECT COUNT(`ProdNo`) FROM `km_product` ");
+			
+
+			if(!group.equals("admin")) {	// 그룹명이 admin이 아니라면
+				sql.append("WHERE `cate1` = '" + cate1 + "' AND `cate2`= '" + cate2 + "'");
+			} 
+			
+			else {	// 그룹명이 admin이라면
+				// 검색 조건이 있다면 WHERE절 추가
+				if(searchWord != null) {	// 검색 단어가 있을 경우
+					sql.append("WHERE `" + searchField  + "` ");
+					sql.append("LIKE '%" + searchWord   + "%'");  
+				}
 			}
+	
 				
 		
 			con = getConnection();
@@ -291,25 +301,30 @@ public class ProductDAO extends DBHelper {
 	};
 	
 	/*** 검색 조건에 맞는 상품 목록을 반환하는 메서드 ***/
-	public void selectProduct(Map<String, Object> map){
+	public void selectProducts(Map<String, Object> map){
 		List<ProductVO> list = null;
 		
 		String cate1 = (String)map.get("cate1");
 		String cate2 = (String)map.get("cate2");
+		String group = (String)map.get("group");
 		
-		String sql = "SELECT a.*, u.`nick` FROM `board_article` a JOIN "
-				   + "`board_user` u ON a.`uid` = u.`uid` "
-				   + "WHERE `parent`=0   AND `cate` = '" + cate1 + cate2 + "'";
+		String sql = "SELECT a.*, u.`nick` FROM `km_product` ";
 		
-		// 검색 조건이 있다면 WHERE절 추가
-		if(map.get("searchField") != null) {
-			sql += " AND `" + map.get("searchField") + "` LIKE '%" + map.get("searchWord") + "%' ";
+		if(!group.equals("admin")) {	// 그룹명이 admin이 아니라면
+			sql += "WHERE `cate1` = '" + cate1 + "' AND `cate2`= '" + cate2 + "'";
+		}
+		
+		else {	// 그룹명이 admin이라면
+			// 검색 조건이 있다면 WHERE절 추가
+			if(map.get("searchField") != null) {
+				sql += " WHERE `" + map.get("searchField") + "` LIKE '%" + map.get("searchWord") + "%' ";
+			}
 		}
 		
 		sql += " ORDER BY `no` desc  LIMIT ?, 10";
 		
 		try {
-			logger.info("selectListPage...");
+			logger.info("selectProducts...");
 			con = getConnection();
 			psmt = con.prepareStatement(sql);
 			psmt.setInt(1, (int)map.get("limitStart"));
@@ -319,17 +334,52 @@ public class ProductDAO extends DBHelper {
 			
 			while(rs.next()) {
 				ProductVO vo = new ProductVO();
+				String path = "file/" + cate1 + "/" + cate2 + "/"; // 이미지 저장경로
+				int price = rs.getInt("price");                    // 상품 가격
+				int discount = rs.getInt("discount");			   // 할인율
+				int discountPrice = (int)(price - (price * (discount/100.0))); // 상품 할인 적용된 가격
+				logger.debug("discount : " + discount);
+				logger.debug("discountPrice : " + discountPrice);				
+				logger.debug("price : " + price);				
+				vo.setDiscountPrice(discountPrice);
+				vo.setProdNo(rs.getInt("prodNo"));
+				vo.setCate1(cate1);
+				vo.setCate2(cate2);
+				vo.setProdName(rs.getString("prodName"));
+				vo.setDescript(rs.getString("descript"));
+				vo.setCompany(rs.getString("company"));
+				vo.setSeller(rs.getString("seller"));
+				vo.setPrice(price);
+				vo.setDiscount(discount);
+				vo.setPoint(rs.getInt("point"));
+				vo.setStock(rs.getInt("stock"));
+				vo.setSold(rs.getInt("sold"));
+				vo.setDelivery(rs.getInt("delivery"));
+				vo.setHit(rs.getInt("hit"));
+				vo.setScore(rs.getInt("score"));
+				vo.setReview(rs.getInt("review"));
+				vo.setThumb1(path + rs.getString("thumb1"));
+				vo.setThumb2(path + rs.getString("thumb2"));
+				vo.setThumb3(path + rs.getString("thumb3"));
+				vo.setDetail(path + rs.getString("detail"));
+				vo.setStatus(rs.getString("status"));
+				vo.setDuty(rs.getString("duty"));
+				vo.setReceipt(rs.getString("receipt"));
+				vo.setBizType(rs.getString("bizType"));
+				vo.setOrigin(rs.getString("origin"));
+				vo.setIp(rs.getString("ip"));
+				vo.setRdate(rs.getString("rdate"));
 				
 				list.add(vo);
 			}
 			
-			map.put("products : ", list);
 			close();
 			
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 				
+		map.put("products : ", list);
 		logger.debug("map : " + map);
 	}
 }

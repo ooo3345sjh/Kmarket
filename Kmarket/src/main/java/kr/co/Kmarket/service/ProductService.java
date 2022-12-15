@@ -52,4 +52,9 @@ public class ProductService {
 		dao.countProducts(map);
 	}
 	
+	/*** 검색 조건에 맞는 상품 목록을 반환하는 메서드 ***/
+	public void selectProducts(Map<String, Object> map) {
+		dao.selectProducts(map);
+	}
+	
 }
