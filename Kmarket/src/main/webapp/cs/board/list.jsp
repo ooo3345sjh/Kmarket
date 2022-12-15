@@ -1,8 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_header.jsp"/>
-<jsp:include page="./_${cate1}.jsp"/>
-						<c:if test="${cate1 eq 'notice'}">
+<jsp:include page="./_${map.cate1}.jsp"/>
+
+						<!-- 공지사항 -->
+						<c:if test="${map.cate1 eq 'notice'}">
                         <table>
                             <tr>
                                 <td><a href="#">[안내] 해외결제 사칭 문자 주의</a></td>
@@ -45,21 +47,17 @@
                                 <td>2022.11.21</td>
                             </tr>
                         </table>
-                        <!-- cate1, cate2, pg로 넘김 -->
                         <div class="page">
-	                            <a href="#" class="prev">이전</a>
-	                            <a href="#" class=" on">1</a>
-	                            <a href="#" >2</a>
-	                            <a href="#" >3</a>
-	                            <a href="#" class="next">다음</a>
-                        	</div>
+                    		${map.pageTag}
+                        </div>
                         </c:if>
                         
-                        <c:if test="${cate1 eq 'qna'}">
+                        <!-- 문의하기 -->
+                        <c:if test="${map.cate1 eq 'qna'}">
                         <table>
                             <tr>
-                                <td><a href="#">[안내] 해외결제 사칭 문자 주의</a></td>
-                                <td>2022.11.21</td>
+                                <td><a href="#">[${list.type}]${list.title}</a></td>
+                                <td>${list.rdate}</td>
                             </tr>
                             <tr>
                                 <td><a href="#">[발표] 치킨 매우 맛있는 이유</a></td>
@@ -99,16 +97,13 @@
                             </tr>
                         </table>
                         <div class="page">
-                            <a href="#" class="prev">이전</a>
-                            <a href="#" class=" on">1</a>
-                            <a href="#" >2</a>
-                            <a href="#" >3</a>
-                            <a href="#" class="next">다음</a>
+                            ${map.pageTag}
                         </div>
                         <a href="<c:url value='/cs/board/write.do?cate1=qna&cate2=${cate2}'/>">문의하기</a>
                         </c:if>
                         
-                        <c:if test="${cate1 eq 'faq'}">
+                        <!-- 자주묻는 질문 -->
+                        <c:if test="${map.cate1 eq 'faq'}">
                         <div>
                             <h3>가입</h3>
                             <ul>

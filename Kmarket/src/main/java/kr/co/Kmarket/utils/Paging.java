@@ -18,7 +18,7 @@ public class Paging {
 		
 		map.put("searchField", searchField);
 		map.put("searchWord", searchWord);
-		
+		//asd435435gfg
 		int totalCount  = (int)map.get("totalCount"); // 전체 게시물 개수 
 		int pageSize    = 10; // 페이지당 출력할 페이지 개수
 		
@@ -124,6 +124,7 @@ public class Paging {
 			String className = group.equals("admin")? prev:"prev";
 			
 			uri += "\" class=\"" + className + "\"><&nbsp;이전</a>";
+			
 
 			pageTags.append(uri);
 		}
@@ -142,7 +143,7 @@ public class Paging {
 					}
 				}
 						
-				uri += "\" class=\"pageNum\">" + String.valueOf(i) + "</a>";
+				uri += "\" class=\"pg\">" + String.valueOf(i) + "</a>";
 				
 				pageTags.append(uri);
 			}
