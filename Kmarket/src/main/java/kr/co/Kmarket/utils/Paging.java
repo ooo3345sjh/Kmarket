@@ -18,7 +18,7 @@ public class Paging {
 		
 		map.put("searchField", searchField);
 		map.put("searchWord", searchWord);
-		
+		//asd435435gfg
 		int totalCount  = (int)map.get("totalCount"); // 전체 게시물 개수 
 		int pageSize    = 10; // 페이지당 출력할 페이지 개수
 		
@@ -110,6 +110,7 @@ public class Paging {
 			}
 			
 			uri += "\" class=\"prev\"><&nbsp;이전</a>";
+			
 
 			pageTags.append(uri);
 		}
