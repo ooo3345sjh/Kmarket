@@ -21,15 +21,15 @@
 
 
 /* list 페이지 */
-
+/*
 #product .badge {
     font-size: 0;
     width: 80px;
     height: 19px;
     background-repeat: no-repeat;
-}
+}*/
 
-#product .badge.power {background-image: url('../img/ico_power_dealer.gif');}
+/*#product .badge.power {background-image: url('../img/ico_power_dealer.gif');}*/
 #product h6.rating {
     font-size: 11px;
     background-image: url('../img/rating_star.png');
@@ -48,7 +48,7 @@
 #product > .list > .sort {
     margin: 0 0 20px 0;
     border-top: 2px solid #111;
-    border-bottom: 1px solid #dfdfdf;
+    border-bottom: 2px solid #111;
     overflow: hidden;
 }
 
@@ -76,6 +76,8 @@
     display: block;
     width: 100%;
     height: 100%;
+    font-size: 0;
+    margin: 5px 0;
 }
 
 #product > .list > table .thumb > img {width: 120px;}
@@ -109,6 +111,7 @@
 
 #product > .list > table .seller {font-size: 12px; margin-bottom: 6px;}
 #product > .list > table .rating {margin-top: 12px;}
+#product > .list > table tr:nth-child(1) {border-top: 1px solid #ececec;}
 #product > .list > table tr {border-bottom: 1px solid #ececec;}
 
 #product > .list > table tr > td {
@@ -118,10 +121,10 @@
     box-sizing: border-box;
 }
 
-#product > .list > table tr > td:nth-child(1) {width: 20%; padding: 0;}
-#product > .list > table tr > td:nth-child(2) {width: 40%;}
-#product > .list > table tr > td:nth-child(3) {width: 20%;}
-#product > .list > table tr > td:nth-child(4) {width: 20%;}
+#product > .list > table tr > td:nth-child(1) {width: 10%; padding-left: 5px; padding-top: 0;}
+#product > .list > table tr > td:nth-child(2) {width: 60%;}
+#product > .list > table tr > td:nth-child(3) {width: 12%;}
+#product > .list > table tr > td:nth-child(4) {width: 15%; padding-right: 5px; }
 
 #product > .list > .paging {
     width: 100%;
