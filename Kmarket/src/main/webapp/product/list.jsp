@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
             </aside>
             <section class="list">
@@ -36,171 +37,41 @@
                 <!-- 상품 목록 -->
                 <table border="0">
                     <tbody>
-                        <tr>
-                            <td>
-                                <a href="#" class="thumb">
-                                    <img src="https://via.placeholder.com/120x120" alt="상품이미지">
-                                </a>
-                            </td>
-                            <td>
-                                <h3 class="name">상품명</h3>
-                                <a href="#" class="desc">상품설명</a>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li>
-                                        <ins class="dis-price">27,000</ins>
-                                    </li>
-                                    <li>
-                                        <del class="org-price">30,000</del>
-                                        <span class="discount">10%</span>
-                                    </li>
-                                    <li>
-                                        <span class="free-delivery">무료배송</span>
-                                    </li>
-                                </ul>
-                            </td>
-                            <td>
-                                <h4 class="seller">
-                                    <i class="fas fa-home" aria-hidden="true"></i>
-                                    판매자
-                                </h4>
-                                <h5 class="badge power">판매자등급</h5>
-                                <h6 class="rating star1">상품평</h6>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#" class="thumb">
-                                    <img src="https://via.placeholder.com/120x120" alt="상품이미지">
-                                </a>
-                            </td>
-                            <td>
-                                <h3 class="name">상품명</h3>
-                                <a href="#" class="desc">상품설명</a>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li>
-                                        <ins class="dis-price">27,000</ins>
-                                    </li>
-                                    <li>
-                                        <del class="org-price">30,000</del>
-                                        <span class="discount">10%</span>
-                                    </li>
-                                    <li>
-                                        <span class="free-delivery">무료배송</span>
-                                    </li>
-                                </ul>
-                            </td>
-                            <td>
-                                <h4 class="seller">
-                                    <i class="fas fa-home" aria-hidden="true"></i>
-                                    판매자
-                                </h4>
-                                <h5 class="badge power">판매자등급</h5>
-                                <h6 class="rating star2">상품평</h6>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#" class="thumb">
-                                    <img src="https://via.placeholder.com/120x120" alt="상품이미지">
-                                </a>
-                            </td>
-                            <td>
-                                <h3 class="name">상품명</h3>
-                                <a href="#" class="desc">상품설명</a>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li>
-                                        <ins class="dis-price">27,000</ins>
-                                    </li>
-                                    <li>
-                                        <del class="org-price">30,000</del>
-                                        <span class="discount">10%</span>
-                                    </li>
-                                    <li>
-                                        <span class="free-delivery">무료배송</span>
-                                    </li>
-                                </ul>
-                            </td>
-                            <td>
-                                <h4 class="seller">
-                                    <i class="fas fa-home" aria-hidden="true"></i>
-                                    판매자
-                                </h4>
-                                <h5 class="badge power">판매자등급</h5>
-                                <h6 class="rating star3">상품평</h6>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#" class="thumb">
-                                    <img src="https://via.placeholder.com/120x120" alt="상품이미지">
-                                </a>
-                            </td>
-                            <td>
-                                <h3 class="name">상품명</h3>
-                                <a href="#" class="desc">상품설명</a>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li>
-                                        <ins class="dis-price">27,000</ins>
-                                    </li>
-                                    <li>
-                                        <del class="org-price">30,000</del>
-                                        <span class="discount">10%</span>
-                                    </li>
-                                    <li>
-                                        <span class="free-delivery">무료배송</span>
-                                    </li>
-                                </ul>
-                            </td>
-                            <td>
-                                <h4 class="seller">
-                                    <i class="fas fa-home" aria-hidden="true"></i>
-                                    판매자
-                                </h4>
-                                <h5 class="badge power">판매자등급</h5>
-                                <h6 class="rating star4">상품평</h6>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#" class="thumb">
-                                    <img src="https://via.placeholder.com/120x120" alt="상품이미지">
-                                </a>
-                            </td>
-                            <td>
-                                <h3 class="name">상품명</h3>
-                                <a href="#" class="desc">상품설명</a>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li>
-                                        <ins class="dis-price">27,000</ins>
-                                    </li>
-                                    <li>
-                                        <del class="org-price">30,000</del>
-                                        <span class="discount">10%</span>
-                                    </li>
-                                    <li>
-                                        <span>배송비 2500</span>
-                                    </li>
-                                </ul>
-                            </td>
-                            <td>
-                                <h4 class="seller">
-                                    <i class="fas fa-home" aria-hidden="true"></i>
-                                    판매자
-                                </h4>
-                                <h5 class="badge power">판매자등급</h5>
-                                <h6 class="rating star5">상품평</h6>
-                            </td>
-                        </tr>
+                    	<c:forEach items="${map.products}" end="${map.totalCount}" var='row' varStatus="loop">
+	                        <tr>
+	                            <td>
+	                                <a href="#" class="thumb">
+	                                    <img src='<c:url value='${row.thumb1}'/>' alt="상품이미지">
+	                                </a>
+	                            </td>
+	                            <td>
+	                                <h3 class="name">상품명</h3>
+	                                <a href="#" class="desc">상품설명</a>
+	                            </td>
+	                            <td>
+	                                <ul>
+	                                    <li>
+	                                        <ins class="dis-price">27,000</ins>
+	                                    </li>
+	                                    <li>
+	                                        <del class="org-price">30,000</del>
+	                                        <span class="discount">10%</span>
+	                                    </li>
+	                                    <li>
+	                                        <span class="free-delivery">무료배송</span>
+	                                    </li>
+	                                </ul>
+	                            </td>
+	                            <td>
+	                                <h4 class="seller">
+	                                    <i class="fas fa-home" aria-hidden="true"></i>
+	                                    판매자
+	                                </h4>
+	                                <h5 class="badge power">판매자등급</h5>
+	                                <h6 class="rating star1">상품평</h6>
+	                            </td>
+	                        </tr>
+                    	</c:forEach>
                     </tbody>
                 </table>
                 <!-- 상품목록 페이지번호 -->

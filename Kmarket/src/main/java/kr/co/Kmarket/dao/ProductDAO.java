@@ -331,7 +331,7 @@ public class ProductDAO extends DBHelper {
 			
 			while(rs.next()) {
 				ProductVO vo = new ProductVO();
-				String path = "file/" + cate1 + "/" + cate2 + "/"; // 이미지 저장경로
+				String path = "/file/" + cate1 + "/" + cate2 + "/"; // 이미지 저장경로
 				int price = rs.getInt("price");                    // 상품 가격
 				int discount = rs.getInt("discount");			   // 할인율
 				int discountPrice = (int)(price - (price * (discount/100.0))); // 상품 할인 적용된 가격
@@ -376,7 +376,7 @@ public class ProductDAO extends DBHelper {
 			logger.error(e.getMessage());
 		}
 				
-		map.put("products : ", list);
-		logger.debug("map : " + map);
+		map.put("products", list);
+		logger.debug(" list : " + list);
 	}
 }

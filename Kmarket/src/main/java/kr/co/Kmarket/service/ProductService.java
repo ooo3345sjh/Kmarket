@@ -29,8 +29,6 @@ public class ProductService {
 	}
 
 
-
-
 	public int selectCountTotalProduct() {
 		int total = dao.selectCountTotalProduct();
 		return total;

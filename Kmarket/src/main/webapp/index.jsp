@@ -412,13 +412,6 @@
 	                            <h2>${row.prodName}</h2>
 	                            <p>${row.descript}</p>
 	                            <div class="org_price">
-<<<<<<< HEAD
-	                                <del>${row.price}</del>
-	                                <span>${row.discount}%</span>
-	                            </div>
-	                            <div class="dis_price">
-	                                <ins>${row.discountPrice}</ins>
-=======
 	                                <del><fmt:formatNumber value="${row.price}" pattern="#,###"/></del>
 	                                <span>${row.discount}%</span>
 	                            </div>
@@ -454,7 +447,6 @@
 	                            </div>
 	                            <div class="dis_price">
 	                                <ins><fmt:formatNumber value="${row.discountPrice}" pattern="#,###"/></ins>
->>>>>>> 4f14da06ec70d9bb6e6eb870becdf5ec4bda6f20
 	                                <c:choose>
 	                                	<c:when test="${row.delivery != 0}">
 			                                <span>배송비 <fmt:formatNumber value="${row.delivery}" pattern="#,###"/></span>
