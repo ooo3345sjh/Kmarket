@@ -36,11 +36,25 @@ public class ProductService {
 		return total;
 	}
 	public void updateProduct () {}
-	public void deleteProduct () {}
+	public int deleteProduct (String prodNo) {
+		int result = dao.deleteProduct(prodNo);
+		return result;
+	}
 	
 	
 	public Map<String, Object> selectBestProducts () {
 		return dao.selectBestProducts();
+	}
+	
+	//====== list ======//
+	/*** 검색 조건에 해당하는 상품 목록 전체 개수 구하는 서비스 ***/ 
+	public void countProducts(Map<String, Object> map) {
+		dao.countProducts(map);
+	}
+	
+	/*** 검색 조건에 맞는 상품 목록을 반환하는 메서드 ***/
+	public void selectProducts(Map<String, Object> map) {
+		dao.selectProducts(map);
 	}
 	
 }

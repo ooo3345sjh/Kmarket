@@ -45,6 +45,14 @@
                                 <td>2022.11.21</td>
                             </tr>
                         </table>
+                        <!-- cate1, cate2, pg로 넘김 -->
+                        <div class="page">
+	                            <a href="#" class="prev">이전</a>
+	                            <a href="#" class=" on">1</a>
+	                            <a href="#" >2</a>
+	                            <a href="#" >3</a>
+	                            <a href="#" class="next">다음</a>
+                        	</div>
                         </c:if>
                         
                         <c:if test="${cate1 eq 'qna'}">
@@ -90,6 +98,14 @@
                                 <td>2022.11.21</td>
                             </tr>
                         </table>
+                        <div class="page">
+                            <a href="#" class="prev">이전</a>
+                            <a href="#" class=" on">1</a>
+                            <a href="#" >2</a>
+                            <a href="#" >3</a>
+                            <a href="#" class="next">다음</a>
+                        </div>
+                        <a href="<c:url value='/cs/board/write.do?cate1=qna&cate2=${cate2}'/>">문의하기</a>
                         </c:if>
                         
                         <c:if test="${cate1 eq 'faq'}">
@@ -137,16 +153,6 @@
                 </section>
                         </c:if>
                         
-                        <div class="page">
-                            <a href="#" class="prev">이전</a>
-                            <a href="#" class="num on">1</a>
-                            <a href="#" class="num">2</a>
-                            <a href="#" class="num">3</a>
-                            <a href="#" class="next">다음</a>
-                        </div>
-                        <c:if test="${cate1 eq 'qna'}">
-                        <a href="<c:url value='/cs/board/write.do'/>">문의하기</a>
-                        </c:if>
                     </article>
                 </section>
             </div>

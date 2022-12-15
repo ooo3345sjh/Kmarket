@@ -1,5 +1,5 @@
 
-/* 筌롫뗄�뵥 */
+/* 메인 */
 #cs {
     width: 100%;
     height: auto;
@@ -92,6 +92,7 @@
     position: relative;
     top: 100px;
     font-size: 14px;
+    white-space: nowrap;
 }
 #cs > .main > .faq > ol > li:nth-child(1) > a{
     background-position: 0 0;
@@ -183,7 +184,7 @@
     font-size: 23px;
 }
 
-/* 甕곌쑵�뱣 �⑤벏�꽰 */
+/* 버튼공통 */
 .btnWrite {
     float: right;
     padding: 10px 20px;
@@ -234,7 +235,7 @@
     background-color: #0954f6;
 }
 
-/* �⑥쥒而쇽옙苑깍옙苑� sub �⑤벏�꽰 */
+/* 고객센터 sub 공통 */
 
 #cs > div > section > article > nav {
     width: 100%;
@@ -250,7 +251,7 @@
 }
 
 
-/* notice �⑤벏�꽰 */
+/* notice 공통 */
 #cs > .notice {}
 #cs > .notice > nav{
     width: 100%;
@@ -322,7 +323,7 @@
     box-sizing: border-box;
 }
 
-/* notice - 疫뀐옙筌뤴뫖以� */
+/* notice - 글목록 */
 #cs > .notice > .list > article > table {
     width: 100%;
     border-collapse: collapse;
@@ -378,7 +379,7 @@
     color: #fff;
 }
 
-/* notice - 疫뀐옙癰귣떯由� */
+/* notice - 글보기 */
 #cs > .notice > .view {}
 #cs > .notice > .view > article {}
 #cs > .notice > .view > article > nav {
@@ -410,7 +411,7 @@
     line-height: 32px;
 }
 
-/* faq �⑤벏�꽰 */
+/* faq 공통 */
 #cs > .faq {}
 #cs > .faq > nav{
     width: 100%;
@@ -482,7 +483,7 @@
     box-sizing: border-box;
 }
 
-/* faq - 疫뀐옙筌뤴뫖以� */
+/* faq - 글목록 */
 #cs > .faq > .list > article > div {
     margin-top: 26px;
 }
@@ -530,7 +531,7 @@
     text-align: center;
 }
 
-/* faq - 疫뀐옙癰귣떯由� */
+/* faq - 글보기 */
 #cs > .faq > .view {}
 #cs > .faq > .view > article {}
 #cs > .faq > .view > article > nav {
@@ -569,7 +570,7 @@
     line-height: 32px;
 }
 
-/* qna �⑤벏�꽰 */
+/* qna 공통 */
 #cs > .qna {}
 #cs > .qna > nav{
     width: 100%;
@@ -663,7 +664,7 @@
     color: gray;
 }
 
-/* qna - 疫뀐옙筌뤴뫖以� */
+/*** qna - 글목록 ***/
 #cs > .qna > .list > article > table {
     width: 100%;
     border-collapse: collapse;
@@ -717,7 +718,7 @@
     color: #fff;
 }
 
-/* qna - 疫뀐옙癰귣떯由� */
+/* qna - 글보기 */
 #cs > .qna > .view {}
 #cs > .qna > .view > article {}
 #cs > .qna > .view > article > nav{
@@ -749,7 +750,7 @@
     line-height: 30px;
 }
 
-/* qna - 疫뀐옙占쎈쾺疫뀐옙 */
+/* qna - 글쓰기 */
 #cs > .qna > .write > article table {
     width: 100%;
     border-collapse: collapse;
