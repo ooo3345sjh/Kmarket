@@ -11,6 +11,7 @@ public class CsDAO extends DBHelper {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+		
 	public int insertQnaArticle(CsVO cvo) {
 		int result = 0;
 		try {
@@ -24,7 +25,6 @@ public class CsDAO extends DBHelper {
 			psmt.setString(5, cvo.getTitle());
 			psmt.setString(6, cvo.getContent());
 			psmt.setString(7, cvo.getRegip());
-			psmt.setString(8, cvo.getRdate());
 			
 			result = psmt.executeUpdate();
 			
@@ -35,7 +35,15 @@ public class CsDAO extends DBHelper {
 		return result;
 	}
 	public void select() {}
-	public void selects() {}
+	public void selectQnaArticles() {
+		try {
+			logger.info("selectQnaArticles...");
+			con = getConnection();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
 	public void update() {}
 	public void delete() {}
 	

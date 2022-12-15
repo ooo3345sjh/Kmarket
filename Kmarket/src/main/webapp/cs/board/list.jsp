@@ -105,7 +105,7 @@
                             <a href="#" >3</a>
                             <a href="#" class="next">다음</a>
                         </div>
-                        <a href="<c:url value='/cs/board/write.do?cate1=qna&cate2=user'/>">문의하기</a>
+                        <a href="<c:url value='/cs/board/write.do?cate1=qna&cate2=${cate2}'/>">문의하기</a>
                         </c:if>
                         
                         <c:if test="${cate1 eq 'faq'}">
