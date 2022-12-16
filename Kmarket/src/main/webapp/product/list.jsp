@@ -1,9 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<<<<<<< HEAD
-=======
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>
->>>>>>> 7a839fd07c6ae73ed702dc2a325a264056a8862a
 <jsp:include page="./_header.jsp"/>
             </aside>
             <section class="list">
