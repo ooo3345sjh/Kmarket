@@ -38,13 +38,13 @@
                     <aside>
                         <h2>자주묻는 질문</h2>
                         <ul>
-                            <li class="${map.cate2 eq 'user' ? 'on':'off'}"><a href="<c:url value='/cs/board/list.do?cate1=faq&cate2=user'/>">회원</a></li>
-                            <li class="${map.cate2 eq 'coupon' ? 'on':'off'}"><a href="<c:url value='/cs/board/list.do?cate1=faq&cate2=coupon'/>">쿠폰/이벤트</a></li>
-                            <li class="${map.cate2 eq 'order' ? 'on':'off'}"><a href="<c:url value='/cs/board/list.do?cate1=faq&cate2=order'/>">주문/결제</a></li>
-                            <li class="${map.cate2 eq 'delivery' ? 'on':'off'}"><a href="<c:url value='/cs/board/list.do?cate1=faq&cate2=delivery'/>">배송</a></li>
-                            <li class="${map.cate2 eq 'cancel' ? 'on':'off'}"><a href="<c:url value='/cs/board/list.do?cate1=faq&cate2=cancel'/>">취소/반품/교환</a></li>
-                            <li class="${map.cate2 eq 'travel' ? 'on':'off'}"><a href="<c:url value='/cs/board/list.do?cate1=faq&cate2=travel'/>">여행/숙박/항공</a></li>
-                            <li class="${map.cate2 eq 'safeDeal' ? 'on':'off'}"><a href="<c:url value='/cs/board/list.do?cate1=faq&cate2=safeDeal'/>">안전거래</a></li>
+                            <li class="${map.cate2 eq 'user' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=faq&cate2=user'/>">회원</a></li>
+                            <li class="${map.cate2 eq 'coupon' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=faq&cate2=coupon'/>">쿠폰/이벤트</a></li>
+                            <li class="${map.cate2 eq 'order' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=faq&cate2=order'/>">주문/결제</a></li>
+                            <li class="${map.cate2 eq 'delivery' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=faq&cate2=delivery'/>">배송</a></li>
+                            <li class="${map.cate2 eq 'cancel' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=faq&cate2=cancel'/>">취소/반품/교환</a></li>
+                            <li class="${map.cate2 eq 'travel' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=faq&cate2=travel'/>">여행/숙박/항공</a></li>
+                            <li class="${map.cate2 eq 'safeDeal' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=faq&cate2=safeDeal'/>">안전거래</a></li>
                         </ul>
                     </aside>
                     
