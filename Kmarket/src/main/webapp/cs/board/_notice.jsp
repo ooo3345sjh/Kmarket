@@ -37,11 +37,11 @@
             <aside>
                 <h2>공지사항</h2>
                 <ul>
-                    <li class="${map.cate2 eq 'all' ? 'on':'off'}"><a href="<c:url value='/cs/board/list.do?cate1=notice&cate2=all'/>">전체</a></li>
-                    <li class="${map.cate2 eq 'service' ? 'on':'off'}"><a href="<c:url value='/cs/board/list.do?cate1=notice&cate2=service'/>">고객서비스</a></li>
-                    <li class="${map.cate2 eq 'safeDeal' ? 'on':'off'}"><a href="<c:url value='/cs/board/list.do?cate1=notice&cate2=safeDeal'/>">안전거래</a></li>
-                    <li class="${map.cate2 eq 'xproduct' ? 'on':'off'}"><a href="<c:url value='/cs/board/list.do?cate1=notice&cate2=xproduct'/>">위해상품</a></li>
-                    <li class="${map.cate2 eq 'great' ? 'on':'off'}"><a href="<c:url value='/cs/board/list.do?cate1=notice&cate2=great'/>">이벤트당첨</a></li>
+                    <li class="${map.cate2 eq 'all' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=notice&cate2=all'/>">전체</a></li>
+                    <li class="${map.cate2 eq 'service' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=notice&cate2=service'/>">고객서비스</a></li>
+                    <li class="${map.cate2 eq 'safeDeal' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=notice&cate2=safeDeal'/>">안전거래</a></li>
+                    <li class="${map.cate2 eq 'xproduct' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=notice&cate2=xproduct'/>">위해상품</a></li>
+                    <li class="${map.cate2 eq 'great' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=notice&cate2=great'/>">이벤트당첨</a></li>
                 </ul>
             </aside>
             

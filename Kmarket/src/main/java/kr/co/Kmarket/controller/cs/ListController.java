@@ -31,7 +31,7 @@ public class ListController extends HttpServlet {
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
 		String pg = req.getParameter("pg");
-		String group = "cs/board";
+		String group = "cs";
 		String searchField = req.getParameter("searchField");
 		String searchWord = req.getParameter("searchWord");
 		
