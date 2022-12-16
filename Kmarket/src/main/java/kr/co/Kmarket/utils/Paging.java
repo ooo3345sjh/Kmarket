@@ -86,8 +86,8 @@ public class Paging {
 		
 		int pageGroupLast = (int)Math.ceil(lastPageNum / 10.0); // 마지막 페이지 그룹번호
 		String start = pageGroupCurrent == 1? "startoff":"starton";
-		String prev = pageGroupCurrent <= 1? "prevoff":"prevon";
-		String next = pageGroupEnd < lastPageNum? "nexton":"nextoff";
+		String prev = pageGroupCurrent <= 1? "prevoff":"prevon";		// prev 변수는 cs에서도 사용
+		String next = pageGroupEnd < lastPageNum? "nexton":"nextoff";	// next 변수는 cs에서도 사용
 		String end = pageGroupCurrent < pageGroupLast? "endon":"endoff";
 		
 		/*** admin 변수 선언 end ***/
@@ -115,9 +115,15 @@ public class Paging {
 			uri += "&cate1=" + cate1 + "&cate2=" + cate2;
 
 			// 현재 그룹 번호가 2이상이면
-			if(pageGroupCurrent > 1) {
-				uri += "\" class=\"prev pg\"><span>&lt;</span>&nbsp;이전</a>";
-				
+			if(group.equals("prodcut")) {
+				if(pageGroupCurrent > 1) {
+					uri += "\" class=\"" + prev + " pg\"><span>&lt;</span>&nbsp;이전</a>";
+					pageTags.append(uri);
+				}
+			} 
+			
+			else {
+				uri += "\" class=\"" + prev + "\">다음&nbsp;<span>&gt;</span></a>";
 				pageTags.append(uri);
 			}
 		} 
@@ -176,9 +182,20 @@ public class Paging {
 		if(!group.equals("admin")) {
 			uri += "&cate1=" + cate1 + "&cate2=" + cate2;
 			
-			// 그룹의 마지막번호가 마지막 페이지 번호보다 작을 경우
-			if(pageGroupEnd < lastPageNum) { 
-				uri += "\" class=\"next\">다음&nbsp;<span>&gt;</span></a>";
+			// product 라면
+			if(group.equals("prodcut")) {
+				
+				// 그룹의 마지막번호가 마지막 페이지 번호보다 작을 경우
+				if(pageGroupEnd < lastPageNum) { 
+					uri += "\" class=\"" + next + "\">다음&nbsp;<span>&gt;</span></a>";
+					pageTags.append(uri);
+				}
+				
+			} 
+			
+			// product가 아니라면
+			else {
+				uri += "\" class=\"" + next + "\">다음&nbsp;<span>&gt;</span></a>";
 				pageTags.append(uri);
 			}
 		} 

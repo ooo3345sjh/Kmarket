@@ -17,6 +17,9 @@ public class MemberService {
 	public TermsVO selectTemrs() {
 		return dao.selectTerms();
 	}
+	public int selectCountUid(String uid) {
+		return dao.selectCountUid(uid);
+	}
 	public void updateMember() {}
 	public void deleteMember() {}
 

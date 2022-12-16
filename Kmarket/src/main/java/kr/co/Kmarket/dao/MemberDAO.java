@@ -38,6 +38,28 @@ public class MemberDAO extends DBHelper {
 		
 		return vo;
 	}
+	
+	// 아이디 중복 체크
+	public int selectCountUid(String uid) {
+		int result = 0;
+		
+		try {
+			logger.info("selectCountUid...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.SELECT_COUNT_UID);
+			psmt.setString(1, uid);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			close();
+		} catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return result;
+	}
+	
 	public void updateMember() {}
 	public void deleteMember() {}
 
