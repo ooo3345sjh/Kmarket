@@ -30,10 +30,15 @@ public class LIstController extends HttpServlet {
 		logger.info("LIstController doGet...");
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
+		String type = req.getParameter("type");
 		String pg = req.getParameter("pg");
 		String group = "product";
 		String searchField = req.getParameter("searchField");
 		String searchWord = req.getParameter("searchWord");
+		
+		System.out.println("type");
+		if(type == null) type = "sold"; // 판매목록순
+		
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("searchField", searchField);
@@ -43,6 +48,7 @@ public class LIstController extends HttpServlet {
 		map.put("group", group);
 		map.put("pg", pg);
 		map.put("req", req);
+		map.put("type", type);
 		
 		service.countProducts(map);  // 조건에 해당하는 전체 상품 목록의 갯수를 가져오는 서비스
 		Paging.paging(map);		     // 페이징 처리
