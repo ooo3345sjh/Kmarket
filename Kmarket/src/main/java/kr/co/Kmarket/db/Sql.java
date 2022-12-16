@@ -67,7 +67,6 @@ public class Sql {
 													+ "`rdate`=NOW()";
 	
 	public static final String SELECT_QNA_ARTICLES = "SELECT * FROM `km_cs`";
-													
 	
 	public static final String SELECT_COUNT_TOTAL_CSNO = "SELECT COUNT(`csNo`) FROM `km_cs`";
 }
