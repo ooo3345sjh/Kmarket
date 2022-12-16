@@ -17,12 +17,16 @@ public class CsService {
 	public int insertQnaArticle(CsVO cvo) {
 		return dao.insertQnaArticle(cvo);
 	}
-	public void select() {}
+	public int selectCountTotalArticle() {
+		return dao.selectCountTotalArticle();
+	}
+	public List<CsVO> selectQnaArticles() {
+		return dao.selectQnaArticles();
+	}
 	
-	
-	//public List<CsVO> selectQnaArticles(int start) {
-	//	return dao.selectQnaArticles(start);
-	//}
+	public void selectQnaArticles(Map<String, Object> map) {
+		 dao.selectQnaArticles(map);
+	}
 	
 	public void countQnaArticles(Map<String, Object> map) {
 		dao.countQnaArticles(map);

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="/_header.jsp"/>
 <jsp:include page="./_${map.cate1}.jsp"/>
 
@@ -55,52 +56,33 @@
                         <!-- 문의하기 -->
                         <c:if test="${map.cate1 eq 'qna'}">
                         <table>
+                        	<c:forEach var="vo" items="${map.articles}">
                             <tr>
-                                <td><a href="#">[${list.type}]${list.title}</a></td>
-                                <td>${list.rdate}</td>
+                            	<!-- 타입, 제목 -->
+                                <td><a href="#">[${vo.type}]${vo.title}</a></td>
+                                <td>검토중</td>
+                                
+                                <!-- 아이디 마스킹처리 -->
+                                <c:if test="${vo.uid ne null}">
+							      <!-- 아이디의 앞 3자리까지 보여 주고 **로 처리 -->
+							      <td>${fn:substring(vo.uid,0,3)}**</td>
+							    </c:if>
+							    
+							    <!-- rdate -->
+                                <c:set var="rdate"  value="${vo.rdate}"/>
+                                <td>
+                                	${fn:substring(rdate,2,10)}
+                                </td>
+                                
                             </tr>
-                            <tr>
-                                <td><a href="#">[발표] 치킨 매우 맛있는 이유</a></td>
-                                <td>2022.11.21</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">[안내] CJ대한통운 반품/교환 수거지 지연 안내</a></td>
-                                <td>2022.11.21</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">[안내] 해외 면세점 특별약관 개정</a></td>
-                                <td>2022.11.21</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">[안내] 위치정보 이용 약관 개정 공지</a></td>
-                                <td>2022.11.21</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">[발표]『써모스 상품 구매』 이벤트 당첨자</a></td>
-                                <td>2022.11.21</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">한국소비자원, '22년 OECD 글로벌 제품안전 캠페인</a></td>
-                                <td>2022.11.21</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">[점검] G마켓 사이트 이용 일시 중단</a></td>
-                                <td>2022.11.21</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">[안내] 구매회원 이용약관 개정</a></td>
-                                <td>2022.11.21</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">[안내] 씨티은행 시스템 점검에 따른 계좌, 체크카드결제 서비스 일시 중단</a></td>
-                                <td>2022.11.21</td>
-                            </tr>
+                            </c:forEach>
                         </table>
                         <div class="page">
                             ${map.pageTag}
                         </div>
-                        <a href="<c:url value='/cs/board/write.do?cate1=qna&cate2=${cate2}'/>">문의하기</a>
+                        <a href="<c:url value='/cs/board/write.do?cate1=qna&cate2=${map.cate2}'/>">문의하기</a>
                         </c:if>
+                        
                         
                         <!-- 자주묻는 질문 -->
                         <c:if test="${map.cate1 eq 'faq'}">

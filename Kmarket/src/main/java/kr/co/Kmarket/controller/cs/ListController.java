@@ -46,12 +46,12 @@ public class ListController extends HttpServlet {
 		
 		service.countQnaArticles(map);  // 조건에 해당하는 전체 상품 목록의 갯수를 가져오는 서비스
 		Paging.paging(map);		     // 페이징 처리
+		service.selectQnaArticles(map);
 		Paging.getPageTags(map);  	 // 페이징 처리된 정보를 토대로 태그 생성
 		
 		req.setAttribute("map", map);
 		req.getRequestDispatcher("/cs/board/list.jsp").forward(req, resp);
 	}
-	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("LIstController doPost...");
