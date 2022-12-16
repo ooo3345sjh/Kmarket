@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.service.CsService;
 
-@WebServlet("/cs/qna/view.do")
+@WebServlet("/cs/view.do")
 public class ViewController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
@@ -27,7 +27,7 @@ public class ViewController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/view.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/board/view.jsp");
 		dispatcher.forward(req, resp);
 	}
 	@Override

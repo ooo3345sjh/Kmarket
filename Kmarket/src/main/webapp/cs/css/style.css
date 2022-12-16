@@ -362,16 +362,30 @@
     font-weight: bold;
     vertical-align: bottom;
 }
-#cs > .notice > .list > article > .page > .prev {
+#cs > .notice > .list > article > .page > .prevon {
     font-size: 0;
     background-image: url("../img/cs_sprites.png");
     background-position: -706px -652px;
 }
-#cs > .notice > .list > article > .page > .next {
+
+#cs > .notice > .list > article > .page > .prevoff {
+    font-size: 0;
+    background-image: url("../img/cs_sprites.png");
+    background-position: -706px -652px;
+}
+
+#cs > .notice > .list > article > .page > .nexton {
     font-size: 0;
     background-image: url("../img/cs_sprites.png");
     background-position: -628px -652px;
 }
+
+#cs > .notice > .list > article > .page > .nextoff {
+    font-size: 0;
+    background-image: url("../img/cs_sprites.png");
+    background-position: -628px -652px;
+}
+
 #cs > .notice > .list > article > .page > .num {}
 #cs > .notice > .list > article > .page > .on {
     background: #006cff;
@@ -701,16 +715,30 @@
     font-weight: bold;
     vertical-align: bottom;
 }
-#cs > .qna > .list > article > .page > .prev{
+
+#cs > .qna > .list > article > .page > .prevon{
     font-size: 0;
     background-image: url("../img/cs_sprites.png");
-    background-position: -706px -652px;
+    background-position: -566px -652px;
 }
-#cs > .qna > .list > article > .page > .next{
+#cs > .qna > .list > article > .page > .prevoff{
+    font-size: 0;
+    background-image: url("../img/cs_sprites.png");
+    background-position: -696px -652px;
+    pointer-events: none;
+}
+#cs > .qna > .list > article > .page > .nexton{
     font-size: 0;
     background-image: url("../img/cs_sprites.png");
     background-position: -628px -652px;
 }
+#cs > .qna > .list > article > .page > .nextoff{
+    font-size: 0;
+    background-image: url("../img/cs_sprites.png");
+    background-position:-769px -652px;
+    pointer-events: none;
+}
+#cs > .qna > .list > article > .page  span{font-size: 0;}
 #cs > .qna > .list > article > .page > .num{}
 #cs > .qna > .list > article > .page > .on{
     background: #006cff;
