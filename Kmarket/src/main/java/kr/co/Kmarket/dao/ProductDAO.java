@@ -261,13 +261,14 @@ public class ProductDAO extends DBHelper {
 			String cate1 = (String)map.get("cate1");
 			String cate2 = (String)map.get("cate2");
 			String group = (String)map.get("group");
+			String type = (String)map.get("type");		// product_list 에서 판매목록순, 낮은가격순, 높은가격순...등으로 정렬하기위한 변수
 		
 			StringBuffer sql = new StringBuffer();
 			sql.append("SELECT COUNT(`prodNo`) FROM `km_product` ");
 			
 
 			if(!group.equals("admin")) {	// 그룹명이 admin이 아니라면
-				sql.append("WHERE `cate1` = '" + cate1 + "' AND `cate2`= '" + cate2 + "'");
+				sql.append("WHERE `cate1` = '" + cate1 + "' AND `cate2`= '" + cate2 + "' ORDER BY " + type + " DESC");
 			} 
 			
 			else {	// 그룹명이 admin이라면
