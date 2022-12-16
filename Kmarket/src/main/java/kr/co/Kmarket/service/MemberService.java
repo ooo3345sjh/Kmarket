@@ -22,5 +22,8 @@ public class MemberService {
 	}
 	public void updateMember() {}
 	public void deleteMember() {}
+	public int[] sendEmailCode(String receiver) {
+		return dao.sendEmailCode(receiver);
+	}
 
 }

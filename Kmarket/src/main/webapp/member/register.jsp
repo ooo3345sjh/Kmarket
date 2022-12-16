@@ -26,7 +26,7 @@
                             </th>
                             <td>
                                 <input type="password" name="km_pass1" placeholder="비밀번호 입력" required>
-                                <span class="msgPass">영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
+                                <span class="msgPass1">영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
                             </td>
                         </tr>
                         <tr>
@@ -36,7 +36,7 @@
                             </th>
                             <td>
                                 <input type="password" name="km_pass2" placeholder="비밀번호 확인" required>
-                                <span class="msgPass">비밀번호 재입력</span>
+                                <span class="msgPass2">비밀번호 재입력</span>
                             </td>
                         </tr>
                     </table>
@@ -51,6 +51,7 @@
                             </th>
                             <td>
                                 <input type="text" name="km_name" placeholder="이름 입력" required>
+                           		<span class="msgName"></span>
                             </td>
                         </tr>
                         <tr>
@@ -70,7 +71,12 @@
                             </th>
                             <td>
                                 <input type="email" name="km_email" placeholder="이메일 입력" required>
-                                <input type="button" class="AuthBtn" value="이메일인증">
+                                <input type="button" class="AuthBtn" name="emailAuth" value="이메일인증">
+                                <span class="msgEmail"><span>
+                                <div class="code">
+	                                <input type="text" name="km_email_code" placeholder="인증번호 입력" required>
+	                            	<input type="button" class="AuthBtn" name="emailCode" value="인증번호확인">
+                                </div>
                             </td>
                         </tr>
                         <tr>

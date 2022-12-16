@@ -15,7 +15,6 @@ let isUidOk 	  = false;
 let isPassOk 	  = false;
 let isNameOk 	  = false;
 let isNickOk  	  = false;
-let isEmailOk 	  = false;
 let isEmailAuthOk = false;
 let isHpOk 		  = false;
 
@@ -56,6 +55,99 @@ $(function(){
 	
 	
 	// 비밀번호 검사
+	$('input[name=km_pass1]').focusout(function(){
+		let pass1 = $('input[name=km_pass1]').val();
+		
+		if(pass1.match(rePass)){
+			$('.msgPass1').css('color', 'green').text('사용할 수 있는 비밀번호입니다.');
+			
+			$('input[name=km_pass2]').focusout(function(){
+				let pass2 = $('input[name=km_pass2]').val();
+				
+				if(pass1 == pass2){
+					isPassOk = true;
+					$('.msgPass2').css('color', 'green').text('비밀번호가 일치합니다.');
+				} else {
+					isPassOk = false;
+					$('.msgPass2').css('color', 'red').text('비밀번호가 일치하지 않습니다.');
+				}
+				
+			});
+			
+		} else {
+			isPassOk = false;
+			$('.msgPass1').css('color', 'red').text('숫자, 영문, 특수문자를 포함하여 8자리 이상이어야 합니다.');
+			$('input[name=km_pass2]').val('');
+			$('.msgPass2').css('color', 'black').text('비밀번호 재입력');
+		}
+	});
+	
+	
+	// 이름 검사
+	$('input[name=km_name]').focusout(function(){
+		
+		let name = $(this).val();
+		
+		if(name.match(reName)){
+			isNameOk = true;
+		} else {
+			isNameOk = false;
+			$('.msgName').css('color', 'red').text('유효하지 않는 이름입니다.');
+		}
+	});
+	
+	
+	// 이메일 인증 검사
+	let emailCode = 0;
+	
+	$('#emailAuth').click(function(){
+		
+		let email = $('input[name=km_email]').val();
+		$('.msgEmail').css('color', 'black').text('잠시만 기다려주세요.');
+		
+		$.ajax({
+			url: '/Kmarket/member/emailAuth.do',
+			method: 'get',
+			data: {"email":email},
+			dataType: 'json',
+			success: function(data){
+				if(data.status == 1){
+					// 메일 발송 성공
+					emailCode = data.code;
+					$('.msgEmail').text('인증코드를 전송했습니다. 이메일을 확인하세요.');
+					$('.code').show();
+				} else {
+					// 메일 발송 실패
+					$('.msgEmail').text('이메일 전송을 실패했습니다. 유효한 이메일인지 확인 후 다시 시도해주세요.');
+				}
+			}
+		});
+	});
+	
+	
+	// 이메일 인증코드 확인
+	$('#emailCode').click(function(){
+		let code = $('input[name=km_email_code]').val();
+		if(code == emailCode){
+			isEmailAuthOk = true;
+			$('.msgEmail').text('이메일이 인증되었습니다.');
+		}
+	});
+	
+	
+	// 휴대폰 검사
+	$('input[name=km_hp]').focusout(function(){
+		
+		let hp = $(this).val();
+		
+		if(hp.match(reHp)){
+			isHpOk = true;
+			$('.msgHp').css('color', 'green').text('');
+		} else {
+			isHpOk = false;
+			$('.msgHp').css('color', 'red').text('유효하지 않는 휴대폰 번호입니다.');
+		}
+	});
 	
 	
 });
