@@ -40,6 +40,50 @@ public class CsDAO extends DBHelper {
 	}
 	public void select() {}
 	
+	public List<CsVO> selectQnaArticles() {
+		
+		List<CsVO> vo = new ArrayList<>();
+		try {
+			logger.info("selectQnaArticle...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.SELECT_QNA_ARTICLES);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				CsVO cvo = new CsVO();
+				cvo.setUid(rs.getString("uid"));
+				cvo.setCate1(rs.getString("cate1"));
+				cvo.setCate2(rs.getString("cate2"));
+				cvo.setType(rs.getString("type"));
+				cvo.setTitle(rs.getString("title"));
+				cvo.setContent(rs.getString("content"));
+				cvo.setRegip(rs.getString("regip"));
+				cvo.setRdate(rs.getString("rdate").substring(2, 10));
+				
+				vo.add(cvo);
+			}
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return vo;
+	}
+
+	public int selectCountTotalArticle() {
+		int total = 0;
+		try {
+			logger.info("selectCountTotal...");
+			con = getConnection();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(Sql.SELECT_COUNT_TOTAL_CSNO);
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
+	}
+	
 	public void selectQnaArticles(Map<String, Object> map) {
 		List<CsVO> list = null;
 		
@@ -55,7 +99,7 @@ public class CsDAO extends DBHelper {
 		sql += "ORDER BY `csNo` desc LIMIT ?,10";
 		
 		try {
-			logger.info("selectProducts...");
+			logger.info("selecQnaArticle...");
 			con = getConnection();
 			psmt = con.prepareStatement(sql);
 			psmt.setInt(1, (int)map.get("limitStart"));
@@ -81,6 +125,9 @@ public class CsDAO extends DBHelper {
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
+		map.put("articles", list);
+		logger.debug(" list : " + list);
+		logger.debug(" map : " + map);
 	}
 	
 	public void countQnaArticles(Map<String, Object> map) {
