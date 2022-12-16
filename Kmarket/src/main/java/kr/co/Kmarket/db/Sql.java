@@ -4,6 +4,8 @@ public class Sql {
 	
 	/*** member ***/
 	public static final String SELECT_TERMS = "SELECT * FROM `km_member_terms`";
+	// 아이디 중복 확인
+	public static final String SELECT_COUNT_UID = "SELECT COUNT(`uid`) FROM `km_member_uid` WHERE `uid`=?";
 	
 	/*** product ***/
 	public static final String INSERT_PRODUCT = "INSERT INTO `km_product` SET "
