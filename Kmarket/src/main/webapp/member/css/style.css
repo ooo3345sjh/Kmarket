@@ -273,6 +273,10 @@ header > div.logo > div > a {
     border: 1px solid #dfe5ed;
 }
 
+#member > .register > section > table div {
+	display: none;
+}
+
 #member > .register > section > table label {font-size: 14px;}
 #member > .register > section > table .radio input {
     vertical-align: middle;
@@ -283,6 +287,17 @@ header > div.logo > div > a {
 #member > .register > section > table .addr > td > input:nth-of-type(2) {width: 126px;}
 #member > .register > section > table .addr > td > input:nth-of-type(3) {width: 370px;}
 #member > .register > section > table .addr > td > input:nth-of-type(4) {width: 370px;}
+
+#member > .register > section > table .AuthBtn {
+    background: #3964e5;
+    border: none;
+    font-size: 15px;
+    color: #fff;
+    padding: 6px 15px;
+    cursor: pointer;
+    margin: 6px auto;    
+    border-radius: 3px; 
+}
 
 
 /* 회원가입 - registerSeller */
@@ -330,18 +345,6 @@ header > div.logo > div > a {
 #member > .registerSeller > section > table .addr > td > input:nth-of-type(2) {width: 126px;}
 #member > .registerSeller > section > table .addr > td > input:nth-of-type(3) {width: 370px;}
 #member > .registerSeller > section > table .addr > td > input:nth-of-type(4) {width: 370px;}
-
-
-#member > .register > section > table .AuthBtn {
-    background: #3964e5;
-    border: none;
-    font-size: 15px;
-    color: #fff;
-    padding: 6px 15px;
-    cursor: pointer;
-    margin: 10px auto;    
-    border-radius: 3px; 
-}
 
 /*** 푸터 ***/
 footer {
