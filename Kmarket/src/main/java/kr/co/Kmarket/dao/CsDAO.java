@@ -40,6 +40,10 @@ public class CsDAO extends DBHelper {
 	}
 	public void select() {}
 	
+	public void selectNoticeArticles() {
+		
+	}
+	
 	public List<CsVO> selectQnaArticles() {
 		
 		List<CsVO> vo = new ArrayList<>();

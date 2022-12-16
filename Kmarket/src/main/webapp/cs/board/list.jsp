@@ -23,7 +23,7 @@
                         	<c:forEach var="vo" items="${map.articles}">
                             <tr>
                             	<!-- 타입, 제목 -->
-                                <td><a href="#">[${vo.type}]${vo.title}</a></td>
+                                <td><a href="<c:url value='/cs/view.do?pg=${map.pg}&cate1=${map.cate1}&cate2=${map.cate2}'/>">[${vo.type}]${vo.title}</a></td>
                                 <td>검토중</td>
                                 
                                 <!-- 아이디 마스킹처리 -->
@@ -44,14 +44,16 @@
                         <div class="page">
                             ${map.pageTag}
                         </div>
-                        <a href="<c:url value='/cs/board/write.do?cate1=qna&cate2=${map.cate2}'/>">문의하기</a>
+                        <a href="<c:url value='/cs/write.do?cate1=qna&cate2=${map.cate2}'/>">문의하기</a>
                         </c:if>
                         
                         
                         <!-- 자주묻는 질문 -->
                         <c:if test="${map.cate1 eq 'faq'}">
+                        
+                        <c:forEach var="vo" items="${map.articles}">
                         <div>
-                            <h3>가입</h3>
+                            <h3>${.type}</h3>
                             <ul>
                                 <li><a href="./view.html"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
                                 <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
@@ -60,6 +62,7 @@
                                 <li class="more"><a href="#">더보기</a> </li>
                             </ul>                              
                         </div>
+                        </c:forEach>
                         <div>
                             <h3>탈퇴</h3>
                             <ul>
@@ -70,6 +73,7 @@
                                 <li class="more"><a href="#">더보기</a> </li>
                             </ul>                              
                         </div>
+                        
                         <div>
                             <h3>회원정보</h3>
                             <ul>
@@ -80,6 +84,7 @@
                                 <li class="more"><a href="#">더보기</a> </li>
                             </ul>                              
                         </div>
+                        
                         <div>
                             <h3>로그인</h3>
                             <ul>
