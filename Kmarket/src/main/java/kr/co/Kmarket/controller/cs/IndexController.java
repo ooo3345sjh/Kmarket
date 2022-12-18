@@ -26,6 +26,7 @@ public class IndexController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("IndexController doGet...");
 		
+		// 세션 부분
 		HttpSession sess = req.getSession();
 		
 		if(sess != null) {

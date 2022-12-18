@@ -16,7 +16,7 @@ public class CsDAO extends DBHelper {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 		
-	public int insertQnaArticle(CsVO cvo) {
+	public int insertArticle(CsVO cvo) {
 		int result = 0;
 		try {
 			logger.info("insertQnaArticle...");
@@ -38,20 +38,48 @@ public class CsDAO extends DBHelper {
 		}
 		return result;
 	}
-	public void select() {}
 	
-	public void selectNoticeArticles() {
+	public CsVO viewArticle(String csNo) {
+		CsVO cvo = null;
 		
+		try {
+			
+			logger.info("viewArticles...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.SELECT_CS_ARTICLE);
+			psmt.setString(1, csNo);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				cvo = new CsVO();
+				cvo.setCsNo(rs.getInt("csNo"));
+				cvo.setUid(rs.getString("uid"));
+				cvo.setCate1(rs.getString("cate1"));
+				cvo.setCate2(rs.getString("cate2"));
+				cvo.setType(rs.getString("type"));
+				cvo.setTitle(rs.getString("title"));
+				cvo.setContent(rs.getString("content"));
+				cvo.setRegip(rs.getString("regip"));
+				cvo.setRdate(rs.getString("rdate"));
+			}
+			
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return cvo;
 	}
 	
-	public List<CsVO> selectQnaArticles() {
+	public List<CsVO> selectNoticeAll() {
+		List<CsVO> nlist = new ArrayList<>();
 		
-		List<CsVO> vo = new ArrayList<>();
 		try {
-			logger.info("selectQnaArticle...");
+			logger.info("selectNoticeAll..");
 			con = getConnection();
-			psmt = con.prepareStatement(Sql.SELECT_QNA_ARTICLES);
-			rs = psmt.executeQuery();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(Sql.SELECT_NOTICE_ALL);
+			
 			while(rs.next()) {
 				CsVO cvo = new CsVO();
 				cvo.setUid(rs.getString("uid"));
@@ -61,34 +89,17 @@ public class CsDAO extends DBHelper {
 				cvo.setTitle(rs.getString("title"));
 				cvo.setContent(rs.getString("content"));
 				cvo.setRegip(rs.getString("regip"));
-				cvo.setRdate(rs.getString("rdate").substring(2, 10));
+				cvo.setRdate(rs.getString("rdate"));
 				
-				vo.add(cvo);
+				nlist.add(cvo);
 			}
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		return vo;
-	}
-
-	public int selectCountTotalArticle() {
-		int total = 0;
-		try {
-			logger.info("selectCountTotal...");
-			con = getConnection();
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(Sql.SELECT_COUNT_TOTAL_CSNO);
-			if(rs.next()) {
-				total = rs.getInt(1);
-			}
-			close();
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-		}
-		return total;
+		return nlist;
 	}
 	
-	public void selectQnaArticles(Map<String, Object> map) {
+	public void selectArticles(Map<String, Object> map) {
 		List<CsVO> list = null;
 		
 		String cate1 = (String)map.get("cate1");
@@ -98,12 +109,15 @@ public class CsDAO extends DBHelper {
 		String sql = "SELECT * FROM `km_cs`";
 		
 		if(!group.equals("admin")) {
+			
 			sql += "WHERE `cate1` = '"+cate1+"' AND `cate2`='"+cate2+"'";
+			
 		}
 		sql += "ORDER BY `csNo` desc LIMIT ?,10";
 		
 		try {
-			logger.info("selecQnaArticle...");
+			
+			logger.info("selectArticle...");
 			con = getConnection();
 			psmt = con.prepareStatement(sql);
 			psmt.setInt(1, (int)map.get("limitStart"));
@@ -112,7 +126,9 @@ public class CsDAO extends DBHelper {
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
+				
 				CsVO cvo = new CsVO();
+				cvo.setCsNo(rs.getInt(1));
 				cvo.setUid(rs.getString("uid"));
 				cvo.setCate1(rs.getString("cate1"));
 				cvo.setCate2(rs.getString("cate2"));
@@ -134,7 +150,7 @@ public class CsDAO extends DBHelper {
 		logger.debug(" map : " + map);
 	}
 	
-	public void countQnaArticles(Map<String, Object> map) {
+	public void countArticles(Map<String, Object> map) {
 		int totalCount = 0;
 		try {
 			

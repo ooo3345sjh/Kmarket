@@ -57,7 +57,7 @@ public class WriteController extends HttpServlet{
 		cvo.setRegip(regip);
 		cvo.setRdate(rdate);
 		
-		int result = service.insertQnaArticle(cvo);
+		int result = service.insertArticle(cvo);
 		if(result > 0) {
 			resp.sendRedirect("/Kmarket/cs/board/list.do?cate1="+cate1+"&cate2="+cate2);
 		}

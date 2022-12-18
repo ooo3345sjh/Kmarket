@@ -1,6 +1,8 @@
 package kr.co.Kmarket.controller.cs;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.service.CsService;
+import kr.co.Kmarket.vo.CsVO;
 
 @WebServlet("/cs/view.do")
 public class ViewController extends HttpServlet{
@@ -26,6 +29,12 @@ public class ViewController extends HttpServlet{
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		logger.info("viewController...");
+		String csNo = req.getParameter("no");
+		
+		CsVO cvo = service.viewArticle(csNo);
+		req.setAttribute("cvo", cvo);
+		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/board/view.jsp");
 		dispatcher.forward(req, resp);
