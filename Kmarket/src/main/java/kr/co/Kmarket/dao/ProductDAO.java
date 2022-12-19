@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.db.Sql;
 import kr.co.Kmarket.vo.ProductVO;
+import kr.co.Kmarket.vo.ReviewVO;
 
 public class ProductDAO extends DBHelper {
 	
@@ -50,7 +51,6 @@ public class ProductDAO extends DBHelper {
 			logger.error(e.getMessage());
 		}
 	}
-	public void selectProduct () {}
 
 
 	public List<ProductVO> selectProducts (int start) {
@@ -137,7 +137,7 @@ public class ProductDAO extends DBHelper {
 	}
 	
 	/*** main ***/
-	// 메인 페이지 베스트 상품, 히트 상품, 최신 상품, 할인 상품, 인기상품
+	/* 메인 페이지 베스트 상품, 히트 상품, 최신 상품, 할인 상품, 인기상품 */
 	public Map<String, Object> selectBestProducts () {
 		Map<String, Object> map = null;
 		List<ProductVO> bestList = null;
@@ -247,8 +247,9 @@ public class ProductDAO extends DBHelper {
 	}
 	
 	
-	//====== product-list ======//
-	/*** 검색 조건에 해당하는 상품 목록 전체 개수 구하는 메서드 ***/
+	/*** product ***/
+	/** list **/
+	/* 검색 조건에 해당하는 상품 목록 전체 개수 구하는 메서드 */
 	public void countProducts(Map<String, Object> map) {
 		int totalCount = 0; // 전체 게시물 저장 변수 
 		
@@ -298,32 +299,34 @@ public class ProductDAO extends DBHelper {
 		map.put("totalCount", totalCount);
 	};
 	
-	/*** 검색 조건에 맞는 상품 목록을 반환하는 메서드 ***/
+	/* 검색 조건에 맞는 상품 목록을 반환하는 메서드 */
 	public void selectProducts(Map<String, Object> map){
 		List<ProductVO> list = null;
 		
 		String cate1 = (String)map.get("cate1");
 		String cate2 = (String)map.get("cate2");
 		String group = (String)map.get("group");
+		String sort = (String)map.get("sort"); // product_list에서 정렬할 변수값을 가져온다.
 		
+		String desc_asc = sort.equals("rowPrice") ? "asc":"desc"; // 낮은 가격순으로 정렬시엔 sql문에 asc를 넣어준다. 이 외에는 전부 desc
+		if(sort.equals("rowPrice") || sort.equals("highPrice")) sort = "price"; // 가격정렬시에 sort변수값을 컬럼값으로 변경
 		String sql = "SELECT p.*, s.`level` FROM `km_product` p JOIN `km_member_seller` s on p.`seller` = s.`uid` ";
 		
-		if(!group.equals("admin")) {	// 그룹명이 admin이 아니라면
-			sql += "WHERE p.`cate1` = '" + cate1 + "' AND p.`cate2`= '" + cate2 + "'";
-		}
-		
-		else {	// 그룹명이 admin이라면
+		if(group.equals("admin")) {	// 그룹명이 admin이라면
 			// 검색 조건이 있다면 WHERE절 추가
 			if(map.get("searchField") != null) {
 				sql += " WHERE p.`" + map.get("searchField") + "` LIKE '%" + map.get("searchWord") + "%' ";
 			}
+			sql += " ORDER BY p.`ProdNo` desc  LIMIT ?, 10";
 		}
 		
-		sql += " ORDER BY p.`ProdNo` desc  LIMIT ?, 10";
+		else {	// 그룹명이 admin이 아니라면
+			sql += "WHERE p.`cate1` = '" + cate1 + "' AND p.`cate2`= '" + cate2 + "'"
+				+ " ORDER BY p.`" + sort + "` " + desc_asc + "  LIMIT ?, 10";
+		}
 		
 		try {
-			logger.info("s"
-					+ "electProducts...");
+			logger.info("selectProducts...");
 			con = getConnection();
 			psmt = con.prepareStatement(sql);
 			psmt.setInt(1, (int)map.get("limitStart"));
@@ -385,6 +388,121 @@ public class ProductDAO extends DBHelper {
 		}
 				
 		map.put("products", list);
+		logger.debug(" list : " + list);
+		logger.debug(" map : " + map);
+	}
+	
+	/** view **/
+	/* 조건에 해당하는 한개의 상품 데이터 조회 */
+	public ProductVO selectProduct(String prodNo, String cate1, String cate2) {
+		ProductVO vo = null;
+		try {
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.SELECT_PRODUCT);
+			psmt.setString(1, prodNo);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				vo = new ProductVO();
+				String path = "/file/" + cate1 + "/" + cate2 + "/"; // 이미지 저장경로
+				int price = rs.getInt("price");                    // 상품 가격
+				int discount = rs.getInt("discount");			   // 할인율
+				int discountPrice = (int)(price - (price * (discount/100.0))); // 상품 할인 적용된 가격
+				vo.setDiscountPrice(discountPrice);
+				vo.setProdNo(rs.getInt("prodNo"));
+				vo.setCate1(rs.getString("cate1"));
+				vo.setCate2(rs.getString("cate2"));					
+				vo.setProdName(rs.getString("prodName"));
+				vo.setDescript(rs.getString("descript"));
+				vo.setCompany(rs.getString("company"));
+				vo.setSeller(rs.getString("seller"));
+				vo.setPrice(price);
+				vo.setDiscount(discount);
+				vo.setPoint(rs.getInt("point"));
+				vo.setStock(rs.getInt("stock"));
+				vo.setSold(rs.getInt("sold"));
+				vo.setDelivery(rs.getInt("delivery"));
+				vo.setHit(rs.getInt("hit"));
+				vo.setScore(rs.getInt("score"));
+				vo.setReview(rs.getInt("review"));
+				vo.setThumb1(path + rs.getString("thumb1"));
+				vo.setThumb2(path + rs.getString("thumb2"));
+				vo.setThumb3(path + rs.getString("thumb3"));
+				vo.setDetail(path + rs.getString("detail"));
+				vo.setStatus(rs.getString("status"));
+				vo.setDuty(rs.getString("duty"));
+				vo.setReceipt(rs.getString("receipt"));
+				vo.setBizType(rs.getString("bizType"));
+				vo.setOrigin(rs.getString("origin"));
+				vo.setIp(rs.getString("ip"));
+				vo.setRdate(rs.getString("rdate"));
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("productVo : " + vo);
+		return vo;
+	}
+	
+	/* 한개의 상품에 등록된 리뷰 조회 */
+	public void selectCountReviews(Map<String, Object> map) {
+		String prodNo = (String)map.get("prodNo");
+		logger.debug(prodNo);
+		int totalCount = 0;
+		try {
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.SELECT_COUNT_REVIEWS);
+			psmt.setString(1, prodNo);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				totalCount = rs.getInt(1);
+				logger.debug("totalCount : "+totalCount);
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("totalCount : " + totalCount);
+		map.put("totalCount", totalCount);
+	}
+	
+	/* 검색 조건에 맞는 리뷰 목록을 반환하는 메서드 */
+	public void selectReviews(Map<String, Object> map){
+		List<ReviewVO> list = null;
+		String prodNo = (String)map.get("prodNo");
+		try {
+			logger.info("selectReviews...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.SELECT_REVIEWS);
+			psmt.setString(1, prodNo);
+			psmt.setInt(2, (int)map.get("limitStart"));
+			list = new ArrayList<>();
+			
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ReviewVO vo = new ReviewVO();
+				vo.setRevNo(rs.getInt(1));
+				vo.setProdNo(rs.getInt(2));
+				vo.setUid(rs.getString(3));
+				vo.setContent(rs.getString(4));
+				vo.setRating(rs.getInt(5));
+				vo.setRegip(rs.getString(6));
+				vo.setRdate(rs.getString(7));
+				
+				list.add(vo);
+			}
+			
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+				
+		map.put("reviews", list);
 		logger.debug(" list : " + list);
 		logger.debug(" map : " + map);
 	}

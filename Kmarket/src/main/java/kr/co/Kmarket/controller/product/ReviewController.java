@@ -1,7 +1,9 @@
 package kr.co.Kmarket.controller.product;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -13,11 +15,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.utils.Paging;
+import kr.co.Kmarket.vo.ReviewVO;
 
-@WebServlet("/product/list.do")
-public class LIstController extends HttpServlet {
+@WebServlet("/product/review.do")
+public class ReviewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private ProductService service = new ProductService();
@@ -27,41 +33,40 @@ public class LIstController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		logger.info("LIstController doGet...");
+		logger.info("ReviewController doGet...");
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		logger.info("ReviewController doPost...");
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
-		String sort = req.getParameter("sort");
+		String prodNo = req.getParameter("prodNo");
 		String pg = req.getParameter("pg");
 		String group = "product";
-		String searchField = req.getParameter("searchField");
-		String searchWord = req.getParameter("searchWord");
-		
-		System.out.println(sort);
-		if(sort == null) sort = "sold"; // 판매목록순
-		
 		Map<String, Object> map = new HashMap<>();
-		
-		map.put("searchField", searchField);
-		map.put("searchWord", searchWord);
 		map.put("cate1", cate1);
 		map.put("cate2", cate2);
 		map.put("group", group);
 		map.put("pg", pg);
 		map.put("req", req);
-		map.put("sort", sort);
+		map.put("prodNo", prodNo);
 		
-		service.countProducts(map);  // 조건에 해당하는 전체 상품 목록의 갯수를 가져오는 서비스
+		service.selectCountReviews(map);  // 조건에 해당하는 전체 상품 목록의 갯수를 가져오는 서비스
 		Paging.paging(map);		     // 페이징 처리
-		service.selectProducts(map); // 검색 조건에 맞는 상품 목록을 반환하는 메서드 
+		service.selectReviews(map); // 검색 조건에 맞는 상품 목록을 반환하는 메서드 
 		Paging.getPageTags(map);  	 // 페이징 처리된 정보를 토대로 태그 생성
 		
-		req.setAttribute("map", map);
-		req.getRequestDispatcher("/product/list.jsp").forward(req, resp);
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		logger.info("LIstController doPost...");
+		Gson gson = new Gson();
+		JsonObject json = new JsonObject();
+		json.addProperty("pageTag", (String)map.get("pageTag"));
+		json.addProperty("reviews", gson.toJson((List<ReviewVO>)map.get("reviews")));
+		json.addProperty("pageGroupEnd", (int)map.get("pageGroupEnd"));
+		
+		resp.setContentType("application/json;charset=UTF-8");
+		Writer writer = resp.getWriter();
+		writer.write(json.toString());
 	}
 
 }
