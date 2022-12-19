@@ -115,7 +115,7 @@ public class Paging {
 			uri += "&cate1=" + cate1 + "&cate2=" + cate2;
 
 			// 현재 그룹 번호가 2이상이면
-			if(group.equals("prodcut")) {
+			if(group.equals("product")) {
 				if(pageGroupCurrent > 1) {
 					uri += "\" class=\"" + prev + " pg\"><span>&lt;</span>&nbsp;이전</a>";
 					pageTags.append(uri);
@@ -123,7 +123,7 @@ public class Paging {
 			} 
 			
 			else {
-				uri += "\" class=\"" + prev + "\">다음&nbsp;<span>&gt;</span></a>";
+				uri += "\" class=\"" + prev + "\"><span>&lt;</span>&nbsp;이전</a>";
 				pageTags.append(uri);
 			}
 		} 
@@ -183,7 +183,7 @@ public class Paging {
 			uri += "&cate1=" + cate1 + "&cate2=" + cate2;
 			
 			// product 라면
-			if(group.equals("prodcut")) {
+			if(group.equals("product")) {
 				
 				// 그룹의 마지막번호가 마지막 페이지 번호보다 작을 경우
 				if(pageGroupEnd < lastPageNum) { 

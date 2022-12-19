@@ -93,6 +93,7 @@ public class CsDAO extends DBHelper {
 				
 				nlist.add(cvo);
 			}
+			close();
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -106,21 +107,17 @@ public class CsDAO extends DBHelper {
 		String cate2 = (String)map.get("cate2");
 		String group = (String)map.get("group");
 		
-		String sql = "SELECT * FROM `km_cs`";
-		
-		if(!group.equals("admin")) {
-			
-			sql += "WHERE `cate1` = '"+cate1+"' AND `cate2`='"+cate2+"'";
-			
-		}
-		sql += "ORDER BY `csNo` desc LIMIT ?,10";
-		
+		String sql = "SELECT *, "
+				   + " ROW_NUMBER() OVER(ORDER BY `csNo` desc) rnum "
+			       + " FROM `km_cs` "
+			       + " LIMIT ?, 10"; // 게시물 구간을 인파라미터로 받기
 		try {
 			
 			logger.info("selectArticle...");
 			con = getConnection();
 			psmt = con.prepareStatement(sql);
 			psmt.setInt(1, (int)map.get("limitStart"));
+			System.out.println((int)map.get("limitStart"));
 			list = new ArrayList<>();
 			
 			rs = psmt.executeQuery();

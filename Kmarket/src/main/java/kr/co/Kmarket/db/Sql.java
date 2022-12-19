@@ -56,6 +56,20 @@ public class Sql {
 													+ "UNION " 
 													+ "SELECT b.* FROM (SELECT 'favorite' AS `type`, a.* FROM `km_product` a ORDER BY `review` DESC LIMIT 8) as b ";
 
+	/*** product ***/
+	/* view */
+	// 조건에 해당하는 한개의 상품 데이터 조회
+	public static final String SELECT_PRODUCT = "SELECT * FROM `km_product` WHERE prodNo=?";
+	
+	// 해당 상품에 등록된 총 리뷰갯수 조회
+	public static final String SELECT_COUNT_REVIEWS = "SELECT COUNT(`revNo`) FROM `km_product_review` WHERE prodNo=?";
+	
+	// 해당 상품에 등록된 총 리뷰 조회
+	public static final String SELECT_REVIEWS = "SELECT * FROM `km_product_review` WHERE prodNo=? "
+											  + "ORDER BY `revNo` DESC "
+											  + "LIMIT ?, 10";
+	
+	
 	/*** QnaArticle ***/
 	// 문의하기 글쓰기, 카테고리 별 목록(회원, 쿠폰/이벤트, 주문/결제, 배송, 취소/반품/교환, 여행/숙박/항공, 안전거래)
 	public static final String INSERT_QNA_ARTICLE = "INSERT INTO `km_cs` SET "

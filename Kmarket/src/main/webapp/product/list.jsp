@@ -17,22 +17,22 @@
                 <!-- 정렬 메뉴 -->
                 <ul class="sort">
                     <li>
-                        <a href="#" class="on">판매많은순</a>
+                        <a href='<c:url value='/product/list.do?cate1=${map.cate1}&cate2=${map.cate2}&sort=sold'/>' class='${map.sort eq "sold" ? "on":""}'>판매많은순</a>
                     </li>
                     <li>
-                        <a href="#">낮은가격순</a>
+                        <a href='<c:url value='/product/list.do?cate1=${map.cate1}&cate2=${map.cate2}&sort=rowPrice'/>' class='${map.sort eq "rowPrice" ? "on":""}'>낮은가격순</a>
                     </li>
                     <li>
-                        <a href="#">높은가격순</a>
+                        <a href='<c:url value='/product/list.do?cate1=${map.cate1}&cate2=${map.cate2}&sort=highPrice'/>' class='${map.sort eq "highPrice" ? "on":""}'>높은가격순</a>
                     </li>
                     <li>
-                        <a href="#">평점높은순</a>
+                        <a href='<c:url value='/product/list.do?cate1=${map.cate1}&cate2=${map.cate2}&sort=score'/>' class='${map.sort eq "score" ? "on":""}'>평점높은순</a>
                     </li>
                     <li>
-                        <a href="#">후기많은순</a>
+                        <a href='<c:url value='/product/list.do?cate1=${map.cate1}&cate2=${map.cate2}&sort=review'/>' class='${map.sort eq "review" ? "on":""}'>후기많은순</a>
                     </li>
                     <li>
-                        <a href="#">최근등록순</a>
+                        <a href='<c:url value='/product/list.do?cate1=${map.cate1}&cate2=${map.cate2}&sort=prodNo'/>' class='${map.sort eq "newProd" ? "on":""}'>최근등록순</a>
                     </li>
                 </ul>
                 <!-- 상품 목록 -->
@@ -41,13 +41,13 @@
                     	<c:forEach items="${map.products}" end="${map.totalCount}" var='row' varStatus="loop">
 	                        <tr>
 	                            <td>
-	                                <a href="#" class="thumb">
+	                                <a href='<c:url value='/product/view.do?cate1=${row.cate1}&cate2=${row.cate2}&no=${row.prodNo}'/>' class="thumb">
 	                                    <img src='<c:url value='${row.thumb1}'/>' alt="상품이미지">
 	                                </a>
 	                            </td>
 	                            <td>
-                               		<h3 class="name">${row.prodName}</h3>
-                               		<a href="#" class="desc">${row.descript}</a>
+                               		<h3 class="name"><a href='<c:url value='/product/view.do?cate1=${row.cate1}&cate2=${row.cate2}&no=${row.prodNo}'/>'>${row.prodName}</a></h3>
+                               		<a href='<c:url value='/product/view.do?cate1=${row.cate1}&cate2=${row.cate2}&no=${row.prodNo}'/>' class="desc">${row.descript}</a>
                             	</td>
 	                            <td width="10%">
 	                                <ul>

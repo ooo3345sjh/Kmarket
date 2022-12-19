@@ -81,12 +81,14 @@
 }
 
 #product > .list > table .thumb > img {width: 120px;}
-#product > .list > table .name {
+#product > .list > table .name a {
     font-size: 16px;
     font-weight: bold;
     color: #111;
     margin-bottom: 6px;
 }
+#product > .list > table .name a:hover {color: #0231a6;}
+#product > .list > table  td > a:hover {text-decoration: underline;}
 
 #product > .list > table .desc {font-size: 12px; color: #333;}
 #product > .list > table .dis-price {
@@ -172,11 +174,15 @@
     font-size: 0px;
     background-image: url('../img/ico_rating_star.png');
     background-repeat: no-repeat;
-    background-position: 36px 0px;
+    background-position: -1px 0px;
     text-indent: 86px;
 }
 
-#product h5.rating.star4 {background-position: 0 -160px;}
+#product h5.star1 {background-position: 0px -41px;}
+#product h5.star2 {background-position: 0px -81px;}
+#product h5.star3 {background-position: 0px -120px;}
+#product h5.star4 {background-position: 0px -161px;}
+#product h5.star5 {background-position: 0px -201px;}
 
 #product > .view > article {
     width: 100%;
@@ -270,6 +276,7 @@
     font-size: 0;
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 
 #product > .view > .info > .summary .count > input[name=num] {
@@ -420,7 +427,7 @@
     letter-spacing: -1px;
 }
 
-#product > .view > .review > .paging > .num > a {
+#product > .view > .review > .paging a {
     display: inline-block;
     min-width: 14px;
     margin: 0 2px;
@@ -433,7 +440,9 @@
     text-decoration: none;
 }
 
-#product > .view > .review > .paging > .num > a.on {color: #fe434c; font-weight: bold;}
+#product > .view > .review > .paging a.prev {border:none;}
+#product > .view > .review > .paging a.next {border:none;}
+#product > .view > .review > .paging a.on {color: #fe434c; font-weight: bold;}
 
 
 /* cart 페이지 */

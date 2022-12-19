@@ -1,66 +1,109 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>
 <jsp:include page="./_header.jsp"/>
-        <main id="product">
-            <aside>
-                <!-- 카테고리 -->
-                <ul class="category">
-                    <li>
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                        카테고리
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-tshirt" aria-hidden="true"></i>
-                            패션·의류·뷰티
-                            <i class="fas fa-angle-right" aria-hidden="true"></i>
-                        </a>
-                        <ol>
-                            <li><a href="#">남성의류</a></li>
-                            <li><a href="#">여성의류</a></li>
-                            <li><a href="#">잡화</a></li>
-                            <li><a href="#">뷰티</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-laptop" aria-hidden="true"></i>
-                            가전·디지털
-                            <i class="fas fa-angle-right" aria-hidden="true"></i>
-                        </a>
-                        <ol>
-                            <li><a href="#">노트북/PC</a></li>
-                            <li><a href="#">가전</a></li>
-                            <li><a href="#">휴대폰</a></li>
-                            <li><a href="#">기타</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-utensils" aria-hidden="true"></i>
-                            식품·생필품
-                            <i class="fas fa-angle-right" aria-hidden="true"></i>
-                        </a>
-                        <ol>
-                            <li><a href="#">신선식품</a></li>
-                            <li><a href="#">가공식품</a></li>
-                            <li><a href="#">건강식품</a></li>
-                            <li><a href="#">생필품</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-home" aria-hidden="true"></i>
-                            홈·문구·취미
-                            <i class="fas fa-angle-right" aria-hidden="true"></i>
-                        </a>
-                        <ol>
-                            <li><a href="#">가구/DIY</a></li>
-                            <li><a href="#">침구·커튼</a></li>
-                            <li><a href="#">생활용품</a></li>
-                            <li><a href="#">사무용품</a></li>
-                        </ol>
-                    </li>
-                </ul>
+<script>
+	
+	$(function () {
+		let contextRoot = '${request.getContextPath()}';
+		console.log(contextRoot);	
+		// 상품 수량 - 클릭시
+		$('.decrease').click(function () {
+			let numTag = $(this).next();
+			let num = numTag.val();
+			if(num == 1) {
+				return;
+			} else {
+				numTag.val(--num);
+				let total = (num * ${vo.discountPrice}).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				$('.total > span').text(total);
+			}
+		})
+		
+		// 상품 수량 + 클릭시
+		$('.increase').click(function () {
+			let numTag = $(this).prev();
+			let num = numTag.val();
+			console.log(num);
+			if(num >= ${vo.stock}) {
+				alert('재고량이 부족합니다.');
+				return;
+			} else {
+				numTag.val(++num);
+				let total = (num * ${vo.discountPrice}).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				$('.total > span').text(total);
+			}
+		})
+		
+		// 해당 상품 리뷰를 불러오는 AJAX
+		let pageGroupEnd;
+		$(document).ready(function () {
+			let jsonData = {"cate1":'${vo.cate1}', "cate2":'${vo.cate2}', "prodNo":'${vo.prodNo}'};
+			
+	        $.post(contextRoot + '/product/review.do', jsonData, function(data){
+	        	pageGroupEnd = data.pageGroupEnd;
+	        	let arr = JSON.parse(data.reviews); // JSON 문자열을 배열로 변환
+	        	if(arr.length == 0){
+                	$('.review > ul').append('<li><p>등록된 리뷰가 없습니다.</p></li>');
+	        	}
+				for(let review of arr){
+					let liTag = '<li>'
+	                          + '<div>'
+	                          + '<h5 class="rating star' + review.rating + '">상품평</h5>'
+	                          + '<span>' + review.uid + ' ' + review.rdate + '</span>'
+	                          + '</div>'
+	                          + '<h3>${vo.prodName}</h3>'
+			                  + '<p>' + review.content + '</p>'
+                			  + '</li>';
+
+                	$('.review > ul').append(liTag);
+                	$('.paging').html(data.pageTag);
+				}
+	        });
+		})
+		
+		// 상품리뷰 페이지 클릭시 해당 상품리뷰가 나오도록 하는 AJAX
+		$(document).on('click', '.paging > a',function (e) {
+			e.preventDefault();
+			let pg = $(this).text();
+			//console.log(pg.includes('다음'));
+			if(pg.includes('다음')){
+				pg = pageGroupEnd + 1;
+				console.log(pg);
+			} else if(pg.includes('이전')){
+				pg = pageGroupEnd - 1;
+				console.log(pg);
+			}
+			let jsonData = {"cate1":'${vo.cate1}', "cate2":'${vo.cate2}', "prodNo":'${vo.prodNo}', "pg":pg};
+			
+	        $.post(contextRoot + '/product/review.do', jsonData, function(data){
+	        	console.log(data.pageTag);	
+	        	console.log(data.reviews);
+	        	$('.review > ul').children().remove(); // 현재 페이지에 출력된 상품리뷰 삭제
+	        	let arr = JSON.parse(data.reviews); // JSON 문자열을 배열로 변환
+				for(let review of arr){
+					console.log(review.revNo);
+					console.log(review.prodNo);
+					console.log(review.uid);
+					console.log(review.content);
+					
+					let liTag = '<li>'
+	                          + '<div>'
+	                          + '<h5 class="rating star' + review.rating + '">상품평</h5>'
+	                          + '<span>' + review.uid + ' ' + review.rdate + '</span>'
+	                          + '</div>'
+	                          + '<h3>${vo.prodName}</h3>'
+			                  + '<p>' + review.content + '</p>'
+                			  + '</li>';
+
+                	
+                	$('.review > ul').append(liTag);
+                	$('.paging').html(data.pageTag);
+				}
+	        });
+		})
+	})
+</script>
             </aside>
             <!-- 상품 상세페이지 시작-->
             <section class="view">
@@ -77,35 +120,35 @@
                 <!-- 상품 전체 정보 내용 -->
                 <article class="info">
                     <div class="image">
-                        <img src="https://via.placeholder.com/460x460" alt="상품 이미지">
+                        <img src='<c:url value='${vo.thumb2}'/>' alt="상품 이미지" width="460px" height="460px">
                     </div>
                     <div class="summary">
                         <nav>
-                            <h1>(주)판매자명</h1>
+                            <h1>${vo.company}</h1>
                             <h2>
                                 상품번호&nbsp;:&nbsp;
-                                <span>10010118412</span>
+                                <span>${vo.prodNo}</span>
                             </h2>
                         </nav>
                         <nav>
-                            <h3>상품명</h3>
-                            <p>상품설명 출력</p>
-                            <h5 class="rating start4">
-                                <a href="#">상품평보기</a>
+                            <h3>${vo.prodName}</h3>
+                            <p>${vo.descript}</p>
+                            <h5 class="rating star${vo.score}">
+                                <a href="#review">상품평보기</a>
                             </h5>
                         </nav>
                         <nav>
                             <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
+                                <del><fmt:formatNumber value="${vo.price}" pattern="#,###"/></del>
+                                <span>${vo.discount}%</span>
                             </div>
                             <div class="dis_price">
-                                <ins>27,000</ins>
+                                <ins><fmt:formatNumber value="${vo.discountPrice}" pattern="#,###"/></ins>
                             </div>
                         </nav>
                         <nav>
                             <span class="delivery">무료배송</span>
-                            <span class="arrival">모레(금) 7/8 도착예정</span>
+                            <span class="arrival">모레(${yoil}) ${date} 도착예정</span>
                             <span class="desc">본 상품은 국내배송만 가능합니다.</span>
                         </nav>
                         <nav>
@@ -144,9 +187,8 @@
                         <h1>상품정보</h1>
                     </nav>
                     <!-- 상품상세페이지 이미지 -->
-                    <img src="https://via.placeholder.com/860x460" alt="상세페이지1">
-                    <img src="https://via.placeholder.com/860x460" alt="상세페이지2">
-                    <img src="https://via.placeholder.com/860x460" alt="상세페이지3">
+                    <img src='<c:url value='${vo.thumb3}'/>' alt="상세페이지1">
+                    <img src='<c:url value='${vo.detail}'/>' alt="상세페이지2">
                 </article>
                 <!-- 상품 정보 제공 고시 내용 -->
                 <article class="notice">
@@ -158,31 +200,31 @@
                         <tbody>
                             <tr>
                                 <td>상품번호</td>
-                                <td>10110125435</td>
+                                <td>${vo.prodNo}</td>
                             </tr>
                             <tr>
                                 <td>상품상태</td>
-                                <td>새상품</td>
+                                <td>${vo.status}</td>
                             </tr>
                             <tr>
                                 <td>부가세 면세여부</td>
-                                <td>과세상품</td>
+                                <td>${vo.duty}</td>
                             </tr>
                             <tr>
                                 <td>영수증발행</td>
-                                <td>발행가능 - 신용카드 전표, 온라인 현금영수증</td>
+                                <td>${vo.receipt}</td>
                             </tr>
                             <tr>
                                 <td>사업자구분</td>
-                                <td>사업자 판매자</td>
+                                <td>${vo.bizType}</td>
                             </tr>
                             <tr>
                                 <td>브랜드</td>
-                                <td>블루포스</td>
+                                <td>${vo.company}</td>
                             </tr>
                             <tr>
                                 <td>원산지</td>
-                                <td>국내생산</td>
+                                <td>${vo.origin}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -241,85 +283,22 @@
                 </article>
                 <!-- 상품 리뷰 내용 -->
                 <article class="review">
+                	<a name="review"></a> <!-- 상품리뷰로 이동하기 위한 타켓링크 -->
                     <nav><h1>상품리뷰</h1></nav>
                     <ul>
-                        <li>
-                            <div>
-                                <h5 class="rating star4">상품평</h5>
-                                <span>seo****** 2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p>
-                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                        <li>
-                            <div>
-                                <h5 class="rating star4">상품평</h5>
-                                <span>seo****** 2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p>
-                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                        <li>
-                            <div>
-                                <h5 class="rating star4">상품평</h5>
-                                <span>seo****** 2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p>
-                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                        <li>
-                            <div>
-                                <h5 class="rating star4">상품평</h5>
-                                <span>seo****** 2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p>
-                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                        <li>
-                            <div>
-                                <h5 class="rating star4">상품평</h5>
-                                <span>seo****** 2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p>
-                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
+                    	<!-- 상품 리뷰 목록 들어오는 곳 -->
                     </ul>
                     <div class="paging">
-                        <span class="prev">
-                            <a href="#"><&nbsp;이전</a>
-                        </span>
-                        <span class="num">
-                            <a href="#" class="on">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                            <a href="#">6</a>
-                            <a href="#">7</a>
-                        </span>
-                        <span class="next">
-                            <a href="#">다음&nbsp;></a>
-                        </span>
+                    <!-- 
+	                    <a href="#"><&nbsp;이전</a>
+	                    <a href="#" class="on">1</a>
+	                    <a href="#">2</a>
+	                    <a href="#">3</a>
+	                    <a href="#">4</a>
+	                    <a href="#">5</a>
+	                    <a href="#">6</a>
+	                    <a href="#">7</a>
+	                    <a href="#">다음&nbsp;></a>-->
                     </div>
                 </article>
             </section>
