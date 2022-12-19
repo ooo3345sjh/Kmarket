@@ -14,22 +14,24 @@ public class CsService {
 		dao = new CsDAO();
 	}
 	
-	public int insertQnaArticle(CsVO cvo) {
-		return dao.insertQnaArticle(cvo);
-	}
-	public int selectCountTotalArticle() {
-		return dao.selectCountTotalArticle();
-	}
-	public List<CsVO> selectQnaArticles() {
-		return dao.selectQnaArticles();
+	public int insertArticle(CsVO cvo) {
+		return dao.insertArticle(cvo);
 	}
 	
-	public void selectQnaArticles(Map<String, Object> map) {
-		 dao.selectQnaArticles(map);
+	public CsVO viewArticle(String csNo) {
+		return dao.viewArticle(csNo);
 	}
 	
-	public void countQnaArticles(Map<String, Object> map) {
-		dao.countQnaArticles(map);
+	public List<CsVO> selectNoticeAll() {
+		return dao.selectNoticeAll();
+	}
+	
+	public void selectArticles(Map<String, Object> map) {
+		 dao.selectArticles(map);
+	}
+	
+	public void countArticles(Map<String, Object> map) {
+		dao.countArticles(map);
 	}
 	
 	public void update() {}

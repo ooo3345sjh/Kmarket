@@ -68,8 +68,7 @@ public class Sql {
 													+ "`regip`=?, "
 													+ "`rdate`=NOW()";
 	
-	public static final String SELECT_QNA_ARTICLES = "SELECT * FROM `km_cs` "
-													+ "ORDER BY `csNo` DESC "
-													+ "LIMIT ?, 10";
-	public static final String SELECT_COUNT_TOTAL_CSNO = "SELECT COUNT(`csNo`) FROM `km_cs`";
+	public static final String SELECT_NOTICE_ALL = "SELECT * FROM `km_cs` WHERE `cate1`='notice' ORDER BY `rdate` DESC;";
+	
+	public static final String SELECT_CS_ARTICLE = "SELECT * FROM `km_cs` WHERE `csNo`=?";
 }

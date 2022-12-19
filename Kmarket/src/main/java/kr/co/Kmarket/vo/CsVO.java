@@ -18,6 +18,9 @@ public class CsVO {
 	public void setCsNo(int csNo) {
 		this.csNo = csNo;
 	}
+	public void setCsNo(String csNo) {
+		this.csNo = Integer.parseInt(csNo);
+	}
 	public String getUid() {
 		return uid;
 	}
