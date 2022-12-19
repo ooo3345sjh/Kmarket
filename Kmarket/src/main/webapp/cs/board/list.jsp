@@ -12,6 +12,7 @@
 	                        	<c:forEach var="nl" items="${nlist}">
 		                            <tr>
 		                                <td><a href="<c:url value='/cs/view.do'/>">[${nl.type}]${nl.title}</a></td>
+		                                
 		                                <c:set var="rdate"  value="${nl.rdate}"/>
 		                                <td>
 		                                	${fn:substring(rdate,2,10)}
@@ -28,7 +29,7 @@
                         	
                         	<%-- 자주묻는 질문 --%>
                         	<c:when test="${map.cate1 eq 'faq'}">
-		                        <c:forEach var="faqCate" items="${map.articles}">
+		                        <c:forEach var="faqCate" items="${map.articles}" varStatus="status">
 		                        <div>
 		                            <h3>${faqCate.type}</h3>
 		                            <ul>
@@ -38,6 +39,7 @@
 		                                	<li class="more"><a href="#">더보기</a> </li>
 		                            </ul>                              
 		                        </div>
+		                        <c:out value="${status.end}"></c:out>
 		                        </c:forEach>
                         	</c:when>
                         	<%-- 자주묻는 질문 끝 --%>
@@ -48,7 +50,7 @@
                         		<c:forEach var="vo" items="${map.articles}">
                             		<tr>
                             			<!-- 타입, 제목 -->
-                                		<td><a href="<c:url value='/cs/view.do?no=${map.no}&pg=${map.pg}&cate1=${map.cate1}&cate2=${map.cate2}'/>">[${vo.type}]${vo.title}</a></td>
+                                		<td><a href="<c:url value='/cs/board/view.do?no=${vo.csNo}&pg=${map.pg}&cate1=${map.cate1}&cate2=${map.cate2}'/>">[${vo.type}]${vo.title}</a></td>
                                 		<td>검토중</td>
                                 
 		                                <!-- 아이디 마스킹처리 -->
