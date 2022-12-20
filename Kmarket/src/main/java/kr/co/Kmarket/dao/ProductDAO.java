@@ -532,4 +532,5 @@ public class ProductDAO extends DBHelper {
 		logger.debug("result : " + result);
 		return result;
 	}
+
 }

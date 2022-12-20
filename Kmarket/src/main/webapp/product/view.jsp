@@ -102,6 +102,7 @@
 				}
 	        });
 		})
+
 		
 		$(document).on('click', '.cart', function () {
 			
