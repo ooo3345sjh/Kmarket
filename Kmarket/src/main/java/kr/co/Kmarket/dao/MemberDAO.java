@@ -25,6 +25,8 @@ public class MemberDAO extends DBHelper {
 	public void insertMember() {}
 	public void selectMember() {}
 	public void selectMembers() {}
+	
+	
 	public TermsVO selectTerms() {
 		logger.info("selectTerms...");
 		TermsVO vo = null;
@@ -46,7 +48,7 @@ public class MemberDAO extends DBHelper {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
+		logger.debug("vo : " + vo);
 		return vo;
 	}
 	

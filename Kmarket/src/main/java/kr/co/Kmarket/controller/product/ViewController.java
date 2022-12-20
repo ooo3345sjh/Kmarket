@@ -44,6 +44,7 @@ public class ViewController extends HttpServlet {
 		req.setAttribute("cate2", cate2);
 		req.setAttribute("vo", vo);
 		LocalDate date = LocalDate.now();
+		date = date.plusDays(2);
 		int week = date.getDayOfWeek().getValue();
 		String yoil = null;
 		
@@ -79,7 +80,7 @@ public class ViewController extends HttpServlet {
 		CartVo vo = new CartVo();
 		vo.setProdNo(prodNo);
 		vo.setUid(uid);
-		vo.setCount(discount);
+		vo.setCount(count);
 		vo.setPrice(price);
 		vo.setDiscount(discount);
 		vo.setPoint(point);

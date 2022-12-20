@@ -23,7 +23,7 @@
                         <a href="#">로그인</a>
                         <a href="#">회원가입</a>
                         <a href="#">마이페이지</a>
-                        <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+                        <a href='<c:url value='/product/cart.do'/>'><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
                     </nav>
                 </div>
             </div>
