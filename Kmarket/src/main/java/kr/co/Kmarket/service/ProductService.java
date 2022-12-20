@@ -8,6 +8,7 @@ import java.util.Map;
 
 
 import kr.co.Kmarket.dao.ProductDAO;
+import kr.co.Kmarket.vo.CartVo;
 import kr.co.Kmarket.vo.ProductVO;
 
 public class ProductService {
@@ -73,4 +74,9 @@ public class ProductService {
 		dao.selectReviews(map);
 	}
 	
+	/** cart **/
+	// 상품을 장바구니 담기 버튼 클릭시 추가하는 서비스
+	public int insertProductInCart(CartVo vo) {
+		return dao.insertProductInCart(vo);
+	}
 }

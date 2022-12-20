@@ -50,7 +50,7 @@
 					let liTag = '<li>'
 	                          + '<div>'
 	                          + '<h5 class="rating star' + review.rating + '">상품평</h5>'
-	                          + '<span>' + review.uid + ' ' + review.rdate + '</span>'
+	                          + '<span>' + review.uid.substring(0,3) + '****** ' + review.rdate.substring(0, 10) + '</span>'
 	                          + '</div>'
 	                          + '<h3>${vo.prodName}</h3>'
 			                  + '<p>' + review.content + '</p>'
@@ -90,7 +90,7 @@
 					let liTag = '<li>'
 	                          + '<div>'
 	                          + '<h5 class="rating star' + review.rating + '">상품평</h5>'
-	                          + '<span>' + review.uid + ' ' + review.rdate + '</span>'
+	                          + '<span>' + review.uid.substring(0,3) + '****** ' + review.rdate.substring(0, 10) + '</span>'
 	                          + '</div>'
 	                          + '<h3>${vo.prodName}</h3>'
 			                  + '<p>' + review.content + '</p>'
@@ -100,6 +100,29 @@
                 	$('.review > ul').append(liTag);
                 	$('.paging').html(data.pageTag);
 				}
+	        });
+		})
+
+		
+		$(document).on('click', '.cart', function () {
+			
+			let num = $('input[name=num]').val();
+			console.log(num);
+			let total = $('.total > span').text();
+			let jsonData = {
+					"prodNo":'${vo.prodNo}', 
+					"uid":'a101', 
+					"count": num, 
+					"price":'${vo.discountPrice}',
+					"discount":'${vo.discount}',
+					"point":'${vo.point}',
+					"delivery":'${vo.delivery}',
+					"total": total.replace(',', '')
+			};
+			
+	        $.post(contextRoot + '/product/view.do', jsonData, function(data){
+	        	console.log(data);	
+				
 	        });
 		})
 	})

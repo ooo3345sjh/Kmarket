@@ -1,6 +1,7 @@
 package kr.co.Kmarket.controller.product;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -16,7 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.JsonObject;
+
 import kr.co.Kmarket.service.ProductService;
+import kr.co.Kmarket.vo.CartVo;
 import kr.co.Kmarket.vo.ProductVO;
 
 @WebServlet("/product/view.do")
@@ -63,6 +67,34 @@ public class ViewController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("ViewController doPost...");
+		String prodNo = req.getParameter("prodNo");
+		String uid = req.getParameter("uid");
+		String count = req.getParameter("count");
+		String price = req.getParameter("price");
+		String discount = req.getParameter("discount");
+		String point = req.getParameter("point");
+		String delivery = req.getParameter("delivery");
+		String total = req.getParameter("total");
+		
+		CartVo vo = new CartVo();
+		vo.setProdNo(prodNo);
+		vo.setUid(uid);
+		vo.setCount(discount);
+		vo.setPrice(price);
+		vo.setDiscount(discount);
+		vo.setPoint(point);
+		vo.setDelivery(delivery);
+		vo.setTotal(total);
+		System.out.println(prodNo + " " + uid + " " + count + " " + price + " " + discount + " " + point + " " + delivery + " " + total);
+		
+		int result = service.insertProductInCart(vo); // 장바구니 테이블에 상품 추가
+		
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		
+		resp.setContentType("application/json;charset=UTF-8");
+		Writer writer = resp.getWriter();
+		writer.write(json.toString());
 	}
 
 }

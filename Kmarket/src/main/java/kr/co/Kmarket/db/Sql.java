@@ -1,5 +1,8 @@
 package kr.co.Kmarket.db;
 
+import kr.co.Kmarket.vo.CartVo;
+import kr.co.Kmarket.vo.ProductVO;
+
 public class Sql {
 	
 	/*** member ***/
@@ -69,6 +72,20 @@ public class Sql {
 											  + "ORDER BY `revNo` DESC "
 											  + "LIMIT ?, 10";
 	
+	/*** cart ***/
+	// 상품을 장바구니 담기 버튼 클릭시 추가하는 서비스
+	public static final String INSERT_PRODUCT_IN_CART = "INSERT INTO `km_product_cart` SET "
+													  + "`prodNo`=?,"
+													  + "`uid`=?,"
+													  + "`count`=?,"
+													  + "`price`=?,"
+													  + "`discount`=?,"
+													  + "`point`=?,"
+													  + "`delivery`=?,"
+													  + "`total`=?,"
+													  + "`rdate`=NOW()";
+	
+
 	
 	/*** QnaArticle ***/
 	// 문의하기 글쓰기, 카테고리 별 목록(회원, 쿠폰/이벤트, 주문/결제, 배송, 취소/반품/교환, 여행/숙박/항공, 안전거래)
