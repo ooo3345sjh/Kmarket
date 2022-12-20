@@ -11,8 +11,6 @@
 			if(check == false){
 				$("input[name=prodCheck]").prop("checked", true);
 				check = true;
-				console.log($('#cart'));
-				
 			} else {
 				$("input[name=prodCheck]").prop("checked", false);
 				check = false;
