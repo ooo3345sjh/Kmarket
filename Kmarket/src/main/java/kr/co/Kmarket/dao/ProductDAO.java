@@ -532,5 +532,44 @@ public class ProductDAO extends DBHelper {
 		logger.debug("result : " + result);
 		return result;
 	}
+	
+	// 장바구니 담긴 상품을 조회하는 서비스
+	public List<CartVo> selectProductInCart(String uid) {
+		List<CartVo> list = null;
+		
+		try {
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.SELECT_PRODUCT_IN_CART);
+			psmt.setString(1, uid);
+			rs = psmt.executeQuery();
+			list = new ArrayList<>();
+			while(rs.next()) {
+				CartVo vo = new CartVo();
+				vo.setCartNo(rs.getInt(1));
+				vo.setProdNo(rs.getInt(2));
+				vo.setUid(rs.getString(3));
+				vo.setCount(rs.getInt(4));
+				vo.setPrice(rs.getInt(5));
+				vo.setDiscount(rs.getInt(6));
+				vo.setPoint(rs.getInt(7));
+				vo.setDelivery(rs.getInt(8));
+				vo.setTotal(rs.getInt(9));
+				vo.setrdate(rs.getString(10));
+				vo.setCate1(rs.getString("cate1"));
+				vo.setCate2(rs.getString("cate2"));
+				String path = "/file/" + vo.getCate1() + "/" + vo.getCate2() + "/"; // 이미지 저장경로
+				vo.setThumb1(path + rs.getString("thumb1"));
+				vo.setProdName(rs.getString("prodName"));
+				vo.setDescript(rs.getString("descript"));
+				list.add(vo);
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("list : " + list);
+		return list;
+	}
 
 }
