@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="/_header.jsp"/>
         <section id="cs">
             <div class="main">
@@ -9,27 +10,18 @@
                 <section class="notice">
                     <h1>공지사항<a href="<c:url value='/cs/list.do?cate1=notice&cate2=all&pg=1'/>">전체보기</a></h1>
                     <ul>
-                        <li>
-                           <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                           <span class="date">22.10.31</span> 
-                        </li>
-                        <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span> 
-                         </li>
-                         <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span> 
-                         </li>
-                         <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span> 
-                         </li>
-                         <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span> 
-                         </li>
+                    
+                    	<c:forEach var="idx" items="${noticList}" end="4">
+	                        <li>
+	                           <a href="<c:url value='/cs/view.do?no=${idx.csNo}'/>" class="title">[${idx.type}] ${idx.title}</a>
+	                           
+	                           <c:set var="rdate"  value="${idx.rdate}"/>
+	                           <span class="date">${fn:substring(rdate,2,10)}</span> 
+	                        </li>
+                        </c:forEach>
+                        
                     </ul>
+                    
                 </section>
                 <section class="faq">
                     <h1>자주 묻는 질문<a href="<c:url value='/cs/list.do?cate1=faq&cate2=user&pg=1'/>">전체보기</a></h1>
@@ -64,41 +56,18 @@
                         <a href="<c:url value='/cs/list.do?cate1=qna&cate2=user&pg=1'/>">전체보기</a>
                     </h1>
                     <ul>
-                        <li>
-                            <a href="./qna/list.html" class="title">[회원] 개인회원과 법인회원에 차이가 있나요?</a>
-                            <p>
-                                <span class="uid">leta**</span>
-                                <span class="date">22.10.31</span>
-                            </p>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[쿠폰/이벤트] 스마일포인트는 어디에 사용하나요?</a>
-                            <p>
-                                <span class="uid">leta**</span>
-                                <span class="date">22.10.31</span>
-                            </p>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[주문/결제] 신용카드 결제 중 오류가 난 경우 어떻게 하나요?</a>
-                            <p>
-                                <span class="uid">leta**</span>
-                                <span class="date">22.10.31</span>
-                            </p>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[배송] 주문한 상품은 언제 배송되나요?</a>
-                            <p>
-                                <span class="uid">leta**</span>
-                                <span class="date">22.10.31</span>
-                            </p>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[취소/반품/교환] 주문을 취소하고 싶어요.</a>
-                            <p>
-                                <span class="uid">leta**</span>
-                                <span class="date">22.10.31</span>
-                            </p>
-                        </li>
+                        <c:forEach var="idx" items="${qnaList}" end="4">
+	                        <li>
+	                           <a href="#" class="title">[${idx.type}] ${idx.title}</a>
+	                           
+	                           <!-- id -->
+	                           <span style="margin-right: 10px;">${fn:substring(idx.uid,0,3)}**</span>
+	                           
+	                           <!-- rdate -->
+	                           <c:set var="rdate"  value="${idx.rdate}"/>
+	                           <span class="date" style="float: right;">${fn:substring(rdate,2,10)}</span> 
+	                        </li>
+                        </c:forEach>
                     </ul>
                     <a href="<c:url value='/cs/write.do?cate1=qna&cate2=user'/>" class="ask">문의글 작성 ></a>
                 </section>

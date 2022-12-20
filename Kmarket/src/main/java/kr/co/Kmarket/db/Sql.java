@@ -6,9 +6,48 @@ import kr.co.Kmarket.vo.ProductVO;
 public class Sql {
 	
 	/*** member ***/
+	
+	// uid 등록
+	public static final String INSERT_UID = "INSERT INTO `km_member_uid` SET "
+											+ "`uid`=?";
+	// 일반 회원 가입
+	public static final String INSERT_MEMBER = "INSERT INTO `km_member_general` SET "
+											+ "`uid`=?, "
+											+ "`pass`=SHA2(?, 256), "
+											+ "`name`=?, "
+											+ "`gender`=?, "
+											+ "`hp`=?, "
+											+ "`email`=?, "
+											+ "`type`=1, "
+											+ "`zip`=?, "
+											+ "`addr1`=?, "
+											+ "`addr2`=?, "
+											+ "`regip`=?, "
+											+ "`rdate`=NOW()";
+	// 판매자 회원 가입
+	public static final String INSERT_SELLER = "INSERT INTO `km_member_seller` SET "
+											+ "`uid`=?, "
+											+ "`pass`=SHA2(?, 256), "
+											+ "`type`=3, "
+											+ "`zip`=?, "
+											+ "`addr1`=?, "
+											+ "`addr2`=?, "
+											+ "`company`=?, "
+											+ "`ceo`=?, "
+											+ "`bizRegNum`=?, "
+											+ "`comRegNum`=?, "
+											+ "`tel`=?, "
+											+ "`manager`=?, "
+											+ "`managerHp`=?, "
+											+ "`fax`=?, "
+											+ "`regip`=?, "
+											+ "`rdate`=NOW()";
+	// 약관 불러오기
 	public static final String SELECT_TERMS = "SELECT * FROM `km_member_terms`";
 	// 아이디 중복 확인
 	public static final String SELECT_COUNT_UID = "SELECT COUNT(`uid`) FROM `km_member_uid` WHERE `uid`=?";
+	// 로그인
+	public static final String SELECT_MEMBER = "SELECT * FROM `km_member_general` WHERE `uid`=? AND `pass`=SHA2(?, 256)";
 	
 	/*** product ***/
 	public static final String INSERT_PRODUCT = "INSERT INTO `km_product` SET "
@@ -107,4 +146,6 @@ public class Sql {
 	public static final String SELECT_NOTICE_ALL = "SELECT * FROM `km_cs` WHERE `cate1`='notice' ORDER BY `rdate` DESC;";
 	
 	public static final String SELECT_CS_ARTICLE = "SELECT * FROM `km_cs` WHERE `csNo`=?";
+	
+	public static final String SELECT_QNA_ALL = "SELECT * FROM `km_cs` WHERE `cate1`='qna' ORDER BY `rdate` DESC;";
 }

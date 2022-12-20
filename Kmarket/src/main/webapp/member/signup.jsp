@@ -26,17 +26,24 @@
                     <textarea name="privacy" readonly>${vo.privacy}</textarea>
                     <label><input type="checkbox" name="agree3">동의합니다.</label>
                 </section>
-                <section>
-                    <h3><span class="optional">(선택)</span> 위치정보 이용약관</h3>
-                    <textarea name="terms" readonly>
-                       	<c:choose>
-                    		<c:when test="${type eq 'seller'}">${vo.tax}</c:when>
-                    		<c:otherwise>${vo.location}</c:otherwise>
-                    	</c:choose>
-                    </textarea>
-                    <label><input type="checkbox" name="agree4">동의합니다.</label>
-                </section>
-                <input type="button" class="agreeBtn" value="동의하기">
+                <c:choose>
+                	<c:when test="${type eq 'seller'}"></c:when>
+                	<c:otherwise>
+                		<section>
+                    		<h3><span class="optional">(선택)</span> 위치정보 이용약관</h3>
+	                    		<textarea name="terms" readonly>${vo.location}</textarea>
+                    		<label><input type="checkbox" name="agree4">동의합니다.</label>
+                		</section>
+                	</c:otherwise>
+                </c:choose>
+                <c:choose>
+                	<c:when test="${type eq 'seller'}">
+                		<input type="button" class="agreeBtn" value="동의하기" onclick="location.href='registerSeller.do'">
+                	</c:when>
+                	<c:otherwise>
+                		<input type="button" class="agreeBtn" value="동의하기" onclick="location.href='register.do'">
+                	</c:otherwise>
+                </c:choose>
             </div>
         </main>
     </div>
