@@ -30,11 +30,17 @@ public class ViewController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("viewController...");
-		String csNo = req.getParameter("no");
+		String csNo	 = req.getParameter("no");
+		String pg	 = req.getParameter("pg");
+		String cate1 = req.getParameter("cate1");
+		String cate2 = req.getParameter("cate2");
 		
 		CsVO cvo = service.viewArticle(csNo);
-		req.setAttribute("cvo", cvo);
 		
+		req.setAttribute("cvo", cvo);
+		req.setAttribute("pg", pg);
+		req.setAttribute("cate1", cate1);
+		req.setAttribute("cate2", cate2);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/board/view.jsp");
 		dispatcher.forward(req, resp);

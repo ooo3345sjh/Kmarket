@@ -468,7 +468,7 @@
     letter-spacing: -0.1em;
 }
 #product > .cart > form > table th:first-child {width: 60px;}
-#product > .cart > form > table .empty {display: none;}
+#product > .cart > form > table .empty {}
 #product > .cart > form > table .empty td {
     padding: 50px 0 !important;
     text-align: center;

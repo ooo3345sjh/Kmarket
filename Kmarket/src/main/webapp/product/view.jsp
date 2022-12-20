@@ -102,7 +102,8 @@
 				}
 	        });
 		})
-		
+
+		// 장바구니에 해당 상품을 추가하는 이벤트 함수		
 		$(document).on('click', '.cart', function () {
 			
 			let num = $('input[name=num]').val();
@@ -112,7 +113,7 @@
 					"prodNo":'${vo.prodNo}', 
 					"uid":'a101', 
 					"count": num, 
-					"price":'${vo.discountPrice}',
+					"price":'${vo.price}',
 					"discount":'${vo.discount}',
 					"point":'${vo.point}',
 					"delivery":'${vo.delivery}',
@@ -194,7 +195,7 @@
                             <button class="increase">+</button>
                         </div>
                         <div class="total">
-                            <span>35,000</span>
+                            <span><fmt:formatNumber value="${vo.discountPrice}" pattern="#,###"/></span>
                             <em>총 상품금액</em>
                         </div>
                         <div class="button">

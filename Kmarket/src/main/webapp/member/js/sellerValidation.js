@@ -2,22 +2,17 @@
  * 
  */
  
-// 데이터 검증에 사용하는 정규표현식
+ // 데이터 검증에 사용하는 정규표현식
 let reUid = /^[a-z]+[a-z0-9]{5,19}$/g;
 let rePass = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
 let reName = /^[가-힣]+$/;
-let reNick = /^[a-zA-Zㄱ-힣0-9][a-zA-Zㄱ-힣0-9]*$/;
-let reEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 let reHp = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
 
 // 폼 데이터 검증 결과 상태변수
 let isUidOk 	  = false;
 let isPassOk 	  = false;
 let isNameOk 	  = false;
-let isNickOk  	  = false;
-let isEmailAuthOk = false;
-let isHpOk 		  = false;
-
+let isHpOk		  = false;
 
 $(function(){
 	
@@ -80,8 +75,7 @@ $(function(){
 		}
 	});
 	
-	
-	// 이름 검사
+	// 담당자 이름 검사
 	$('input[name=km_name]').focusout(function(){
 		
 		let name = $(this).val();
@@ -95,24 +89,7 @@ $(function(){
 		}
 	});
 	
-	
-	// 이메일 검사
-	$('input[name=km_email]').focusout(function(){
-		
-		let email = $(this).val();
-		
-		if(email.match(reEmail)){
-			isEmailOk = true;
-			$('.msgEmail').css('color', 'green').text('사용할 수 있는 이메일입니다.');
-		} else {
-			isEmailOk = false;
-			$('.msgEmail').css('color', 'red').text('유효하지 않는 이메일입니다.');
-		}
-		
-	})
-	
-	
-	// 휴대폰 검사
+	// 담당자 휴대폰 검사
 	$('input[name=km_hp]').focusout(function(){
 		
 		let hp = $(this).val();

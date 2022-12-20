@@ -82,6 +82,7 @@ public class CsDAO extends DBHelper {
 			
 			while(rs.next()) {
 				CsVO cvo = new CsVO();
+				cvo.setCsNo(rs.getString("csNo"));
 				cvo.setUid(rs.getString("uid"));
 				cvo.setCate1(rs.getString("cate1"));
 				cvo.setCate2(rs.getString("cate2"));
@@ -100,16 +101,45 @@ public class CsDAO extends DBHelper {
 		return nlist;
 	}
 	
+	public List<CsVO> selectQnaAll() {
+		List<CsVO> list1 = new ArrayList<>();
+		try {
+			logger.info("indexQnaArticles...");
+			con = getConnection();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(Sql.SELECT_QNA_ALL);
+			while(rs.next()) {
+				CsVO cvo1 = new CsVO();
+				cvo1.setCsNo(rs.getString("csNo"));
+				cvo1.setUid(rs.getString("uid"));
+				cvo1.setCate1(rs.getString("cate1"));
+				cvo1.setCate2(rs.getString("cate2"));
+				cvo1.setType(rs.getString("type"));
+				cvo1.setTitle(rs.getString("title"));
+				cvo1.setContent(rs.getString("content"));
+				cvo1.setRegip(rs.getString("regip"));
+				cvo1.setRdate(rs.getString("rdate"));
+				
+				list1.add(cvo1);
+			}
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return list1;
+	}
+	
 	public void selectArticles(Map<String, Object> map) {
 		List<CsVO> list = null;
 		
 		String cate1 = (String)map.get("cate1");
 		String cate2 = (String)map.get("cate2");
-		String group = (String)map.get("group");
 		
 		String sql = "SELECT *, "
 				   + " ROW_NUMBER() OVER(ORDER BY `csNo` desc) rnum "
 			       + " FROM `km_cs` "
+			       + " WHERE `cate1`='" + cate1 + "' AND `cate2`='" + cate2 + "'"
 			       + " LIMIT ?, 10"; // 게시물 구간을 인파라미터로 받기
 		try {
 			
@@ -125,7 +155,7 @@ public class CsDAO extends DBHelper {
 			while(rs.next()) {
 				
 				CsVO cvo = new CsVO();
-				cvo.setCsNo(rs.getInt(1));
+				cvo.setCsNo(rs.getInt("csNo"));
 				cvo.setUid(rs.getString("uid"));
 				cvo.setCate1(rs.getString("cate1"));
 				cvo.setCate2(rs.getString("cate2"));
@@ -178,6 +208,16 @@ public class CsDAO extends DBHelper {
 		logger.debug("totalCount : "+totalCount);
 		
 		map.put("totalCount", totalCount);
+	}
+	
+	
+	
+	public void indexQnaArticles() {
+		try {
+			logger.info("indexQnaArticles...");
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
 	}
 	
 	public void update() {}
