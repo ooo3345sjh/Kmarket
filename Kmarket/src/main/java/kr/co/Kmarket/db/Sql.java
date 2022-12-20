@@ -102,4 +102,6 @@ public class Sql {
 	public static final String SELECT_NOTICE_ALL = "SELECT * FROM `km_cs` WHERE `cate1`='notice' ORDER BY `rdate` DESC;";
 	
 	public static final String SELECT_CS_ARTICLE = "SELECT * FROM `km_cs` WHERE `csNo`=?";
+	
+	public static final String SELECT_QNA_ALL = "SELECT * FROM `km_cs` WHERE `cate1`='qna' ORDER BY `rdate` DESC;";
 }

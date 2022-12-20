@@ -26,6 +26,10 @@ public class CsService {
 		return dao.selectNoticeAll();
 	}
 	
+	public List<CsVO> selectQnaAll() {
+		return dao.selectQnaAll();
+	}
+	
 	public void selectArticles(Map<String, Object> map) {
 		 dao.selectArticles(map);
 	}

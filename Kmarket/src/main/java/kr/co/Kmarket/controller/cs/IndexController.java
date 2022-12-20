@@ -1,6 +1,9 @@
 package kr.co.Kmarket.controller.cs;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,10 +16,15 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.co.Kmarket.service.CsService;
+import kr.co.Kmarket.utils.Paging;
+import kr.co.Kmarket.vo.CsVO;
+
 @WebServlet("/cs/index.do")
 public class IndexController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
+	private CsService service = new CsService();
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override
@@ -25,6 +33,13 @@ public class IndexController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("IndexController doGet...");
+		
+		// 메인 인덱스 공지사항, 문의하기 최신 글 출력
+		List<CsVO> list = service.selectNoticeAll();
+		List<CsVO> list1 = service.selectQnaAll();
+		
+		req.setAttribute("noticList", list);
+		req.setAttribute("qnaList", list1);
 		
 		// 세션 부분
 		HttpSession sess = req.getSession();
