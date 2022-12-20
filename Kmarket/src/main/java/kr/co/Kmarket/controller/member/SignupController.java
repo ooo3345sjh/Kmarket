@@ -32,7 +32,8 @@ public class SignupController extends HttpServlet {
 		TermsVO vo = service.selectTemrs();
 
 		req.setAttribute("vo", vo);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/signup.jsp?type="+type);
+		req.setAttribute("type", type);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/signup.jsp");
 		dispatcher.forward(req, resp);
 	}
 	

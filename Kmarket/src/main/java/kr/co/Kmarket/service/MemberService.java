@@ -1,6 +1,8 @@
 package kr.co.Kmarket.service;
 
 import kr.co.Kmarket.dao.MemberDAO;
+import kr.co.Kmarket.vo.MemberVO;
+import kr.co.Kmarket.vo.SellerVO;
 import kr.co.Kmarket.vo.TermsVO;
 
 public class MemberService {
@@ -11,8 +13,17 @@ public class MemberService {
 		dao = new MemberDAO();
 	}
 	
-	public void insertMember() {}
-	public void selectMember() {}
+	public void insertMember(MemberVO vo) {
+		dao.insertMember(vo);
+	}
+	
+	public void insertSeller(SellerVO vo) {
+		dao.insertSeller(vo);
+	}
+	
+	public MemberVO selectMember(String uid, String pass) {
+		return dao.selectMember(uid, pass);
+	}
 	public void selectMembers() {}
 	public TermsVO selectTemrs() {
 		return dao.selectTerms();
