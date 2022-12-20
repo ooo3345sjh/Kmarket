@@ -1,5 +1,8 @@
 package kr.co.Kmarket.db;
 
+import kr.co.Kmarket.vo.CartVo;
+import kr.co.Kmarket.vo.ProductVO;
+
 public class Sql {
 	
 	/*** member ***/
@@ -68,6 +71,19 @@ public class Sql {
 	public static final String SELECT_REVIEWS = "SELECT * FROM `km_product_review` WHERE prodNo=? "
 											  + "ORDER BY `revNo` DESC "
 											  + "LIMIT ?, 10";
+	
+	/*** cart ***/
+	// 상품을 장바구니 담기 버튼 클릭시 추가하는 서비스
+	public static final String INSERT_PRODUCT_IN_CART = "INSERT INTO `km_product_cart` SET "
+													  + "`prodNo`=?,"
+													  + "`uid`=?,"
+													  + "`count`=?,"
+													  + "`price`=?,"
+													  + "`discount`=?,"
+													  + "`point`=?,"
+													  + "`delivery`=?,"
+													  + "`total`=?,"
+													  + "`rdate`=NOW()";
 	
 	
 	/*** QnaArticle ***/

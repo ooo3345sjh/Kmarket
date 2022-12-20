@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.db.Sql;
+import kr.co.Kmarket.vo.CartVo;
 import kr.co.Kmarket.vo.ProductVO;
 import kr.co.Kmarket.vo.ReviewVO;
 
@@ -505,5 +506,30 @@ public class ProductDAO extends DBHelper {
 		map.put("reviews", list);
 		logger.debug(" list : " + list);
 		logger.debug(" map : " + map);
+	}
+	
+	/** cart **/
+	// 상품을 장바구니 담기 버튼 클릭시 추가하는 서비스
+	public int insertProductInCart(CartVo vo) {
+		int result = 0;
+		try {
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.INSERT_PRODUCT_IN_CART);
+			psmt.setInt(1, vo.getProdNo());
+			psmt.setString(2, vo.getUid());
+			psmt.setInt(3, vo.getCount());
+			psmt.setInt(4, vo.getPrice());
+			psmt.setInt(5, vo.getDiscount());
+			psmt.setInt(6, vo.getPoint());
+			psmt.setInt(7, vo.getDelivery());
+			psmt.setInt(8, vo.getTotal());
+			
+			result = psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+		return result;
 	}
 }
