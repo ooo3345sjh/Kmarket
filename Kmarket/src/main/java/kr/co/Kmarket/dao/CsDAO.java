@@ -125,7 +125,7 @@ public class CsDAO extends DBHelper {
 			while(rs.next()) {
 				
 				CsVO cvo = new CsVO();
-				cvo.setCsNo(rs.getInt(1));
+				cvo.setCsNo(rs.getInt("csNo"));
 				cvo.setUid(rs.getString("uid"));
 				cvo.setCate1(rs.getString("cate1"));
 				cvo.setCate2(rs.getString("cate2"));
