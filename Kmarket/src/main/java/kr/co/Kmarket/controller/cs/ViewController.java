@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.Kmarket.service.CsService;
 import kr.co.Kmarket.vo.CsVO;
 
-@WebServlet("/cs/board/view.do")
+@WebServlet("/cs/view.do")
 public class ViewController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +36,7 @@ public class ViewController extends HttpServlet{
 		String cate2 = req.getParameter("cate2");
 		
 		CsVO cvo = service.viewArticle(csNo);
+		
 		req.setAttribute("cvo", cvo);
 		req.setAttribute("pg", pg);
 		req.setAttribute("cate1", cate1);

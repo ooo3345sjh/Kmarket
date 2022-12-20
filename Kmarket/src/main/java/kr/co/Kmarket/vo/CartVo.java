@@ -10,7 +10,54 @@ public class CartVo {
 	private int point;
 	private int delivery;
 	private int total;
-	private String date;
+	private String rdate;
+	
+	// 추가 컬럼
+	private String thumb1;
+	private String cate1;
+	private String cate2;
+	private String prodName;
+	private String descript;
+	
+	
+	public String getProdName() {
+		return prodName;
+	}
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
+	public String getDescript() {
+		return descript;
+	}
+	public void setDescript(String descript) {
+		this.descript = descript;
+	}
+	public String getRdate() {
+		return rdate;
+	}
+	public void setRdate(String rdate) {
+		this.rdate = rdate;
+	}
+	public String getThumb1() {
+		return thumb1;
+	}
+	public void setThumb1(String thumb1) {
+		this.thumb1 = thumb1;
+	}
+	public String getCate1() {
+		return cate1;
+	}
+	public void setCate1(String cate1) {
+		this.cate1 = cate1;
+	}
+	public String getCate2() {
+		return cate2;
+	}
+	public void setCate2(String cate2) {
+		this.cate2 = cate2;
+	}
+	
+	
 	public int getCartNo() {
 		return cartNo;
 	}
@@ -86,11 +133,11 @@ public class CartVo {
 	public void setTotal(String total) {
 		this.total = Integer.parseInt(total);
 	}
-	public String getDate() {
-		return date;
+	public String getrdate() {
+		return rdate;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setrdate(String rdate) {
+		this.rdate = rdate;
 	}
 	
 	

@@ -124,6 +124,11 @@ public class Sql {
 													  + "`total`=?,"
 													  + "`rdate`=NOW()";
 	
+	// 장바구니 담긴 상품을 조회하는 서비스
+	public static final String SELECT_PRODUCT_IN_CART = "SELECT * FROM `km_product_cart` c JOIN "
+													  + "`km_product` p ON	c.prodNo = p.prodNo "
+													  + "WHERE c.`uid`=?";
+	
 
 	
 	/*** QnaArticle ***/
@@ -141,4 +146,6 @@ public class Sql {
 	public static final String SELECT_NOTICE_ALL = "SELECT * FROM `km_cs` WHERE `cate1`='notice' ORDER BY `rdate` DESC;";
 	
 	public static final String SELECT_CS_ARTICLE = "SELECT * FROM `km_cs` WHERE `csNo`=?";
+	
+	public static final String SELECT_QNA_ALL = "SELECT * FROM `km_cs` WHERE `cate1`='qna' ORDER BY `rdate` DESC;";
 }

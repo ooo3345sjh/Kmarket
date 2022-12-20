@@ -154,7 +154,7 @@ public class MemberDAO extends DBHelper {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
+		logger.debug("vo : " + vo);
 		return vo;
 	}
 	
