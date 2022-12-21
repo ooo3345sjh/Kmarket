@@ -30,7 +30,6 @@
 				check = true;
 				let trTag = $('#cart > tr').get();
 				trTag.forEach(function (el, index) {
-					console.log(el);
 					let count = Number(el.cells[2].innerHTML);
 					let price = Number(el.cells[3].innerHTML.replace(",", "")) * count;
 					let discount = Number(el.cells[4].innerHTML.replace("%", ""));
@@ -67,6 +66,9 @@
 				tTotalPrice.text("0");
 			}
 		})
+		
+		
+		
 		
 		// 체크박스 체크에 변화가 있을 때 전체합계의 값을 바꾸는 이벤트 함수
 		$('input[name=prodCheck]').change(function () {
@@ -184,25 +186,59 @@
 			}
 		});
 		
-		// 주문하기
+		// 주문하기 AJAX
 		$('input[type=submit]').click(function (e) {
 			e.preventDefault();
 			let trTag = $('#cart > tr');
 			let checkbox = $("input[name=prodCheck]");
-			let arr = [];
+			let list = [];
 			
+			let count = 0;
+			console.log(trTag);
 			for(let i=0; i<checkbox.length; i++){
 				if(checkbox[i].checked){
+					count++;
 					
-					// 주문할 상품의 cartNo를 배열에 저장
-					arr.push(trTag[i].children[1].children[0].defaultValue); // tr -> td[1] -> input[0] -> inputTag의 Value값
+					// 썸네일1 사진 주소 작업
+					let thumb1 = trTag[0].children[1].children[1].children[0].children[0].currentSrc;
+					let index = thumb1.indexOf("file");
+					thumb1 = "/" + thumb1.substring(index);
+					
+					// 체크된 상품 객체화해서 리스트에 저장
+					list.push({
+						"cartNo":trTag[i].children[1].children[0].defaultValue,
+						"count":trTag[i].cells[2].innerHTML,
+						"price":trTag[i].cells[3].innerHTML, 
+						"discount":trTag[i].cells[4].innerHTML, 
+						"point":trTag[i].cells[5].innerHTML, 
+						"delivery":trTag[i].cells[6].innerHTML, 
+						"totalPrice":trTag[i].cells[7].innerHTML, 
+						"thumb1":thumb1,
+						"prodName":trTag[0].children[1].children[1].children[1].children[0].innerText,
+						"descript":trTag[0].children[1].children[1].children[1].children[1].innerText
+					});
+					
 				}
 			}
 			
-			if(arr.length != 0){
-				location.href = contextRoot + '/product/order.do?cartNo=' + arr;
-			} else {
+			// 세션 처리
+			sessionStorage.setItem("orderList", JSON.stringify(list)); // 세션 저장
+			
+			
+			/*
+			let orderList = sessionStorage.getItem("orderList");
+			orderList = JSON.parse(orderList) // JSON 데이터를 객체로 변환
+			console.log("cartNo : " + orderList[0].cartNo);
+			console.log("count : " + orderList[0].count);
+			console.log("thumb1 : " + orderList[0].thumb1);
+			console.log("prodName : " + orderList[0].prodName);
+			console.log("descript : " + orderList[0].descript);
+			*/
+			
+			if(count == 0){
 				alert('주문하실 상품을 선택해주세요.');
+			} else {
+				location.href = contextRoot + '/product/order.do';
 			}
 		});
 	})
