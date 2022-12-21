@@ -2,6 +2,7 @@ package kr.co.Kmarket.controller.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.JsonObject;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -27,6 +29,7 @@ public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductService service = new ProductService();
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	
 	@Override
 	public void init() throws ServletException {
@@ -43,15 +46,20 @@ public class RegisterController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("RegisterController doPost...");
 		ServletContext ctx = req.getServletContext();
-		String path = ctx.getRealPath("/file");
+
+		String category1 = null, category2 = null;
 		
-		File targetDir = new File(path);
-		if(!targetDir.exists()) {
-			targetDir.mkdirs();
-		}
+		String cate1Path = ctx.getRealPath("/file/" + category1 + "/");
+		String cate2Path = cate1Path + category2;
+		
+		File cate1Dir = new File(cate1Path);
+		File cate2Dir = new File(cate2Path);
+		
+		if(!cate1Dir.exists()) cate1Dir.mkdirs();
+		if(!cate2Dir.exists()) cate2Dir.mkdirs();
 		
 		int maxSize = 1024 * 1024 * 30;
-		MultipartRequest mr = new MultipartRequest(req, path, maxSize, "UTF-8", new DefaultFileRenamePolicy());
+		MultipartRequest mr = new MultipartRequest(req, cate2Path, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 		
 		String cate1 = mr.getParameter("category1");
 		String cate2 = mr.getParameter("category2");
@@ -79,8 +87,8 @@ public class RegisterController extends HttpServlet {
 		String ext1 = thumb1.substring(i1);
 		String newName1 = UUID.randomUUID()+ext1;
 		
-		File f1 = new File(path+"/"+thumb1);
-		File f2 = new File(path+"/"+newName1);
+		File f1 = new File(cate2Path+"/"+thumb1);
+		File f2 = new File(cate2Path+"/"+newName1);
 		
 		f1.renameTo(f2);
 		
@@ -88,8 +96,8 @@ public class RegisterController extends HttpServlet {
 		String ext2 = thumb2.substring(i2);
 		String newName2 = UUID.randomUUID()+ext2;
 		
-		File f3 = new File(path+"/"+thumb2);
-		File f4 = new File(path+"/"+newName2);
+		File f3 = new File(cate2Path+"/"+thumb2);
+		File f4 = new File(cate2Path+"/"+newName2);
 		
 		f3.renameTo(f4);
 		
@@ -97,8 +105,8 @@ public class RegisterController extends HttpServlet {
 		String ext3 = thumb3.substring(i3);
 		String newName3 = UUID.randomUUID()+ext3;
 		
-		File f5 = new File(path+"/"+thumb3);
-		File f6 = new File(path+"/"+newName3);
+		File f5 = new File(cate2Path+"/"+thumb3);
+		File f6 = new File(cate2Path+"/"+newName3);
 		
 		f5.renameTo(f6);
 		
@@ -106,8 +114,8 @@ public class RegisterController extends HttpServlet {
 		String ext4 = detail.substring(i4);
 		String newName4 = UUID.randomUUID()+ext4;
 		
-		File f7 = new File(path+"/"+detail);
-		File f8 = new File(path+"/"+newName4);
+		File f7 = new File(cate2Path+"/"+detail);
+		File f8 = new File(cate2Path+"/"+newName4);
 		
 		f7.renameTo(f8);
 		

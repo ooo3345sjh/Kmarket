@@ -9,12 +9,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.utils.Paging;
+import kr.co.Kmarket.vo.SellerVO;
 
 @WebServlet("/admin/list.do")
 public class ListController extends HttpServlet {
@@ -28,6 +30,12 @@ public class ListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("LIstController doGet...");
+		
+		HttpSession sess = req.getSession();
+		SellerVO sessSeller = (SellerVO)sess.getAttribute("sessSeller");
+		String uid = sessSeller.getUid();
+		int type = sessSeller.getType();
+		
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
 		String pg = req.getParameter("pg");
