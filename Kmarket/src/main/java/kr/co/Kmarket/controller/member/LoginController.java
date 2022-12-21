@@ -43,12 +43,12 @@ public class LoginController extends HttpServlet {
 		int type = member.getType();
 		
 
-		if (type == 5) {
+		if (type == 2) {
 			// 판매자 회원인 경우
 			SellerVO vo = service.selectSeller(uid, pass);
 			if (vo != null) {
 				HttpSession sess = req.getSession();
-				sess.setAttribute("sessUser", vo);
+				sess.setAttribute("sessSeller", vo);
 				resp.sendRedirect("/Kmarket/");
 			} else {
 				resp.sendRedirect("/Kmarket/member/login.do");
@@ -58,7 +58,7 @@ public class LoginController extends HttpServlet {
 			MemberVO vo = service.selectMember(uid, pass);
 			if (vo != null) {
 				HttpSession sess = req.getSession();
-				sess.setAttribute("sessUser", vo);
+				sess.setAttribute("sessMember", vo);
 				resp.sendRedirect("/Kmarket/");
 			} else {
 				resp.sendRedirect("/Kmarket/member/login.do");

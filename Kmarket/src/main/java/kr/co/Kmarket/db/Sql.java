@@ -29,7 +29,7 @@ public class Sql {
 	public static final String INSERT_SELLER = "INSERT INTO `km_member_seller` SET "
 											+ "`uid`=?, "
 											+ "`pass`=SHA2(?, 256), "
-											+ "`type`=3, "
+											+ "`type`=2, "
 											+ "`zip`=?, "
 											+ "`addr1`=?, "
 											+ "`addr2`=?, "
