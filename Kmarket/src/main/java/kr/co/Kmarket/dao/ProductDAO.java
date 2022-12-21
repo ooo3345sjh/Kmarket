@@ -309,8 +309,6 @@ public class ProductDAO extends DBHelper {
 		String group = (String)map.get("group");
 		String sort = (String)map.get("sort"); // product_list에서 정렬할 변수값을 가져온다.
 		
-		String desc_asc = sort.equals("rowPrice") ? "asc":"desc"; // 낮은 가격순으로 정렬시엔 sql문에 asc를 넣어준다. 이 외에는 전부 desc
-		if(sort.equals("rowPrice") || sort.equals("highPrice")) sort = "price"; // 가격정렬시에 sort변수값을 컬럼값으로 변경
 		String sql = "SELECT p.*, s.`level` FROM `km_product` p JOIN `km_member_seller` s on p.`seller` = s.`uid` ";
 		
 		if(group.equals("admin")) {	// 그룹명이 admin이라면
@@ -322,6 +320,8 @@ public class ProductDAO extends DBHelper {
 		}
 		
 		else {	// 그룹명이 admin이 아니라면
+			String desc_asc = sort.equals("rowPrice") ? "asc":"desc"; // 낮은 가격순으로 정렬시엔 sql문에 asc를 넣어준다. 이 외에는 전부 desc
+			if(sort.equals("rowPrice") || sort.equals("highPrice")) sort = "price"; // 가격정렬시에 sort변수값을 컬럼값으로 변경
 			sql += "WHERE p.`cate1` = '" + cate1 + "' AND p.`cate2`= '" + cate2 + "'"
 				+ " ORDER BY p.`" + sort + "` " + desc_asc + "  LIMIT ?, 10";
 		}

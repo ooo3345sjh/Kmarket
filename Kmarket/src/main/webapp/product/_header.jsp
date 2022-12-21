@@ -31,7 +31,7 @@
             </div>
             <div class="logo">
                 <div>
-                    <a href="#">
+                    <a href="<c:url value='/index.do'/>">
                         <img src='<c:url value='/img/header_logo.png'/>' alt="로고">
                     </a>
                     <form action="#">

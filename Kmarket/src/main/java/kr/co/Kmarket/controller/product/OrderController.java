@@ -24,7 +24,7 @@ import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.vo.CartVo;
 import kr.co.Kmarket.vo.ProductVO;
 
-@WebServlet("/product/order.do")
+//@WebServlet("/product/order.do")
 public class OrderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
