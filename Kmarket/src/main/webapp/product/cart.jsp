@@ -8,14 +8,63 @@
 		// 전체 체크 박스 클릭시 개별 체크항목 체크되게 하는 이벤트 함수
 		let check = false;
 		$('input[name=all]').click(function () {
-			if(check == false){
+			
+			// 전체 합계 변수
+			let tCount = $('#count');	// 상품 수량 
+			let tPrice = $('#price');	// 상품 가격 
+			let tDiscountPrice = $('#discountPrice');	// 상품 할인율
+			let tPoint = $('#point');	// 적립 포인트
+			let tDelivery = $('#delivery');	// 배송비
+			let tTotalPrice = $('#totalPrice');	// 전체 가격
+		
+			// 0으로 초기화
+			tCount.text("0");
+			tPrice.text("0");
+			tDiscountPrice.text("0");
+			tPoint.text("0");
+			tDelivery.text("0");
+			tTotalPrice.text("0");
+			
+			if(check == false){ // 체크박스를 체크 했을때
 				$("input[name=prodCheck]").prop("checked", true);
 				check = true;
-				console.log($('#cart'));
+				let trTag = $('#cart > tr').get();
+				trTag.forEach(function (el, index) {
+					console.log(el);
+					let count = Number(el.cells[2].innerHTML);
+					let price = Number(el.cells[3].innerHTML.replace(",", "")) * count;
+					let discount = Number(el.cells[4].innerHTML.replace("%", ""));
+					let discountPrice = price * discount * (-0.01);
+					let point = Number(el.cells[5].innerHTML.replace(",", ""));
+					let delivery = Number(el.cells[6].innerHTML.replace(",", ""));
+					let total = price + discountPrice;
+					
+					tCount.text(Number(tCount.text()) + count);
+					tPrice.text(Number(tPrice.text()) + price);
+					tDiscountPrice.text(Number(tDiscountPrice.text()) + discountPrice);
+					tPoint.text(Number(tPoint.text()) + point);
+					tDelivery.text(Number(tDelivery.text()) + delivery);
+					tTotalPrice.text(Number(tTotalPrice.text()) + total);
+				});
 				
-			} else {
+				// 천단위 ',' 처리
+				tPrice.text(tPrice.text().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+				tDiscountPrice.text(tDiscountPrice.text().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+				tPoint.text(tPoint.text().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+				tDelivery.text(tDelivery.text().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+				tTotalPrice.text(tTotalPrice.text().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+				
+			} else { // 체크박스를 체크 해제 했을때
 				$("input[name=prodCheck]").prop("checked", false);
 				check = false;
+				
+				// 0으로 초기화
+				tCount.text("0");
+				tPrice.text("0");
+				tDiscountPrice.text("0");
+				tPoint.text("0");
+				tDelivery.text("0");
+				tTotalPrice.text("0");
 			}
 		})
 		
@@ -29,7 +78,7 @@
 			let price = tdTag.eq(3).text().replace(",", ""); // 상품 가격 
 			let discount = tdTag.eq(4).text().replace("%", ""); // 상품 할인율
 			let discountPrice = (price * count) * discount * 0.01; // 상품 할인 가격
-			let point = tdTag.eq(5).text() * count; // 적립 포인트
+			let point = tdTag.eq(5).text(); // 적립 포인트
 			let delivery = tdTag.eq(6).text() == '무료배송'? 0 : tdTag.eq(6).text().replace(",", ""); // 배송비
 			let total = (Number(price) * count) - Number(discountPrice); // 전체 가격
 			
@@ -42,16 +91,16 @@
 			let tTotalPrice = $('#totalPrice');
 			console.log(checked);
 			if(checked){
+				price = Number(tPrice.text().replace(",", "")) + (Number(price) * Number(count));
 				count = Number(tCount.text()) + Number(count);
-				price = Number(tPrice.text().replace(",", "")) + Number(price);
 				discountPrice = -(Number(tdiscountPrice.text().replace(/-|,/g , '')) + Number(discountPrice));
 				point = Number(tPoint.text().replace(",", "")) + Number(point);
 				delivery = Number(tDelivery.text().replace(",", "")) + Number(delivery);
 				total = Number(tTotalPrice.text().replace(",", "")) + Number(total);
 			} else {
 				if(tCount.text() != 0){
+					price = Number(tPrice.text().replace(",", "")) - (Number(price) * Number(count));
 					count = Number(tCount.text()) - Number(count);
-					price = Number(tPrice.text().replace(",", "")) - Number(price);
 					discountPrice = -(Number(tdiscountPrice.text().replace(/-|,/g , '')) - Number(discountPrice));
 					point = Number(tPoint.text().replace(",", "")) - Number(point);
 					delivery = Number(tDelivery.text().replace(",", "")) - Number(delivery);
@@ -75,7 +124,87 @@
 			tPoint.text(point);
 			tDelivery.text(delivery);
 			tTotalPrice.text(total);
-		})
+		});
+		
+		
+		// 선택된 상품 제거하는 AJAX
+		let contextRoot = '${request.getContextPath()}';
+		$('input[name=del]').click(function () {
+			let trTag = $('#cart > tr');
+			let checkbox = $("input[name=prodCheck]");
+			let arr = [];
+			
+			for(let i=0; i<checkbox.length; i++){
+				if(checkbox[i].checked){
+					trTag[i].remove(); // 선택 상품 제거
+					
+					// 더 이상 제거할 상품이 없으면
+					if($('#cart > tr').length == 0){
+						let empty = "<tr class='empty'>"
+                        		  + "<td colspan='7'>장바구니에 상품이 없습니다.</td>"
+                    			  + "</tr>";
+                    	$('#cart').append(empty);
+					}
+					
+					// 제거할 상품의 cartNo를 배열에 저장
+					arr.push(trTag[i].children[1].children[0].defaultValue);
+				}
+			}
+			
+			if(arr.length != 0){
+				$.ajax({
+					url: contextRoot + '/product/deleteCart.do',
+					type: "post",
+					traditional: true,	// ajax 배열 넘기기 옵션!
+					data: {"cartNo" : arr},
+					dataType: "json",
+					success: function (data) {
+						console.log(data);
+						
+						// 전체 합계 변수
+						let tCount = $('#count');	// 상품 수량 
+						let tPrice = $('#price');	// 상품 가격 
+						let tDiscountPrice = $('#discountPrice');	// 상품 할인율
+						let tPoint = $('#point');	// 적립 포인트
+						let tDelivery = $('#delivery');	// 배송비
+						let tTotalPrice = $('#totalPrice');	// 전체 가격
+					
+						// 0으로 초기화
+						tCount.text("0");
+						tPrice.text("0");
+						tDiscountPrice.text("0");
+						tPoint.text("0");
+						tDelivery.text("0");
+						tTotalPrice.text("0");
+						
+					}
+				});
+			} else {
+				alert('선택하신 상품이 없습니다. 삭제를 원하시는 상품을 선택 해 주세요.');
+			}
+		});
+		
+		// 주문하기 AJAX
+		$('input[type=submit]').click(function (e) {
+			e.preventDefault();
+			let trTag = $('#cart > tr');
+			let checkbox = $("input[name=prodCheck]");
+			let arr = [];
+			
+			for(let i=0; i<checkbox.length; i++){
+				if(checkbox[i].checked){
+					
+					// 주문할 상품의 cartNo를 배열에 저장
+					arr.push(trTag[i].children[1].children[0].defaultValue); // tr -> td[1] -> input[0] -> inputTag의 Value값
+				}
+			}
+			
+			if(arr.length != 0){
+				location.href = contextRoot + '/product/order.do?cartNo=' + arr;
+			} else {
+				alert('주문하실 상품을 선택해주세요.');
+			}
+		});
 	})
 </script>
             </aside>
@@ -89,19 +218,19 @@
                         <strong>장바구니</strong>
                     </p>
                 </nav>
-                <form action="#">
+                <form action='<c:url value='/product/cart.do'/>' method="post">
                     <!-- 장바구니 목록 -->
                     <table>
                         <thead>
                             <tr>
                                 <th><input type="checkbox" name="all"></th>
                                 <th>상품명</th>
-                                <th>총수량</th>
+                                <th>수량</th>
                                 <th>판매가</th>
                                 <th>할인</th>
                                 <th>포인트</th>
                                 <th>배송비</th>
-                                <th>소계</th>
+                                <th>총합</th>
                             </tr>
                         </thead>
                         <tbody id='cart'>
@@ -112,10 +241,11 @@
 		                            </tr>
 								</c:when>
 								<c:otherwise>
-									<c:forEach items="${list}" var='row'>
+									<c:forEach items="${list}" var='row' varStatus='loop'>
 			                            <tr>
 			                                <td><input type="checkbox" name='prodCheck'></td>
 			                                <td>
+			                                	<input type="hidden" name='cartNo' value='${row.cartNo}'>
 			                                    <article>
 			                                        <a href="#"><img src='<c:url value='${row.thumb1}'/>' alt='썸네일1'></a>
 			                                        <div>
@@ -129,7 +259,7 @@
 			                                <td>${row.count}</td>
 			                                <td><fmt:formatNumber value="${row.price}" pattern="#,###"/></td>
 			                                <td>${row.discount}%</td>
-			                                <td><fmt:formatNumber value="${row.point}" pattern="#,###"/></td>
+			                                <td><fmt:formatNumber value="${row.point * row.count}" pattern="#,###"/></td>
 			                                <c:choose>
 			                                	<c:when test="${row.delivery eq 0}">
 			                                		<td>무료배송</td>
@@ -177,7 +307,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <input type="submit" name value="주문하기">
+                        <input type="submit" value="주문하기">
                     </div>
                 </form>
             </section>

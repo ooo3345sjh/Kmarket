@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import kr.co.Kmarket.service.MemberService;
 import kr.co.Kmarket.vo.MemberVO;
+import kr.co.Kmarket.vo.SellerVO;
+import kr.co.Kmarket.vo.UidVO;
 
 @WebServlet("/member/login.do")
 public class LoginController extends HttpServlet {
@@ -36,16 +38,32 @@ public class LoginController extends HttpServlet {
 		String uid = req.getParameter("uid");
 		String pass = req.getParameter("pass");
 		
-		MemberVO vo = service.selectMember(uid, pass);
+		// uid를 통해 member type을 검색
+		UidVO member = service.selectUid(uid);
+		int type = member.getType();
 		
-		if (vo != null) {
-			HttpSession sess = req.getSession();
-			sess.setAttribute("sessUser", vo);
-			resp.sendRedirect("/Kmarket/");
+
+		if (type == 5) {
+			// 판매자 회원인 경우
+			SellerVO vo = service.selectSeller(uid, pass);
+			if (vo != null) {
+				HttpSession sess = req.getSession();
+				sess.setAttribute("sessUser", vo);
+				resp.sendRedirect("/Kmarket/");
+			} else {
+				resp.sendRedirect("/Kmarket/member/login.do");
+			}
 		} else {
-			resp.sendRedirect("/Kmarket/member/login.do");
+			// 일반 회원인 경우
+			MemberVO vo = service.selectMember(uid, pass);
+			if (vo != null) {
+				HttpSession sess = req.getSession();
+				sess.setAttribute("sessUser", vo);
+				resp.sendRedirect("/Kmarket/");
+			} else {
+				resp.sendRedirect("/Kmarket/member/login.do");
+			}	
 		}
-		
 		
 	}
 

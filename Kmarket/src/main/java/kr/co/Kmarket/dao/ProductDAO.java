@@ -395,7 +395,7 @@ public class ProductDAO extends DBHelper {
 	
 	/** view **/
 	/* 조건에 해당하는 한개의 상품 데이터 조회 */
-	public ProductVO selectProduct(String prodNo, String cate1, String cate2) {
+	public ProductVO selectProduct(String prodNo) {
 		ProductVO vo = null;
 		try {
 			con = getConnection();
@@ -404,7 +404,6 @@ public class ProductDAO extends DBHelper {
 			rs = psmt.executeQuery();
 			if(rs.next()) {
 				vo = new ProductVO();
-				String path = "/file/" + cate1 + "/" + cate2 + "/"; // 이미지 저장경로
 				int price = rs.getInt("price");                    // 상품 가격
 				int discount = rs.getInt("discount");			   // 할인율
 				int discountPrice = (int)(price - (price * (discount/100.0))); // 상품 할인 적용된 가격
@@ -412,6 +411,7 @@ public class ProductDAO extends DBHelper {
 				vo.setProdNo(rs.getInt("prodNo"));
 				vo.setCate1(rs.getString("cate1"));
 				vo.setCate2(rs.getString("cate2"));					
+				String path = "/file/" + vo.getCate1() + "/" + vo.getCate2() + "/"; // 이미지 저장경로
 				vo.setProdName(rs.getString("prodName"));
 				vo.setDescript(rs.getString("descript"));
 				vo.setCompany(rs.getString("company"));
@@ -538,10 +538,89 @@ public class ProductDAO extends DBHelper {
 		List<CartVo> list = null;
 		
 		try {
+			logger.info("selectProductInCart...");
 			con = getConnection();
 			psmt = con.prepareStatement(Sql.SELECT_PRODUCT_IN_CART);
 			psmt.setString(1, uid);
 			rs = psmt.executeQuery();
+			list = new ArrayList<>();
+			while(rs.next()) {
+				CartVo vo = new CartVo();
+				vo.setCartNo(rs.getInt(1));
+				vo.setProdNo(rs.getInt(2));
+				vo.setUid(rs.getString(3));
+				vo.setCount(rs.getInt(4));
+				vo.setPrice(rs.getInt(5));
+				vo.setDiscount(rs.getInt(6));
+				vo.setPoint(rs.getInt(7));
+				vo.setDelivery(rs.getInt(8));
+				vo.setTotal(rs.getInt(9));
+				vo.setrdate(rs.getString(10));
+				vo.setCate1(rs.getString("cate1"));
+				vo.setCate2(rs.getString("cate2"));
+				String path = "/file/" + vo.getCate1() + "/" + vo.getCate2() + "/"; // 이미지 저장경로
+				vo.setThumb1(path + rs.getString("thumb1"));
+				vo.setProdName(rs.getString("prodName"));
+				vo.setDescript(rs.getString("descript"));
+				list.add(vo);
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("list : " + list);
+		return list;
+	}
+	
+	// 장바구니 담긴 상품 중 체크된 상품으로 선택삭제 버튼 클릭시 삭제하는 서비스 
+	public int deleteProductInCart(String[] cartNo) {
+		int result = 0;
+		String sql = "DELETE FROM `km_product_cart` WHERE `cartNo` IN(";
+		
+		for(int i=0; i<cartNo.length; i++) {
+			if(i == cartNo.length-1) {
+				sql += cartNo[i] + ")";
+				break;
+			}
+			sql += cartNo[i] + ", ";
+		}
+				   
+		try {
+			logger.info("deleteProductInCart...");
+			con = getConnection();
+			stmt = con.createStatement();
+			result = stmt.executeUpdate(sql);
+			
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+		return result;
+	}
+	
+	/** order **/
+	/* 장바구니로부터 체크한 상품 목록을 가져오는 서비스 */
+	public List<CartVo> selectProductInCart(String[] cartNo) {
+		List<CartVo> list = null;
+		String sql = "SELECT * FROM `km_product_cart` c JOIN `km_product` p ON c.`prodNo` = p.`prodNo` "
+				   + " WHERE c.`cartNo` IN(";
+		
+		for(int i=0; i<cartNo.length; i++) {
+			if(i == cartNo.length-1) {
+				sql += cartNo[i] + ")";
+				break;
+			}
+			sql += cartNo[i] + ", ";
+		}
+		
+		try {
+			logger.info("selectProductInCart...");
+			con = getConnection();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			
 			list = new ArrayList<>();
 			while(rs.next()) {
 				CartVo vo = new CartVo();

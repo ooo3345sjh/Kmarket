@@ -24,8 +24,8 @@ import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.vo.CartVo;
 import kr.co.Kmarket.vo.ProductVO;
 
-@WebServlet("/product/cart.do")
-public class CartController extends HttpServlet {
+@WebServlet("/product/deleteCart.do")
+public class DeleteCartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private ProductService service = new ProductService();
@@ -35,20 +35,22 @@ public class CartController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		logger.info("CartController doGet...");
-		String uid = req.getParameter("uid");
-		uid = "a101";
-		
-		List<CartVo> list = service.selectProductInCart(uid);
-		
-		req.setAttribute("request", req);
-		req.setAttribute("list", list);
-		req.getRequestDispatcher("/product/cart.jsp").forward(req, resp);
+		logger.info("DeleteCartController doGet...");
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		logger.info("CartController doPost...");
+		logger.info("DeleteCartController doPost...");
+		String[] cartNo = req.getParameterValues("cartNo");
+		
+		int result = service.deleteProductInCart(cartNo);
+	
+		JsonObject json = new JsonObject();
+		json.addProperty("result ", result);
+		
+		resp.setContentType("application/json;charset=UTF-8");
+		Writer writer = resp.getWriter();
+		writer.write(json.toString());
 	}
 
 }
