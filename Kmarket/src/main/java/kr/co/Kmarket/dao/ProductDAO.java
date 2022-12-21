@@ -121,7 +121,27 @@ public class ProductDAO extends DBHelper {
 		}
 		return total;
 	}
-	public void updateProduct () {}
+	// 상품 정보 수정
+	public int updateProduct (ProductVO vo) {
+		int result = 0;
+		try {
+			logger.info("updateProduct...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.UPDATE_PRODUCT);
+			psmt.setString(1, vo.getProdName());
+			psmt.setInt(2, vo.getPrice());
+			psmt.setInt(3, vo.getDiscount());
+			psmt.setInt(4, vo.getPoint());
+			psmt.setInt(5, vo.getStock());
+			psmt.setInt(6, vo.getProdNo());
+			result = psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	// 상품 삭제
 	public int deleteProduct (String prodNo) {
 		int result = 0;
 		try {

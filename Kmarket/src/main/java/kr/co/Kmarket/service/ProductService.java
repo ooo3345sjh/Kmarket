@@ -2,6 +2,8 @@ package kr.co.Kmarket.service;
 
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+
 import java.util.List;
 
 import java.util.Map;
@@ -34,10 +36,11 @@ public class ProductService {
 		int total = dao.selectCountTotalProduct();
 		return total;
 	}
-	public void updateProduct () {}
+	public int updateProduct (ProductVO vo) {
+		return dao.updateProduct(vo);
+	}
 	public int deleteProduct (String prodNo) {
-		int result = dao.deleteProduct(prodNo);
-		return result;
+		return dao.deleteProduct(prodNo);
 	}
 	
 	

@@ -52,6 +52,9 @@ public class ProductVO {
 	public void setProdNo(int prodNo) {
 		this.prodNo = prodNo;
 	}
+	public void setProdNo(String prodNo) {
+		this.prodNo = Integer.parseInt(prodNo);
+	}
 	public int getCate1() {
 		return cate1;
 	}
