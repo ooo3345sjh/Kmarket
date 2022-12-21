@@ -39,7 +39,7 @@ public class ViewController extends HttpServlet {
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
 
-		ProductVO vo = service.selectProduct(prodNo, cate1, cate2);
+		ProductVO vo = service.selectProduct(prodNo);
 		req.setAttribute("cate1", cate1);
 		req.setAttribute("cate2", cate2);
 		req.setAttribute("vo", vo);

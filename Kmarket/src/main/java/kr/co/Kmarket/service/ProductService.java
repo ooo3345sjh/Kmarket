@@ -60,8 +60,8 @@ public class ProductService {
 
 	/** view **/
 	/* 조건에 해당하는 한개의 상품 데이터 조회 */
-	public ProductVO selectProduct(String prodNo, String cate1, String cate2) {
-		return dao.selectProduct(prodNo, cate1, cate2);
+	public ProductVO selectProduct(String prodNo) {
+		return dao.selectProduct(prodNo);
 	}
 	
 	/* 해당 상품에 등록된 리뷰 총 리뷰 갯수를 조회 */
@@ -83,5 +83,16 @@ public class ProductService {
 	/* 장바구니 담긴 상품을 조회하는 서비스 */
 	public List<CartVo> selectProductInCart(String uid) {
 		return dao.selectProductInCart(uid);
+	}
+	
+	/* 장바구니 담긴 상품 중 체크된 상품으로 선택삭제 버튼 클릭시 삭제하는 서비스 */
+	public int deleteProductInCart(String[] cartNo) {
+		return dao.deleteProductInCart(cartNo);
+	}
+	
+	/** order **/
+	/* 장바구니로부터 체크한 상품 목록을 가져오는 서비스 */
+	public List<CartVo> selectProductInCart(String[] cartNo) {
+		return dao.selectProductInCart(cartNo);
 	}
 }

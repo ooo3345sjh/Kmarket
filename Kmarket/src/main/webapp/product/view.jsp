@@ -125,6 +125,11 @@
 				
 	        });
 		})
+		// 구매하기 버튼 클릭시 바로 해당 상품을 주문하는 페이지로 이동하는 이벤트
+		$('.order').click(function () {
+			let count = $('input[name=num]').val();
+			location.href = contextRoot + '/product/order.do?prodNo=${vo.prodNo}&count=' + count;
+		})
 	})
 </script>
             </aside>
