@@ -71,6 +71,38 @@ public class CsDAO extends DBHelper {
 		return cvo;
 	}
 	
+	public void selectFaqArticle(Map<String, Object> map) {
+		List<CsVO> faqlist = null;
+		
+		String cate2 = (String)map.get("cate2");
+		
+		String sql = "SELECT DISTINCT cate1, cate2, type FROM `km_cs` WHERE `cate1`='faq'";
+		
+		
+		try {
+			con = getConnection();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			faqlist = new ArrayList<>();
+			
+			while(rs.next()) {
+				
+				CsVO cvo = new CsVO();
+				cvo.setCate1(rs.getString("cate1"));
+				cvo.setCate2(rs.getString("cate2"));
+				cvo.setType(rs.getString("type"));
+				
+				faqlist.add(cvo);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		map.put("faqlist", faqlist);
+		logger.debug(" faqlist : " + faqlist);
+		logger.debug(" faq : " + map);
+	}
+	
 	public List<CsVO> selectNoticeAll() {
 		List<CsVO> nlist = new ArrayList<>();
 		
