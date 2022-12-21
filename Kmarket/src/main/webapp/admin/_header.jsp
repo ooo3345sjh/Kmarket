@@ -22,9 +22,9 @@
                     <img src='<c:url value='/admin/img/admin_logo.png'/>' alt="ADMINSTRATOR">
                 </a>
                 <nav>
-                    <span>홍길동님 반갑습니다.</span>
-                    <a href="#">HOME</a>
-                    <a href="#">로그아웃</a>
+                    <span>${sessSeller.manager}님 반갑습니다.</span>
+                    <a href='<c:url value='/admin/index.do'/>'>HOME</a>
+                    <a href='<c:url value='/member/logoutSeller.do'/>'>로그아웃</a>
                     <a href="#">고객센터</a>
                 </nav>
             </div>
