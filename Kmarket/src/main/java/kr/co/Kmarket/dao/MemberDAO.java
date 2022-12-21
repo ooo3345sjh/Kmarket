@@ -20,6 +20,7 @@ import kr.co.Kmarket.db.Sql;
 import kr.co.Kmarket.vo.MemberVO;
 import kr.co.Kmarket.vo.SellerVO;
 import kr.co.Kmarket.vo.TermsVO;
+import kr.co.Kmarket.vo.UidVO;
 
 public class MemberDAO extends DBHelper {
 	
@@ -45,6 +46,7 @@ public class MemberDAO extends DBHelper {
 			psmt1.setString(9, vo.getAddr2());
 			psmt1.setString(10, vo.getRegip());
 			psmt2.setString(1, vo.getUid());
+			psmt2.setInt(2, 1);
 			psmt1.executeUpdate();
 			psmt2.executeUpdate();
 			con.commit();
@@ -81,6 +83,7 @@ public class MemberDAO extends DBHelper {
 			psmt1.setString(13, vo.getFax());
 			psmt1.setString(14, vo.getRegip());
 			psmt2.setString(1, vo.getUid());
+			psmt2.setInt(2, 5);
 			psmt1.executeUpdate();
 			psmt2.executeUpdate();
 			con.commit();
@@ -93,7 +96,31 @@ public class MemberDAO extends DBHelper {
 		}
 	}
 	
-	// 로그인
+	// 회원 타입 구분
+	public UidVO selectUid(String uid) {
+		
+		UidVO vo = null;
+		
+		try {
+			logger.info("selectUid...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.SELECT_UID);
+			psmt.setString(1, uid);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				vo = new UidVO();
+				vo.setUid(rs.getString(1));
+				vo.setType(rs.getInt(2));
+			}
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return vo;
+	}
+	
+	// 일반 회원 로그인
 	public MemberVO selectMember(String uid, String pass) {
 		MemberVO vo = null;
 		
@@ -104,7 +131,6 @@ public class MemberDAO extends DBHelper {
 			psmt.setString(1, uid);
 			psmt.setString(2, pass);
 			rs = psmt.executeQuery();
-			
 			if(rs.next()) {
 				vo = new MemberVO();
 				vo.setUid(rs.getString(1));
@@ -124,6 +150,46 @@ public class MemberDAO extends DBHelper {
 			}
 			close();
 		} catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return vo;
+	}
+	
+	// 판매자 회원 로그인
+	public SellerVO selectSeller(String uid, String pass) {
+		SellerVO vo = null;
+		
+		try {
+			logger.info("selectSeller...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.SELECT_SELLER);
+			psmt.setString(1, uid);
+			psmt.setString(2, pass);
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				vo = new SellerVO();
+				vo.setUid(rs.getString(1));
+				vo.setPass(rs.getString(2));
+				vo.setType(rs.getInt(3));
+				vo.setPoint(rs.getInt(4));
+				vo.setLevel(rs.getInt(5));
+				vo.setZip(rs.getString(6));
+				vo.setAddr1(rs.getString(7));
+				vo.setAddr2(rs.getString(8));
+				vo.setCompany(rs.getString(9));
+				vo.setCeo(rs.getString(10));
+				vo.setBizRegNum(rs.getString(11));
+				vo.setCompany(rs.getString(12));
+				vo.setTel(rs.getString(13));
+				vo.setManager(rs.getString(14));
+				vo.setManagerHp(rs.getString(15));
+				vo.setFax(rs.getString(16));
+				vo.setRegip(rs.getString(17));
+				vo.setRdate(rs.getString(19));
+			}
+			close();
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 		

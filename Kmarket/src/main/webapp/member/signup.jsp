@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_header.jsp"/>
+<script src="./js/script.js"></script>
         <main id="member">
             <div class="signup">
                 <nav>
@@ -38,12 +39,12 @@
                 </c:choose>
                 <c:choose>
                 	<c:when test="${type eq 'seller'}">
-                		<input type="button" class="agreeBtn" value="동의하기" onclick="location.href='registerSeller.do'">
+                		<input type="button" class="agreeBtn" value="동의하기" onclick="checkSeller()">
                 	</c:when>
                 	<c:otherwise>
-                		<input type="button" class="agreeBtn" value="동의하기" onclick="location.href='register.do'">
+                		<input type="button" class="agreeBtn" value="동의하기" onclick="checkGeneral()">
                 	</c:otherwise>
-                </c:choose>
+            	</c:choose>
             </div>
         </main>
     </div>

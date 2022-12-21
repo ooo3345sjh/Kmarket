@@ -1,66 +1,48 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="./_header.jsp"/>
-        <main id="product">
-            <aside>
-                <!-- 카테고리 -->
-                <ul class="category">
-                    <li>
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                        카테고리
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-tshirt" aria-hidden="true"></i>
-                            패션·의류·뷰티
-                            <i class="fas fa-angle-right" aria-hidden="true"></i>
-                        </a>
-                        <ol>
-                            <li><a href="#">남성의류</a></li>
-                            <li><a href="#">여성의류</a></li>
-                            <li><a href="#">잡화</a></li>
-                            <li><a href="#">뷰티</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-laptop" aria-hidden="true"></i>
-                            가전·디지털
-                            <i class="fas fa-angle-right" aria-hidden="true"></i>
-                        </a>
-                        <ol>
-                            <li><a href="#">노트북/PC</a></li>
-                            <li><a href="#">가전</a></li>
-                            <li><a href="#">휴대폰</a></li>
-                            <li><a href="#">기타</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-utensils" aria-hidden="true"></i>
-                            식품·생필품
-                            <i class="fas fa-angle-right" aria-hidden="true"></i>
-                        </a>
-                        <ol>
-                            <li><a href="#">신선식품</a></li>
-                            <li><a href="#">가공식품</a></li>
-                            <li><a href="#">건강식품</a></li>
-                            <li><a href="#">생필품</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-home" aria-hidden="true"></i>
-                            홈·문구·취미
-                            <i class="fas fa-angle-right" aria-hidden="true"></i>
-                        </a>
-                        <ol>
-                            <li><a href="#">가구/DIY</a></li>
-                            <li><a href="#">침구·커튼</a></li>
-                            <li><a href="#">생활용품</a></li>
-                            <li><a href="#">사무용품</a></li>
-                        </ol>
-                    </li>
-                </ul>
+<script>
+	$(function () {
+		// 전체 합계 변수
+		let tCount = $('#count');	// 상품 수량 
+		let tPrice = $('#price');	// 상품 가격 
+		let tDiscountPrice = $('#discountPrice');	// 상품 할인율
+		let tPoint = $('#point');	// 적립 포인트
+		let tDelivery = $('#delivery');	// 배송비
+		let tTotalPrice = $('#totalPrice');	// 전체 가격
+		
+		$(document).ready(function () {
+			let trTag = $('#cart > tr').get(); // 상품 정보가 담겨있는 tr 태그를 배열로 가져온다.
+			console.log(trTag);
+			
+			trTag.forEach(function (el, index) { // 반복문을 통해 현재 주문페이지에 있는 상품들의 정보를 가져온다.
+				console.log(el);
+				let count = Number(el.cells[1].innerHTML);							 // 상품의 갯수를 가져옴.
+				let price = Number(el.cells[2].innerHTML.replace(",", "")) * count;  // 상품의 가격을 가져옴.
+				let discount = Number(el.cells[3].innerHTML.replace("%", ""));       // 상품의 할인율을 가져옴.
+				let discountPrice = price * discount * (-0.01);						 // 가져온 할인율을 통해 할인가격을 계산
+				let delivery = Number(el.cells[5].innerHTML.replace(",", ""));       // 상품의 배달비를 가져옴.
+				let total = price + discountPrice;									 // 하나의 상품의 가격과 갯수를 곱해 총합계를 계산
+				
+				
+				// 위에서 구한 값을 최종결제 정보에 다 더해준다.
+				tCount.text(Number(tCount.text()) + count);            
+				tPrice.text(Number(tPrice.text()) + price);
+				tDiscountPrice.text(Number(tDiscountPrice.text()) + discountPrice);
+				tDelivery.text(Number(tDelivery.text()) + delivery);
+				tTotalPrice.text(Number(tTotalPrice.text()) + total);
+			});
+			
+			// 천단위 ',' 처리
+			tPrice.text(tPrice.text().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+			tDiscountPrice.text(tDiscountPrice.text().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+			tDelivery.text(tDelivery.text().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+			tTotalPrice.text(tTotalPrice.text().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+		})
+	})
+</script>
             </aside>
             <!-- 주문 페이지 시작-->
             <section class="order">
@@ -80,67 +62,77 @@
                         <thead>
                             <tr>
                                 <th>상품명</th>
-                                <th>총수량</th>
+                                <th>수량</th>
                                 <th>판매가</th>
+                                <th>할인</th>
+                                <th>포인트</th>
                                 <th>배송비</th>
-                                <th>소계</th>
+                                <th>총합</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="empty">
-                                <td colspan="7">장바구니에 상품이 없습니다.</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <article>
-                                        <a href="#"><img src="https://via.placeholder.com/80x80" alt></a>
-                                        <div>
-                                            <h2>
-                                                <a href="#">상품명</a>
-                                            </h2>
-                                            <p>상품설명</p>
-                                        </div>
-                                    </article>
-                                </td>
-                                <td>1</td>
-                                <td>27,000</td>
-                                <td>무료배송</td>
-                                <td>27,000</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <article>
-                                        <a href="#"><img src="https://via.placeholder.com/80x80" alt></a>
-                                        <div>
-                                            <h2>
-                                                <a href="#">상품명</a>
-                                            </h2>
-                                            <p>상품설명</p>
-                                        </div>
-                                    </article>
-                                </td>
-                                <td>1</td>
-                                <td>27,000</td>
-                                <td>무료배송</td>
-                                <td>27,000</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <article>
-                                        <a href="#"><img src="https://via.placeholder.com/80x80" alt></a>
-                                        <div>
-                                            <h2>
-                                                <a href="#">상품명</a>
-                                            </h2>
-                                            <p>상품설명</p>
-                                        </div>
-                                    </article>
-                                </td>
-                                <td>1</td>
-                                <td>27,000</td>
-                                <td>무료배송</td>
-                                <td>27,000</td>
-                            </tr>
+                        <tbody id='cart'>
+                        	<c:choose>
+	                            <c:when test='${type eq "buyNow"}'>
+			                            <tr>
+			                                <td>
+			                                	<input type="hidden" name='discount' value='${vo.discount}'>
+			                                    <article>
+			                                        <a href="#"><img src='<c:url value='${vo.thumb1}'/>' alt='썸네일1'></a>
+			                                        <div>
+			                                            <h2>
+			                                                <a href="#">${vo.prodName}</a>
+			                                            </h2>
+			                                            <p>${vo.descript}</p>
+			                                        </div>
+			                                    </article>
+			                                </td>
+			                                <td>${count}</td>
+			                                <td><fmt:formatNumber value="${vo.price}" pattern="#,###"/></td>
+			                                <td>${vo.discount}%</td>
+			                                <td><fmt:formatNumber value="${vo.point}" pattern="#,###"/></td>
+			                                <c:choose>
+			                                	<c:when test="${vo.delivery eq 0}">
+			                                		<td>무료배송</td>
+			                                	</c:when>
+			                                	<c:otherwise>
+			                                		<td><fmt:formatNumber value="${vo.delivery}" pattern="#,###"/></td>
+			                                	</c:otherwise>
+			                                </c:choose>
+			                                <td><fmt:formatNumber value="${vo.discountPrice * count}" pattern="#,###"/></td>
+			                            </tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${list}" var='row'>
+			                            <tr>
+			                                <td>
+			                                	<input type="hidden" name='discount' value='${row.discount}'>
+			                                    <article>
+			                                        <a href="#"><img src='<c:url value='${row.thumb1}'/>' alt='썸네일1'></a>
+			                                        <div>
+			                                            <h2>
+			                                                <a href="#">${row.prodName}</a>
+			                                            </h2>
+			                                            <p>${row.descript}</p>
+			                                        </div>
+			                                    </article>
+			                                </td>
+			                                <td>${row.count}</td>
+			                                <td><fmt:formatNumber value="${row.price}" pattern="#,###"/></td>
+			                                <td>${row.discount}%</td>
+			                                <td><fmt:formatNumber value="${row.point}" pattern="#,###"/></td>
+			                                <c:choose>
+			                                	<c:when test="${row.delivery eq 0}">
+			                                		<td>무료배송</td>
+			                                	</c:when>
+			                                	<c:otherwise>
+			                                		<td><fmt:formatNumber value="${row.delivery}" pattern="#,###"/></td>
+			                                	</c:otherwise>
+			                                </c:choose>
+			                                <td><fmt:formatNumber value="${(row.price -(row.price * row.discount * 0.01)) * row.count}" pattern="#,###"/></td>
+			                            </tr>
+									</c:forEach>
+								</c:otherwise>
+                        	</c:choose>
                         </tbody>
                     </table>
                     <!-- 최종 결제 정보 -->
@@ -150,27 +142,27 @@
                             <tbody>
                                 <tr>
                                     <td>총</td>
-                                    <td>2 건</td>
+                                    <td><span id='count' style="font-size: 14px;">0</span> 건</td>
                                 </tr>
                                 <tr>
                                     <td>상품금액</td>
-                                    <td>27,000</td>
+                                    <td id='price'>0</td>
                                 </tr>
                                 <tr>
                                     <td>할인금액</td>
-                                    <td>-1,000</td>
+                                    <td id='discountPrice'>0</td>
                                 </tr>
                                 <tr>
                                     <td>배송비</td>
-                                    <td>0</td>
+                                    <td id='delivery'>0</td>
                                 </tr>
                                 <tr>
                                     <td>포인트 할인</td>
-                                    <td>-1000</td>
+                                    <td id='point'>0</td>
                                 </tr>
                                 <tr>
                                     <td>전체주문금액</td>
-                                    <td>25,000</td>
+                                    <td id='totalPrice'>0</td>
                                 </tr>
                             </tbody>
                         </table>

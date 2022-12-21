@@ -28,35 +28,26 @@
                         	
                         	<%-- 자주묻는 질문 --%>
                         	<c:when test="${map.cate1 eq 'faq'}">
-                        		<c:set var="doneLoop" value="false"/>
-		                        <c:forEach var="faqCate" items="${map.articles}" varStatus="status">
-		                        	<c:choose>
-		                        		<c:when test="${not doneloop}">
-		                        			<c:choose>
-		                        				<c:when test="${faqCate.type eq map.type}">
-		                        					<div>
-						                            <h3>${faqCate.type}</h3>
-						                            
-						                            <ul>
-						                            
-						                            	<c:forEach var="article" items="${map.articles}">
-						                            	
-						                                	<li><a href="<c:url value='/cs/view.do'/>"><span>Q.</span>${faqCate.title}</a></li>
-						                                	
-						                                </c:forEach>
-						                                
-						                                	<li class="more"><a href="#">더보기</a> </li>
-						                                	
-						                            </ul>                              
-					                        		</div>
-					                        		
-		                        				</c:when>
-		                        				
-		                        			</c:choose>
-					                        
-					                    </c:when>
-			                        </c:choose>
+                        	
+		                        <c:forEach var="faqCate" items="${map.faqlist}" varStatus="status" >
+                        					<div>
+                        					
+				                            	<h3>${faqCate.type}</h3>
+				                            
+				                            	<ul>
+				                            
+				                            	<c:forEach var="article" items="${map.articles}">
+				                            	
+				                                	<li><a href="<c:url value='/cs/view.do'/>"><span>Q.</span>${faqCate.title}</a></li>
+				                                	
+				                                </c:forEach>
+				                                
+				                                	<li class="more"><a href="#">더보기</a> </li>
+				                                	
+				                            	</ul>                              
+			                        		</div>
 		                        </c:forEach>
+		                        
                         	</c:when>
                         	<%-- 자주묻는 질문 끝 --%>
                         	
