@@ -28,7 +28,6 @@ public class SignupController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String type = req.getParameter("type");
-		System.out.println("type : " + type);
 		TermsVO vo = service.selectTemrs();
 
 		req.setAttribute("vo", vo);
