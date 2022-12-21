@@ -20,9 +20,20 @@
             <div class="top">
                 <div>
                     <nav>
-                        <a href="#">로그인</a>
-                        <a href="#">회원가입</a>
-                        <a href="#">마이페이지</a>
+                    	<c:choose>
+                    		<c:when test="${sessMember != null}">
+                        		<a href='<c:url value='/member/logoutMember.do'/>'>로그아웃</a>
+                        		<a href="#">마이페이지</a>
+                        	</c:when>
+                        	<c:when test="${sessSeller != null}">
+                        		<a href='<c:url value='/member/logoutSeller.do'/>'>로그아웃</a>
+                        		<a href='<c:url value='/admin/index.do'/>'>마이페이지</a>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<a href='<c:url value='/member/login.do'/>'>로그인</a>
+                        		<a href='<c:url value='/member/join.do'/>'>회원가입</a>
+                        	</c:otherwise>
+                        </c:choose>
                         <a href='<c:url value='/product/cart.do'/>'><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
                     </nav>
                 </div>

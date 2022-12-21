@@ -9,7 +9,8 @@ public class Sql {
 	
 	// uid 등록
 	public static final String INSERT_UID = "INSERT INTO `km_member_uid` SET "
-											+ "`uid`=?";
+											+ "`uid`=?, "
+											+ "`type`=?";
 	// 일반 회원 가입
 	public static final String INSERT_MEMBER = "INSERT INTO `km_member_general` SET "
 											+ "`uid`=?, "
@@ -28,7 +29,7 @@ public class Sql {
 	public static final String INSERT_SELLER = "INSERT INTO `km_member_seller` SET "
 											+ "`uid`=?, "
 											+ "`pass`=SHA2(?, 256), "
-											+ "`type`=3, "
+											+ "`type`=2, "
 											+ "`zip`=?, "
 											+ "`addr1`=?, "
 											+ "`addr2`=?, "
@@ -46,10 +47,15 @@ public class Sql {
 	public static final String SELECT_TERMS = "SELECT * FROM `km_member_terms`";
 	// 아이디 중복 확인
 	public static final String SELECT_COUNT_UID = "SELECT COUNT(`uid`) FROM `km_member_uid` WHERE `uid`=?";
-	// 로그인
+	// uid 검색으로 회원 구분 확인
+	public static final String SELECT_UID = "SELECT * FROM `km_member_uid` WHERE `uid`=?";
+	// 일반 회원 로그인
 	public static final String SELECT_MEMBER = "SELECT * FROM `km_member_general` WHERE `uid`=? AND `pass`=SHA2(?, 256)";
+	// 판매자 회원 로그인
+	public static final String SELECT_SELLER = "SELECT * FROM `km_member_seller` WHERE `uid`=? AND `pass`=SHA2(?, 256)";
 	
 	/*** product ***/
+	// 상품 등록
 	public static final String INSERT_PRODUCT = "INSERT INTO `km_product` SET "
 												+ "`cate1`=?, "
 												+ "`cate2`=?, "
@@ -73,15 +79,22 @@ public class Sql {
 												+ "`origin`=?, "
 												+ "`ip`=?, "
 												+ "`rdate`=NOW()";
-	
-
+	// 상품 조회 리스트
 	public static final String SELECT_PRODUCTS = "SELECT * FROM `km_product` "
 												+ "ORDER BY `prodNo` DESC "
 												+ "LIMIT ?, 10";
-	
+	// 상품 총 갯수 계산
 	public static final String SELECT_COUNT_TOTAL_PROD = "SELECT COUNT(`prodNo`) FROM `km_product`";
-	
-	public static final String DELETE_PRODUCT = "DELETE * FROM `km_product` WHERE `prodNo`=?";
+	// 상품 정보 수정
+	public static final String UPDATE_PRODUCT = "UPDATE `km_product` SET "
+												+ "`prodName`=?, "
+												+ "`price`=?, "
+												+ "`discount`=?, "
+												+ "`point`=?, "
+												+ "`stock`=? "
+												+ "WHERE `prodNo`=?";
+	// 상품 삭제
+	public static final String DELETE_PRODUCT = "DELETE FROM `km_product` WHERE `prodNo`=?";
 	
 	
 	/*** main ***/

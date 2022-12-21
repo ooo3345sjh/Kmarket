@@ -71,6 +71,63 @@ public class CsDAO extends DBHelper {
 		return cvo;
 	}
 	
+	public void selectFaqArticle(Map<String, Object> map) {
+		List<CsVO> faqlist = null;
+		
+		String cate2 = (String)map.get("cate2");
+		
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append("SELECT DISTINCT `cate1`, `cate2`, `type`, `title` FROM `km_cs` WHERE `cate1` = 'faq'");
+		
+		// type 불러오기
+		if(cate2.equals("user")) { // cate2가 'user' 라면 중복되지 않은 type들 나옴
+			sql.append("AND `cate2`= 'user'");
+		}
+		else if(cate2.equals("coupon")) {	// 
+			sql.append("AND `cate2`= 'coupon'");
+		}
+		else if(cate2.equals("order")) {
+			sql.append("AND `cate2`= 'order'");
+		}
+		else if(cate2.equals("delivery")) {
+			sql.append("AND `cate2`= 'delivery'");
+		}
+		else if(cate2.equals("cancel")) {
+			sql.append("AND `cate2`= 'cancel'");
+		}
+		else if(cate2.equals("travel")) {
+			sql.append("AND `cate2`= 'travel'");
+		}
+		else if(cate2.equals("safeDeal")) {
+			sql.append("AND `cate2`= 'safeDeal'");
+		}
+		
+		try {
+			con = getConnection();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql.toString());
+			faqlist = new ArrayList<>();
+			
+			while(rs.next()) {
+				
+				CsVO cvo = new CsVO();
+				cvo.setCate1(rs.getString("cate1"));
+				cvo.setCate2(rs.getString("cate2"));
+				cvo.setType(rs.getString("type"));
+				cvo.setTitle(rs.getString("title"));
+				
+				faqlist.add(cvo);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		map.put("faqlist", faqlist);
+		logger.debug(" faqlist : " + faqlist);
+		logger.debug(" faq : " + map);
+	}
+	
 	public List<CsVO> selectNoticeAll() {
 		List<CsVO> nlist = new ArrayList<>();
 		
@@ -210,15 +267,6 @@ public class CsDAO extends DBHelper {
 		map.put("totalCount", totalCount);
 	}
 	
-	
-	
-	public void indexQnaArticles() {
-		try {
-			logger.info("indexQnaArticles...");
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-	}
 	
 	public void update() {}
 	public void delete() {}

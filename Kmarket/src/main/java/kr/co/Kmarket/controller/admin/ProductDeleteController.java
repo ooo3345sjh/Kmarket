@@ -1,24 +1,23 @@
-package kr.co.Kmarket.controller.member;
+package kr.co.Kmarket.controller.admin;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.Kmarket.service.MemberService;
-import kr.co.Kmarket.vo.TermsVO;
+import com.google.gson.JsonObject;
 
-@WebServlet("/member/signup.do")
-public class SignupController extends HttpServlet {
+import kr.co.Kmarket.service.ProductService;
+
+@WebServlet("/admin/productDelete.do")
+public class ProductDeleteController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private MemberService service = new MemberService();
+	private ProductService service = new ProductService();
 	
 	@Override
 	public void init() throws ServletException {
@@ -26,14 +25,15 @@ public class SignupController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		String type = req.getParameter("type");
-		TermsVO vo = service.selectTemrs();
 
-		req.setAttribute("vo", vo);
-		req.setAttribute("type", type);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/signup.jsp");
-		dispatcher.forward(req, resp);
+		String prodNo = req.getParameter("prodNo");
+		
+		int result = service.deleteProduct(prodNo);
+		
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		PrintWriter writer = resp.getWriter();
+		writer.print(json.toString());
 	}
 	
 	@Override

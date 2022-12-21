@@ -541,7 +541,7 @@
     color: #006cff;
     margin-right: 6px;
 }
-#cs > .faq > .list > article > div > ul > .more {
+#cs > .faq > .list > article > div > button {
     display: block !important;
     border-bottom: none;
     text-align: center;
