@@ -55,6 +55,7 @@ public class Sql {
 	public static final String SELECT_SELLER = "SELECT * FROM `km_member_seller` WHERE `uid`=? AND `pass`=SHA2(?, 256)";
 	
 	/*** product ***/
+	// 상품 등록
 	public static final String INSERT_PRODUCT = "INSERT INTO `km_product` SET "
 												+ "`cate1`=?, "
 												+ "`cate2`=?, "
@@ -78,15 +79,22 @@ public class Sql {
 												+ "`origin`=?, "
 												+ "`ip`=?, "
 												+ "`rdate`=NOW()";
-	
-
+	// 상품 조회 리스트
 	public static final String SELECT_PRODUCTS = "SELECT * FROM `km_product` "
 												+ "ORDER BY `prodNo` DESC "
 												+ "LIMIT ?, 10";
-	
+	// 상품 총 갯수 계산
 	public static final String SELECT_COUNT_TOTAL_PROD = "SELECT COUNT(`prodNo`) FROM `km_product`";
-	
-	public static final String DELETE_PRODUCT = "DELETE * FROM `km_product` WHERE `prodNo`=?";
+	// 상품 정보 수정
+	public static final String UPDATE_PRODUCT = "UPDATE `km_product` SET "
+												+ "`prodName`=?, "
+												+ "`price`=?, "
+												+ "`discount`=?, "
+												+ "`point`=?, "
+												+ "`stock`=? "
+												+ "WHERE `prodNo`=?";
+	// 상품 삭제
+	public static final String DELETE_PRODUCT = "DELETE FROM `km_product` WHERE `prodNo`=?";
 	
 	
 	/*** main ***/
