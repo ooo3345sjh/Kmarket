@@ -519,7 +519,7 @@
     height: auto;
     border-bottom: 1px solid #ccc;
 }
-#cs > .faq > .list > article > div > ul > li:nth-child(n+4) {
+#cs > .faq > .list > article > div > ul > #m_list:nth-child(n+4) {
     display: none;
 }
 #cs > .faq > .list > article > div > ul a {
@@ -542,13 +542,13 @@
     margin-right: 6px;
 }
 #cs > .faq > .list > article > div > ul > .more1, .more2, .more3, .more4, .more5, .more6, .more7 {
-    display: block !important;
+    display: block ;
     border-bottom: none;
     text-align: center;
 }
 
 #cs > .faq > .list > article > div > ul > .short1, .short2, .short3, .short4, .short5, .short6, .short7 {
-    display: block !important;
+    display: none;
     border-bottom: none;
     text-align: center;
 }
