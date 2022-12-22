@@ -21,7 +21,9 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.JsonObject;
 
 import kr.co.Kmarket.service.ProductService;
+import kr.co.Kmarket.utils.JSFunction;
 import kr.co.Kmarket.vo.CartVo;
+import kr.co.Kmarket.vo.MemberVO;
 import kr.co.Kmarket.vo.ProductVO;
 
 @WebServlet("/product/cart.do")
@@ -36,11 +38,14 @@ public class CartController_session extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("CartController doGet...");
-		String uid = req.getParameter("uid");
-		uid = "a101";
+		MemberVO vo	= (MemberVO)req.getSession().getAttribute("sessMember");
+		if(vo == null) {
+			JSFunction.alertBack(resp, "로그인 후에 이용해 주세요.");
+			return;
+		}
 		
+		String uid = vo.getUid();
 		List<CartVo> list = service.selectProductInCart(uid);
-		
 		req.setAttribute("request", req);
 		req.setAttribute("session", req.getSession());
 		req.setAttribute("list", list);

@@ -4,7 +4,7 @@
 <jsp:include page="/_header.jsp"/>
 
         <section id="cs">
-            <div class="notice">
+            <div class="faq">
                 <nav>
                     <div>
                       <p>홈<span>></span>
@@ -82,6 +82,7 @@
                     		</aside>
                     		<article>
                         		<nav>
+                        		
                             		<h2 class="title">[${cvo.type}]${cvo.title}</h2>
                             
                             <!-- id -->
@@ -104,10 +105,40 @@
                     		</article>
                     	</c:when>
                     	<%-- 공지사항 글 보기 종료 --%>
-                    	<c:when test="">
                     	
+                    	<%-- 자주묻는 질문 글 보기 --%>
+                    	<c:when test="${cate1 eq 'faq'}">
+                    		<aside>
+                    		
+                        	<c:if test="${cvo.cate1 eq 'faq'}">
+                        		<h2>자주묻는 질문</h2>
+                        	</c:if>	
+                        	
+                        		<ul>
+		                            <li class="${cate2 eq 'user' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=faq&cate2=user'/>">회원</a></li>
+		                            <li class="${cate2 eq 'coupon' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=faq&cate2=coupon'/>">쿠폰/이벤트</a></li>
+		                            <li class="${cate2 eq 'order' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=faq&cate2=order'/>">주문/결제</a></li>
+		                            <li class="${cate2 eq 'delivery' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=faq&cate2=delivery'/>">배송</a></li>
+		                            <li class="${cate2 eq 'cancel' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=faq&cate2=cancel'/>">취소/반품/교환</a></li>
+		                            <li class="${cate2 eq 'travel' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=faq&cate2=travel'/>">여행/숙박/항공</a></li>
+		                            <li class="${cate2 eq 'safeDeal' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=faq&cate2=safeDeal'/>">안전거래</a></li>
+                        		</ul>
+                    		</aside>
+                    		
+                    		<article>
+                    			
+                        		<nav>
+                            		<h2 class="title"><span>Q.</span>${cvo.title}</h2>
+                        	   </nav>
+		                        <div class="content">
+		                            <p>
+		                                ${cvo.content}
+		                            </p>
+		                        </div>
+                        		<a href="<c:url value='/cs/list.do?cate1=faq&cate2=${cvo.cate2}&pg=1'/>" class="btnList">목록보기</a>
+                    		</article>
                     	</c:when>
-                    	
+                    	<%-- 자주묻는 질문 글 보기 종료 --%>
                     	
                     </c:choose>
                 </section>
