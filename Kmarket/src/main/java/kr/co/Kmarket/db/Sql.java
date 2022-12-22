@@ -140,7 +140,8 @@ public class Sql {
 	// 장바구니 담긴 상품을 조회하는 서비스
 	public static final String SELECT_PRODUCT_IN_CART = "SELECT * FROM `km_product_cart` c JOIN "
 													  + "`km_product` p ON	c.prodNo = p.prodNo "
-													  + "WHERE c.`uid`=?";
+													  + "WHERE c.`uid`=?"
+													  + "ORDER BY c.`cartNo` desc";
 	
 
 	
