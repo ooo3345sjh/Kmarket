@@ -280,6 +280,7 @@ public class ProductDAO extends DBHelper {
 			
 			String searchField = (String)map.get("searchField");
 			String searchWord = (String)map.get("searchWord");
+			String uid = (String)map.get("uid");
 			String cate1 = (String)map.get("cate1");
 			String cate2 = (String)map.get("cate2");
 			String group = (String)map.get("group");
@@ -294,10 +295,11 @@ public class ProductDAO extends DBHelper {
 			} 
 			
 			else {	// 그룹명이 admin이라면
+				sql.append("WHERE `seller` = '"+ uid + "'" );
 				// 검색 조건이 있다면 WHERE절 추가
 				if(searchWord != null) {	// 검색 단어가 있을 경우
-					sql.append("WHERE `" + searchField  + "` ");
-					sql.append("LIKE '%" + searchWord   + "%'");  
+					sql.append("AND `" + searchField + "` ");
+					sql.append("LIKE '%" + searchWord + "%'");  
 				}
 			}
 	
@@ -334,9 +336,10 @@ public class ProductDAO extends DBHelper {
 		if(group.equals("admin")) {	// 그룹명이 admin이라면
 			// 검색 조건이 있다면 WHERE절 추가
 			if(map.get("searchField") != null) {
-				sql += " WHERE p.`" + map.get("searchField") + "` LIKE '%" + map.get("searchWord") + "%' ";
+				sql += " WHERE s.`uid` = '" + map.get("uid") + "' AND p.`" + map.get("searchField") + "` LIKE '%" + map.get("searchWord") + "%' ORDER BY p.`ProdNo` desc  LIMIT ?, 10";
+			} else {
+				sql += " WHERE s.`uid` = '" + map.get("uid") + "' ORDER BY p.`ProdNo` desc  LIMIT ?, 10";
 			}
-			sql += " ORDER BY p.`ProdNo` desc  LIMIT ?, 10";
 		}
 		
 		else {	// 그룹명이 admin이 아니라면

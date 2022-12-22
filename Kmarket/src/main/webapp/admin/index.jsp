@@ -252,7 +252,7 @@
                     <section>
                         <article>
                             <table border="0">
-                                <caption>공지사항1</caption>
+                                <caption>공지사항</caption>
                                 <tr>
                                     <td>
                                         <p>

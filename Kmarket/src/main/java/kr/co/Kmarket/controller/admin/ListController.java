@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.utils.Paging;
-import kr.co.Kmarket.vo.SellerVO;
+import kr.co.Kmarket.vo.MemberVO;
 
 @WebServlet("/admin/list.do")
 public class ListController extends HttpServlet {
@@ -32,9 +32,9 @@ public class ListController extends HttpServlet {
 		logger.info("LIstController doGet...");
 		
 		HttpSession sess = req.getSession();
-		SellerVO sessSeller = (SellerVO)sess.getAttribute("sessSeller");
-		String uid = sessSeller.getUid();
-		int type = sessSeller.getType();
+		MemberVO sessMember = (MemberVO)sess.getAttribute("sessMember");
+		String uid = sessMember.getUid();
+		int type = sessMember.getType();
 		
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
@@ -51,6 +51,7 @@ public class ListController extends HttpServlet {
 		map.put("group", group);
 		map.put("pg", pg);
 		map.put("req", req);
+		map.put("uid", uid);
 		
 		service.countProducts(map);  // 조건에 해당하는 전체 상품 목록의 갯수를 가져오는 서비스
 		Paging.paging(map);		     // 페이징 처리

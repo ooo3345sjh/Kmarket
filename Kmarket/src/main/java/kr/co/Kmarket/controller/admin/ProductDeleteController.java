@@ -38,6 +38,19 @@ public class ProductDeleteController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	
+		String[] ajaxMsg = req.getParameterValues("valueArr");
+		int size = ajaxMsg.length;
+		int result = 0;
+		for (int i=0; i<size; i++) {
+			result = service.deleteProduct(ajaxMsg[i]);
+		}
+		
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		PrintWriter writer = resp.getWriter();
+		writer.print(json.toString());
+
 	}
 
 }

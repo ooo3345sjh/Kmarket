@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.Kmarket.service.MemberService;
-import kr.co.Kmarket.vo.SellerVO;
+import kr.co.Kmarket.vo.MemberVO;
 
 @WebServlet("/member/registerSeller.do")
 public class RegisterSellerController extends HttpServlet {
@@ -47,7 +47,7 @@ public class RegisterSellerController extends HttpServlet {
 		String managerHp = req.getParameter("km_hp");
 		String regip = req.getRemoteAddr();
 		
-		SellerVO vo = new SellerVO();
+		MemberVO vo = new MemberVO();
 		vo.setUid(uid);
 		vo.setPass(pass);
 		vo.setCompany(company);
