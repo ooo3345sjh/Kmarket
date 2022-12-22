@@ -203,12 +203,14 @@
 					count++;
 					
 					// 썸네일1 사진 주소 작업
-					let thumb1 = trTag[i].children[1].children[1].children[0].children[0].currentSrc;
+					let thumb1 = trTag[i].children[1].children[2].children[0].children[0].currentSrc;
 					let index = thumb1.indexOf("file");
 					thumb1 = thumb1.substring(index);
+					
 					// 체크된 상품 객체화해서 리스트에 저장
 					list.push({
-						"cartNo":trTag[i].children[1].children[0].defaultValue,
+						"cartNo":trTag[i].children[1].children[1].defaultValue,
+						"prodNo":trTag[i].children[1].children[0].defaultValue,
 						"count":trTag[i].cells[2].innerHTML,
 						"price":trTag[i].cells[3].innerHTML, 
 						"discount":trTag[i].cells[4].innerHTML, 
@@ -216,8 +218,8 @@
 						"delivery":trTag[i].cells[6].innerHTML, 
 						"totalPrice":trTag[i].cells[7].innerHTML, 
 						"thumb1":thumb1,
-						"prodName":trTag[i].children[1].children[1].children[1].children[0].innerText,
-						"descript":trTag[i].children[1].children[1].children[1].children[1].innerText
+						"prodName":trTag[i].children[1].children[2].children[1].children[0].innerText,
+						"descript":trTag[i].children[1].children[2].children[1].children[1].innerText
 					});
 					
 				}
@@ -225,17 +227,6 @@
 			
 			// 세션 처리
 			sessionStorage.setItem("orderList", JSON.stringify(list)); // 세션 저장
-			
-			
-			/*
-			let orderList = sessionStorage.getItem("orderList");
-			orderList = JSON.parse(orderList) // JSON 데이터를 객체로 변환
-			console.log("cartNo : " + orderList[0].cartNo);
-			console.log("count : " + orderList[0].count);
-			console.log("thumb1 : " + orderList[0].thumb1);
-			console.log("prodName : " + orderList[0].prodName);
-			console.log("descript : " + orderList[0].descript);
-			*/
 			
 			if(count == 0){
 				alert('주문하실 상품을 선택해주세요.');
@@ -283,6 +274,7 @@
 			                            <tr>
 			                                <td><input type="checkbox" name='prodCheck'></td>
 			                                <td>
+			                                	<input type="hidden" name='cartNo' value='${row.cartNo}'>
 			                                	<input type="hidden" name='cartNo' value='${row.cartNo}'>
 			                                    <article>
 			                                        <a href="#"><img src='<c:url value='${row.thumb1}'/>' alt='썸네일1'></a>

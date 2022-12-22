@@ -627,7 +627,7 @@
     color: #ff006c;
 }
 
-#product > .order > form > .final > input[type=button] {
+#product > .order > form > .final > input[type=submit] {
     width: 100%;
     height: 56px;
     font-size: 26px;
@@ -685,7 +685,8 @@
 #product > .order > form > .discount > div > label > input[type=text] {
     display: inline-block;
     outline: none;
-    text-indent: 3px;
+    text-align: right;
+    padding-right: 3px;
 }
 
 #product > .order > form > .discount > div > label > input[type=button] {
