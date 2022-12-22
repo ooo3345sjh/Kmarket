@@ -107,11 +107,10 @@
 		$(document).on('click', '.cart', function () {
 			
 			let num = $('input[name=num]').val();
-			console.log(num);
 			let total = $('.total > span').text();
 			let jsonData = {
 					"prodNo":'${vo.prodNo}', 
-					"uid":'a101', 
+					"uid":'${sessMember.uid}', 
 					"count": num, 
 					"price":'${vo.price}',
 					"discount":'${vo.discount}',
@@ -127,17 +126,21 @@
 		})
 		// 구매하기 버튼 클릭시 바로 해당 상품을 주문하는 페이지로 이동하는 이벤트
 		$('.order').click(function () {
+			let num = $('input[name=num]').val(); // 주문 갯수
+			let total = $('.total > span').text(); // 총 상품금액
 			let list=[];
 			
+			// 천 단위 ',' 처리
+			let price = String('${vo.price}').replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			let point = String('${vo.point}').replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			let delivery = String('${vo.delivery}').replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 			list.push({
 					"prodNo":'${vo.prodNo}', 
-					"uid":'a101', 
-					"count": '${vo.count', 
-					"price":'${vo.price}',
-					"discount":'${vo.discount}',
-					"point":'${vo.point}',
-					"delivery":'${vo.delivery}',
-					"totalPeice": total.replace(',', ''),
+					"count": num, 
+					"price": price,
+					"discount":'${vo.discount}%',
+					"point": point,
+					"delivery": delivery,
 					"thumb1":'${vo.thumb1}',
 					"prodName":'${vo.prodName}',
 					"descript":'${vo.descript}'
