@@ -33,7 +33,7 @@
 					let count = Number(el.cells[2].innerHTML);
 					let price = Number(el.cells[3].innerHTML.replace(",", "")) * count;
 					let discount = Number(el.cells[4].innerHTML.replace("%", ""));
-					let discountPrice = price * discount * (-0.01);
+					let discountPrice = Math.floor(price * discount * (-0.01));
 					let point = Number(el.cells[5].innerHTML.replace(",", ""));
 					let delivery = Number(el.cells[6].innerHTML.replace(",", ""));
 					let total = price + discountPrice;
@@ -79,7 +79,7 @@
 			let count = tdTag.eq(2).text(); // 상품 수량 
 			let price = tdTag.eq(3).text().replace(",", ""); // 상품 가격 
 			let discount = tdTag.eq(4).text().replace("%", ""); // 상품 할인율
-			let discountPrice = (price * count) * discount * 0.01; // 상품 할인 가격
+			let discountPrice = Math.floor((price * count) * discount * 0.01); // 상품 할인 가격
 			let point = tdTag.eq(5).text(); // 적립 포인트
 			let delivery = tdTag.eq(6).text() == '무료배송'? 0 : tdTag.eq(6).text().replace(",", ""); // 배송비
 			let total = (Number(price) * count) - Number(discountPrice); // 전체 가격
@@ -91,7 +91,8 @@
 			let tPoint = $('#point');
 			let tDelivery = $('#delivery');
 			let tTotalPrice = $('#totalPrice');
-			console.log(checked);
+			console.log("checked? : " + checked);
+			
 			if(checked){
 				price = Number(tPrice.text().replace(",", "")) + (Number(price) * Number(count));
 				count = Number(tCount.text()) + Number(count);
@@ -112,6 +113,7 @@
 				}
 			}
 			
+			console.log("discountPrice : " + discountPrice);
 			// 천단위 ',' 처리
 			price = String(price).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 			discountPrice = String(discountPrice).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -200,10 +202,9 @@
 					count++;
 					
 					// 썸네일1 사진 주소 작업
-					let thumb1 = trTag[0].children[1].children[1].children[0].children[0].currentSrc;
+					let thumb1 = trTag[i].children[1].children[1].children[0].children[0].currentSrc;
 					let index = thumb1.indexOf("file");
-					thumb1 = "/" + thumb1.substring(index);
-					
+					thumb1 = thumb1.substring(index);
 					// 체크된 상품 객체화해서 리스트에 저장
 					list.push({
 						"cartNo":trTag[i].children[1].children[0].defaultValue,
@@ -214,8 +215,8 @@
 						"delivery":trTag[i].cells[6].innerHTML, 
 						"totalPrice":trTag[i].cells[7].innerHTML, 
 						"thumb1":thumb1,
-						"prodName":trTag[0].children[1].children[1].children[1].children[0].innerText,
-						"descript":trTag[0].children[1].children[1].children[1].children[1].innerText
+						"prodName":trTag[i].children[1].children[1].children[1].children[0].innerText,
+						"descript":trTag[i].children[1].children[1].children[1].children[1].innerText
 					});
 					
 				}
