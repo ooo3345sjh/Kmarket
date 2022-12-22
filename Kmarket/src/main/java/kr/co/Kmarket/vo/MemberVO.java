@@ -18,6 +18,15 @@ public class MemberVO {
 	private String wdate;
 	private String rdate;
 	
+	private String company;
+	private String ceo;
+	private String bizRegNum;
+	private String comRegNum;
+	private String tel;
+	private String manager;
+	private String managerHp;
+	private String fax;
+	
 	
 	public String getUid() {
 		return uid;
@@ -112,5 +121,54 @@ public class MemberVO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	public String getCeo() {
+		return ceo;
+	}
+	public void setCeo(String ceo) {
+		this.ceo = ceo;
+	}
+	public String getBizRegNum() {
+		return bizRegNum;
+	}
+	public void setBizRegNum(String bizRegNum) {
+		this.bizRegNum = bizRegNum;
+	}
+	public String getComRegNum() {
+		return comRegNum;
+	}
+	public void setComRegNum(String comRegNum) {
+		this.comRegNum = comRegNum;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public String getManager() {
+		return manager;
+	}
+	public void setManager(String manager) {
+		this.manager = manager;
+	}
+	public String getManagerHp() {
+		return managerHp;
+	}
+	public void setManagerHp(String managerHp) {
+		this.managerHp = managerHp;
+	}
+	public String getFax() {
+		return fax;
+	}
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
 
+	
 }

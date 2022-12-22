@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.co.Kmarket.service.MemberService;
+import kr.co.Kmarket.utils.JSFunction;
 import kr.co.Kmarket.vo.MemberVO;
-import kr.co.Kmarket.vo.SellerVO;
 import kr.co.Kmarket.vo.UidVO;
 
 @WebServlet("/member/login.do")
@@ -38,31 +38,47 @@ public class LoginController extends HttpServlet {
 		String uid = req.getParameter("uid");
 		String pass = req.getParameter("pass");
 		
+		String msg1 = "존재하지 않는 아이디입니다.";
+		String msg2 = "비밀번호를 확인해주세요.";
+		String url = "/Kmarket/member/login.do";
+		
+		JSFunction log1 = new JSFunction();
+		JSFunction log2 = new JSFunction();
+		
 		// uid를 통해 member type을 검색
 		UidVO member = service.selectUid(uid);
-		int type = member.getType();
 		
-
-		if (type == 2) {
-			// 판매자 회원인 경우
-			SellerVO vo = service.selectSeller(uid, pass);
-			if (vo != null) {
-				HttpSession sess = req.getSession();
-				sess.setAttribute("sessSeller", vo);
-				resp.sendRedirect("/Kmarket/");
-			} else {
-				resp.sendRedirect("/Kmarket/member/login.do");
-			}
+		if (member == null) {
+			// 아이디 조회가 되지 않는 경우
+			log1.alertBack(resp, msg1);
 		} else {
-			// 일반 회원인 경우
-			MemberVO vo = service.selectMember(uid, pass);
-			if (vo != null) {
-				HttpSession sess = req.getSession();
-				sess.setAttribute("sessMember", vo);
-				resp.sendRedirect("/Kmarket/");
+			int type = member.getType();
+			
+			if (type == 2) {
+				// 판매자 회원인 경우
+				MemberVO vo = service.selectSeller(uid, pass);
+				if (vo != null) {
+					// 로그인 성공
+					HttpSession sess = req.getSession();
+					sess.setAttribute("sessMember", vo);
+					resp.sendRedirect("/Kmarket/");
+				} else {
+					// 로그인 실패
+					log2.alertLocation(resp, msg2, url);
+				}
 			} else {
-				resp.sendRedirect("/Kmarket/member/login.do");
-			}	
+				// 일반 회원인 경우
+				MemberVO vo = service.selectMember(uid, pass);
+				if (vo != null) {
+					// 로그인 성공
+					HttpSession sess = req.getSession();
+					sess.setAttribute("sessMember", vo);
+					resp.sendRedirect("/Kmarket/");
+				} else {
+					// 로그인 실패
+					log2.alertLocation(resp, msg2, url);
+				}	
+			}
 		}
 		
 	}

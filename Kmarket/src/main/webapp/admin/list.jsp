@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="./js/product.js"></script>
+<script src="./js/checkbox.js"></script>
 <jsp:include page="./_header.jsp"/>
         <main>
             <div>
@@ -73,16 +74,18 @@
                         <h1>상품목록</h1>
                         <p>HOME > 상품관리 > <span>상품목록</span></p>
                     </nav>
-                    <select name="searchField">
-                        <option value="prodName">상품명</option>
-                        <option value="productCode">상품코드</option>
-                        <option value="company">제조사</option>
-                        <option value="seller">판매자</option>
-                    </select>
-                    <input type="text" name="searchWord">
+                    <form>
+                    	<select name="searchField">
+                      	  <option value="prodName">상품명</option>
+                   	      <option value="prodNo">상품코드</option>
+                   	      <option value="seller">판매자</option>
+                    	</select>
+                    	<input type="text" name="searchWord"/>
+                    	<input type="submit" value="검색하기"/>
+                    </form>   
                     <table border="0">
                         <tr>
-                            <th><input type="checkbox"name="all"></th>
+                            <th><input type="checkbox" name="allCheck" value="all" onclick="selectAll(this)"></th>
                             <th>이미지</th>
                             <th>상품코드</th>
                             <th>상품명</th>
@@ -96,7 +99,7 @@
                         </tr>
                         <c:forEach var="vo" items="${map.products}">
                         <tr>
-                            <td><input type="checkbox" name="상품코드"></td>
+                            <td><input type="checkbox" name="check" value="${vo.prodNo}"></td>
                             <td>
                                 <img src="<c:url value='${vo.thumb1}'/>" alt="thumb">
                             </td>
@@ -115,7 +118,7 @@
                         </tr>
                         </c:forEach>
                     </table>
-                    <input type="button" value="선택삭제">
+                    <input type="button" id="deleteButton" value="선택삭제" onclick="checkDelete()">
                     <div class="paging">
                     	${map.pageTag}
                     </div>

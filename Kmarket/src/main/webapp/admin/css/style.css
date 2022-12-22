@@ -183,7 +183,7 @@ main > div > aside > #gnb ol > li > a {
 
 /*** 관리자 상품목록 ***/
 #admin-product-list {height: auto; overflow: hidden;}
-#admin-product-list > select {
+#admin-product-list > form > select {
     width: 80px;
     border: 1px solid #d6d6d6;
     box-sizing:border-box;
@@ -191,13 +191,21 @@ main > div > aside > #gnb ol > li > a {
     text-indent: 5px;
 }
 
-#admin-product-list > input {
+#admin-product-list > form > input:nth-of-type(1) {
     height: 30px;
     border: 1px solid #d6d6d6;
     box-sizing:border-box;
     margin: 25px 0 10px;
     text-indent: 5px;
 }
+
+#admin-product-list > form > input:nth-of-type(2) {
+	width: 75px;
+	height: 30px;
+	border: 1px solid #d6d6d6;
+	box-sizing: border-box;
+}
+
 #admin-product-list > table {
     width: 100%;
     border-collapse: collapse;

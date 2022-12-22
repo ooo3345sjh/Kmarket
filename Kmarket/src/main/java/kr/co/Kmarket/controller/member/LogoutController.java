@@ -9,10 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.co.Kmarket.utils.JSFunction;
 import kr.co.Kmarket.vo.MemberVO;
 
-@WebServlet("/member/logoutMember.do")
-public class LogoutMemberController extends HttpServlet {
+@WebServlet("/member/logout.do")
+public class LogoutController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -32,7 +33,10 @@ public class LogoutMemberController extends HttpServlet {
 		sess.removeAttribute("sessMember");
 		sess.invalidate();
 
-		resp.sendRedirect("/Kmarket/");
+		JSFunction logout = new JSFunction();
+		String msg = "로그아웃 되었습니다.";
+		String url = "/Kmarket/";
+		logout.alertLocation(resp, msg, url);
 		
 	}
 	
