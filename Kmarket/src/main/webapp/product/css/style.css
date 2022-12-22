@@ -664,6 +664,7 @@
 
 #product > .order > form > .delivery > table {margin-top: 10px;}
 #product > .order > form > .delivery > table tr > td:nth-child(1) {padding: 6px;}
+#product > .order > form > .delivery > table input {text-indent: 3px;}
 #product > .order > form > .delivery > table input[type=button] {
     padding: 4px 6px;
     border: 1px solid #ccc;
@@ -671,6 +672,7 @@
     border-color: #acc0e0;
     color: #3371c9;
     outline: none;
+    text-indent: 0;
 }
 
 #product > .order > form > .delivery > table input[name=addr1] {width: 400px;}
@@ -683,6 +685,7 @@
 #product > .order > form > .discount > div > label > input[type=text] {
     display: inline-block;
     outline: none;
+    text-indent: 3px;
 }
 
 #product > .order > form > .discount > div > label > input[type=button] {

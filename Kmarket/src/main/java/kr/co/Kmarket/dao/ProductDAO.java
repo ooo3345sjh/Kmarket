@@ -360,7 +360,7 @@ public class ProductDAO extends DBHelper {
 				String path = "/file/" + cate1 + "/" + cate2 + "/"; // 이미지 저장경로
 				int price = rs.getInt("price");                    // 상품 가격
 				int discount = rs.getInt("discount");			   // 할인율
-				int discountPrice = (int)(price - (price * (discount/100.0))); // 상품 할인 적용된 가격
+				int discountPrice = price - (int)(price * (discount/100.0)); // 상품 할인 적용된 가격
 				logger.debug("discount : " + discount);
 				logger.debug("discountPrice : " + discountPrice);				
 				logger.debug("price : " + price);				
@@ -426,7 +426,7 @@ public class ProductDAO extends DBHelper {
 				vo = new ProductVO();
 				int price = rs.getInt("price");                    // 상품 가격
 				int discount = rs.getInt("discount");			   // 할인율
-				int discountPrice = (int)(price - (price * (discount/100.0))); // 상품 할인 적용된 가격
+				int discountPrice = price - (int)(price * (discount/100.0)); // 상품 할인 적용된 가격
 				vo.setDiscountPrice(discountPrice);
 				vo.setProdNo(rs.getInt("prodNo"));
 				vo.setCate1(rs.getString("cate1"));
