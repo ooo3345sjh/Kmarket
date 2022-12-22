@@ -33,14 +33,15 @@
 					let count = Number(el.cells[2].innerHTML);
 					let price = Number(el.cells[3].innerHTML.replace(",", "")) * count;
 					let discount = Number(el.cells[4].innerHTML.replace("%", ""));
-					let discountPrice = Math.floor(price * discount * (-0.01));
+					let discountPrice = Math.floor(price * discount * (0.01));
+					console.log("discountPrice : " + discountPrice);
 					let point = Number(el.cells[5].innerHTML.replace(",", ""));
 					let delivery = Number(el.cells[6].innerHTML.replace(",", ""));
-					let total = price + discountPrice;
+					let total = price + (discountPrice * -1);
 					
 					tCount.text(Number(tCount.text()) + count);
 					tPrice.text(Number(tPrice.text()) + price);
-					tDiscountPrice.text(Number(tDiscountPrice.text()) + discountPrice);
+					tDiscountPrice.text(Number(tDiscountPrice.text()) + (discountPrice * -1));
 					tPoint.text(Number(tPoint.text()) + point);
 					tDelivery.text(Number(tDelivery.text()) + delivery);
 					tTotalPrice.text(Number(tTotalPrice.text()) + total);
