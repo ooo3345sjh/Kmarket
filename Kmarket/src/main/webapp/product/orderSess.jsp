@@ -58,13 +58,13 @@
  				// 할인가격 계산
  				let discount = Number(orderList[i].discount.replace("%", ""));
  				let cost = Number(orderList[i].price.replace(",", ""));
- 				let totalPrice = Math.floor((cost - (cost * discount * 0.01)) * Number(orderList[i].count)); // 할인가격
+ 				let totalPrice = cost - Math.floor(cost * discount * 0.01) * Number(orderList[i].count); // 할인가격
  				
  				
  				// 숫자로 변형뒤 합산
  				count += Number(orderList[i].count);
  				price += Number(orderList[i].price.replace(",", "")) * Number(orderList[i].count);
- 				discountPrice += Math.floor(cost * discount * 0.01 * -1);
+ 				discountPrice += Math.floor(cost * discount * 0.01);
  				delivery += Number(orderList[i].delivery.replace(",", ""));
  				total += totalPrice;
  				
@@ -76,7 +76,7 @@
 			
 			// 천단위 ',' 처리
 			price = String(price).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-			discountPrice = String(discountPrice).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			discountPrice = String(discountPrice * -1).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 			delivery = String(delivery).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 			total = String(total).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 			
