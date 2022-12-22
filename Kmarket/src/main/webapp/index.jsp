@@ -101,7 +101,7 @@
                         		<a href='<c:url value='/member/join.do'/>'>회원가입</a>
                         	</c:otherwise>
                         </c:choose>
-                    <a href="#">
+                    <a href='<c:url value='/product/cart.do'/>'>
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         장바구니
                     </a>

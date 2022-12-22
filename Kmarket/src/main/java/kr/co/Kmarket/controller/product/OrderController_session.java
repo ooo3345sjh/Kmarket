@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 
 import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.vo.CartVo;
+import kr.co.Kmarket.vo.MemberVO;
 import kr.co.Kmarket.vo.ProductVO;
 
 @WebServlet("/product/order.do")
@@ -37,26 +38,9 @@ public class OrderController_session extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("OrderController doGet...");
 		
-		/*
-		// 장바구니를 통한 주문 페이지 이동시
-		String cartNo = req.getParameter("cartNo");
+		MemberVO vo = (MemberVO)req.getSession().getAttribute("sessMember");
 		
-		// 상세뷰에서 바로 주문을 통한 페이지 이동시
-		String prodNo = req.getParameter("prodNo");
-		String count = req.getParameter("count");
-		
-		if(cartNo != null) {
-			String[] arrCartNo = cartNo.split(","); 
-			List<CartVo> list = service.selectProductInCart(arrCartNo);
-			req.setAttribute("list", list);
-			req.setAttribute("type", "cart");
-		} else if(prodNo != null) {
-			ProductVO vo = service.selectProduct(prodNo);
-			req.setAttribute("count", count);
-			req.setAttribute("vo", vo);
-			req.setAttribute("type", "buyNow");
-		}
-		*/
+		req.setAttribute("vo", vo);
 		req.getRequestDispatcher("/product/orderSess.jsp").forward(req, resp);
 	}
 	
