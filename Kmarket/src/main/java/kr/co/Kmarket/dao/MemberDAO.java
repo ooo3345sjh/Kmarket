@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.db.Sql;
 import kr.co.Kmarket.vo.MemberVO;
-import kr.co.Kmarket.vo.SellerVO;
 import kr.co.Kmarket.vo.TermsVO;
 import kr.co.Kmarket.vo.UidVO;
 
@@ -60,7 +59,7 @@ public class MemberDAO extends DBHelper {
 	}
 	
 	// 판매자 회원가입
-	public void insertSeller(SellerVO vo) {
+	public void insertSeller(MemberVO vo) {
 		try {
 			logger.info("insertSeller...");
 			con = getConnection();
@@ -120,7 +119,7 @@ public class MemberDAO extends DBHelper {
 		return vo;
 	}
 	
-	// 일반 회원 로그인
+	// 회원 로그인
 	public MemberVO selectMember(String uid, String pass) {
 		MemberVO vo = null;
 		
@@ -147,6 +146,14 @@ public class MemberDAO extends DBHelper {
 				vo.setAddr2(rs.getString(12));
 				vo.setRegip(rs.getString(13));
 				vo.setRdate(rs.getString(15));
+				vo.setCompany(rs.getString(16));
+				vo.setCeo(rs.getString(17));
+				vo.setBizRegNum(rs.getString(18));
+				vo.setComRegNum(rs.getString(19));
+				vo.setTel(rs.getString(20));
+				vo.setManager(rs.getString(21));
+				vo.setManagerHp(rs.getString(22));
+				vo.setFax(rs.getString(23));
 			}
 			close();
 		} catch(Exception e) {
@@ -157,8 +164,8 @@ public class MemberDAO extends DBHelper {
 	}
 	
 	// 판매자 회원 로그인
-	public SellerVO selectSeller(String uid, String pass) {
-		SellerVO vo = null;
+	public MemberVO selectSeller(String uid, String pass) {
+		MemberVO vo = null;
 		
 		try {
 			logger.info("selectSeller...");
@@ -168,7 +175,7 @@ public class MemberDAO extends DBHelper {
 			psmt.setString(2, pass);
 			rs = psmt.executeQuery();
 			if (rs.next()) {
-				vo = new SellerVO();
+				vo = new MemberVO();
 				vo.setUid(rs.getString(1));
 				vo.setPass(rs.getString(2));
 				vo.setType(rs.getInt(3));
