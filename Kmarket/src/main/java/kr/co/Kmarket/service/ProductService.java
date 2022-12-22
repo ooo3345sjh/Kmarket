@@ -11,6 +11,7 @@ import java.util.Map;
 
 import kr.co.Kmarket.dao.ProductDAO;
 import kr.co.Kmarket.vo.CartVo;
+import kr.co.Kmarket.vo.OrderVO;
 import kr.co.Kmarket.vo.ProductVO;
 
 public class ProductService {
@@ -95,7 +96,12 @@ public class ProductService {
 	
 	/** order **/
 	/* 장바구니로부터 체크한 상품 목록을 가져오는 서비스 */
-	public List<CartVo> selectProductInCart(String[] cartNo) {
+	/*public List<CartVo> selectProductInCart(String[] cartNo) {
 		return dao.selectProductInCart(cartNo);
-	}
+	}*/
+	
+	/* 주문한 상품 DB에 저장하는 서비스 */
+	/*public int insertOrder(OrderVO vo) {
+		return dao.insertOrder(vo);
+	}*/
 }

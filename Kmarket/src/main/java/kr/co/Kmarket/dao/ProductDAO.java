@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.db.Sql;
 import kr.co.Kmarket.vo.CartVo;
+import kr.co.Kmarket.vo.OrderVO;
 import kr.co.Kmarket.vo.ProductVO;
 import kr.co.Kmarket.vo.ReviewVO;
 
@@ -670,5 +671,18 @@ public class ProductDAO extends DBHelper {
 		logger.debug("list : " + list);
 		return list;
 	}
+	
+	/* 주문한 상품 DB에 저장하는 메서드 */
+	/*public int insertOrder(OrderVO vo) {
+		int result = 0;
+		
+		try {
+			con = getConnection();
+			psmt = con.prepareStatement("sd");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+	}*/
 
 }
