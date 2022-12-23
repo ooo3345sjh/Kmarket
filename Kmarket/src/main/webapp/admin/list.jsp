@@ -4,6 +4,7 @@
 <script src="./js/product.js"></script>
 <script src="./js/checkbox.js"></script>
 <jsp:include page="./_header.jsp"/>
+
                 <section id="admin-product-list" class="admin">
                     <nav>
                         <h1>상품목록</h1>
