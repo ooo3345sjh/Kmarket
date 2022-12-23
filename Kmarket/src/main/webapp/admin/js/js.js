@@ -70,11 +70,3 @@ function optionChange(){
 		$('.category2').append(option);
 	}
 }
-
-
-// input 입력창에 숫자만 입력되도록 하는 기능
-class inNumber {
-    constructor() {
-        this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
-    }
-}

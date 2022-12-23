@@ -2,7 +2,8 @@ package kr.co.Kmarket.controller.admin;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
@@ -12,15 +13,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.JsonObject;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.Kmarket.service.ProductService;
+import kr.co.Kmarket.vo.MemberVO;
 import kr.co.Kmarket.vo.ProductVO;
 
 @WebServlet("/admin/register.do")
@@ -45,22 +47,23 @@ public class RegisterController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("RegisterController doPost...");
+		
+		HttpSession sess = req.getSession();
+		MemberVO sessMember = (MemberVO)sess.getAttribute("sessMember");
+		String uid = sessMember.getUid();
+		int type = sessMember.getType();
+		
 		ServletContext ctx = req.getServletContext();
 		String path = ctx.getRealPath("/file");
-		
-		String cate1 = req.getParameter("category1");
-		String cate2 = req.getParameter("category2");
-		
-		System.out.println("cate1 : " + cate1);
-		System.out.println("cate2 : " + cate2);
-		
-		/*
+
 		File file = new File(path);
 		if(!file.exists()) file.mkdirs();
 		
 		int maxSize = 1024 * 1024 * 10;
 		MultipartRequest mr = new MultipartRequest(req, path, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 		
+		String cate1 = mr.getParameter("category1");
+		String cate2 = mr.getParameter("category2");
 		String prodName = mr.getParameter("productName");
 		String descript = mr.getParameter("description");
 		String company = mr.getParameter("productCompany");
@@ -80,55 +83,53 @@ public class RegisterController extends HttpServlet {
 		String origin = mr.getParameter("origin");
 		String ip = req.getRemoteAddr();
 		
-		String path2 = path + "/" + cate1 + "/" + cate2;
-		if(file.exists()) {
-			File[] files = file.listFiles();
-			for (int i=0; i<files.length; i++) {
-				files[i].delete();
-			}
-		}
+		int newCate2 = 10 + Integer.parseInt(cate2);
 		
-		MultipartRequest mr2 = new MultipartRequest(req, path2, maxSize, "UTF-8", new DefaultFileRenamePolicy());
+		String newPath = path + "/" + cate1 + "/" + newCate2;
+		
+		File newFile = new File(newPath);
+		if(!newFile.exists()) newFile.mkdirs();
 		
 		int i1 = thumb1.lastIndexOf(".");
 		String ext1 = thumb1.substring(i1);
 		String newName1 = UUID.randomUUID()+ext1;
 		
-		File f1 = new File(path2+"/"+thumb1);
-		File f2 = new File(path2+"/"+newName1);
-		
-		f1.renameTo(f2);
+		File f1 = new File(path+"/"+thumb1);
+		File f2 = new File(newPath+"/"+newName1);
+		Files.copy(f1.toPath(), f2.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		f1.delete();
 		
 		int i2 = thumb2.lastIndexOf(".");
 		String ext2 = thumb2.substring(i2);
 		String newName2 = UUID.randomUUID()+ext2;
 		
-		File f3 = new File(path2+"/"+thumb2);
-		File f4 = new File(path2+"/"+newName2);
-		
-		f3.renameTo(f4);
+		File f3 = new File(path+"/"+thumb2);
+		File f4 = new File(newPath+"/"+newName2);
+		Files.copy(f3.toPath(), f4.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		f3.delete();
 		
 		int i3 = thumb3.lastIndexOf(".");
 		String ext3 = thumb3.substring(i3);
 		String newName3 = UUID.randomUUID()+ext3;
 		
-		File f5 = new File(path2+"/"+thumb3);
-		File f6 = new File(path2+"/"+newName3);
-		
-		f5.renameTo(f6);
+		File f5 = new File(path+"/"+thumb3);
+		File f6 = new File(newPath+"/"+newName3);
+		Files.copy(f5.toPath(), f6.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		f5.delete();
 		
 		int i4 = detail.lastIndexOf(".");
 		String ext4 = detail.substring(i4);
 		String newName4 = UUID.randomUUID()+ext4;
 		
-		File f7 = new File(path2+"/"+detail);
-		File f8 = new File(path2+"/"+newName4);
-		
-		f7.renameTo(f8);
+		File f7 = new File(path+"/"+detail);
+		File f8 = new File(newPath+"/"+newName4);
+		Files.copy(f7.toPath(), f8.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		f7.delete();
 		
 		ProductVO pv = new ProductVO();
 		pv.setCate1(cate1);
 		pv.setCate2(cate2);
+		pv.setSeller(uid);
 		pv.setProdName(prodName);
 		pv.setDescript(descript);
 		pv.setCompany(company);
@@ -149,7 +150,6 @@ public class RegisterController extends HttpServlet {
 		pv.setIp(ip);
 		
 		service.insertProduct(pv);
-		*/
 		resp.sendRedirect("/Kmarket/admin/list.do");
 	}
 

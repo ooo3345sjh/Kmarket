@@ -16,7 +16,7 @@
   		<role-name>nobody</role-name>
   	</auth-constraint>
   </security-constraint>-->
-
+  
    <!-- 인코딩 설정 --> 
   <filter>
  	<filter-name>SetCharEncoding</filter-name>
@@ -30,6 +30,7 @@
  	<filter-name>SetCharEncoding</filter-name>
  	<url-pattern>/*</url-pattern>
  </filter-mapping>
+ 
 
 </web-app>
 

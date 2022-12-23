@@ -4,6 +4,8 @@
  
  $(function(){
 	
+
+	
 	/** 상품 삭제 **/
 	$(document).on('click', '.remove', function(e){
 		e.preventDefault();
@@ -34,15 +36,15 @@
 	/** 상품 수정 **/
 	$(document).on('click', '.modify', function(e){
 		
-		let tr = $(this).parent().parent();
-		let td = tr.children();
+		let tr  = $(this).parent().parent();
+		let td  = tr.children();
 		let txt = $(this).text();
 		
 		let prodName = td.eq(3);
-		let price = td.eq(4);
+		let price 	 = td.eq(4);
 		let discount = td.eq(5);
-		let point = td.eq(6);
-		let stock = td.eq(7);
+		let point 	 = td.eq(6);
+		let stock 	 = td.eq(7);
 		
 		if(txt == '[수정]'){
 			// 수정모드

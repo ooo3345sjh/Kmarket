@@ -66,7 +66,7 @@ public class Sql {
 												+ "`prodName`=?, "
 												+ "`descript`=?, "
 												+ "`company`=?, "
-												+ "`seller`='a101', "
+												+ "`seller`=?, "
 												+ "`price`=?, "
 												+ "`discount`=?, "
 												+ "`point`=?, "

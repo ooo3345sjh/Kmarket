@@ -7,7 +7,7 @@
                     <h1>로그인</h1>
                     <p>HOME > <span>로그인</span></p>
                 </nav>
-                <form action="/Kmarket/member/login.do" method="post">
+                <form action='<c:url value='/member/login.do'/>' method="post">
                     <table>
                         <tr>
                             <td>아이디</td>
@@ -32,11 +32,11 @@
                         <a href="#">비밀번호 찾기</a>
                         <a href='<c:url value='/member/join.do'/>'>회원가입</a>
                     </div>
-                    <a href="#">
-                        <img src="./img/member_login_banner.jpg" alt="휴대폰번호로 편리하게 로그인">
+                    <a href="https://www.naver.com">
+                        <img src='<c:url value='/member/img/member_login_banner.jpg'/>' alt="휴대폰번호로 편리하게 로그인">
                     </a>
                 </form>
-                <img src="./img/member_certifi_logo.gif" alt="banner">
+                <img src='<c:url value='/member/img/member_certifi_logo.gif'/>' alt="banner">
             </div>
         </main>
     </div>
