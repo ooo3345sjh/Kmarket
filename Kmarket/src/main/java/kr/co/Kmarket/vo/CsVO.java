@@ -9,6 +9,7 @@ public class CsVO {
 	private String type;
 	private String title;
 	private String content;
+	private int hit;
 	private String regip;
 	private String rdate;
 	
@@ -56,6 +57,12 @@ public class CsVO {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
 	}
 	public String getRegip() {
 		return regip;
