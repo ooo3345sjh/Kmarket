@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.db.Sql;
 import kr.co.Kmarket.vo.CartVo;
+import kr.co.Kmarket.vo.MemberVO;
 import kr.co.Kmarket.vo.OrderItemVO;
 import kr.co.Kmarket.vo.OrderVO;
 import kr.co.Kmarket.vo.ProductVO;
@@ -701,14 +702,16 @@ public class ProductDAO extends DBHelper {
 	}
 	
 	/* 주문한 상품 DB에 저장하는 메서드 */
-	public int insertOrder(OrderVO vo, List<OrderItemVO> list) {
+	public int insertOrder(OrderVO vo, List<OrderItemVO> list, MemberVO user) {
 		int result = 0;
 		
 		try {
 			con = getConnection();
 			con.setAutoCommit(false);
+			
+			// km_product_order에 최종 주문한 결제정고 추가하는 작업
 			psmt = con.prepareStatement(Sql.INSERT_ORDER);
-			psmt.setInt(1, vo.getOrdNo());
+			psmt.setString(1, vo.getOrdNo());
 			psmt.setString(2, vo.getUid());
 			psmt.setInt(3, vo.getOrdCount());
 			psmt.setInt(4, vo.getOrdPrice());
@@ -726,13 +729,14 @@ public class ProductDAO extends DBHelper {
 			psmt.setInt(16, vo.getOrdComplete());
 			psmt.setString(17, vo.getOrdState());
 			
-			result = psmt.executeUpdate();
+			psmt.executeUpdate();
 			
+			// km_product_order_item에 주문한 상품 추가하는 작업
 			String sql = "INSERT INTO `km_product_order_item` VALUES";
 			
 			for(int i=0; i<list.size(); i++) {
 				OrderItemVO oiv = list.get(i);
-				sql += "(" + oiv.getOrdNo() + ", " + oiv.getProdNo() + ", " + oiv.getCount() + ", "
+				sql += "('" + oiv.getOrdNo() + "', " + oiv.getProdNo() + ", " + oiv.getCount() + ", "
 					+  oiv.getPrice() + ", " + oiv.getDiscount() + ", " + oiv.getPoint() + ", " + oiv.getDelivery() + ", "
 					+ oiv.getTotal() + ")";
 				
@@ -742,7 +746,32 @@ public class ProductDAO extends DBHelper {
 			}
 			
 			stmt = con.createStatement();
-			result = stmt.executeUpdate(sql);
+			stmt.executeUpdate(sql);
+			
+			// km_member_point 테이블에 사용한 포인트 추가하는 작업
+			psmt.close();
+			
+			psmt = con.prepareStatement(Sql.INSERT_POINT);
+			psmt.setString(1, vo.getUid());
+			psmt.setString(2, vo.getOrdNo());
+			psmt.setInt(3, vo.getUsedPoint() * -1);
+			
+			psmt.executeUpdate();
+			
+			// km_member 테이블에 사용한 포인트 삭감하는 작업
+			String mamberPointSql = "UPDATE ";
+			
+			if(user.getType() == 1) {
+				mamberPointSql += " `km_member_general` ";
+			} else {
+				mamberPointSql += " `km_member_seller` ";
+			}
+			
+			mamberPointSql += "SET `point` = " +  (user.getPoint() - vo.getUsedPoint()) + " WHERE `uid`= '" + user.getUid() + "'";
+			
+			stmt.close();
+			stmt = con.createStatement();
+			result = stmt.executeUpdate(mamberPointSql);
 			
 			con.commit();
 			
@@ -753,5 +782,32 @@ public class ProductDAO extends DBHelper {
 		logger.debug("result : " + result);
 		return result;
 	}
-
+	
+	/* 장바구니로부터 주문페이지로 온 경우 주문한 상품을 장바구니 테이블에서 삭제하는 메서드 */
+	public int deleteProdcuctInCart(String[] cartNo) {
+		int result = 0;
+		
+		String sql = "DELETE FROM `km_product_cart` `cartNo` IN(";
+		
+		for(int i=0; i<cartNo.length; i++) {
+			if(i == cartNo.length-1) {
+				sql += "'" + cartNo[i] + "') ";
+				break;
+			}
+			sql += "'" + cartNo[i] + "', ";
+		}
+		
+		try {
+			stmt = con.createStatement();
+			result = stmt.executeUpdate(sql);
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		logger.debug("result : " + result);
+		return result;
+	}
 }

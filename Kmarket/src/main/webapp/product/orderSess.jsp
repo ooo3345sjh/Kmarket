@@ -43,6 +43,9 @@
                		  + "		<input type='hidden' name='discount' value='" + orderList[i].discount.replace("%", "") + "'>"
                		  + "		<input type='hidden' name='ProPoint' value='" + orderList[i].point.replaceAll(",", "") + "'>"
                		  + "		<input type='hidden' name='delivery' value='" + orderList[i].delivery.replaceAll(",", "") + "'>"
+               		  + "		<input type='hidden' name='prodName' value='" + orderList[i].prodName + "'>"
+               		  + "		<input type='hidden' name='descript' value='" + orderList[i].descript + "'>"
+               		  + "		<input type='hidden' name='thumb1' value='" + orderList[i].thumb1 + "'>"
 					  + "		<article>"
                       + "			<a href='#'><img src='<c:url value='/" + orderList[i].thumb1 + "'/>' alt='썸네일1'></a>"
                       + "			<div>"
@@ -162,7 +165,7 @@
 		
 		// 결제하기 버튼 클릭시
 		$('form').submit(function (e) {
-			//e.preventDefault();
+			e.preventDefault();
 			let regex = /[^0-9]/g;	// 숫자 아닌것만 체크하는 정규식
 			$('input[name=ordCount]').val(tCount.text()); 	 // 전체 상품 수량
 			$('input[name=ordPrice]').val(String(tPrice.text()).replace(regex, "")); 	 // 전체 상품 가격 
@@ -172,6 +175,23 @@
 			$('input[name=usedPoint]').val(String(usedPoint.text()).replace(regex, "")); 	 // 사용 포인트
 			$('input[name=ordTotPrice]').val(String(tTotalPrice.text()).replace(regex, "")); // 전체 상품 결제 금액
 		
+			
+			let formVal = $("form").serialize() ;
+			let contextRoot = '${request.getContextPath()}';
+			$.ajax({
+				type : 'post',
+				url : contextRoot + '/product/order.do',
+				data : formVal,
+				dataType : 'json',
+				success : function(data){
+					
+					// 세션 처리
+					sessionStorage.setItem("list", data.list);      // 주문된 상품 정보 저장
+					sessionStorage.setItem("orderInfo", data.orderInfo); // 최종결제 정보 저장
+					
+					location.href = contextRoot + '/product/complete.do';
+				}
+			});
 		})
 		/*
 		// 포인트 입력하는 이벤트
