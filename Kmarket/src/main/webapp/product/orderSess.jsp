@@ -173,7 +173,7 @@
 			$('input[name=ordTotPrice]').val(String(tTotalPrice.text()).replace(regex, "")); // 전체 상품 결제 금액
 		
 		})
-		
+		/*
 		// 포인트 입력하는 이벤트
 		$('input[name=point]').keyup(function () {
 			let inputVal = $(this).val().replaceAll(",", "");
@@ -234,7 +234,7 @@
 		})
 		
 		
-			
+			*/
 	})
 </script>
             </aside>
