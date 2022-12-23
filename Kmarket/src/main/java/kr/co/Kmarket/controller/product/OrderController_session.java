@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -61,10 +62,10 @@ public class OrderController_session extends HttpServlet {
 		// 주문 일련번호 생성
 		Date date = new Date();
 		Random random = new Random();
-		SimpleDateFormat sdf = new SimpleDateFormat("HHmmssSS");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyHHmmss");
 		
 		// 최종 결제 정보
-		String ordNo = sdf.format(date) + random.nextInt(10);  // 주문 번호
+		String ordNo = random.nextInt(22) + sdf.format(date);  // 주문 번호
 		System.out.println(ordNo);
 		String uid = user.getUid(); 	   					   // 회원 아이디
 		String ordCount = req.getParameter("ordCount"); 	   // 전체 상품 수량
@@ -104,7 +105,6 @@ public class OrderController_session extends HttpServlet {
 		orderVo.setOrdComplete(ordComplete);
 		orderVo.setOrdState(ordState);
 		
-		
 		String[] prodNoArr = req.getParameterValues("prodNo"); // 각 상품 번호
 		String[] cartNoArr = req.getParameterValues("cartNo"); // 장바구니에 담겨진 상품일시 장바구니 상품 번호
 		String[] countArr = req.getParameterValues("count");   // 각 상품 갯수
@@ -113,10 +113,28 @@ public class OrderController_session extends HttpServlet {
 		String[] pointArr = req.getParameterValues("ProPoint");   // 각 상품 갯수
 		String[] deliveryArr = req.getParameterValues("delivery");   // 각 상품 갯수
 		
+		// 주문 상품 아이템 테이블에 추가할 데이터
+		List<OrderItemVO> list = new ArrayList<>();
+		for(int i=0; i<prodNoArr.length; i++) {
+			OrderItemVO orderItemVo = new OrderItemVO();
+			orderItemVo.setProdNo(ordNo);
+			orderItemVo.setProdNo(prodNoArr[i]);
+			orderItemVo.setCount(countArr[i]);
+			orderItemVo.setPrice(priceArr[i]);
+			orderItemVo.setDiscount(discountArr[i]);
+			orderItemVo.setPoint(pointArr[i]);
+			orderItemVo.setDelivery(deliveryArr[i]);
+			orderItemVo.setTotal((Integer.parseInt(priceArr[i])
+					             - (int)Math.floor(Integer.parseInt(priceArr[i]) * (Integer.parseInt(discountArr[i]) * 0.01)))
+								 * Integer.parseInt(countArr[i])
+								 + Integer.parseInt(deliveryArr[i]));
+			
+			list.add(orderItemVo);
+		}
 
 		// 바로 구매일 경우
 		if(cartNoArr[0].equals("undefined")) {
-			//service.countProducts(null);
+			service.insertOrder(orderVo, list);
 		} 
 		
 		// 장바구니를 통한 구매일 경우
@@ -141,12 +159,6 @@ public class OrderController_session extends HttpServlet {
 		System.out.println("ordPayment : " + ordPayment);
 		
 		
-		for(int i=0; i<prodNoArr.length; i++) {
-			OrderItemVO orderItemVo = new OrderItemVO();
-			orderItemVo.setProdNo(ordNo);
-			orderItemVo.setProdNo(prodNoArr[i]);
-			orderItemVo.setCount(countArr[i]);
-		}
 		
 		for(String prodNo : prodNoArr) {
 			System.out.println("prodNo : " + prodNo);

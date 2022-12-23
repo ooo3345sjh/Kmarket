@@ -53,6 +53,7 @@
 	                    	
 	                    	<ul class="ul${i.count}">
 	                     		<c:forEach var="article" items="${map.articles}">
+
 	                         		<li id="m_list"><a href="<c:url value='/cs/view.do?no=${article.csNo}&cate1=${map.cate1}&cate2=${map.cate2}'/>"><span>Q.</span>${faqCate.title}</a></li>
 	                         	</c:forEach>
 	                         		<li class="more${i.count}"> <a href="#">더보기</a> </li>

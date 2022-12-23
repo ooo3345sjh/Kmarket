@@ -45,5 +45,12 @@ public class CsService {
 	public void update() {}
 	public void delete() {}
 	
+	
+	/*** admin index ***/
+	// 관리자 페이지 최신글 보기
+	public synchronized List<CsVO> selectLatest(String cate1) {
+		return dao.selectLatest(cate1);
+	}
+	
 
 }

@@ -5,6 +5,10 @@ import kr.co.Kmarket.vo.ProductVO;
 
 public class Sql {
 	
+	/*** admin ***/
+	public static final String SELECT_LATEST = "SELECT `csNo`, `title`, `rdate` FROM `km_cs` "
+											+ "WHERE `cate1`=? ORDER BY `csNo` DESC LIMIT 5 ";
+	
 	/*** member ***/
 	
 	// uid 등록
@@ -137,11 +141,14 @@ public class Sql {
 													  + "`total`=?,"
 													  + "`rdate`=NOW()";
 	
-	// 장바구니 담긴 상품을 조회하는 서비스
+	// 장바구니 담긴 상품을 조회
 	public static final String SELECT_PRODUCT_IN_CART = "SELECT * FROM `km_product_cart` c JOIN "
 													  + "`km_product` p ON	c.prodNo = p.prodNo "
 													  + "WHERE c.`uid`=?"
 													  + "ORDER BY c.`cartNo` desc";
+	/*** order ***/
+	// 주문한 상품 DB에 저장
+	public static final String INSERT_ORDER = "INSERT INTO `km_product_order` VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),?) ";
 	
 
 	
