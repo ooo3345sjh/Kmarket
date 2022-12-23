@@ -9,6 +9,9 @@ public class Sql {
 	public static final String SELECT_LATEST = "SELECT `csNo`, `title`, `rdate` FROM `km_cs` "
 											+ "WHERE `cate1`=? ORDER BY `csNo` DESC LIMIT 5 ";
 	
+	/*** admin-cs ***/
+	public static final String UPDATE_HIT = "UPDATE `km_cs` SET `hit` = `hit` + 1 WHERE `csNo`=?";
+	
 	/*** member ***/
 	
 	// uid 등록
@@ -155,7 +158,7 @@ public class Sql {
 	
 
 	
-	/*** QnaArticle ***/
+	/*** CS ***/
 	// 문의하기 글쓰기, 카테고리 별 목록(회원, 쿠폰/이벤트, 주문/결제, 배송, 취소/반품/교환, 여행/숙박/항공, 안전거래)
 	public static final String INSERT_QNA_ARTICLE = "INSERT INTO `km_cs` SET "
 													+ "`uid`=?, "
