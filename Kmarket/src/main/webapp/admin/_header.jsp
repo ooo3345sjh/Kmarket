@@ -22,9 +22,16 @@
                     <img src='<c:url value='/admin/img/admin_logo.png'/>' alt="ADMINSTRATOR">
                 </a>
                 <nav>
-                    <span>${sessMember.manager}님 반갑습니다.</span>
-                    <a href='<c:url value='/admin/index.do'/>'>HOME</a>
-                    <a href='<c:url value='/member/logoutSeller.do'/>'>로그아웃</a>
+                	<c:choose>
+                    	<c:when test="${sessMember.type eq 2}">
+                    		<span>${sessMember.manager}님 반갑습니다.</span>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<span>${sessMember.name}님 반갑습니다.</span>
+                    	</c:otherwise>
+                    </c:choose>
+                    <a href='<c:url value='/index.do'/>'>HOME</a>
+                    <a href='<c:url value='/member/logout.do'/>'>로그아웃</a>
                     <a href="#">고객센터</a>
                 </nav>
             </div>

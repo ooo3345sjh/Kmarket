@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.db.Sql;
 import kr.co.Kmarket.vo.CartVo;
+import kr.co.Kmarket.vo.OrderItemVO;
 import kr.co.Kmarket.vo.OrderVO;
 import kr.co.Kmarket.vo.ProductVO;
 import kr.co.Kmarket.vo.ReviewVO;
@@ -286,7 +287,8 @@ public class ProductDAO extends DBHelper {
 			String cate2 = (String)map.get("cate2");
 			String group = (String)map.get("group");
 			String type = (String)map.get("type");		// product_list 에서 판매목록순, 낮은가격순, 높은가격순...등으로 정렬하기위한 변수
-		
+			int types = (int)map.get("types");	// 유저 등급 확인
+			
 			StringBuffer sql = new StringBuffer();
 			sql.append("SELECT COUNT(`prodNo`) FROM `km_product` ");
 			
@@ -296,12 +298,23 @@ public class ProductDAO extends DBHelper {
 			} 
 			
 			else {	// 그룹명이 admin이라면
-				sql.append("WHERE `seller` = '"+ uid + "'" );
-				// 검색 조건이 있다면 WHERE절 추가
-				if(searchWord != null) {	// 검색 단어가 있을 경우
-					sql.append("AND `" + searchField + "` ");
-					sql.append("LIKE '%" + searchWord + "%'");  
-				}
+				if (types == 2) {
+					// 최고 관리자 계정이 아니라면
+					sql.append("WHERE `seller` = '"+ uid + "'" );
+					if(searchWord != null) {	// 검색 단어가 있을 경우
+						// 검색 조건이 있다면 AND절 추가
+						sql.append("AND `" + searchField + "` ");
+						sql.append("LIKE '%" + searchWord + "%'");  
+						}
+					} else {
+						// 최고 관리자 계정이라면
+						if(searchWord != null) {	// 검색 단어가 있을 경우
+							// 검색 조건이 있다면 WHERE절 추가
+							sql.append("WHERE `" + searchField + "` ");
+							sql.append("LIKE '%" + searchWord + "%'");  
+							}
+					}
+				
 			}
 	
 				
@@ -331,15 +344,28 @@ public class ProductDAO extends DBHelper {
 		String cate2 = (String)map.get("cate2");
 		String group = (String)map.get("group");
 		String sort = (String)map.get("sort"); // product_list에서 정렬할 변수값을 가져온다.
+		int types = (int)map.get("types");
 		
 		String sql = "SELECT p.*, s.`level` FROM `km_product` p JOIN `km_member_seller` s on p.`seller` = s.`uid` ";
 		
 		if(group.equals("admin")) {	// 그룹명이 admin이라면
-			// 검색 조건이 있다면 WHERE절 추가
-			if(map.get("searchField") != null) {
-				sql += " WHERE s.`uid` = '" + map.get("uid") + "' AND p.`" + map.get("searchField") + "` LIKE '%" + map.get("searchWord") + "%' ORDER BY p.`ProdNo` desc  LIMIT ?, 10";
-			} else {
-				sql += " WHERE s.`uid` = '" + map.get("uid") + "' ORDER BY p.`ProdNo` desc  LIMIT ?, 10";
+			
+			// 최고 관리자 계정이 아닌 경우
+			if(types == 2) {
+				// 검색 조건이 있다면 WHERE절 추가
+				if(map.get("searchField") != null) {
+					sql += " WHERE s.`uid` = '" + map.get("uid") + "' AND p.`" + map.get("searchField") + "` LIKE '%" + map.get("searchWord") + "%' ORDER BY p.`ProdNo` desc  LIMIT ?, 10";
+				} else {
+					sql += " WHERE s.`uid` = '" + map.get("uid") + "' ORDER BY p.`ProdNo` desc  LIMIT ?, 10";
+				}
+			}
+			// 최고 관리자 계정인 경우
+			else {
+				if(map.get("searchField") != null) {
+					sql += " WHERE p.`" + map.get("searchField") + "` LIKE '%" + map.get("searchWord") + "%' ORDER BY p.`ProdNo` desc  LIMIT ?, 10";
+				} else {
+					sql += " ORDER BY p.`ProdNo` desc  LIMIT ?, 10";
+				}
 			}
 		}
 		
@@ -676,16 +702,57 @@ public class ProductDAO extends DBHelper {
 	}
 	
 	/* 주문한 상품 DB에 저장하는 메서드 */
-	/*public int insertOrder(OrderVO vo) {
+	public int insertOrder(OrderVO vo, List<OrderItemVO> list) {
 		int result = 0;
 		
 		try {
 			con = getConnection();
-			psmt = con.prepareStatement("sd");
+			con.setAutoCommit(false);
+			psmt = con.prepareStatement(Sql.INSERT_ORDER);
+			psmt.setInt(1, vo.getOrdNo());
+			psmt.setString(2, vo.getUid());
+			psmt.setInt(3, vo.getOrdCount());
+			psmt.setInt(4, vo.getOrdPrice());
+			psmt.setInt(5, vo.getOrdDiscount());
+			psmt.setInt(6, vo.getOrdDelivery());
+			psmt.setInt(7, vo.getSavePoint());
+			psmt.setInt(8, vo.getUsedPoint());
+			psmt.setInt(9, vo.getOrdTotPrice());
+			psmt.setString(10, vo.getRecipName());
+			psmt.setString(11, vo.getRecipHp());
+			psmt.setString(12, vo.getRecipZip());
+			psmt.setString(13, vo.getRecipAddr1());
+			psmt.setString(14, vo.getRecipAddr2());
+			psmt.setInt(15, vo.getOrdPayment());
+			psmt.setInt(16, vo.getOrdComplete());
+			psmt.setString(17, vo.getOrdState());
+			
+			result = psmt.executeUpdate();
+			
+			String sql = "INSERT INTO `km_product_order_item` VALUES";
+			
+			for(int i=0; i<list.size(); i++) {
+				OrderItemVO oiv = list.get(i);
+				sql += "(" + oiv.getOrdNo() + ", " + oiv.getProdNo() + ", " + oiv.getCount() + ", "
+					+  oiv.getPrice() + ", " + oiv.getDiscount() + ", " + oiv.getPoint() + ", " + oiv.getDelivery() + ", "
+					+ oiv.getTotal() + ")";
+				
+				if(i != list.size()-1) {
+					sql += ", ";
+				} 
+			}
+			
+			stmt = con.createStatement();
+			result = stmt.executeUpdate(sql);
+			
+			con.commit();
+			
+			close();
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 		logger.debug("result : " + result);
-	}*/
+		return result;
+	}
 
 }

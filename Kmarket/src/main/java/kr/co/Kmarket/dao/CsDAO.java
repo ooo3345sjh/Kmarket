@@ -271,4 +271,34 @@ public class CsDAO extends DBHelper {
 	public void update() {}
 	public void delete() {}
 	
+	
+	/*** admin ***/
+	
+	/* 관리자 페이지 최신글 보기 */
+	public synchronized List<CsVO> selectLatest(String cate1){
+		
+		List<CsVO> latests = new ArrayList<>();
+		
+		try {
+			logger.info("selectLatest...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.SELECT_LATEST);
+			psmt.setString(1, cate1);
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				CsVO vo = new CsVO();
+				vo.setCsNo(rs.getInt(1));
+				vo.setTitle(rs.getString(2));
+				vo.setRdate(rs.getString(3).substring(2, 10));
+				latests.add(vo);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return latests;
+	}
+	
+	
 }
