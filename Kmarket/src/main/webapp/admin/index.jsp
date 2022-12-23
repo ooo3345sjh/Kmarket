@@ -56,11 +56,12 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>게시판관리
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>고객센터
                             </a>
                             <ol>
-                                <li><a href="#">게시판현황</a></li>
-                                <li><a href="#">고객문의</a></li>
+                                <li><a href="#">공지사항</a></li>
+                                <li><a href="#">자주묻는질문</a></li>
+                                <li><a href="#">문의하기</a></li>
                             </ol>
                         </li>
                     </ul>
@@ -251,7 +252,7 @@
                     <section>
                         <article>
                             <table border="0">
-                                <caption>공지사항1</caption>
+                                <caption>공지사항</caption>
                                 <tr>
                                     <td>
                                         <p>

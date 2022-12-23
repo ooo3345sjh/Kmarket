@@ -519,7 +519,7 @@
     height: auto;
     border-bottom: 1px solid #ccc;
 }
-#cs > .faq > .list > article > div > ul > li:nth-child(n+4) {
+#cs > .faq > .list > article > div > ul > #m_list:nth-child(n+4) {
     display: none;
 }
 #cs > .faq > .list > article > div > ul a {
@@ -541,8 +541,14 @@
     color: #006cff;
     margin-right: 6px;
 }
-#cs > .faq > .list > article > div > button {
-    display: block !important;
+#cs > .faq > .list > article > div > ul > .more1, .more2, .more3, .more4, .more5, .more6, .more7 {
+    display: block ;
+    border-bottom: none;
+    text-align: center;
+}
+
+#cs > .faq > .list > article > div > ul > .short1, .short2, .short3, .short4, .short5, .short6, .short7 {
+    display: none;
     border-bottom: none;
     text-align: center;
 }
@@ -550,6 +556,9 @@
 /* faq - 글보기 */
 #cs > .faq > .view {}
 #cs > .faq > .view > article {}
+#cs > .faq > .view > article > div {
+	
+}
 #cs > .faq > .view > article > nav {
     width: 100%;
     height: auto;
@@ -560,7 +569,7 @@
 }
 #cs > .faq > .view > article > nav > .title {
     margin-bottom: 6px;
-    font-size: 32px;
+    font-size: 27px;
     font-weight: bold;
 }
 #cs > .faq > .view > article > nav > .title > span {

@@ -5,11 +5,24 @@
 <jsp:include page="./_${map.cate1}.jsp"/>
 <script>
 	$(function(){
-		
-		
+		for(let i = 1; i < 8; i++){
+			
+			$('.more'+i+'').click(function(){
+				$('.more'+i+'').hide();
+				$('.short'+i+'').show();
+				$('.ul'+i+' > #m_list:nth-child(n+4)').show();
+			});
+			
+			$('.short'+i+'').click(function(){
+				$('#m_list:nth-child(n+4)').hide();
+				$('.short'+i+'').hide();
+				$('.more'+i+'').show();
+			})
+		}
 		
 	})
 </script>
+
             <c:choose>
             	<%-- 공지사항 전체 --%>
             	<c:when test="${map.cate1 eq 'notice' && map.cate2 eq 'all'}"> 
@@ -23,7 +36,7 @@
                       	${fn:substring(rdate,2,10)}
                       </td>
                   </tr>
-                 </c:forEach>
+                </c:forEach>
             	</table>
             	
             	<div class="page">
@@ -34,20 +47,19 @@
             	
             	<%-- 자주묻는 질문 --%>
             	<c:when test="${map.cate1 eq 'faq'}">
-            	
-	              	<c:forEach var="faqCate" items="${map.faqlist}" varStatus="status">
-	            		<div class="box">
+            	<div>
+	              	<c:forEach var="faqCate" items="${map.faqlist}" varStatus="i">
 	                    	<h3>${faqCate.type}</h3>
 	                    	
-	                    	<ul>
+	                    	<ul class="ul${i.count}">
 	                     		<c:forEach var="article" items="${map.articles}">
-	                         		<li class="m_list"><a href="<c:url value='/cs/view.do'/>"><span>Q.</span>${faqCate.title}</a></li>
+	                         		<li id="m_list"><a href="<c:url value='/cs/view.do?no=${article.csNo}&cate1=${map.cate1}&cate2=${map.cate2}'/>"><span>Q.</span>${faqCate.title}</a></li>
 	                         	</c:forEach>
-	                         	<li class="more"><a href="#">더보기</a> </li>
+	                         		<li class="more${i.count}"> <a href="#">더보기</a> </li>
+	                         		<li class="short${i.count}"> <a href="#">간단히 보기</a> </li>
 	                    	</ul>                              
-	               		</div>
 	              	</c:forEach>
-              
+              	</div>
             	</c:when>
             	<%-- 자주묻는 질문 끝 --%>
             	
