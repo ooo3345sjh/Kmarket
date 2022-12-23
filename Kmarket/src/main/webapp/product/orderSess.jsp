@@ -173,8 +173,68 @@
 			$('input[name=ordTotPrice]').val(String(tTotalPrice.text()).replace(regex, "")); // 전체 상품 결제 금액
 		
 		})
-		
+		/*
+		// 포인트 입력하는 이벤트
+		$('input[name=point]').keyup(function () {
+			let inputVal = $(this).val().replaceAll(",", "");
+			if(!inputVal.match(/^[0-9 || ,]+$/) && inputVal != ''){
+				$(this).val(inputVal.replace(/[^0-9]/g, "").replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+				alert('숫자만 입력해주세요.');
+				return;
+			}
+
+			// 회원이 가지고 있는 포인트 이상 입력시
+			if(Number(inputVal) > Number(userPoint)){
+				inputVal = userPoint;	
+			}
 			
+			$(this).val(inputVal.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+		})
+		
+		
+		// 포인트 적용시키는 이벤트
+		let currentPoint = $('#currentPoint');
+		let apply = false;
+		$('input[name=pointBtn]').click(function () {
+			
+			if(!apply){
+				let point = $('input[name=point]').val().replaceAll(",", "");
+				
+				if(Number(point) < 5000){
+					alert('5,000점이상 부터 사용가능합니다.');
+					return;
+				}
+				
+				tPoint.text((Number(point)*-1).toLocaleString('ko-KR')); // 사용할 포인트 입력
+				currentPoint.text((Number(userPoint)- Number(point)).toLocaleString('ko-KR')); // 현재 포인트에 사용할 포인트를 뺀다.
+				let totalPrice = Number(currentTotal) - Number(point);  // 현재 전체 주문금액에서 포인트를 뺀다.
+				tTotalPrice.text(totalPrice.toLocaleString('ko-KR'));   // 사용한 포인트를 뺀 주문금액 입력
+				
+				$(this).val('취소');
+				
+				$(this).css({
+					'background':'#F99C9C',
+					'color':'#8E1010',
+					'border-color':'#BF6C6C'
+				});
+				apply = true;
+			} else {
+				tTotalPrice.text(Number(currentTotal).toLocaleString('ko-KR'));
+				tPoint.text('0');
+				currentPoint.text(Number(userPoint).toLocaleString('ko-KR'));
+				
+				$(this).val('적용');
+				$(this).css({
+					'background':'#f0f4f9',
+					'color':'#3371c9',
+					'border-color':'#acc0e0'
+				});
+				apply = false;
+			}
+		})
+		
+		
+			*/
 	})
 </script>
             </aside>

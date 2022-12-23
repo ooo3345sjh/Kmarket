@@ -17,6 +17,7 @@
                                 <li><a href="#">배너관리</a></li>
                             </ol>
                         </li>
+                        
                         <li>
                             <a href="#">
                                 <i class="fas fa-store" aria-hidden="true"></i>상점관리
@@ -26,6 +27,7 @@
                                 <li><a href="#">재고관리</a></li>
                             </ol>
                         </li>
+                        
                         <li>
                             <a href="#">
                                 <i class="fa fa-users" aria-hidden="true"></i>회원관리
@@ -37,6 +39,7 @@
                                 <li><a href="#">접속자집계</a></li>
                             </ol>
                         </li>
+                        
                         <li>
                             <a href="#">
                                 <i class="fas fa-box-open" aria-hidden="true"></i>상품관리

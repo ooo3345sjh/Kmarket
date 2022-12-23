@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
         <main>
             <div>
@@ -253,59 +254,35 @@
                         <article>
                             <table border="0">
                                 <caption>공지사항</caption>
-                                <tr>
-                                    <td>
-                                        <p>
-                                            <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요. 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                        <p>
-                                            <span>[공지] 1주년 기념 신규가입 사은품 안내</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                        <p>
-                                            <span>[공지] 1주년 기념 신규가입 사은품 안내</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                        <p>
-                                            <span>[공지] 1주년 기념 신규가입 사은품 안내</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                        <p>
-                                            <span>[공지] 1주년 기념 신규가입 사은품 안내</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                    </td>
-                                </tr>
+                                	<c:forEach var="vo" items="${latest1}">
+	                                	<tr>
+	                                    	<td>
+		                                        <p>
+		                                            <span>
+		                                            	<a href="#">${vo.title}</a>
+		                                            </span>
+		                                            <span>${vo.rdate}</span>
+		                                        </p>
+	                                    	</td>
+	                                    </tr>
+                                    </c:forEach>
                             </table>
                         </article>
                         <article>
                             <table>
                                 <caption>고객문의</caption>
-                                <tr>
-                                    <td>
-                                        <p>
-                                            <span>[문의] 상품이 잘못 왔습니다.</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                        <p>
-                                            <span>[문의] 안녕하세요. 주문자 입니다. 구매한 상품에 문제가 있어서 이렇게 문의글을 남깁니다.</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                        <p>
-                                            <span>[문의] 상품이 1개 잘못 왔습니다.</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                        <p>
-                                            <span>[문의] 상품이 1개 잘못 왔습니다.</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                        <p>
-                                            <span>[문의] 상품이 1개 잘못 왔습니다.</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                    </td>
-                                </tr>
+                                	<c:forEach var="vo" items="${latest2}">
+	                                	<tr>
+	                                    	<td>
+		                                        <p>
+		                                            <span>
+		                                            	<a href="#">${vo.title}</a>
+		                                            </span>
+		                                            <span>${vo.rdate}</span>
+		                                        </p>
+	                                    	</td>
+	                                    </tr>
+                                    </c:forEach>
                             </table>
                         </article>
                     </section>
