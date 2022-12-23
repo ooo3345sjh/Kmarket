@@ -20,9 +20,21 @@
         <header>
             <div class="top">
                 <div>
-                    <a href="<c:url value='#'/>">로그인</a>
-                    <a href="#">회원가입</a>
-                    <a href="#">마이페이지</a>
+                	<c:choose>
+                		<c:when test="${sessMember.type eq 1}">
+                    		<a href='<c:url value='/member/logout.do'/>'>로그아웃</a>
+                    		<a href="#">마이페이지</a>
+                    	</c:when>
+                    	<c:when test="${sessMember.type > 1}">
+                    		<a href='<c:url value='/admin/index.do'/>'>관리자</a>
+                    		<a href='<c:url value='/member/logout.do'/>'>로그아웃</a>
+                    		<a href="#">마이페이지</a>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<a href='<c:url value='/member/login.do'/>'>로그인</a>
+                    		<a href='<c:url value='/member/join.do'/>'>회원가입</a>
+                    	</c:otherwise>
+                    </c:choose>
                     <a href='<c:url value='/product/cart.do'/>'>
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         장바구니

@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kr.co.Kmarket.service.ProductService;
@@ -46,6 +47,7 @@ public class OrderController_session extends HttpServlet {
 		MemberVO vo = (MemberVO)req.getSession().getAttribute("sessMember");
 		
 		req.setAttribute("vo", vo);
+		req.setAttribute("request", req);
 		req.getRequestDispatcher("/product/orderSess.jsp").forward(req, resp);
 	}
 	
@@ -62,7 +64,7 @@ public class OrderController_session extends HttpServlet {
 		// 주문 일련번호 생성
 		Date date = new Date();
 		Random random = new Random();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyHHmmss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmssSSS");
 		
 		// 최종 결제 정보
 		String ordNo = random.nextInt(22) + sdf.format(date);  // 주문 번호
@@ -112,36 +114,38 @@ public class OrderController_session extends HttpServlet {
 		String[] discountArr = req.getParameterValues("discount");   // 각 상품 갯수
 		String[] pointArr = req.getParameterValues("ProPoint");   // 각 상품 갯수
 		String[] deliveryArr = req.getParameterValues("delivery");   // 각 상품 갯수
+		String[] prodNameArr = req.getParameterValues("prodName");   // 각 상품 제목
+		String[] descriptArr = req.getParameterValues("descript");   // 각 상품 설명
+		String[] thumb1Arr = req.getParameterValues("thumb1");   // 각 상품 썸네일1
 		
 		// 주문 상품 아이템 테이블에 추가할 데이터
 		List<OrderItemVO> list = new ArrayList<>();
 		for(int i=0; i<prodNoArr.length; i++) {
 			OrderItemVO orderItemVo = new OrderItemVO();
-			orderItemVo.setProdNo(ordNo);
+			orderItemVo.setOrdNo(ordNo);
 			orderItemVo.setProdNo(prodNoArr[i]);
 			orderItemVo.setCount(countArr[i]);
 			orderItemVo.setPrice(priceArr[i]);
 			orderItemVo.setDiscount(discountArr[i]);
 			orderItemVo.setPoint(pointArr[i]);
 			orderItemVo.setDelivery(deliveryArr[i]);
+			orderItemVo.setDiscountPrice((int)Math.floor(Integer.parseInt(priceArr[i]) * (Integer.parseInt(discountArr[i]) * 0.01)));
 			orderItemVo.setTotal((Integer.parseInt(priceArr[i])
-					             - (int)Math.floor(Integer.parseInt(priceArr[i]) * (Integer.parseInt(discountArr[i]) * 0.01)))
-								 * Integer.parseInt(countArr[i])
-								 + Integer.parseInt(deliveryArr[i]));
+					             - orderItemVo.getDiscountPrice()
+								 * Integer.parseInt(countArr[i])));
+			orderItemVo.setProdName(prodNameArr[i]);
+			orderItemVo.setDescript(descriptArr[i]);
+			orderItemVo.setThumb1(thumb1Arr[i]);
 			
 			list.add(orderItemVo);
 		}
 
-		// 바로 구매일 경우
-		if(cartNoArr[0].equals("undefined")) {
-			service.insertOrder(orderVo, list);
+		// 장바구니를 통한 구매일 경우
+		if(!cartNoArr[0].equals("undefined")) {
+			service.deleteProductInCart(cartNoArr); // 장바구니 테이블에서 주문한 상품을 삭제 해준다.
 		} 
 		
-		// 장바구니를 통한 구매일 경우
-		else {
-			
-		}
-		
+		service.insertOrder(orderVo, list, user);
 		
 		
 		System.out.println("ordCount : " + ordCount);
@@ -182,6 +186,16 @@ public class OrderController_session extends HttpServlet {
 		for(String delivery : deliveryArr) {
 			System.out.println("delivery : " + delivery);
 		}
+		
+		JsonObject json = new JsonObject();
+		Gson gson = new Gson();
+		json.addProperty("list", gson.toJson(list));
+		json.addProperty("orderInfo", gson.toJson(orderVo));
+		
+		resp.setContentType("application/json;charset=UTF-8");
+		Writer writer = resp.getWriter();
+		writer.write(json.toString());
+		//req.getRequestDispatcher("/product/complete.jsp").forward(req, resp);
 	}
 
 }

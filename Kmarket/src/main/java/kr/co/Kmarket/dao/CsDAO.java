@@ -145,6 +145,7 @@ public class CsDAO extends DBHelper {
 				cvo.setCate2(rs.getString("cate2"));
 				cvo.setType(rs.getString("type"));
 				cvo.setTitle(rs.getString("title"));
+				cvo.setHit(rs.getInt("hit"));
 				cvo.setContent(rs.getString("content"));
 				cvo.setRegip(rs.getString("regip"));
 				cvo.setRdate(rs.getString("rdate"));
@@ -219,6 +220,7 @@ public class CsDAO extends DBHelper {
 				cvo.setType(rs.getString("type"));
 				cvo.setTitle(rs.getString("title"));
 				cvo.setContent(rs.getString("content"));
+				cvo.setHit(rs.getInt("hit"));
 				cvo.setRegip(rs.getString("regip"));
 				cvo.setRdate(rs.getString("rdate"));
 				
@@ -267,8 +269,50 @@ public class CsDAO extends DBHelper {
 		map.put("totalCount", totalCount);
 	}
 	
+	public void updateHit(String csNo) {
+		try {
+			logger.info("updateHit...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.UPDATE_HIT);
+			psmt.setString(1, csNo);
+			psmt.executeUpdate();
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
 	
-	public void update() {}
 	public void delete() {}
+	
+	
+	/*** admin ***/
+	
+	/* 관리자 페이지 최신글 보기 */
+	public synchronized List<CsVO> selectLatest(String cate1){
+		
+		List<CsVO> latests = new ArrayList<>();
+		
+		try {
+			logger.info("selectLatest...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.SELECT_LATEST);
+			psmt.setString(1, cate1);
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				CsVO vo = new CsVO();
+				vo.setCsNo(rs.getInt(1));
+				vo.setTitle(rs.getString(2));
+				vo.setRdate(rs.getString(3).substring(2, 10));
+				latests.add(vo);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return latests;
+	}
+	
 	
 }

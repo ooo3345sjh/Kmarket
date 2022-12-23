@@ -219,13 +219,13 @@ main > div > aside > #gnb ol > li > a {
 }
 #admin-product-list > table tr:first-child > th > input[type=checkbox] {margin-top: 1.5px;}
 #admin-product-list > table tr > td {padding: 10px;}
-#admin-product-list > table tr:not(:first-child) > td:nth-child(4) {width: 300px;text-align: left;}
+#admin-product-list > table tr:not(:first-child) > td:nth-child(4) {width: 300px; text-align: left;}
 #admin-product-list > table td {
     border-bottom: 1px solid #e6e6e6;
     text-align: center;
 }
 #admin-product-list > table td > img {width: 60px;}
-#admin-product-list > input[type=button] {
+#admin-product-list > #deleteButton {
     float: left;
     background: #fff;
     height: auto;
@@ -234,6 +234,18 @@ main > div > aside > #gnb ol > li > a {
     padding: 10px 15px;
     border: 1px solid #d6d6d6;
     box-sizing: border-box;
+    margin-top: 10px;
+}
+#admin-product-list > #registerButton {
+	float: right;
+    background: #fff;
+    height: auto;
+    cursor: pointer;
+    text-indent: 0;
+    padding: 10px 15px;
+    border: 1px solid #d6d6d6;
+    box-sizing: border-box;
+    margin-top: 10px;
 }
 #admin-product-list > .paging {
     display: block;

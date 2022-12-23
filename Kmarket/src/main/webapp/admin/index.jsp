@@ -1,71 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
-        <main>
-            <div>
-                <aside>
-                    <ul id="gnb">
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-cogs" aria-hidden="true"></i>환경설정
-                            </a>
-                            <ol>
-                                <li><a href="#">기본환경설정</a></li>
-                                <li><a href="#">배너관리</a></li>
-                            </ol>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-store" aria-hidden="true"></i>상점관리
-                            </a>
-                            <ol>
-                                <li><a href="#">판매자현황</a></li>
-                                <li><a href="#">재고관리</a></li>
-                            </ol>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-users" aria-hidden="true"></i>회원관리
-                            </a>
-                            <ol>
-                                <li><a href="#">회원현황</a></li>
-                                <li><a href="#">포인트관리</a></li>
-                                <li><a href="#">비회원관리</a></li>
-                                <li><a href="#">접속자집계</a></li>
-                            </ol>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-box-open" aria-hidden="true"></i>상품관리
-                            </a>
-                            <ol>
-                                <li><a href="#">상품현황</a></li>
-                                <li><a href="#">상품등록</a></li>
-                                <li><a href="#">재고관리</a></li>
-                            </ol>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-credit-card" aria-hidden="true"></i>주문관리
-                            </a>
-                            <ol>
-                                <li><a href="#">주문현황</a></li>
-                                <li><a href="#">매출현황</a></li>
-                                <li><a href="#">결제관리</a></li>
-                                <li><a href="#">배송관리</a></li>
-                            </ol>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>고객센터
-                            </a>
-                            <ol>
-                                <li><a href="#">공지사항</a></li>
-                                <li><a href="#">자주묻는질문</a></li>
-                                <li><a href="#">문의하기</a></li>
-                            </ol>
-                        </li>
-                    </ul>
-                </aside>
+
                 <section id="admin-index" class="admin">
                     <nav>
                         <h1>관리자 메인</h1>
@@ -253,59 +189,35 @@
                         <article>
                             <table border="0">
                                 <caption>공지사항</caption>
-                                <tr>
-                                    <td>
-                                        <p>
-                                            <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요. 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                        <p>
-                                            <span>[공지] 1주년 기념 신규가입 사은품 안내</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                        <p>
-                                            <span>[공지] 1주년 기념 신규가입 사은품 안내</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                        <p>
-                                            <span>[공지] 1주년 기념 신규가입 사은품 안내</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                        <p>
-                                            <span>[공지] 1주년 기념 신규가입 사은품 안내</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                    </td>
-                                </tr>
+                                	<c:forEach var="vo" items="${latest1}">
+	                                	<tr>
+	                                    	<td>
+		                                        <p>
+		                                            <span>
+		                                            	<a href="#">${vo.title}</a>
+		                                            </span>
+		                                            <span>${vo.rdate}</span>
+		                                        </p>
+	                                    	</td>
+	                                    </tr>
+                                    </c:forEach>
                             </table>
                         </article>
                         <article>
                             <table>
                                 <caption>고객문의</caption>
-                                <tr>
-                                    <td>
-                                        <p>
-                                            <span>[문의] 상품이 잘못 왔습니다.</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                        <p>
-                                            <span>[문의] 안녕하세요. 주문자 입니다. 구매한 상품에 문제가 있어서 이렇게 문의글을 남깁니다.</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                        <p>
-                                            <span>[문의] 상품이 1개 잘못 왔습니다.</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                        <p>
-                                            <span>[문의] 상품이 1개 잘못 왔습니다.</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                        <p>
-                                            <span>[문의] 상품이 1개 잘못 왔습니다.</span>
-                                            <span>20-07-08 12:23</span>
-                                        </p>
-                                    </td>
-                                </tr>
+                                	<c:forEach var="vo" items="${latest2}">
+	                                	<tr>
+	                                    	<td>
+		                                        <p>
+		                                            <span>
+		                                            	<a href="#">${vo.title}</a>
+		                                            </span>
+		                                            <span>${vo.rdate}</span>
+		                                        </p>
+	                                    	</td>
+	                                    </tr>
+                                    </c:forEach>
                             </table>
                         </article>
                     </section>

@@ -1,7 +1,6 @@
 package kr.co.Kmarket.controller.admin;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,36 +9,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kr.co.Kmarket.service.CsService;
 import kr.co.Kmarket.vo.CsVO;
 
-@WebServlet("/admin/index.do")
-public class IndexController extends HttpServlet {
+@WebServlet("/admin/cs/view.do")
+public class _CsViewController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private CsService service = new CsService();
 	
 	@Override
 	public void init() throws ServletException {
 	}
-	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String cate1 = req.getParameter("cate1");
+		String csNo = req.getParameter("no");
 		
-		String notice = "notice";
-		String qna = "qna";
+		CsVO cvo = service.viewArticle(csNo);
 		
-		List<CsVO> latest1 = service.selectLatest(notice);
-		List<CsVO> latest2 = service.selectLatest(qna);
-		
-		req.setAttribute("latest1", latest1);
-		req.setAttribute("latest2", latest2);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/index.jsp");
+		req.setAttribute("cate1", cate1);
+		req.setAttribute("cvo", cvo);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/view.jsp");
 		dispatcher.forward(req, resp);
 	}
-	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	}
-
 }

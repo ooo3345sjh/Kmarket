@@ -775,6 +775,7 @@
 
 #product > .complete > .info table tr > td {text-align: center;}
 #product > .complete > .info table tr > td div {
+	width: 516px;
     float: left;
     margin-left: 10px;
     text-align: left;
@@ -790,7 +791,7 @@
 #product > .complete > .info table tr > td:last-child {
     color: #ff006c;
     font-weight: bold;
-    text-align: right;
+    text-align: center;
 }
 #product > .complete > .info table tr > td > article {
     overflow: hidden;

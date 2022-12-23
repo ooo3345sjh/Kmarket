@@ -1,25 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
-<script>
-$(function(){
-	
-	$('form').submit(function(e) {
-		
-		e.preventDefault();
-
-		$.ajax({
-			  url  : "/Kmarket/admin/register.do",
-			  type : "POST",
-			  data : $('#form1, #form2').serialize(),
-			  dataType: "json"
-			  success : function(){
-			    alert("성공했네?!");
-			  }
-			});
-	})
-});
-</script>
+<script src="./js/point.js"></script>
         <main>
             <div>
                 <aside>
@@ -58,8 +40,8 @@ $(function(){
                                 <i class="fas fa-box-open" aria-hidden="true"></i>상품관리
                             </a>
                             <ol>
-                                <li><a href="#">상품현황</a></li>
-                                <li><a href="#">상품등록</a></li>
+                                <li><a href='<c:url value='/admin/list.do'/>'>상품현황</a></li>
+                                <li><a href='<c:url value='/admin/register.do'/>'>상품등록</a></li>
                                 <li><a href="#">재고관리</a></li>
                             </ol>
                         </li>
@@ -85,12 +67,30 @@ $(function(){
                         </li>
                     </ul>
                 </aside>
+=======
+<script>
+$(function(){
+	
+	$(document).on('click', '#submit', function(){
+		
+		let cate1 = $('.category1').val();
+		let cate2 = $('.category2').val();
+		
+		$.ajax({
+			type:'POST',
+			url: '/Kmarket/admin/register.do',
+			data: {'cate1':cate1, 'cate2':cate2},
+			dataType: 'json'
+		});
+	});
+});
+</script>
                 <section id="admin-product-register" class="admin">
                     <nav>
                         <h1>상품등록</h1>
                         <p>HOME > 상품관리 > <span>상품등록</span></p>
                     </nav>
-                    <form action="#" id="form1" enctype="application/x-www-form-urlencoded">
+                    <form action='<c:url value="/admin/register.do"/>' name="form" method="post" enctype="multipart/form-data" onsubmit="return checkAll()">
                         <h2>상품분류</h2>
                         <p>기본분류는 반드시 선택하셔야 합니다. 하나의 상품에 1개의 분류를 지정 합니다.</p>
                         <table border="0">
@@ -120,8 +120,6 @@ $(function(){
                                 </td>
                             </tr>
                         </table>
-                      </form>
-                      <form action='<c:url value="/admin/register.do"/>' id="form2" name="form" method="post" enctype="multipart/form-data" onsubmit="return checkAll()">
                         <h2>기본정보</h2>
                         <p>기본정보는 반드시 입력해야 합니다.</p>
                         <table border="0">
@@ -148,7 +146,7 @@ $(function(){
                             <tr>
                                 <th>판매가격</th>
                                 <td>
-                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="sellPrice" required><span>원</span>
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="sellPrice" id="price" onkeyup="points();" required><span>원</span>
                                 </td>
                             </tr>
                             
@@ -162,7 +160,7 @@ $(function(){
                             <tr>
                                 <th>포인트</th>
                                 <td>
-                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="point" required><span>점</span>
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="point" id="point" required><span>점</span>
                                     <p>※ '0'을 입력하면 포인트 없음</p>
                                 </td>
                             </tr>

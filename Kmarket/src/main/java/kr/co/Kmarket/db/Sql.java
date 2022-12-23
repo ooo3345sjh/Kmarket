@@ -5,6 +5,13 @@ import kr.co.Kmarket.vo.ProductVO;
 
 public class Sql {
 	
+	/*** admin ***/
+	public static final String SELECT_LATEST = "SELECT `csNo`, `title`, `rdate` FROM `km_cs` "
+											+ "WHERE `cate1`=? ORDER BY `csNo` DESC LIMIT 5 ";
+	
+	/*** admin-cs ***/
+	public static final String UPDATE_HIT = "UPDATE `km_cs` SET `hit` = `hit` + 1 WHERE `csNo`=?";
+	
 	/*** member ***/
 	
 	// uid 등록
@@ -62,7 +69,7 @@ public class Sql {
 												+ "`prodName`=?, "
 												+ "`descript`=?, "
 												+ "`company`=?, "
-												+ "`seller`='a101', "
+												+ "`seller`=?, "
 												+ "`price`=?, "
 												+ "`discount`=?, "
 												+ "`point`=?, "
@@ -146,9 +153,12 @@ public class Sql {
 	// 주문한 상품 DB에 저장
 	public static final String INSERT_ORDER = "INSERT INTO `km_product_order` VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),?) ";
 	
+	// 주문시 사용한 포인트 저장
+	public static final String INSERT_POINT = "INSERT INTO `km_member_point` (`uid`, `ordNo`, `point`, `pointDate`) VALUES(?, ?, ?, NOW())";
+	
 
 	
-	/*** QnaArticle ***/
+	/*** CS ***/
 	// 문의하기 글쓰기, 카테고리 별 목록(회원, 쿠폰/이벤트, 주문/결제, 배송, 취소/반품/교환, 여행/숙박/항공, 안전거래)
 	public static final String INSERT_QNA_ARTICLE = "INSERT INTO `km_cs` SET "
 													+ "`uid`=?, "
