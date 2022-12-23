@@ -4,10 +4,12 @@
 <script>
 $(function(){
 	
-	$(document).on('click', '#submit', function(){
-		
+	$(document).on('click', '#submit', function(e){
+		e.preventDefault();
 		let cate1 = $('.category1').val();
 		let cate2 = $('.category2').val();
+		console.log(cate1);
+		console.log(cate2);
 		
 		$.ajax({
 			type:'POST',
