@@ -2,7 +2,7 @@ package kr.co.Kmarket.vo;
 
 public class OrderVO {
 	
-	private int ordNo;
+	private String ordNo;
 	private String uid;
 	private int ordCount;
 	private int ordPrice;
@@ -21,14 +21,12 @@ public class OrderVO {
 	private String ordDate;
 	private String ordState;
 	
-	public int getOrdNo() {
+	
+	public String getOrdNo() {
 		return ordNo;
 	}
-	public void setOrdNo(int ordNo) {
-		this.ordNo = ordNo;
-	}
 	public void setOrdNo(String ordNo) {
-		this.ordNo = Integer.parseInt(ordNo);
+		this.ordNo = ordNo;
 	}
 	public String getUid() {
 		return uid;

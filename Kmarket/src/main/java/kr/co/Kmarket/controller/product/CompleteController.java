@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 
 import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.vo.CartVo;
+import kr.co.Kmarket.vo.MemberVO;
 import kr.co.Kmarket.vo.ProductVO;
 
 @WebServlet("/product/complete.do")
@@ -36,8 +37,15 @@ public class CompleteController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("CompleteController doGet...");
-		
-		req.getRequestDispatcher("/product/order.jsp").forward(req, resp);
+		MemberVO user = (MemberVO)req.getSession().getAttribute("sessMember");
+		if(user.getType() == 1) {
+			req.setAttribute("userName", user.getName());
+			req.setAttribute("userHp", user.getHp());
+		} else {
+			req.setAttribute("userName", user.getManager());
+			req.setAttribute("userHp", user.getManagerHp());
+		}
+		req.getRequestDispatcher("/product/complete.jsp").forward(req, resp);
 	}
 	
 	@Override

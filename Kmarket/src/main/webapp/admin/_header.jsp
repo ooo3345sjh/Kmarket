@@ -18,7 +18,7 @@
     <div id="wrapper">
         <header>
             <div>
-                <a href="#">
+                <a href='<c:url value='/admin/index.do'/>'>
                     <img src='<c:url value='/admin/img/admin_logo.png'/>' alt="ADMINSTRATOR">
                 </a>
                 <nav>

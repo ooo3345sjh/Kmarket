@@ -1,69 +1,78 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="./_header.jsp"/>
-        <main id="product">
-            <aside>
-                <!-- 카테고리 -->
-                <ul class="category">
-                    <li>
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                        카테고리
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-tshirt" aria-hidden="true"></i>
-                            패션·의류·뷰티
-                            <i class="fas fa-angle-right" aria-hidden="true"></i>
-                        </a>
-                        <ol>
-                            <li><a href="#">남성의류</a></li>
-                            <li><a href="#">여성의류</a></li>
-                            <li><a href="#">잡화</a></li>
-                            <li><a href="#">뷰티</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-laptop" aria-hidden="true"></i>
-                            가전·디지털
-                            <i class="fas fa-angle-right" aria-hidden="true"></i>
-                        </a>
-                        <ol>
-                            <li><a href="#">노트북/PC</a></li>
-                            <li><a href="#">가전</a></li>
-                            <li><a href="#">휴대폰</a></li>
-                            <li><a href="#">기타</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-utensils" aria-hidden="true"></i>
-                            식품·생필품
-                            <i class="fas fa-angle-right" aria-hidden="true"></i>
-                        </a>
-                        <ol>
-                            <li><a href="#">신선식품</a></li>
-                            <li><a href="#">가공식품</a></li>
-                            <li><a href="#">건강식품</a></li>
-                            <li><a href="#">생필품</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-home" aria-hidden="true"></i>
-                            홈·문구·취미
-                            <i class="fas fa-angle-right" aria-hidden="true"></i>
-                        </a>
-                        <ol>
-                            <li><a href="#">가구/DIY</a></li>
-                            <li><a href="#">침구·커튼</a></li>
-                            <li><a href="#">생활용품</a></li>
-                            <li><a href="#">사무용품</a></li>
-                        </ol>
-                    </li>
-                </ul>
+<script>
+	$(function () {
+		// 주문 페이지에서 넘어온 정보 받기
+		let listArr = sessionStorage.getItem("list"); // 주문 상품 정보 세션값 가져오기
+		let orderinfo = sessionStorage.getItem("orderInfo"); // 최종 결제 정보 세션값 가져오기
+		
+		// JSON 데이터를 객체로 변환
+		listArr = JSON.parse(listArr);
+		orderinfo = JSON.parse(orderinfo);
+		
+		console.log(listArr);
+		console.log(orderinfo);
+		
+		$(document).ready(function () {
+			let trTag;
+			
+			// 개별 상품 정보 입력
+			for(let i=0; i<listArr.length; i++){
+				trTag = "<tr>"
+					  + "	<td>"
+					  + "		<article>"
+	                  + "			<a href='#'><img src='<c:url value='/" + listArr[i].thumb1 + "'/>' alt='썸네일1'></a>"
+	                  + "			<div>"
+	                  + "				<h2>"
+	                  + "					<a href='#'>" + listArr[i].prodName + "</a>"
+	                  + "				</h2>"
+	                  + "				<p>" + listArr[i].descript + "</p>"
+	                  + "			</div>"
+	               	  + "		</article>"
+	           		  + "	</td>"
+	           		  + "	<td>" + Number(listArr[i].price).toLocaleString('ko-KR') + "</td>"
+	           		  + "	<td>" + Number(listArr[i].discountPrice).toLocaleString('ko-KR') + "</td>"
+	           		  + "	<td>" + Number(listArr[i].count).toLocaleString('ko-KR') + "</td>"
+	           		  + "	<td>" + Number(listArr[i].total).toLocaleString('ko-KR') + "</td>";
+	           		  
+					
+					$('#cart').append(trTag);
+			}
+			
+			// 최종 결제 정보 입력
+			let totalDiscountPrice = orderinfo.ordDiscount + orderinfo.usedPoint; // 총할인 금액 계산
+			
+			$('#total > tr:eq(0)').children(1).children(0).text(orderinfo.ordPrice.toLocaleString('ko-KR')); 		  // 총 상품금액
+			$('#total > tr:eq(1)').children(1).children(0).text("-" + totalDiscountPrice.toLocaleString('ko-KR'));    // 총 할인금액
+			$('#total > tr:eq(2)').children(1).children(0).text(orderinfo.ordDelivery.toLocaleString('ko-KR')); 	  // 배송비
+			$('#total > tr:eq(3)').children(1).children(0).text(orderinfo.ordTotPrice.toLocaleString('ko-KR'));       // 총 결제금액
+			$('#ordNo').text(orderinfo.ordNo);       // 주문번호
+			
+			let payment = orderinfo.ordPayment; 
+			switch(payment){
+				case 1: payment = '신용카드 결제'; break;
+				case 2: payment = '체크카드 결제'; break;
+				case 3: payment = '실시간계좌이체'; break;
+				case 4: payment = '무통장 입금'; break;
+				case 5: payment = '휴대폰 결제'; break;
+				case 6: payment = '카카오페이'; break;
+			}
+			
+			$('#ordPayment').text(payment);       		  // 결제방법
+			$('#orderName').text(payment);        		  // 수취인 이름
+			$('#orderHp').text(orderinfo.recipHp);        // 수취인 연락처
+			$('#orderAddress').text(orderinfo.recipAddr1 + orderinfo.recipAddr2);        // 배송지 주소
+			
+		})
+	})
+
+</script>
             </aside>
             <!-- 결제완료 페이지 시작-->
-            <section class="complete">
+            <section class="complete" >
                 <!-- 제목, 페이지 네비게이션 -->
                 <nav>
                     <h1>주문완료</h1>
@@ -86,7 +95,7 @@
                 <article class="info">
                     <h1>상품정보</h1>
                     <table border="0">
-                        <tbody>
+                        <tbody id='cart'>
                             <tr>
                                 <th>상품명</th>
                                 <th>상품금액</th>
@@ -94,62 +103,14 @@
                                 <th>수량</th>
                                 <th>주문금액</th>
                             </tr>
-                            <tr>
-                                <td>
-                                    <article>
-                                        <a href="#"><img src="https://via.placeholder.com/80x80" alt></a>
-                                        <div>
-                                            <h2>
-                                                <a href="#">상품명</a>
-                                            </h2>
-                                            <p>상품설명</p>
-                                        </div>
-                                    </article>
-                                </td>
-                                <td>17,000원</td>
-                                <td>1,000원</td>
-                                <td>1</td>
-                                <td>16,000원</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <article>
-                                        <a href="#"><img src="https://via.placeholder.com/80x80" alt></a>
-                                        <div>
-                                            <h2>
-                                                <a href="#">상품명</a>
-                                            </h2>
-                                            <p>상품설명</p>
-                                        </div>
-                                    </article>
-                                </td>
-                                <td>17,000원</td>
-                                <td>1,000원</td>
-                                <td>1</td>
-                                <td>16,000원</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <article>
-                                        <a href="#"><img src="https://via.placeholder.com/80x80" alt></a>
-                                        <div>
-                                            <h2>
-                                                <a href="#">상품명</a>
-                                            </h2>
-                                            <p>상품설명</p>
-                                        </div>
-                                    </article>
-                                </td>
-                                <td>17,000원</td>
-                                <td>1,000원</td>
-                                <td>1</td>
-                                <td>16,000원</td>
-                            </tr>
+                            
+                        </tbody>
+                        <tbody>
                             <tr class="total">
-                                <td colspan="4"></td>
-                                <td>
+                                <td colspan="3"></td>
+                                <td colspan="2">
                                     <table border="0">
-                                        <tbody>
+                                        <tbody id='total'>
                                             <tr>
                                                 <td>총 상품금액</td>
                                                 <td>
@@ -188,17 +149,17 @@
                         <tbody>
                             <tr>
                                 <td>주문번호</td>
-                                <td>2008101324568</td>
+                                <td id='ordNo'>2008101324568</td>
                                 <td rowspan="3">총 결제금액</td>
-                                <td rowspan="3"><span>35,000</span>원</td>
+                                <td rowspan="3"><span id='ordTotPrice'>35,000</span>원</td>
                             </tr>
                             <tr>
                                 <td>결제방법</td>
-                                <td>신용카드</td>
+                                <td id='ordPayment'>신용카드</td>
                             </tr>
                             <tr>
                                 <td>주문자/연락처</td>
-                                <td>홍길동/010-1234-1234</td>
+                                <td>${userName}/${userHp}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -210,12 +171,12 @@
                         <tbody>
                             <tr>
                                 <td>수취인</td>
-                                <td>홍길동</td>
+                                <td id='orderName'>홍길동</td>
                                 <td>주문자 정보</td>
                             </tr>
                             <tr>
                                 <td>연락처</td>
-                                <td>010-1234-1234</td>
+                                <td id='orderHp'>010-1234-1234</td>
                                 <td rowspan="2">
                                     홍길동
                                     <br/>
@@ -224,7 +185,7 @@
                             </tr>
                             <tr>
                                 <td>배송지 주소</td>
-                                <td>부산광역시 강남구 대연동 123 10층</td>
+                                <td id='orderAddress'>부산광역시 강남구 대연동 123 10층</td>
                             </tr>
                         </tbody>
                     </table>

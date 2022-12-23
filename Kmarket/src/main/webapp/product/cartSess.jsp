@@ -26,7 +26,8 @@
 			tTotalPrice.text("0");
 			
 			if(check == false){ // 체크박스를 체크 했을때
-				$("input[name=prodCheck]").prop("checked", true);
+				$("input[name=prodCheck]").prop("checked", true).change();
+				/*
 				check = true;
 				let trTag = $('#cart > tr').get();
 				trTag.forEach(function (el, index) {
@@ -53,9 +54,10 @@
 				tPoint.text(tPoint.text().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
 				tDelivery.text(tDelivery.text().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
 				tTotalPrice.text(tTotalPrice.text().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
-				
+				*/
+				check = true;
 			} else { // 체크박스를 체크 해제 했을때
-				$("input[name=prodCheck]").prop("checked", false);
+				$("input[name=prodCheck]").prop("checked", false).change();
 				check = false;
 				
 				// 0으로 초기화
@@ -72,7 +74,7 @@
 		
 		
 		// 체크박스 체크에 변화가 있을 때 전체합계의 값을 바꾸는 이벤트 함수
-		$('input[name=prodCheck]').change(function () {
+		$(document).on('change', 'input[name=prodCheck]', function () {
 			
 			// 해당 상품관련 변수 선언
 			let checked = $(this).is(':checked'); // 해당 체크박스 체크 여부

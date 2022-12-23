@@ -18,7 +18,7 @@ $(function(){
 	});
 });
 </script>
-        
+
                 <section id="admin-product-register" class="admin">
                     <nav>
                         <h1>상품등록</h1>
@@ -80,7 +80,7 @@ $(function(){
                             <tr>
                                 <th>판매가격</th>
                                 <td>
-                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="sellPrice" required><span>원</span>
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="sellPrice" id="price" onkeyup="points();" required><span>원</span>
                                 </td>
                             </tr>
                             
@@ -94,7 +94,7 @@ $(function(){
                             <tr>
                                 <th>포인트</th>
                                 <td>
-                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="point" required><span>점</span>
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="point" id="point" required><span>점</span>
                                     <p>※ '0'을 입력하면 포인트 없음</p>
                                 </td>
                             </tr>
@@ -170,7 +170,7 @@ $(function(){
                                 </td>
                             </tr>
                         </table>
-                        <input type="submit" id="submit" value="등록하기">
+                        <input type="submit" value="등록하기">
                     </form>
                     <p class = "ico info">
                         <strong>Tip!</strong>

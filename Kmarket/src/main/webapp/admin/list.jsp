@@ -4,7 +4,7 @@
 <script src="./js/product.js"></script>
 <script src="./js/checkbox.js"></script>
 <jsp:include page="./_header.jsp"/>
-        
+
                 <section id="admin-product-list" class="admin">
                     <nav>
                         <h1>상품목록</h1>
@@ -55,6 +55,7 @@
                         </c:forEach>
                     </table>
                     <input type="button" id="deleteButton" value="선택삭제" onclick="checkDelete()">
+                    <input type="button" id="registerButton" value="등록하기" onclick="location.href='<c:url value='/admin/register.do'/>'">
                     <div class="paging">
                     	${map.pageTag}
                     </div>
