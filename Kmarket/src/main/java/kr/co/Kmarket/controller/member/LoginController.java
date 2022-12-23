@@ -42,15 +42,12 @@ public class LoginController extends HttpServlet {
 		String msg2 = "비밀번호를 확인해주세요.";
 		String url = "/Kmarket/member/login.do";
 		
-		JSFunction log1 = new JSFunction();
-		JSFunction log2 = new JSFunction();
-		
 		// uid를 통해 member type을 검색
 		UidVO member = service.selectUid(uid);
 		
 		if (member == null) {
 			// 아이디 조회가 되지 않는 경우
-			log1.alertBack(resp, msg1);
+			JSFunction.alertBack(resp, msg1);
 		} else {
 			int type = member.getType();
 			
@@ -64,7 +61,7 @@ public class LoginController extends HttpServlet {
 					resp.sendRedirect("/Kmarket/");
 				} else {
 					// 로그인 실패
-					log2.alertLocation(resp, msg2, url);
+					JSFunction.alertLocation(resp, msg2, url);
 				}
 			} else {
 				// 일반 회원인 경우
@@ -76,7 +73,7 @@ public class LoginController extends HttpServlet {
 					resp.sendRedirect("/Kmarket/");
 				} else {
 					// 로그인 실패
-					log2.alertLocation(resp, msg2, url);
+					JSFunction.alertLocation(resp, msg2, url);
 				}	
 			}
 		}

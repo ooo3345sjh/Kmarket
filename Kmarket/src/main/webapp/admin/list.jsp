@@ -45,8 +45,8 @@
                                 <i class="fas fa-box-open" aria-hidden="true"></i>상품관리
                             </a>
                             <ol>
-                                <li><a href="#">상품현황</a></li>
-                                <li><a href="#">상품등록</a></li>
+                                <li><a href='<c:url value='/admin/list.do'/>'>상품현황</a></li>
+                                <li><a href='<c:url value='/admin/register.do'/>'>상품등록</a></li>
                                 <li><a href="#">재고관리</a></li>
                             </ol>
                         </li>
@@ -122,6 +122,7 @@
                         </c:forEach>
                     </table>
                     <input type="button" id="deleteButton" value="선택삭제" onclick="checkDelete()">
+                    <input type="button" id="registerButton" value="등록하기" onclick="location.href='<c:url value='/admin/register.do'/>'">
                     <div class="paging">
                     	${map.pageTag}
                     </div>

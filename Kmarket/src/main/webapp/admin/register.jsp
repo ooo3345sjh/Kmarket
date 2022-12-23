@@ -1,23 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
-<script>
-$(function(){
-	
-	$(document).on('click', '#submit', function(){
-		
-		let cate1 = $('.category1').val();
-		let cate2 = $('.category2').val();
-		
-		$.ajax({
-			type:'POST',
-			url: '/Kmarket/admin/register.do',
-			data: {'cate1':cate1, 'cate2':cate2},
-			dataType: 'json'
-		});
-	});
-});
-</script>
+<script src="./js/point.js"></script>
         <main>
             <div>
                 <aside>
@@ -56,8 +40,8 @@ $(function(){
                                 <i class="fas fa-box-open" aria-hidden="true"></i>상품관리
                             </a>
                             <ol>
-                                <li><a href="#">상품현황</a></li>
-                                <li><a href="#">상품등록</a></li>
+                                <li><a href='<c:url value='/admin/list.do'/>'>상품현황</a></li>
+                                <li><a href='<c:url value='/admin/register.do'/>'>상품등록</a></li>
                                 <li><a href="#">재고관리</a></li>
                             </ol>
                         </li>
@@ -144,7 +128,7 @@ $(function(){
                             <tr>
                                 <th>판매가격</th>
                                 <td>
-                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="sellPrice" required><span>원</span>
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="sellPrice" id="price" onkeyup="points();" required><span>원</span>
                                 </td>
                             </tr>
                             
@@ -158,7 +142,7 @@ $(function(){
                             <tr>
                                 <th>포인트</th>
                                 <td>
-                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="point" required><span>점</span>
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="point" id="point" required><span>점</span>
                                     <p>※ '0'을 입력하면 포인트 없음</p>
                                 </td>
                             </tr>
@@ -234,7 +218,7 @@ $(function(){
                                 </td>
                             </tr>
                         </table>
-                        <input type="submit" id="submit" value="등록하기">
+                        <input type="submit" value="등록하기">
                     </form>
                     <p class = "ico info">
                         <strong>Tip!</strong>
