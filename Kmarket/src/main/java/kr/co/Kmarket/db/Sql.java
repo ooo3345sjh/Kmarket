@@ -150,6 +150,9 @@ public class Sql {
 	// 주문한 상품 DB에 저장
 	public static final String INSERT_ORDER = "INSERT INTO `km_product_order` VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),?) ";
 	
+	// 주문시 사용한 포인트 저장
+	public static final String INSERT_POINT = "INSERT INTO `km_member_point` (`uid`, `ordNo`, `point`, `pointDate`) VALUES(?, ?, ?, NOW())";
+	
 
 	
 	/*** QnaArticle ***/
