@@ -211,7 +211,6 @@
 			$(this).val(inputVal.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
 		})
 		
-		
 		// 포인트 적용시키는 이벤트
 		let currentPoint = $('#currentPoint');
 		let apply = false;
