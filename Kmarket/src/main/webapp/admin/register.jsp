@@ -85,7 +85,6 @@ $(function(){
 	});
 });
 </script>
->>>>>>> b52e6b45240b8a948160843b23c19a56ac52405a
                 <section id="admin-product-register" class="admin">
                     <nav>
                         <h1>상품등록</h1>
