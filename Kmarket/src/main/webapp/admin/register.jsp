@@ -67,6 +67,25 @@
                         </li>
                     </ul>
                 </aside>
+=======
+<script>
+$(function(){
+	
+	$(document).on('click', '#submit', function(){
+		
+		let cate1 = $('.category1').val();
+		let cate2 = $('.category2').val();
+		
+		$.ajax({
+			type:'POST',
+			url: '/Kmarket/admin/register.do',
+			data: {'cate1':cate1, 'cate2':cate2},
+			dataType: 'json'
+		});
+	});
+});
+</script>
+>>>>>>> b52e6b45240b8a948160843b23c19a56ac52405a
                 <section id="admin-product-register" class="admin">
                     <nav>
                         <h1>상품등록</h1>
