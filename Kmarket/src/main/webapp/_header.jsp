@@ -25,7 +25,7 @@
                         		<a href='<c:url value='/member/logout.do'/>'>로그아웃</a>
                         		<a href="#">마이페이지</a>
                         	</c:when>
-                        	<c:when test="${sessMember.type > 2}">
+                        	<c:when test="${sessMember.type > 1}">
                         		<a href='<c:url value='/admin/index.do'/>'>관리자</a>
                         		<a href='<c:url value='/member/logout.do'/>'>로그아웃</a>
                         		<a href="#">마이페이지</a>
@@ -47,3 +47,4 @@
                 </div>
             </div>
         </header>
+        
