@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.db.Sql;
 import kr.co.Kmarket.vo.CartVo;
+import kr.co.Kmarket.vo.OrderItemVO;
 import kr.co.Kmarket.vo.OrderVO;
 import kr.co.Kmarket.vo.ProductVO;
 import kr.co.Kmarket.vo.ReviewVO;
@@ -676,16 +677,57 @@ public class ProductDAO extends DBHelper {
 	}
 	
 	/* 주문한 상품 DB에 저장하는 메서드 */
-	/*public int insertOrder(OrderVO vo) {
+	public int insertOrder(OrderVO vo, List<OrderItemVO> list) {
 		int result = 0;
 		
 		try {
 			con = getConnection();
-			psmt = con.prepareStatement("sd");
+			con.setAutoCommit(false);
+			psmt = con.prepareStatement(Sql.INSERT_ORDER);
+			psmt.setInt(1, vo.getOrdNo());
+			psmt.setString(2, vo.getUid());
+			psmt.setInt(3, vo.getOrdCount());
+			psmt.setInt(4, vo.getOrdPrice());
+			psmt.setInt(5, vo.getOrdDiscount());
+			psmt.setInt(6, vo.getOrdDelivery());
+			psmt.setInt(7, vo.getSavePoint());
+			psmt.setInt(8, vo.getUsedPoint());
+			psmt.setInt(9, vo.getOrdTotPrice());
+			psmt.setString(10, vo.getRecipName());
+			psmt.setString(11, vo.getRecipHp());
+			psmt.setString(12, vo.getRecipZip());
+			psmt.setString(13, vo.getRecipAddr1());
+			psmt.setString(14, vo.getRecipAddr2());
+			psmt.setInt(15, vo.getOrdPayment());
+			psmt.setInt(16, vo.getOrdComplete());
+			psmt.setString(17, vo.getOrdState());
+			
+			result = psmt.executeUpdate();
+			
+			String sql = "INSERT INTO `km_product_order_item` VALUES";
+			
+			for(int i=0; i<list.size(); i++) {
+				OrderItemVO oiv = list.get(i);
+				sql += "(" + oiv.getOrdNo() + ", " + oiv.getProdNo() + ", " + oiv.getCount() + ", "
+					+  oiv.getPrice() + ", " + oiv.getDiscount() + ", " + oiv.getPoint() + ", " + oiv.getDelivery() + ", "
+					+ oiv.getTotal() + ")";
+				
+				if(i != list.size()-1) {
+					sql += ", ";
+				} 
+			}
+			
+			stmt = con.createStatement();
+			result = stmt.executeUpdate(sql);
+			
+			con.commit();
+			
+			close();
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 		logger.debug("result : " + result);
-	}*/
+		return result;
+	}
 
 }
