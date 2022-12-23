@@ -52,6 +52,7 @@ public class ListController extends HttpServlet {
 		map.put("pg", pg);
 		map.put("req", req);
 		map.put("uid", uid);
+		map.put("types", type);
 		
 		service.countProducts(map);  // 조건에 해당하는 전체 상품 목록의 갯수를 가져오는 서비스
 		Paging.paging(map);		     // 페이징 처리
