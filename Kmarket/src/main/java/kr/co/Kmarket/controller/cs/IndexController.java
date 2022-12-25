@@ -17,14 +17,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.service.CsService;
+import kr.co.Kmarket.service.MemberService;
 import kr.co.Kmarket.utils.Paging;
 import kr.co.Kmarket.vo.CsVO;
+import kr.co.Kmarket.vo.MemberVO;
 
 @WebServlet("/cs/index.do")
 public class IndexController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private CsService service = new CsService();
+	private MemberService mservice = new MemberService();
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override
@@ -42,11 +45,13 @@ public class IndexController extends HttpServlet{
 		req.setAttribute("qnaList", list1);
 		
 		// 세션 부분
-		HttpSession sess = req.getSession();
+		//HttpSession sess = req.getSession();
+		//String str = (String)sess.getAttribute("sessMember");
 		
-		if(sess != null) {
-			sess.setAttribute("sessUser", sess);
-		}
+		//if(sess != null) {
+		//	sess.setAttribute("sessMember", str);
+		//	resp.sendRedirect("/Kmarket/cs");
+		//}
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/index.jsp");
 		dispatcher.forward(req, resp);

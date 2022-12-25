@@ -2,7 +2,7 @@ package kr.co.Kmarket.vo;
 
 public class OrderItemVO {
 	
-	private int ordNo;
+	private String ordNo;
 	private int prodNo;
 	private int count;
 	private int price;
@@ -11,14 +11,44 @@ public class OrderItemVO {
 	private int delivery;
 	private int total;
 	
-	public int getOrdNo() {
+	// 추가 컬럼
+	private String prodName;
+	private String descript;
+	private String thumb1;
+	private int discountPrice;
+	
+	
+	
+	
+	public int getDiscountPrice() {
+		return discountPrice;
+	}
+	public void setDiscountPrice(int discountPrice) {
+		this.discountPrice = discountPrice;
+	}
+	public String getProdName() {
+		return prodName;
+	}
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
+	public String getDescript() {
+		return descript;
+	}
+	public void setDescript(String descript) {
+		this.descript = descript;
+	}
+	public String getThumb1() {
+		return thumb1;
+	}
+	public void setThumb1(String thumb1) {
+		this.thumb1 = thumb1;
+	}
+	public String getOrdNo() {
 		return ordNo;
 	}
-	public void setOrdNo(int ordNo) {
-		this.ordNo = ordNo;
-	}
 	public void setOrdNo(String ordNo) {
-		this.ordNo = Integer.parseInt(ordNo);
+		this.ordNo = ordNo;
 	}
 	public int getProdNo() {
 		return prodNo;

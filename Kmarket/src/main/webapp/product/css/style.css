@@ -685,8 +685,12 @@
 #product > .order > form > .discount > div > label > input[type=text] {
     display: inline-block;
     outline: none;
+<<<<<<< HEAD
+    text-indent: 3px;
+=======
     text-align: right;
     padding-right: 3px;
+>>>>>>> 3ac7fd93a212c8170a44b1d873350a3bc4509bf2
 }
 
 #product > .order > form > .discount > div > label > input[type=button] {
@@ -771,6 +775,7 @@
 
 #product > .complete > .info table tr > td {text-align: center;}
 #product > .complete > .info table tr > td div {
+	width: 516px;
     float: left;
     margin-left: 10px;
     text-align: left;
@@ -786,7 +791,7 @@
 #product > .complete > .info table tr > td:last-child {
     color: #ff006c;
     font-weight: bold;
-    text-align: right;
+    text-align: center;
 }
 #product > .complete > .info table tr > td > article {
     overflow: hidden;

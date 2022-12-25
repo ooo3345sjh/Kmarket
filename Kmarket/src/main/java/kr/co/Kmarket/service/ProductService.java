@@ -11,6 +11,8 @@ import java.util.Map;
 
 import kr.co.Kmarket.dao.ProductDAO;
 import kr.co.Kmarket.vo.CartVo;
+import kr.co.Kmarket.vo.MemberVO;
+import kr.co.Kmarket.vo.OrderItemVO;
 import kr.co.Kmarket.vo.OrderVO;
 import kr.co.Kmarket.vo.ProductVO;
 
@@ -101,7 +103,12 @@ public class ProductService {
 	}*/
 	
 	/* 주문한 상품 DB에 저장하는 서비스 */
-	/*public int insertOrder(OrderVO vo) {
-		return dao.insertOrder(vo);
-	}*/
+	public int insertOrder(OrderVO vo, List<OrderItemVO> list, MemberVO user) {
+		return dao.insertOrder(vo, list, user);
+	}
+	
+	/* 장바구니로부터 주문페이지로 온 경우 주문한 상품을 장바구니 테이블에서 삭제하는 서비스 */
+	public int deleteProdcuctInCart(String[] cartNo) {
+		return dao.deleteProdcuctInCart(cartNo);
+	}
 }

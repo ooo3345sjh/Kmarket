@@ -21,13 +21,14 @@
                 <div>
                     <nav>
                     	<c:choose>
-                    		<c:when test="${sessMember != null}">
-                        		<a href='<c:url value='/member/logoutMember.do'/>'>로그아웃</a>
+                    		<c:when test="${sessMember.type eq 1}">
+                        		<a href='<c:url value='/member/logout.do'/>'>로그아웃</a>
                         		<a href="#">마이페이지</a>
                         	</c:when>
-                        	<c:when test="${sessSeller != null}">
-                        		<a href='<c:url value='/member/logoutSeller.do'/>'>로그아웃</a>
-                        		<a href='<c:url value='/admin/index.do'/>'>마이페이지</a>
+                        	<c:when test="${sessMember.type > 1}">
+                        		<a href='<c:url value='/admin/index.do'/>'>관리자</a>
+                        		<a href='<c:url value='/member/logout.do'/>'>로그아웃</a>
+                        		<a href="#">마이페이지</a>
                         	</c:when>
                         	<c:otherwise>
                         		<a href='<c:url value='/member/login.do'/>'>로그인</a>
@@ -46,3 +47,4 @@
                 </div>
             </div>
         </header>
+        
