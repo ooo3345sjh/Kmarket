@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>케이마켓:: 대한민국 1등 온라인 쇼핑몰</title>
-    <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="<c:url value='/img/favicon.ico'/>" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="<c:url value='/admin/css/style.css'/>">
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="./js/js.js"></script>
+    <script src="<c:url value='/admin/js/js.js'/>"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -96,9 +96,9 @@
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>고객센터
                             </a>
                             <ol>
-                                <li><a href="#">공지사항</a></li>
-                                <li><a href="#">자주묻는질문</a></li>
-                                <li><a href="#">문의하기</a></li>
+                                <li><a href="<c:url value='/admin/cs/list.do?cate1=notice'/>">공지사항</a></li>
+                                <li><a href="<c:url value='/admin/cs/list.do?cate1=faq'/>">자주묻는질문</a></li>
+                                <li><a href="<c:url value='/admin/cs/list.do?cate1=qna'/>">문의하기</a></li>
                             </ol>
                         </li>
                     </ul>

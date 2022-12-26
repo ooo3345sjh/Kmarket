@@ -27,7 +27,6 @@ public class IndexController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private CsService service = new CsService();
-	private MemberService mservice = new MemberService();
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override
@@ -37,21 +36,18 @@ public class IndexController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("IndexController doGet...");
 		
+		String uid = req.getParameter("uid");
 		// 메인 인덱스 공지사항, 문의하기 최신 글 출력
 		List<CsVO> list = service.selectNoticeAll();
 		List<CsVO> list1 = service.selectQnaAll();
 		
+		// 세션 부분
+		HttpSession session = req.getSession();
+		session.setAttribute("uid", uid);
+		
+				
 		req.setAttribute("noticList", list);
 		req.setAttribute("qnaList", list1);
-		
-		// 세션 부분
-		//HttpSession sess = req.getSession();
-		//String str = (String)sess.getAttribute("sessMember");
-		
-		//if(sess != null) {
-		//	sess.setAttribute("sessMember", str);
-		//	resp.sendRedirect("/Kmarket/cs");
-		//}
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/index.jsp");
 		dispatcher.forward(req, resp);

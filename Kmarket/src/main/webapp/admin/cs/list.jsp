@@ -2,8 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="../_header.jsp"/>
-        
-                <section id="notice-list" class="admin">
+<script src="<c:url value='/admin/js/csArticle.js'/>"></script>
+                <section id="cs-list" class="admin">
                 
                     <nav>
                         <h1>공지사항 목록</h1>
@@ -11,11 +11,11 @@
                     </nav>
 
                     <select>
-                        <option value="0">유형선택</option>
-                        <option value="10">고객서비스</option>
-                        <option value="20">안전거래</option>
-                        <option value="30">위해상품</option>
-                        <option value="40">이벤트당첨</option>
+                        <option>유형선택</option>
+                        <option>고객서비스</option>
+                        <option>안전거래</option>
+                        <option>위해상품</option>
+                        <option>이벤트당첨</option>
                     </select>
 					
                     <table>
@@ -33,15 +33,15 @@
                             <td><input type="checkbox"></td>
                             <td>${vo.csNo}</td>
                             <td>${vo.type}</td>
-                            <td><a href="<c:url value='/admin/cs/view.do?no=${vo.csNo}cate1=notice'/>">[${vo.type}]${vo.title}</a></td>
+                            <td><a href="<c:url value='/admin/cs/view.do?no=${vo.csNo}&cate1=notice'/>">[${vo.type}]${vo.title}</a></td>
                             <td>${vo.hit}</td>
                             
                             <c:set var="rdate"  value="${vo.rdate}"/>
                             <td>${fn:substring(rdate,2,10)}</td>
                             
                             <td>
-                                <a href="#" class="remove">[삭제]</a>
-                                <a href="#" class="modify">[수정]</a>
+                                <a href="#" class="remove" data-no="${vo.csNo}">[삭제]</a>
+                                <a href="<c:url value='/admin/cs/modify.do?no=${vo.csNo}'/>" class="modify">[수정]</a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -52,7 +52,7 @@
                        ${map.pageTag} 
                     </div>
 
-                    <a href="<c:url value='/admin/cs/write.do?cate1=notice'/>">작성하기</a>
+                    <a href="<c:url value='/admin/cs/write.do?cate1=notice'/>" class="btnWrite">작성하기</a>
                 </section>
             </div>
         </main>

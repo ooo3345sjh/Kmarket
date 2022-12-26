@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.Kmarket.service.CsService;
 import kr.co.Kmarket.vo.CsVO;
 
-@WebServlet("/cs/board/write.do")
+@WebServlet("/cs/write.do")
 public class WriteController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
@@ -59,7 +59,7 @@ public class WriteController extends HttpServlet{
 		
 		int result = service.insertArticle(cvo);
 		if(result > 0) {
-			resp.sendRedirect("/Kmarket/cs/board/list.do?cate1="+cate1+"&cate2="+cate2);
+			resp.sendRedirect("/Kmarket/cs/list.do?cate1="+cate1+"&cate2="+cate2+"&pg=1");
 		}
 	}
 }
