@@ -54,6 +54,7 @@ public class _CsListController extends HttpServlet{
 		Paging.getPageTags(map);  	 // 페이징 처리된 정보를 토대로 태그 생성
 		
 		List<CsVO> cvo = service.selectNoticeAll();
+		req.setAttribute("cate1", cate1);
 		
 		req.setAttribute("map", map);
 		req.setAttribute("cvo", cvo);
