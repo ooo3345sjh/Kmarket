@@ -1,5 +1,5 @@
-/*** 초기화 ***/
-* {margin: 0; padding: 0; font: normal 12px 고딕;}
+/*** 珥덇린�솕 ***/
+* {margin: 0; padding: 0; font: normal 12px 怨좊뵓;}
 a {text-decoration: none; color: #111;}
 ul, ol {list-style: none;}
 html, body {height: 100%}
@@ -11,7 +11,7 @@ html, body {height: 100%}
     box-sizing: border-box;
 }
 
-/*** 헤더 ***/
+/*** �뿤�뜑 ***/
 header {
     min-width: 1400px;
     height: 120px;
@@ -46,7 +46,7 @@ header > div > nav > a {
 
 header > div > nav > a:not(:last-child) {border-right: 1px solid #fff;}
 
-/*** 관리자 메인 ***/
+/*** 愿�由ъ옄 硫붿씤 ***/
 main {
     height: auto;
     box-sizing: border-box;
@@ -181,7 +181,7 @@ main > div > aside > #gnb ol > li > a {
 }
 
 
-/*** 관리자 상품목록 ***/
+/*** 愿�由ъ옄 �긽�뭹紐⑸줉 ***/
 #admin-product-list {height: auto; overflow: hidden;}
 #admin-product-list > form > select {
     width: 80px;
@@ -345,7 +345,7 @@ p.ico  {
     background: no-repeat #A8B2C5 url('../img/admin_ico_info.png') scroll 15px 20px;
 }
 
-/*** 관리자 상품등록 ***/
+/*** 愿�由ъ옄 �긽�뭹�벑濡� ***/
 #admin-product-register > form > table {
     width: 100%;
     border-collapse: collapse;
@@ -426,8 +426,18 @@ p.ico  {
     background: no-repeat #FFF6BF  url('../img/admin_ico_alert.png') scroll 15px 20px;
 }
 
-/*** 관리자 고객센터 ***/
-/*=== 목록 ===*/
+/*** 愿�由ъ옄 怨좉컼�꽱�꽣 ***/
+/*=== 紐⑸줉 ===*/
+
+#cs-list > select {
+	margin-top: 10px;
+    width: 114px;
+    height: 40px;
+    text-indent: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
 #cs-list > table {
     margin-top: 10px;
     width: 100%;
@@ -559,7 +569,7 @@ p.ico  {
     background: no-repeat #A8B2C5 url('../img/admin_ico_info.png') scroll 15px 20px;
 }
 
-/* 공지사항 보기 */
+/* 怨듭��궗�빆 蹂닿린 */
 #cs-view > table {
     margin-top: 50px;
     width: 100%;
@@ -599,7 +609,7 @@ p.ico  {
     margin-top: 35px;   
 }
 
-/* 공지사항 글 쓰기 */
+/* 怨듭��궗�빆 湲� �벐湲� */
 
 #cs-write > form > table {
     width: 100%;
@@ -655,7 +665,7 @@ p.ico  {
     float: right;
 }
 
-/* 공지사항 수정 */
+/* 怨듭��궗�빆 �닔�젙 */
 
 #cs-modify > form > table {
     width: 100%;
@@ -750,7 +760,7 @@ p.ico  {
     border: 1px solid #0063ce;
 }
 
-/*** 푸터 ***/
+/*** �뫖�꽣 ***/
 footer {
     min-width: 1400px;
     height: 60px;
