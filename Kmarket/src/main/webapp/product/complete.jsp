@@ -24,10 +24,14 @@
 				trTag = "<tr>"
 					  + "	<td>"
 					  + "		<article>"
-	                  + "			<a href='#'><img src='<c:url value='/" + listArr[i].thumb1 + "'/>' alt='썸네일1'></a>"
-	                  + "			<div>"
+	                  + "			<a href='<c:url value='/product/view.do?cate1=" + listArr[i].cate1 + "&cate2=" + listArr[i].cate2 + "&no=" + listArr[i].prodNo + "'/>'>"
+	                  + " 				<img src='<c:url value='/" + listArr[i].thumb1 + "'/>' alt='썸네일1'>"
+	                  + "           </a>"
+	                  + "			<div>" 
 	                  + "				<h2>"
-	                  + "					<a href='#'>" + listArr[i].prodName + "</a>"
+	                  + "			<a href='<c:url value='/product/view.do?cate1=" + listArr[i].cate1 + "&cate2=" + listArr[i].cate2 + "&no=" + listArr[i].prodNo + "'/>'>" 
+	                  + 				listArr[i].prodName 
+	                  + "			</a>"
 	                  + "				</h2>"
 	                  + "				<p>" + listArr[i].descript + "</p>"
 	                  + "			</div>"
@@ -49,6 +53,8 @@
 			$('#total > tr:eq(1)').children(1).children(0).text("-" + totalDiscountPrice.toLocaleString('ko-KR'));    // 총 할인금액
 			$('#total > tr:eq(2)').children(1).children(0).text(orderinfo.ordDelivery.toLocaleString('ko-KR')); 	  // 배송비
 			$('#total > tr:eq(3)').children(1).children(0).text(orderinfo.ordTotPrice.toLocaleString('ko-KR'));       // 총 결제금액
+			
+			// 주문 정보
 			$('#ordNo').text(orderinfo.ordNo);       // 주문번호
 			
 			let payment = orderinfo.ordPayment; 
@@ -61,10 +67,11 @@
 				case 6: payment = '카카오페이'; break;
 			}
 			
-			$('#ordPayment').text(payment);       		  // 결제방법
-			$('#orderName').text(payment);        		  // 수취인 이름
-			$('#orderHp').text(orderinfo.recipHp);        // 수취인 연락처
-			$('#orderAddress').text(orderinfo.recipAddr1 + orderinfo.recipAddr2);        // 배송지 주소
+			$('#ordPayment').text(payment);       		  						   // 결제방법
+			$('#orderName').text(payment);        		  						   // 수취인 이름
+			$('#orderHp').text(orderinfo.recipHp);        					       // 수취인 연락처
+			$('#ordTotPrice').text(orderinfo.ordTotPrice.toLocaleString('ko-KR')); // 총 결제금액
+			$('#orderAddress').text(orderinfo.recipAddr1 + orderinfo.recipAddr2);  // 배송지 주소
 			
 		})
 	})
@@ -78,7 +85,7 @@
                     <h1>주문완료</h1>
                     <p>
                         HOME > 장바구니 > 주문결제 >
-                        <strong>주문완료</strong>
+                        <strong style="font-weight: bold;">주문완료</strong>
                     </p>
                 </nav>
                 <!-- 완료 멘트 -->
@@ -99,16 +106,16 @@
                             <tr>
                                 <th>상품명</th>
                                 <th>상품금액</th>
-                                <th>할인금액</th>
-                                <th>수량</th>
+                                <th width="70px">할인금액</th>
+                                <th width='50px'>수량</th>
                                 <th>주문금액</th>
                             </tr>
                             
                         </tbody>
                         <tbody>
                             <tr class="total">
-                                <td colspan="3"></td>
-                                <td colspan="2">
+                                <td colspan="2"></td>
+                                <td colspan="3">
                                     <table border="0">
                                         <tbody id='total'>
                                             <tr>
@@ -159,7 +166,7 @@
                             </tr>
                             <tr>
                                 <td>주문자/연락처</td>
-                                <td>${userName}/${userHp}</td>
+                                <td>${userName} / ${userHp}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -178,9 +185,7 @@
                                 <td>연락처</td>
                                 <td id='orderHp'>010-1234-1234</td>
                                 <td rowspan="2">
-                                    홍길동
-                                    <br/>
-                                    010-1234-1234
+                                    ${userName} / ${userHp}
                                 </td>
                             </tr>
                             <tr>
@@ -216,6 +221,10 @@
                         </li>
                     </ul>
                 </article>
+ 				<div id='link'>
+ 					<a href="#">구매내역 보기</a>
+ 					<a href='<c:url value='/index.do'/>'>쇼핑홈 가기</a>
+ 				</div>
             </section>
             <!-- 결제완료 페이지 끝 -->
         </main>

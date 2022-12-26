@@ -49,8 +49,14 @@ header > div.top nav > a:hover{
 }
 header > div.logo {height: 115px;}
 header > div.logo > div > a {
-    display: inline-block;
+    float: left;
     margin-top: 30px;
+}
+header > .logo > div > a:nth-of-type(2){
+	margin-top: 48px;
+	margin-left: 5px;
+	font-size: 22px;
+	font-weight: bold;
 }
 
 /*** 회원 ***/

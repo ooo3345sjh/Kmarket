@@ -9,9 +9,9 @@
                     <h1>상품목록</h1>
                     <p>
                         HOME >
-                        <span>패션·의류·뷰티</span>
+                        <span id='cate1'>패션·의류·뷰티</span>
                         >
-                        <strong>남성의류</strong>
+                        <strong id='cate2' style="font-weight: bold;">남성의류</strong>
                     </p>
                 </nav>
                 <!-- 정렬 메뉴 -->

@@ -28,7 +28,7 @@ public class ProductDAO extends DBHelper {
 			con = getConnection();
 			psmt = con.prepareStatement(Sql.INSERT_PRODUCT);
 			psmt.setInt(1, vo.getCate1());
-			psmt.setInt(2, vo.getCate2() + 10);
+			psmt.setInt(2, vo.getCate2());
 			psmt.setString(3, vo.getProdName());
 			psmt.setString(4, vo.getDescript());
 			psmt.setString(5, vo.getCompany());

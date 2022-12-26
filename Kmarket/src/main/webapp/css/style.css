@@ -9,6 +9,7 @@ html, body {height: 100%}
     padding-bottom: 192px;
     box-sizing: border-box;
 }
+body{position: relative;}
 
 /* 헤더 */
 
@@ -197,7 +198,7 @@ main > aside > .category > li {
 main > aside > .category > li i.fa-angle-right {
     float: right;
     width: auto;
-    margin-top: 10px;
+    margin-top: 14px;
     margin-right: 0;
 }
 
@@ -210,6 +211,7 @@ main > aside > .category > li > a {
     text-decoration: none;
     font-size: 1em;
 }
+main > aside > .category > li > a > span {font-size: 1em; font-weight: bold;}
 
 main > aside > .category > li > a:hover {background: #2b313f; color: #fff;}
 main > aside > .category > li > a:hover + ol {display: block;}
@@ -437,6 +439,24 @@ main > section > section > h3 > span {
     border-bottom: 2px solid #111;
     font-weight: bold;
     font-size: 16px;
+}
+
+main #link {
+	margin-top: 15px;
+    text-align: center;
+}
+
+main #link > a {
+	display: inline-block;
+    width: 130px;
+    background-color: #45ad4a;
+    padding: 15px 0px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+main #link > a:nth-child(1) {
+	margin-right: 20px;
 }
 
 /*** 푸터 ***/

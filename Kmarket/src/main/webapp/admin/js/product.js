@@ -46,30 +46,31 @@
 		let point 	 = td.eq(6);
 		let stock 	 = td.eq(7);
 		
+		let content1 = prodName.text();
+		let content2 = price.text();
+		let content3 = discount.text();
+		let content4 = point.text();
+		let content5 = stock.text();
+		
+		
 		if(txt == '[수정]'){
 			// 수정모드
 			$(this).text('[수정완료]');
-			prodName.attr('contentEditable', true);
-			price.attr('contentEditable', true);
-			discount.attr('contentEditable', true);
-			point.attr('contentEditable', true);
-			stock.attr('contentEditable', true);
+			prodName.html('<textarea style="resize:none; width:300px; height:80px;">' + content1 + '</textarea>');
+			price.html('<textarea style="resize:none; width:100px; height:20px;">' + content2 + '</textarea>');
+			discount.html('<textarea style="resize:none; width:50px; height:20px;">' + content3 + '</textarea>');
+			point.html('<textarea style="resize:none; width:50px; height:20px;">' + content4 + '</textarea>');
+			stock.html('<textarea style="resize:none; width:50px; height:20px;">' + content5 + '</textarea>');
 			prodName.focus();
 		} else {
-			// 수정완료
 			$(this).text('[수정]');
-			prodName.attr('contentEditable', false);
-			price.attr('contentEditable', false);
-			discount.attr('contentEditable', false);
-			point.attr('contentEditable', false);
-			stock.attr('contentEditable', false);
-			
+
 			let prodNo = $(this).attr('data-no');
-			content1 = prodName.text();
-			content2 = price.text();
-			content3 = discount.text();
-			content4 = point.text();
-			content5 = stock.text();
+			content1 = prodName.children(0).val();
+			content2 = price.children(0).val();
+			content3 = discount.children(0).val();
+			content4 = point.children(0).val();
+			content5 = stock.children(0).val();
 			
 			let jsonData = {
 					"prodNo": prodNo,
@@ -92,6 +93,8 @@
 				}
 			});
 			
+			location.reload();
+
 		}
 		
 		
