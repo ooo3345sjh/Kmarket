@@ -205,14 +205,14 @@
 					count++;
 					
 					// 썸네일1 사진 주소 작업
-					let thumb1 = trTag[i].children[1].children[2].children[0].children[0].currentSrc;
+					let thumb1 = trTag[i].children[1].children[4].children[0].children[0].currentSrc;
 					let index = thumb1.indexOf("file");
 					thumb1 = thumb1.substring(index);
-					
+					console.log(trTag[i]);
 					// 체크된 상품 객체화해서 리스트에 저장
 					list.push({
-						"cartNo":trTag[i].children[1].children[1].defaultValue,
-						"prodNo":trTag[i].children[1].children[0].defaultValue,
+						"cartNo":trTag[i].children[1].children[0].defaultValue,
+						"prodNo":trTag[i].children[1].children[1].defaultValue,
 						"count":trTag[i].cells[2].innerHTML,
 						"price":trTag[i].cells[3].innerHTML, 
 						"discount":trTag[i].cells[4].innerHTML, 
@@ -220,8 +220,8 @@
 						"delivery":trTag[i].cells[6].innerHTML, 
 						"totalPrice":trTag[i].cells[7].innerHTML, 
 						"thumb1":thumb1,
-						"prodName":trTag[i].children[1].children[2].children[1].children[0].innerText,
-						"descript":trTag[i].children[1].children[2].children[1].children[1].innerText
+						"prodName":trTag[i].children[1].children[4].children[1].children[0].innerText,
+						"descript":trTag[i].children[1].children[4].children[1].children[1].innerText
 					});
 					
 				}
@@ -277,12 +277,18 @@
 			                                <td><input type="checkbox" name='prodCheck'></td>
 			                                <td>
 			                                	<input type="hidden" name='cartNo' value='${row.cartNo}'>
-			                                	<input type="hidden" name='cartNo' value='${row.cartNo}'>
+			                                	<input type="hidden" name='prodNo' value='${row.prodNo}'>
+			                                	<input type="hidden" name='cate1' value='${row.cate1}'>
+			                                	<input type="hidden" name='cate2' value='${row.cate2}'>
 			                                    <article>
-			                                        <a href="#"><img src='<c:url value='${row.thumb1}'/>' alt='썸네일1'></a>
+			                                        <a href='<c:url value='/product/view.do?cate1=${row.cate1}&cate2=${row.cate2}&no=${row.prodNo}'/>'>
+			                                        	<img src='<c:url value='${row.thumb1}'/>' alt='썸네일1'>
+			                                        </a>
 			                                        <div>
 			                                            <h2>
-			                                                <a href="#">${row.prodName}</a>
+			                                                <a href='<c:url value='/product/view.do?cate1=${row.cate1}&cate2=${row.cate2}&no=${row.prodNo}'/>'>
+			                                                	${row.prodName}
+			                                                </a>
 			                                            </h2>
 			                                            <p>${row.descript}</p>
 			                                        </div>
