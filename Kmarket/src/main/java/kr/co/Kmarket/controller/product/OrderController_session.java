@@ -67,7 +67,7 @@ public class OrderController_session extends HttpServlet {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmssSSS");
 		
 		// 최종 결제 정보
-		String ordNo = random.nextInt(22) + sdf.format(date);  // 주문 번호
+		String ordNo = sdf.format(date) + random.nextInt(10);  // 주문 번호
 		System.out.println(ordNo);
 		String uid = user.getUid(); 	   					   // 회원 아이디
 		String ordCount = req.getParameter("ordCount"); 	   // 전체 상품 수량

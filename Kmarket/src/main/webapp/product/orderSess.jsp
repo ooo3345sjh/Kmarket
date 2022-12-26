@@ -163,9 +163,65 @@
 			}
 		})
 		
+		
+		/** 유효성 검사 **/
+		let isNameOk = true;
+		let isHpOk = true;
+		
+		// 주문자 이름 검증
+		$('input[name=orderer]').keyup(function () {
+			let reName  = /^[ㄱ-힣]+$/;
+			let name = $('input[name=orderer]').val();
+			
+			if(name.match(reName)){
+				isNameOk = true;
+			} else {
+				isNameOk = false;
+			}
+			console.log(name);
+		});
+		
+		// 휴대폰 검증
+		$('input[name=hp]').keyup(function () {
+			let reHp = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;
+			let hp = $('input[name=hp]').val();
+			
+			if(hp.match(reHp)){
+				isHpOk = true;
+			} else {
+				isHpOk = false;
+			}
+			console.log(hp);
+		});
+		
+		
 		// 결제하기 버튼 클릭시
 		$('form').submit(function (e) {
 			e.preventDefault();
+			
+			// 이름 입력 검증
+			if(!isNameOk){
+				alert('유효한 이름이 아닙니다.');
+				$('input[name=orderer]').focus();
+				return false;
+			}
+			
+			// 휴대폰 입력 검증
+			if(!isHpOk){
+				alert('유효한 휴대폰이 아닙니다.');
+				$('input[name=hp]').focus();
+				return false;
+			}
+			
+			// 라디오박스 체크 검증
+			if (!$('input[type=radio]:checked').val()) {
+				alert('결제방법을 선택해주세요.');
+				return false;
+			}
+			
+			
+			
+			return;
 			let regex = /[^0-9]/g;	// 숫자 아닌것만 체크하는 정규식
 			$('input[name=ordCount]').val(tCount.text()); 	 // 전체 상품 수량
 			$('input[name=ordPrice]').val(String(tPrice.text()).replace(regex, "")); 	 // 전체 상품 가격 
@@ -193,67 +249,7 @@
 				}
 			});
 		})
-		/*
-		// 포인트 입력하는 이벤트
-		$('input[name=point]').keyup(function () {
-			let inputVal = $(this).val().replaceAll(",", "");
-			if(!inputVal.match(/^[0-9 || ,]+$/) && inputVal != ''){
-				$(this).val(inputVal.replace(/[^0-9]/g, "").replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
-				alert('숫자만 입력해주세요.');
-				return;
-			}
-
-			// 회원이 가지고 있는 포인트 이상 입력시
-			if(Number(inputVal) > Number(userPoint)){
-				inputVal = userPoint;	
-			}
-			
-			$(this).val(inputVal.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
-		})
 		
-		// 포인트 적용시키는 이벤트
-		let currentPoint = $('#currentPoint');
-		let apply = false;
-		$('input[name=pointBtn]').click(function () {
-			
-			if(!apply){
-				let point = $('input[name=point]').val().replaceAll(",", "");
-				
-				if(Number(point) < 5000){
-					alert('5,000점이상 부터 사용가능합니다.');
-					return;
-				}
-				
-				tPoint.text((Number(point)*-1).toLocaleString('ko-KR')); // 사용할 포인트 입력
-				currentPoint.text((Number(userPoint)- Number(point)).toLocaleString('ko-KR')); // 현재 포인트에 사용할 포인트를 뺀다.
-				let totalPrice = Number(currentTotal) - Number(point);  // 현재 전체 주문금액에서 포인트를 뺀다.
-				tTotalPrice.text(totalPrice.toLocaleString('ko-KR'));   // 사용한 포인트를 뺀 주문금액 입력
-				
-				$(this).val('취소');
-				
-				$(this).css({
-					'background':'#F99C9C',
-					'color':'#8E1010',
-					'border-color':'#BF6C6C'
-				});
-				apply = true;
-			} else {
-				tTotalPrice.text(Number(currentTotal).toLocaleString('ko-KR'));
-				tPoint.text('0');
-				currentPoint.text(Number(userPoint).toLocaleString('ko-KR'));
-				
-				$(this).val('적용');
-				$(this).css({
-					'background':'#f0f4f9',
-					'color':'#3371c9',
-					'border-color':'#acc0e0'
-				});
-				apply = false;
-			}
-		})
-		
-		
-			*/
 	})
 </script>
             </aside>
@@ -266,7 +262,7 @@
                         HOME >
                         <span>장바구니</span>
                         >
-                        <strong>주문결제</strong>
+                        <strong style="font-weight: bold;">주문결제</strong>
                     </p>
                 </nav>
                 <form action='<c:url value='/product/order.do'/>' method="post">
@@ -347,12 +343,12 @@
                                     <td>우편번호</td>
                                     <td>
                                         <input type="text" name="zip" id="zip" value="${vo.zip}">
-                                        <input type="button" class="AuthBtn" onclick="zipcode()" value="검색">
+                                        <input type="button" class="AuthBtn" onclick="zipcode()" value="검색" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>기본주소</td>
-                                    <td><input type="text" name="addr1" id="addr1" value="${vo.addr1}"></td>
+                                    <td><input type="text" name="addr1" id="addr1" value="${vo.addr1}" required></td>
                                 </tr>
                                 <tr>
                                     <td>상세주소</td>
