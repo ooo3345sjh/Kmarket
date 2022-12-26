@@ -14,6 +14,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
 </head>
+<script>
+	$(function () {
+		$(document).ready(function () {
+			let csTag = "<a href='<c:url value='/cs/index.do'/>'>고객센터</a>";
+			let uri = window.location.pathname;
+			
+			if(uri.includes('cs')){
+				$('.logo > div').append(csTag);
+			}
+		});
+	})
+</script>
 <body>
     <div id="wrapper">
         <header>
@@ -41,7 +53,7 @@
             </div>
             <div class="logo">
                 <div>
-                    <a href="<c:url value='/cs/index.do'/>">
+                    <a href="<c:url value='/index.do'/>">
                         <img src='<c:url value='/member/img/header_logo.png'/>' alt="Kmarket 대한민국 1등 온라인 쇼핑">
                     </a>
                 </div>

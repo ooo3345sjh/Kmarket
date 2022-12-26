@@ -50,7 +50,7 @@ public class ListController extends HttpServlet {
 		
 		service.countArticles(map);  // 조건에 해당하는 전체 상품 목록의 갯수를 가져오는 서비스
 		Paging.paging(map);		     // 페이징 처리
-		service.selectArticles(map);
+		service.selectArticles(map); // 
 		Paging.getPageTags(map);  	 // 페이징 처리된 정보를 토대로 태그 생성
 		
 		service.selectFaqArticle(map);
