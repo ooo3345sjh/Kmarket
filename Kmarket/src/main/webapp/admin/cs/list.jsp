@@ -33,7 +33,7 @@
                             <td><input type="checkbox"></td>
                             <td>${vo.csNo}</td>
                             <td>${vo.type}</td>
-                            <td><a href="<c:url value='/admin/cs/view.do?no=${vo.csNo}&cate1=notice'/>">[${vo.type}]${vo.title}</a></td>
+                            <td><a href="<c:url value='/admin/cs/view.do?no=${vo.csNo}&cate1=${cate1}'/>">[${vo.type}]${vo.title}</a></td>
                             <td>${vo.hit}</td>
                             
                             <c:set var="rdate"  value="${vo.rdate}"/>
@@ -52,7 +52,7 @@
                        ${map.pageTag} 
                     </div>
 
-                    <a href="<c:url value='/admin/cs/write.do?cate1=notice'/>" class="btnWrite">작성하기</a>
+                    <a href="<c:url value='/admin/cs/write.do?cate1=${cate1}'/>" class="btnWrite">작성하기</a>
                 </section>
             </div>
         </main>
