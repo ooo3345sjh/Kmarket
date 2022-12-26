@@ -86,7 +86,7 @@
                                 </tr>
                             </table>
                             
-                            <a href="<c:url value='/cs/board/list.do?cate1=${cate1}&cate2=${cate2}'/>" class="btnList">취소하기</a>
+                            <a href="<c:url value='/cs/list.do?cate1=${cate1}&cate2=${cate2}'/>" class="btnList">취소하기</a>
                             <input type="submit" class="btnSubmit" value="등록하기"/>
                         </form>
                     </article>

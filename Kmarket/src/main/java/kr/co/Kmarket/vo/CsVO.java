@@ -77,6 +77,16 @@ public class CsVO {
 		this.rdate = rdate;
 	}
 	
-	
-	
+	public String getTypeValue() {
+		  if(type.equals("1")) {
+		  	return "고객서비스";
+		  }else if(type.equals("2")) {
+		  	return "안전거래";
+		  }else if(type.equals("3")) {
+		  	return "위해상품";
+		  }else if(type.equals("4")) {
+		  	return "이벤트당첨";
+		  }
+		return null;
+	}
 }

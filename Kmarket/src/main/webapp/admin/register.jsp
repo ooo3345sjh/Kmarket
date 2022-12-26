@@ -22,6 +22,7 @@ $(function(){
 	});
 });
 </script>
+
                 <section id="admin-product-register" class="admin">
                     <nav>
                         <h1>상품등록</h1>
