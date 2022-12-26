@@ -5,8 +5,9 @@
  $(function(){
 	
 	$('select[name=type]').change(function(){
-			console.log($('select[name=type] option:selected').text());
+			 console.log($('select[name=type] option:selected').text());
 	})
+	
 	
 	$(document).on('click', '.remove', function(e){
 		e.preventDefault();

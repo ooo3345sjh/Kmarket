@@ -46,7 +46,7 @@ public class CsDAO extends DBHelper {
 			con = getConnection();
 			psmt = con.prepareStatement(Sql.INSERT_ADMIN_NOTICE);
 			psmt.setString(1, cvo.getUid());
-			psmt.setString(2, cvo.getCate1());
+			psmt.setString(2, cvo.getCate2());
 			psmt.setString(3, cvo.getType());
 			psmt.setString(4, cvo.getTitle());
 			psmt.setString(5, cvo.getContent());

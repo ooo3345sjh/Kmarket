@@ -26,7 +26,7 @@
                         </tr>
                     </table>
                     <input type="button" class="btnDelete" value="삭제">
-                    <input type="button" class="btnModify" value="수정">
+                    <a href="<c:url value='/admin/cs/modify.do?no=${cvo.csNo}'/>">수정</a>
                     <input type="button" class="btnList" value="목록">
                 </section>
             </div>

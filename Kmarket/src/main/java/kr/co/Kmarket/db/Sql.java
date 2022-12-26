@@ -177,7 +177,8 @@ public class Sql {
 	
 	public static final String INSERT_ADMIN_NOTICE = "INSERT INTO `km_cs` SET "
 													+ "`uid`=?, "
-													+ "`cate1`=?, "
+													+ "`cate1`='notice', "
+													+ "`cate2`=?, "
 													+ "`type`=?, "
 													+ "`title`=?, "
 													+ "`content`=?, "
