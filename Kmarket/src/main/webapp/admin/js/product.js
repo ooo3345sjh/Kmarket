@@ -46,23 +46,33 @@
 		let point 	 = td.eq(6);
 		let stock 	 = td.eq(7);
 		
+		let content1 = prodName.text();
+		let content2 = price.text();
+		let content3 = discount.text();
+		let content4 = point.text();
+		let content5 = stock.text();
+		
+		// 
+		
+		
 		if(txt == '[수정]'){
 			// 수정모드
 			$(this).text('[수정완료]');
-			prodName.attr('contentEditable', true);
-			price.attr('contentEditable', true);
-			discount.attr('contentEditable', true);
-			point.attr('contentEditable', true);
-			stock.attr('contentEditable', true);
+			prodName.html('<input id="prodName" value=' + content1 + ' style="width:300px; height:80px;">');
+			price.html('<input id="price" value=' + content2 + ' style="width:100px; height:80px;">');
+			discount.html('<input id="discount" value=' + content3 + ' style="width:50px; height:80px;">');
+			point.html('<input id="point" value=' + content4 + ' style="width:50px; height:80px;">');
+			stock.html('<input id="stock" value=' + content5 + ' style="width:50px; height:80px;">');
 			prodName.focus();
+			
 		} else {
 			// 수정완료
 			$(this).text('[수정]');
-			prodName.attr('contentEditable', false);
-			price.attr('contentEditable', false);
-			discount.attr('contentEditable', false);
-			point.attr('contentEditable', false);
-			stock.attr('contentEditable', false);
+			prodName.html(cont1);
+			price.html(cont2);
+			discount.html(cont3);
+			point.html(cont4);
+			stock.html(cont5);
 			
 			let prodNo = $(this).attr('data-no');
 			content1 = prodName.text();
