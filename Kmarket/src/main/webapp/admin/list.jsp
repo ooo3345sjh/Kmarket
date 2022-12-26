@@ -42,7 +42,7 @@
                             <td>${vo.prodNo}</td>
                             <td>${vo.prodName}</td>
                             <td>${vo.price}</td>
-                            <td>${vo.discount}</td>
+                            <td><input type="text" value="${vo.discount}"></td>
                             <td>${vo.point}</td>
                             <td>${vo.stock}</td>
                             <td>${vo.seller}</td>

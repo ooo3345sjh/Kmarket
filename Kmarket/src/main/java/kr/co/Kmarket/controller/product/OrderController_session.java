@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,9 +57,11 @@ public class OrderController_session extends HttpServlet {
 		logger.info("OrderController doPost...");
 		
 		// 회원 정보 가져오기
-		MemberVO user = (MemberVO)req.getSession().getAttribute("sessMember");
+		HttpSession session = req.getSession();
+		MemberVO user = (MemberVO)session.getAttribute("sessMember");
 		if(user == null) {
 			JSFunction.alertBack(resp, "로그인이 필요합니다.");
+			return;
 		} 
 		
 		// 주문 일련번호 생성
@@ -117,6 +120,8 @@ public class OrderController_session extends HttpServlet {
 		String[] prodNameArr = req.getParameterValues("prodName");   // 각 상품 제목
 		String[] descriptArr = req.getParameterValues("descript");   // 각 상품 설명
 		String[] thumb1Arr = req.getParameterValues("thumb1");   // 각 상품 썸네일1
+		String[] cate1Arr = req.getParameterValues("catg1");   // 각 상품 catg1
+		String[] cate2Arr = req.getParameterValues("cate2");   // 각 상품 cate2
 		
 		// 주문 상품 아이템 테이블에 추가할 데이터
 		List<OrderItemVO> list = new ArrayList<>();
@@ -145,9 +150,12 @@ public class OrderController_session extends HttpServlet {
 			service.deleteProductInCart(cartNoArr); // 장바구니 테이블에서 주문한 상품을 삭제 해준다.
 		} 
 		
-		service.insertOrder(orderVo, list, user);
+		int result = service.insertOrder(orderVo, list, user); // 주문 테이블 및 주문아이템 테이블에 내용 추가
 		
+		user.setPoint(user.getPoint() - Integer.parseInt(usedPoint));
+		session.setAttribute("sessMember", user);
 		
+		/*
 		System.out.println("ordCount : " + ordCount);
 		System.out.println("ordPrice : " + ordPrice);
 		System.out.println("ordDisCount : " + ordDisCount);
@@ -186,6 +194,7 @@ public class OrderController_session extends HttpServlet {
 		for(String delivery : deliveryArr) {
 			System.out.println("delivery : " + delivery);
 		}
+		*/
 		
 		JsonObject json = new JsonObject();
 		Gson gson = new Gson();
@@ -195,7 +204,6 @@ public class OrderController_session extends HttpServlet {
 		resp.setContentType("application/json;charset=UTF-8");
 		Writer writer = resp.getWriter();
 		writer.write(json.toString());
-		//req.getRequestDispatcher("/product/complete.jsp").forward(req, resp);
 	}
 
 }

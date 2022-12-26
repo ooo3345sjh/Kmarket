@@ -140,6 +140,8 @@
 			let delivery = String('${vo.delivery}').replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 			list.push({
 					"prodNo":'${vo.prodNo}', 
+					"cate1":'${vo.cate1}', 
+					"cate2":'${vo.cate2}', 
 					"count": num, 
 					"price": price,
 					"discount":'${vo.discount}%',

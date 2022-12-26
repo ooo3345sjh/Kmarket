@@ -64,9 +64,12 @@ function optionChange(){
 	
 	// 옵션을 추가하기 전에 select box를 비워준다.
 	$('.category2').empty();
+	let option;
+	option = $("<option value='none' disabled selected>2차 분류 선택</option>");
+	$('.category2').append(option);
 	
 	for (let i=0; i < change.length; i++){
-		let option = $("<option value="+[i]+">"+change[i]+"</option>");
+		option = $("<option value="+[i]+">"+change[i]+"</option>");
 		$('.category2').append(option);
 	}
 }

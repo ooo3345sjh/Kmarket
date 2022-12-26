@@ -38,6 +38,8 @@
 					  + "	<td>"
                		  + "		<input type='hidden' name='count' value='" + orderList[i].count + "'>"
                		  + "		<input type='hidden' name='cartNo' value='" + orderList[i].cartNo + "'>"
+               		  + "		<input type='hidden' name='cate1' value='" + orderList[i].cate1 + "'>"
+               		  + "		<input type='hidden' name='cate2' value='" + orderList[i].cate2 + "'>"
                		  + "		<input type='hidden' name='prodNo' value='" + orderList[i].prodNo + "'>"
                		  + "		<input type='hidden' name='price' value='" + orderList[i].price.replaceAll(",", "") + "'>"
                		  + "		<input type='hidden' name='discount' value='" + orderList[i].discount.replace("%", "") + "'>"
@@ -47,10 +49,14 @@
                		  + "		<input type='hidden' name='descript' value='" + orderList[i].descript + "'>"
                		  + "		<input type='hidden' name='thumb1' value='" + orderList[i].thumb1 + "'>"
 					  + "		<article>"
-                      + "			<a href='#'><img src='<c:url value='/" + orderList[i].thumb1 + "'/>' alt='썸네일1'></a>"
+					  + "			<a href='<c:url value='/product/view.do?cate1=" + orderList[i].cate1 + "&cate2=" + orderList[i].cate2 + "&no=" + orderList[i].prodNo + "'/>'>"
+					  + "				<img src='<c:url value='/" + orderList[i].thumb1 + "'/>' alt='썸네일1'>"
+					  + "			</a>"
                       + "			<div>"
                       + "				<h2>"
-                      + "					<a href='#'>" + orderList[i].prodName + "</a>"
+                      + "				<a href='<c:url value='/product/view.do?cate1=" + orderList[i].cate1 + "&cate2=" + orderList[i].cate2 + "&no=" + orderList[i].prodNo + "'/>'>" 
+                      + 					orderList[i].prodName 
+                      + "				</a>"
                       + "				</h2>"
                       + "				<p>" + orderList[i].descript + "</p>"
                       + "			</div>"
@@ -221,7 +227,6 @@
 			
 			
 			
-			return;
 			let regex = /[^0-9]/g;	// 숫자 아닌것만 체크하는 정규식
 			$('input[name=ordCount]').val(tCount.text()); 	 // 전체 상품 수량
 			$('input[name=ordPrice]').val(String(tPrice.text()).replace(regex, "")); 	 // 전체 상품 가격 
