@@ -7,20 +7,24 @@
 	$(function(){
 		for(let i = 1; i < 8; i++){
 			
-			$('.more'+i+'').click(function(){
+			$('.more'+i+'').click(function(e){
+				e.preventDefault();
 				$('.more'+i+'').hide();
 				$('.short'+i+'').show();
 				$('.ul'+i+' > #m_list:nth-child(n+4)').show();
 			});
 			
-			$('.short'+i+'').click(function(){
+			$('.short'+i+'').click(function(e){
+				e.preventDefault();
 				$('#m_list:nth-child(n+4)').hide();
 				$('.short'+i+'').hide();
 				$('.more'+i+'').show();
 			})
 		}
-		
+	
 	})
+	
+	
 </script>
 
             <c:choose>
@@ -112,7 +116,8 @@
             		</c:otherwise>
             	<%-- 공지사항 전체 외 나머지 카테고리 끝 --%>
             </c:choose>
-                        
+            
+                  
                     </article>
                 </section>
                         

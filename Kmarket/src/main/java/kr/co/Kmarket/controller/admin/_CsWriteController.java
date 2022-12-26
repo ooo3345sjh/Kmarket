@@ -35,14 +35,17 @@ public class _CsWriteController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uid	 = req.getParameter("uid");
 		String cate1 = req.getParameter("cate1");
+		String cate2 = req.getParameter("cate2");
 		String type	 = req.getParameter("type");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String regip = req.getRemoteAddr();
 		
+		
 		CsVO cvo = new CsVO();
 		cvo.setUid(uid);
 		cvo.setCate1(cate1);
+		cvo.setCate2(cate2);
 		cvo.setType(type);
 		cvo.setTitle(title);
 		cvo.setContent(content);
@@ -52,8 +55,8 @@ public class _CsWriteController extends HttpServlet{
 		
 		if(result > 0) {
 			resp.sendRedirect("/Kmarket/admin/cs/list.do?cate1="+cate1);
-		}else {
-			
 		}
+		
+		
 	}
 }
