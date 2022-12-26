@@ -685,12 +685,8 @@
 #product > .order > form > .discount > div > label > input[type=text] {
     display: inline-block;
     outline: none;
-<<<<<<< HEAD
-    text-indent: 3px;
-=======
     text-align: right;
     padding-right: 3px;
->>>>>>> 3ac7fd93a212c8170a44b1d873350a3bc4509bf2
 }
 
 #product > .order > form > .discount > div > label > input[type=button] {
@@ -826,7 +822,7 @@
     letter-spacing: -0.1em;
 }
 
-#product > .complete > .info > table tr > th:last-child {width: 200px;}
+#product > .complete > .info > table tr > th:last-child {width: 80px;}
 #product > .complete > .order table tr > td {
     padding: 10px;
     box-sizing: border-box;
@@ -876,5 +872,7 @@
 #product > .complete > .alert > ul {list-style: inherit;}
 #product > .complete > .alert > ul > li {line-height: 20px;}
 #product > .complete > .alert > ul > li > span {position: relative; left: -6px;}
+
+#product #total td{width: 100px;}
 
 
