@@ -2,7 +2,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"/>
 <script src="<c:url value='/admin/js/csArticle.js'/>"></script>
-
+<script>
+	$(function(){
+		
+		$('select[name=type]').change(function(){
+			
+			
+			$.ajax({
+				url:'/Kmarket/admin/cs/write.do',
+				method:'get',
+				data: "cate2":$(this).val(),
+				dataType:'json',
+				success: function(data){
+					
+				}
+			})
+			
+		})
+		
+	})
+</script>
                 <section id="cs-write" class="admin">
                     <nav>
                         <h1>공지사항 작성</h1>

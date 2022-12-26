@@ -8,6 +8,8 @@ $(function(){
 		
 		let cate1 = $('.category1').val();
 		let cate2 = $('.category2').val();
+		console.log(cate1);
+		console.log(cate2);
 		
 		$.ajax({
 			type:'GET',
@@ -19,6 +21,7 @@ $(function(){
 	
 });
 </script>
+
                 <section id="admin-product-register" class="admin">
                     <nav>
                         <h1>상품등록</h1>

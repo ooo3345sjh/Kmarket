@@ -732,7 +732,7 @@
     background-image: url("../img/cs_sprites.png");
     background-position: -566px -652px;
 }
-#cs > .qna > .list > article > .page > .prevoff{
+#cs  .list > article > .page > .prevoff{
     font-size: 0;
     background-image: url("../img/cs_sprites.png");
     background-position: -696px -652px;
@@ -743,7 +743,7 @@
     background-image: url("../img/cs_sprites.png");
     background-position: -628px -652px;
 }
-#cs > .qna > .list > article > .page > .nextoff{
+#cs .list > article > .page > .nextoff{
     font-size: 0;
     background-image: url("../img/cs_sprites.png");
     background-position:-769px -652px;
@@ -815,7 +815,7 @@
     box-sizing: border-box;
 }
 #cs > .qna > .write > article table select {
-	width: 150px;
+	width: 177px;
     height: 40px;
     text-indent: 5px;
     box-sizing: border-box;
