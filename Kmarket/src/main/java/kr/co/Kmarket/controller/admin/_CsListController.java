@@ -32,10 +32,10 @@ public class _CsListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("CsListController...");
-		String cate1 = req.getParameter("cate1");
-		String cate2 = req.getParameter("cate2");
-		String pg = req.getParameter("pg");
-		String group = "admin";
+		String cate1	 = req.getParameter("cate1");
+		String cate2	 = req.getParameter("cate2");
+		String pg		 = req.getParameter("pg");
+		String group	 = "admin";
 		String searchField = req.getParameter("searchField");
 		String searchWord = req.getParameter("searchWord");
 		Map<String, Object> map = new HashMap<>();
@@ -54,6 +54,7 @@ public class _CsListController extends HttpServlet{
 		Paging.getPageTags(map);  	 // 페이징 처리된 정보를 토대로 태그 생성
 		
 		List<CsVO> cvo = service.selectNoticeAll();
+		req.setAttribute("cate1", cate1);
 		
 		req.setAttribute("map", map);
 		req.setAttribute("cvo", cvo);

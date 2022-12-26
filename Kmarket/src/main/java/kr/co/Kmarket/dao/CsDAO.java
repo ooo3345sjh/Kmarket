@@ -39,6 +39,28 @@ public class CsDAO extends DBHelper {
 		return result;
 	}
 	
+	public int insertAdminNoticeArticle(CsVO cvo) {
+		int result = 0;
+		try {
+			logger.info("insertAdminNoticeArticle...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.INSERT_ADMIN_NOTICE);
+			psmt.setString(1, cvo.getUid());
+			psmt.setString(2, cvo.getCate2());
+			psmt.setString(3, cvo.getType());
+			psmt.setString(4, cvo.getTitle());
+			psmt.setString(5, cvo.getContent());
+			psmt.setString(6, cvo.getRegip());
+			
+			result = psmt.executeUpdate();
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
 	public CsVO viewArticle(String csNo) {
 		CsVO cvo = null;
 		
@@ -71,6 +93,8 @@ public class CsDAO extends DBHelper {
 		return cvo;
 	}
 	
+	
+	/* 자주묻는 질문 목록 */
 	public void selectFaqArticle(Map<String, Object> map) {
 		List<CsVO> faqlist = null;
 		
@@ -128,6 +152,7 @@ public class CsDAO extends DBHelper {
 		logger.debug(" faq : " + map);
 	}
 	
+	/* 공지사항 전체보기 */
 	public List<CsVO> selectNoticeAll() {
 		List<CsVO> nlist = new ArrayList<>();
 		
@@ -199,9 +224,10 @@ public class CsDAO extends DBHelper {
 			       + " FROM `km_cs` "
 			       + " WHERE `cate1`='" + cate1 + "' AND `cate2`='" + cate2 + "'"
 			       + " LIMIT ?, 10"; // 게시물 구간을 인파라미터로 받기
+			  
 		try {
 			
-			logger.info("selectArticle...");
+			logger.info("selectArticles...");
 			con = getConnection();
 			psmt = con.prepareStatement(sql);
 			psmt.setInt(1, (int)map.get("limitStart"));
@@ -244,14 +270,9 @@ public class CsDAO extends DBHelper {
 			
 			String cate1 = (String)map.get("cate1");
 			String cate2 = (String)map.get("cate2");
-			String group = (String)map.get("group");
 			
 			StringBuffer sql = new StringBuffer();
-			sql.append("SELECT COUNT(`csNo`)FROM `km_cs` ");
-			
-			if(!group.equals("cs")) { // 그룹명(자칭)이 cs가 아니라면
-				sql.append("WHERE `cate1` = '"+cate1+"' AND `cate2`= '"+cate2+"'");
-			}
+			sql.append("SELECT COUNT(`csNo`)FROM `km_cs` WHERE `cate1` = '" + cate1 + "' AND `cate2`='" + cate2 + "'");
 			
 			con = getConnection();
 			stmt = con.createStatement();
@@ -283,7 +304,40 @@ public class CsDAO extends DBHelper {
 		}
 	}
 	
-	public void delete() {}
+	public int updateArticle(String type, String title, String content, String no) {
+		int result = 0;
+		try{
+			logger.info("updateArticle...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.UPDATE_ARITLCE);
+			psmt.setString(1, type);
+			psmt.setString(2, title);
+			psmt.setString(3, content);
+			psmt.setString(4, no);
+			result = psmt.executeUpdate();
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	
+	public int deleteArticle(String csNo) {
+		int result = 0;
+		try {
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.DELECT_ARTICLE);
+			psmt.setString(1, csNo);
+			result = psmt.executeUpdate();
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
 	
 	
 	/*** admin ***/

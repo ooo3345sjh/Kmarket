@@ -55,14 +55,6 @@ public class CartController_session extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("CartController doPost...");
-		
-		
-		String[] carts = req.getParameterValues("장바구니 번호들");
-		
-		List<CartVo> list = null;
-		
-		req.getSession().setAttribute("list", list);
-		
 	}
 
 }

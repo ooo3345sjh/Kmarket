@@ -24,7 +24,7 @@
 		$('.increase').click(function () {
 			let numTag = $(this).prev();
 			let num = numTag.val();
-			console.log(num);
+			//console.log(num);
 			if(num >= ${vo.stock}) {
 				alert('재고량이 부족합니다.');
 				return;
@@ -77,8 +77,8 @@
 			let jsonData = {"cate1":'${vo.cate1}', "cate2":'${vo.cate2}', "prodNo":'${vo.prodNo}', "pg":pg};
 			
 	        $.post(contextRoot + '/product/review.do', jsonData, function(data){
-	        	console.log(data.pageTag);	
-	        	console.log(data.reviews);
+	        	//console.log(data.pageTag);	
+	        //	console.log(data.reviews);
 	        	$('.review > ul').children().remove(); // 현재 페이지에 출력된 상품리뷰 삭제
 	        	let arr = JSON.parse(data.reviews); // JSON 문자열을 배열로 변환
 				for(let review of arr){
@@ -103,6 +103,13 @@
 	        });
 		})
 
+		 function scroll_on() {
+	        $('body').on('scroll touchmove mousewheel', function(e) {
+	            e.preventDefault();
+	            e.stopPropagation();
+	            return false;
+	        });
+    	}
 		// 장바구니에 해당 상품을 추가하는 이벤트 함수		
 		$(document).on('click', '.cart', function () {
 			
@@ -120,12 +127,15 @@
 			};
 			
 	        $.post(contextRoot + '/product/view.do', jsonData, function(data){
-	        	console.log(data);	
-	        	
-	        	if(confirm('장바구니에 상품을 담았습니다. \n장바구니로 이동하시겠습니까?')){
-	        		location.href(contextRoot + '/product/cart.do');
+	        	console.log(data.result);
+	        	if(data.result != 0){
+	        		$('#cartMove').show();
+	        		$('#background').show();
+	        		
+	        		return;
+	        		location.href = contextRoot + '/product/cart.do';
 	        	};
-				
+	        	console.log(document.documentElement.scrollHeight);
 	        });
 		})
 		// 구매하기 버튼 클릭시 바로 해당 상품을 주문하는 페이지로 이동하는 이벤트
@@ -140,6 +150,8 @@
 			let delivery = String('${vo.delivery}').replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 			list.push({
 					"prodNo":'${vo.prodNo}', 
+					"cate1":'${vo.cate1}', 
+					"cate2":'${vo.cate2}', 
 					"count": num, 
 					"price": price,
 					"discount":'${vo.discount}%',
@@ -235,7 +247,7 @@
                             <em>총 상품금액</em>
                         </div>
                         <div class="button">
-                            <input type="button" class="cart" value="장바구니">
+                            <input type="button" class="cart" value="장바구니" onclick="return scroll_on();">
                             <input type="button" class="order" value="구매하기">
                         </div>
                     </div>
@@ -364,4 +376,12 @@
             <!-- 상품 상세페이지 끝 -->
         </main>
         </div>
+        <div id='background'>
+        </div>
+        <div id='cartMove'>
+        	<img alt="장바구니" src='<c:url value='/product/img/cart.png'/>'>
+			<p>장바구니에 상품을 담았습니다.</p>
+		 	<button type="button" name='shopping'>계속 쇼핑</button>
+		 	<button type="button" name='cart'>장바구니로</button>
+		</div>;
 <jsp:include page="/_footer.jsp"/>

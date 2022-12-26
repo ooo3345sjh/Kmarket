@@ -9,6 +9,7 @@ html, body {height: 100%}
     padding-bottom: 192px;
     box-sizing: border-box;
 }
+body{position: relative;}
 
 /* 헤더 */
 
@@ -448,7 +449,11 @@ main #link {
 main #link > a {
 	display: inline-block;
     width: 130px;
+<<<<<<< HEAD
     background-color: #32de10;
+=======
+    background-color: #45ad4a;
+>>>>>>> 47bcab39e58dabb76587b5357204d6b2bb0a3c11
     padding: 15px 0px;
     color: white;
     font-weight: bold;
