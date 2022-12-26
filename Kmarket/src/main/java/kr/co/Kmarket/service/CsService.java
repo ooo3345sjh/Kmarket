@@ -17,6 +17,9 @@ public class CsService {
 	public int insertArticle(CsVO cvo) {
 		return dao.insertArticle(cvo);
 	}
+	public int insertAdminNoticeArticle(CsVO cvo) {
+		return dao.insertAdminNoticeArticle(cvo);
+	}
 	
 	public CsVO viewArticle(String csNo) {
 		return dao.viewArticle(csNo);
@@ -42,8 +45,12 @@ public class CsService {
 		dao.countArticles(map);
 	}
 	
-	public void update() {}
-	public void delete() {}
+	public int updateArticle(String type, String title, String content, String no) {
+		return dao.updateArticle(type, title, content, no);
+	}
+	public int deleteArticle(String csNo) {
+		return dao.deleteArticle(csNo);
+	}
 	
 	
 	/*** admin index ***/
