@@ -121,6 +121,10 @@
 			
 	        $.post(contextRoot + '/product/view.do', jsonData, function(data){
 	        	console.log(data);	
+	        	
+	        	if(confirm('장바구니에 상품을 담았습니다. \n장바구니로 이동하시겠습니까?')){
+	        		location.href(contextRoot + '/product/cart.do');
+	        	};
 				
 	        });
 		})
@@ -160,9 +164,9 @@
                     <h1>상품보기</h1>
                     <p>
                         HOME >
-                        <span>패션·의류·뷰티</span>
+                        <span id='cate1'>패션·의류·뷰티</span>
                         >
-                        <strong>남성의류</strong>
+                        <strong id='cate2' style="font-weight: bold;">남성의류</strong>
                     </p>
                 </nav>
                 <!-- 상품 전체 정보 내용 -->
@@ -195,7 +199,14 @@
                             </div>
                         </nav>
                         <nav>
-                            <span class="delivery">무료배송</span>
+                        	<c:choose>
+	                           	<c:when test="${vo.delivery != 0}">
+	                            	<span class="delivery"><fmt:formatNumber value="${vo.delivery}" pattern="#,###"/>원</span>
+	                           	</c:when>
+	                           	<c:otherwise>
+	                            	<span class="delivery">무료배송</span>
+	                           	</c:otherwise>
+	                       	</c:choose>
                             <span class="arrival">모레(${yoil}) ${date} 도착예정</span>
                             <span class="desc">본 상품은 국내배송만 가능합니다.</span>
                         </nav>

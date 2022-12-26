@@ -39,6 +39,28 @@ public class CsDAO extends DBHelper {
 		return result;
 	}
 	
+	public int insertAdminNoticeArticle(CsVO cvo) {
+		int result = 0;
+		try {
+			logger.info("insertAdminNoticeArticle...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.INSERT_ADMIN_NOTICE);
+			psmt.setString(1, cvo.getUid());
+			psmt.setString(2, cvo.getCate1());
+			psmt.setString(3, cvo.getType());
+			psmt.setString(4, cvo.getTitle());
+			psmt.setString(5, cvo.getContent());
+			psmt.setString(6, cvo.getRegip());
+			
+			result = psmt.executeUpdate();
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
 	public CsVO viewArticle(String csNo) {
 		CsVO cvo = null;
 		
@@ -283,7 +305,40 @@ public class CsDAO extends DBHelper {
 		}
 	}
 	
-	public void delete() {}
+	public int updateArticle(String type, String title, String content, String no) {
+		int result = 0;
+		try{
+			logger.info("updateArticle...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.UPDATE_ARITLCE);
+			psmt.setString(1, type);
+			psmt.setString(2, title);
+			psmt.setString(3, content);
+			psmt.setString(4, no);
+			result = psmt.executeUpdate();
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	
+	public int deleteArticle(String csNo) {
+		int result = 0;
+		try {
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.DELECT_ARTICLE);
+			psmt.setString(1, csNo);
+			result = psmt.executeUpdate();
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
 	
 	
 	/*** admin ***/
