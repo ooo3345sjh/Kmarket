@@ -822,7 +822,7 @@
     letter-spacing: -0.1em;
 }
 
-#product > .complete > .info > table tr > th:last-child {width: 200px;}
+#product > .complete > .info > table tr > th:last-child {width: 80px;}
 #product > .complete > .order table tr > td {
     padding: 10px;
     box-sizing: border-box;
@@ -872,5 +872,7 @@
 #product > .complete > .alert > ul {list-style: inherit;}
 #product > .complete > .alert > ul > li {line-height: 20px;}
 #product > .complete > .alert > ul > li > span {position: relative; left: -6px;}
+
+#product #total td{width: 100px;}
 
 

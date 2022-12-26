@@ -246,7 +246,7 @@
                     <h1>장바구니</h1>
                     <p>
                         HOME >
-                        <strong>장바구니</strong>
+                        <strong style="font-weight: bold;">장바구니</strong>
                     </p>
                 </nav>
                 <form action='<c:url value='/product/cart.do'/>' method="post">
