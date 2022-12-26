@@ -52,18 +52,23 @@ public class RegisterController extends HttpServlet {
 		MemberVO sessMember = (MemberVO)sess.getAttribute("sessMember");
 		String uid = sessMember.getUid();
 		int type = sessMember.getType();
+		String cate1 = String.valueOf(sess.getAttribute("cate1"));
+		String cate2 = String.valueOf(sess.getAttribute("cate2"));
+		
+		System.out.println("cate1 : "+cate1);
+		System.out.println("cate2 : "+cate2);
 		
 		ServletContext ctx = req.getServletContext();
 		String path = ctx.getRealPath("/file");
 
-		File file = new File(path);
-		if(!file.exists()) file.mkdirs();
+		String newPath = path + "/" + cate1 + "/" + cate2;
+		
+		File newFile = new File(newPath);
+		if(!newFile.exists()) newFile.mkdirs();
 		
 		int maxSize = 1024 * 1024 * 10;
-		MultipartRequest mr = new MultipartRequest(req, path, maxSize, "UTF-8", new DefaultFileRenamePolicy());
+		MultipartRequest mr = new MultipartRequest(req, newPath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 		
-		String cate1 = mr.getParameter("category1");
-		String cate2 = mr.getParameter("category2");
 		String prodName = mr.getParameter("productName");
 		String descript = mr.getParameter("description");
 		String company = mr.getParameter("productCompany");
@@ -82,22 +87,15 @@ public class RegisterController extends HttpServlet {
 		String bizType = mr.getParameter("separation");
 		String origin = mr.getParameter("origin");
 		String ip = req.getRemoteAddr();
-		
-		int newCate2 = 10 + Integer.parseInt(cate2);
-		
-		String newPath = path + "/" + cate1 + "/" + newCate2;
-		
-		File newFile = new File(newPath);
-		if(!newFile.exists()) newFile.mkdirs();
+
 		
 		int i1 = thumb1.lastIndexOf(".");
 		String ext1 = thumb1.substring(i1);
 		String newName1 = UUID.randomUUID()+ext1;
 		
-		File f1 = new File(path+"/"+thumb1);
+		File f1 = new File(newPath+"/"+thumb1);
 		File f2 = new File(newPath+"/"+newName1);
-		Files.copy(f1.toPath(), f2.toPath(), StandardCopyOption.REPLACE_EXISTING);
-		f1.delete();
+		f1.renameTo(f2);
 		
 		int i2 = thumb2.lastIndexOf(".");
 		String ext2 = thumb2.substring(i2);
@@ -105,8 +103,7 @@ public class RegisterController extends HttpServlet {
 		
 		File f3 = new File(path+"/"+thumb2);
 		File f4 = new File(newPath+"/"+newName2);
-		Files.copy(f3.toPath(), f4.toPath(), StandardCopyOption.REPLACE_EXISTING);
-		f3.delete();
+		f3.renameTo(f4);
 		
 		int i3 = thumb3.lastIndexOf(".");
 		String ext3 = thumb3.substring(i3);
@@ -114,8 +111,7 @@ public class RegisterController extends HttpServlet {
 		
 		File f5 = new File(path+"/"+thumb3);
 		File f6 = new File(newPath+"/"+newName3);
-		Files.copy(f5.toPath(), f6.toPath(), StandardCopyOption.REPLACE_EXISTING);
-		f5.delete();
+		f5.renameTo(f6);
 		
 		int i4 = detail.lastIndexOf(".");
 		String ext4 = detail.substring(i4);
@@ -123,8 +119,7 @@ public class RegisterController extends HttpServlet {
 		
 		File f7 = new File(path+"/"+detail);
 		File f8 = new File(newPath+"/"+newName4);
-		Files.copy(f7.toPath(), f8.toPath(), StandardCopyOption.REPLACE_EXISTING);
-		f7.delete();
+		f7.renameTo(f8);
 		
 		ProductVO pv = new ProductVO();
 		pv.setCate1(cate1);
