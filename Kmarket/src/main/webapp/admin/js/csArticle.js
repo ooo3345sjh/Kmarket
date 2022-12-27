@@ -58,5 +58,30 @@
 		}
 		
 	});
+	
+	$('#reply').click(function(){
+		
+		let no = $('input[name=no]').val();
+		let textarea = $('textarea[name=content]');
+		let content = textarea.val();
+		
+		let jsonData = {
+			"no":no,
+			"content":content,
+		}
+		
+		$.ajax({
+			url:'/Kmarket/admin/cs/reply.do',
+			method:'post',
+			data:jsonData,
+			dataType:'json',
+			success: function(data){
+				console.log(data);
+				
+				
+			}
+			
+		})
+	})
 })
 

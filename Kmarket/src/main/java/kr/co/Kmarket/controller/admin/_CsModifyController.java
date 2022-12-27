@@ -27,7 +27,7 @@ public class _CsModifyController extends HttpServlet{
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String csNo = req.getParameter("no");
+		int csNo = Integer.parseInt(req.getParameter("no")); 
 		String cate1 = req.getParameter("cate1");
 		
 		CsVO cvo = service.viewArticle(csNo);

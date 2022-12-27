@@ -37,7 +37,8 @@ public class AdminCheckFilter implements Filter {
 		
 		HttpSession sess = req.getSession();
 		MemberVO sessMember = (MemberVO)sess.getAttribute("sessMember");
-
+		
+		
 		// 로그인을 하지 않았을 경우
 		if (sessMember == null) {
 			
