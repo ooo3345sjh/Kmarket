@@ -202,7 +202,7 @@
 		                                    	<td>
 			                                        <p>
 			                                            <span>
-			                                            	<a href="#">${vo.title}</a>
+			                                            	<a href="<c:url value='/admin/cs/view.do?no=${vo.csNo}&cate1=notice'/>">${vo.title}</a>
 			                                            </span>
 			                                            <span>${vo.rdate}</span>
 			                                        </p>
@@ -228,7 +228,7 @@
 		                                    	<td>
 			                                        <p>
 			                                            <span>
-			                                            	<a href="#">${vo.title}</a>
+			                                            	<a href="<c:url value='/admin/cs/view.do?no=${vo.csNo}&cate1=qna'/>">[${vo.type}]${vo.title}</a>
 			                                            </span>
 			                                            <span>${vo.rdate}</span>
 			                                        </p>
