@@ -17,7 +17,7 @@
   	</auth-constraint>
   </security-constraint>-->
   
-    <filter>
+   <filter>
   	<filter-name>LoginCheckFilter</filter-name>
   	<filter-class>kr.co.Kmarket.filter.LoginCheckFilter</filter-class>
   </filter>

@@ -85,6 +85,11 @@ public class ProductService {
 	public int insertProductInCart(CartVo vo) {
 		return dao.insertProductInCart(vo);
 	}
+
+	/* 비로그인 상태에서 장바구니에 등록한 상품을 로그인시 product_cart테이블에 넣기위한 서비스 */
+	public int insertProductsInCart(List<CartVo> cartList, String userID) {
+		return dao.insertProductsInCart(cartList, userID);
+	}
 	
 	/* 장바구니 담긴 상품을 조회하는 서비스 */
 	public List<CartVo> selectProductInCart(String uid) {
