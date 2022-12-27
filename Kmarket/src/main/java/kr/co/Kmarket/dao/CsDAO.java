@@ -461,6 +461,7 @@ public class CsDAO extends DBHelper {
 				vo.setCsNo(rs.getInt(1));
 				vo.setTitle(rs.getString(2));
 				vo.setRdate(rs.getString(3).substring(2, 10));
+				vo.setType(rs.getString(4));
 				latests.add(vo);
 			}
 			close();
