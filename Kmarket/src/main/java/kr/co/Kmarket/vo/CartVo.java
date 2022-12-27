@@ -1,6 +1,8 @@
 package kr.co.Kmarket.vo;
 
-public class CartVo {
+import java.util.Date;
+
+public class CartVo implements Comparable<CartVo>{
 	private int cartNo;
 	private int prodNo;
 	private String uid;
@@ -18,8 +20,18 @@ public class CartVo {
 	private String cate2;
 	private String prodName;
 	private String descript;
+	private Date date;
 	
+	public CartVo () {
+		date = new Date();
+	}
 	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	public String getProdName() {
 		return prodName;
 	}
@@ -138,6 +150,11 @@ public class CartVo {
 	}
 	public void setrdate(String rdate) {
 		this.rdate = rdate;
+	}
+	
+	@Override
+	public int compareTo(CartVo vo) {
+		return -1 * date.compareTo(vo.getDate());
 	}
 	
 	

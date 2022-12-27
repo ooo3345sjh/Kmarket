@@ -1,6 +1,8 @@
 package kr.co.Kmarket.controller.member;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.co.Kmarket.service.MemberService;
+import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.utils.JSFunction;
+import kr.co.Kmarket.vo.CartVo;
 import kr.co.Kmarket.vo.MemberVO;
 import kr.co.Kmarket.vo.UidVO;
 
@@ -20,6 +24,8 @@ public class LoginController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private MemberService service = new MemberService();
+	private ProductService pService = new ProductService();
+	
 	
 	@Override
 	public void init() throws ServletException {
@@ -37,6 +43,7 @@ public class LoginController extends HttpServlet {
 
 		String uid = req.getParameter("uid");
 		String pass = req.getParameter("pass");
+		String cart = req.getParameter("cart");
 		
 		String msg1 = "존재하지 않는 아이디입니다.";
 		String msg2 = "비밀번호를 확인해주세요.";
@@ -48,6 +55,7 @@ public class LoginController extends HttpServlet {
 		if (member == null) {
 			// 아이디 조회가 되지 않는 경우
 			JSFunction.alertBack(resp, msg1);
+			return;
 		} else {
 			int type = member.getType();
 			
@@ -58,10 +66,10 @@ public class LoginController extends HttpServlet {
 					// 로그인 성공
 					HttpSession sess = req.getSession();
 					sess.setAttribute("sessMember", vo);
-					resp.sendRedirect("/Kmarket/");
 				} else {
 					// 로그인 실패
 					JSFunction.alertLocation(resp, msg2, url);
+					return;
 				}
 			} else {
 				// 일반 회원인 경우
@@ -70,14 +78,26 @@ public class LoginController extends HttpServlet {
 					// 로그인 성공
 					HttpSession sess = req.getSession();
 					sess.setAttribute("sessMember", vo);
-					resp.sendRedirect("/Kmarket/");
 				} else {
 					// 로그인 실패
 					JSFunction.alertLocation(resp, msg2, url);
+					return;
 				}	
 			}
 		}
+		MemberVO user = (MemberVO)req.getSession().getAttribute("sessMember");
+		List<CartVo> cartList = (List<CartVo>)req.getSession().getAttribute("cartList");
+		if(cartList != null) {
+			Collections.reverse(cartList);
+			pService.insertProductsInCart(cartList, user.getUid());
+			
+		}
 		
+		if("cart".equals(cart)) {
+			resp.sendRedirect("/Kmarket/product/order.do");
+		} else {
+			resp.sendRedirect("/Kmarket/");
+		}
 	}
 
 }

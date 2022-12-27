@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>
+
 <jsp:include page="./product/_header.jsp"/>
                 <!-- 베스트상품 배너 -->
                 <article class="best" style="position: static; top: 0px;">

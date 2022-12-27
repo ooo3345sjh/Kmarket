@@ -5,6 +5,8 @@ import java.io.Writer;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,17 +41,25 @@ public class CartController_session extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("CartController doGet...");
-		MemberVO vo	= (MemberVO)req.getSession().getAttribute("sessMember");
+		HttpSession session = req.getSession();
+		MemberVO vo	= (MemberVO)session.getAttribute("sessMember");
+		
 		if(vo == null) {
-			JSFunction.alertBack(resp, "로그인 후에 이용해 주세요.");
-			return;
+			List<CartVo> list = (List<CartVo>)session.getAttribute("cartList");
+			if(list != null) {
+				Collections.sort(list);
+			}
+			req.setAttribute("list", list);
+			
+		} else {
+			String uid = vo.getUid();
+			List<CartVo> list = service.selectProductInCart(uid);
+			req.setAttribute("list", list);
+			req.setAttribute("user", vo);
 		}
 		
-		String uid = vo.getUid();
-		List<CartVo> list = service.selectProductInCart(uid);
 		req.setAttribute("request", req);
-		req.setAttribute("session", req.getSession());
-		req.setAttribute("list", list);
+		req.setAttribute("session", session);
 		req.getRequestDispatcher("/product/cartSess.jsp").forward(req, resp);
 	}
 	

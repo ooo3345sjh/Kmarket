@@ -584,6 +584,42 @@ public class ProductDAO extends DBHelper {
 		return result;
 	}
 	
+	// 비로그인 상태에서 장바구니에 등록한 상품을 로그인시 product_cart테이블에 넣기위한 서비스
+	public int insertProductsInCart(List<CartVo> cartList, String userID) {
+		int result = 0;
+		String sql = "INSERT INTO `km_product_cart`(`prodNo`, `uid`, `count`, `price`, `discount`, `point`, `delivery`, `total`, `rdate`) VALUES";
+		for(int i=0; i<cartList.size(); i++) {
+			if(i == cartList.size()-1) {
+				sql += " (?,?,?,?,?,?,?,?, NOW())";
+				break;
+			}
+			sql += " (?,?,?,?,?,?,?,?, NOW()), ";
+		}
+		try {
+			logger.info("insertProductsInCart...");
+			con = getConnection();
+			psmt = con.prepareStatement(sql);
+			int count = 1;
+			for(int i=0; i<cartList.size(); i++) {
+				psmt.setInt(count++, cartList.get(i).getProdNo());
+				psmt.setString(count++, userID);
+				psmt.setInt(count++, cartList.get(i).getCount());
+				psmt.setInt(count++, cartList.get(i).getPrice());
+				psmt.setInt(count++, cartList.get(i).getDiscount());
+				psmt.setInt(count++, cartList.get(i).getPoint());
+				psmt.setInt(count++, cartList.get(i).getDelivery());
+				psmt.setInt(count++, cartList.get(i).getTotal());
+			}
+			
+			result = psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+		return result;
+	}
+	
 	// 장바구니 담긴 상품을 조회하는 서비스
 	public List<CartVo> selectProductInCart(String uid) {
 		List<CartVo> list = null;
