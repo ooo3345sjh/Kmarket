@@ -1,5 +1,5 @@
-/*** 珥덇린�솕 ***/
-* {margin: 0; padding: 0; font: normal 12px 怨좊뵓;}
+/*** 초기화 ***/
+* {margin: 0; padding: 0; font: normal 12px 고딕;}
 a {text-decoration: none; color: #111;}
 ul, ol {list-style: none;}
 html, body {height: 100%}
@@ -11,7 +11,7 @@ html, body {height: 100%}
     box-sizing: border-box;
 }
 
-/*** �뿤�뜑 ***/
+/*** 헤더 ***/
 header {
     min-width: 1400px;
     height: 120px;
@@ -46,7 +46,7 @@ header > div > nav > a {
 
 header > div > nav > a:not(:last-child) {border-right: 1px solid #fff;}
 
-/*** 愿�由ъ옄 硫붿씤 ***/
+/*** 관리자 메인 ***/
 main {
     height: auto;
     box-sizing: border-box;
@@ -181,7 +181,7 @@ main > div > aside > #gnb ol > li > a {
 }
 
 
-/*** 愿�由ъ옄 �긽�뭹紐⑸줉 ***/
+/*** 관리자 상품 페이지 ***/
 #admin-product-list {height: auto; overflow: hidden;}
 #admin-product-list > form > select {
     width: 80px;
@@ -345,7 +345,22 @@ p.ico  {
     background: no-repeat #A8B2C5 url('../img/admin_ico_info.png') scroll 15px 20px;
 }
 
-/*** 愿�由ъ옄 �긽�뭹�벑濡� ***/
+/*** 관리자 상품 등록 ***/
+#admin-product-register > table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+#admin-product-register > h2 {
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+#admin-product-register > p {
+    background: #eaeaea;
+    padding: 10px;
+    margin: 10px 0;
+}
 #admin-product-register > form > table {
     width: 100%;
     border-collapse: collapse;

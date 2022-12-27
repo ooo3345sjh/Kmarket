@@ -9,12 +9,7 @@
                 </nav>
                 <section>
                     <h3><span class="essential">(필수)</span> 케이마켓 이용약관</h3>
-                    <textarea name="terms" readonly>
-                    	<c:choose>
-                    		<c:when test="${type eq 'seller'}">${vo.tax}</c:when>
-                    		<c:otherwise>${vo.terms}</c:otherwise>
-                    	</c:choose>
-                    </textarea>
+                    <textarea name="terms" readonly><c:choose><c:when test="${type eq 'seller'}">${vo.tax}</c:when><c:otherwise>${vo.terms}</c:otherwise></c:choose></textarea>
                     <label><input type="checkbox" name="agree1">동의합니다.</label>
                 </section>
                 <section>

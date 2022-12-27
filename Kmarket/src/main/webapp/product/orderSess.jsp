@@ -83,7 +83,7 @@
  				price += Number(orderList[i].price.replaceAll(",", "")) * Number(orderList[i].count);
  				savedPoint += Number(orderList[i].point);
  				discountPrice += Math.floor(cost * discount * 0.01);
- 				delivery += Number(orderList[i].delivery.replace(",", ""));
+ 				delivery += Number(orderList[i].delivery.replaceAll(",", ""));
  				total += totalPrice;
  				
  				totalPrice = String(totalPrice).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") // 천단위 ',' 처리
