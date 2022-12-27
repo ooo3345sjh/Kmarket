@@ -102,8 +102,45 @@ $(function(){
 		let email = $(this).val();
 		
 		if(email.match(reEmail)){
-			isEmailOk = true;
-			$('.msgEmail').css('color', 'green').text('사용할 수 있는 이메일입니다.');
+			let emailCode = 0;
+			
+			$('#btnCode').click(function(){
+				
+				let email = $('input[name=km_email]').val();
+				$('.msgEmail').css('color', 'black').text('잠시만 기다려주세요.');
+				
+				$.ajax({
+					url: '/Kmarket/member/emailAuth.do',
+					method: 'get',
+					data: {"email":email},
+					dataType: 'json',
+					success: function(data){
+						if(data.status == 1){
+							emailCode = data.code;
+							$('.msgEmail').text('인증코드를 전송했습니다.');
+							$('.auth').show();
+						} else {
+							$('msgEmail').text('이메일 전송을 실패했습니다. 이메일을 확인 후 다시 시도하시길 바랍니다.');
+						}
+					}
+				});
+				
+			});
+			
+			$('#btnConfirm').click(function(){
+				
+				let code = $('input[name=km_code]').val();
+				
+				if(code == emailCode){
+					isEmailOk = true;
+					alert('이메일이 인증되었습니다.');
+					document.getElementById('code').readOnly = true;
+				} else {
+					alert('인증번호를 확인해주세요.');
+				}
+				
+			});
+			
 		} else {
 			isEmailOk = false;
 			$('.msgEmail').css('color', 'red').text('유효하지 않는 이메일입니다.');

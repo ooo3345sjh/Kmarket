@@ -294,7 +294,7 @@ header > .logo > div > a:nth-of-type(2){
 #member > .register > form section > table .addr > td > input:nth-of-type(3) {width: 370px;}
 #member > .register > form section > table .addr > td > button {width: 126px;}
 
-#member > .register > form section > table .AuthBtn {
+#member > .register > form section > table .authBtn {
     background: #3964e5;
     border: none;
     font-size: 15px;
