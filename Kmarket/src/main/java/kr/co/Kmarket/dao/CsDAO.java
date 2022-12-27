@@ -1,5 +1,7 @@
 package kr.co.Kmarket.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -83,7 +85,40 @@ public class CsDAO extends DBHelper {
 		return result;
 	}
 	
-	public CsVO viewArticle(String csNo) {
+	/* Reply 답변 등록*/
+	public int insertComment(CsVO comment) {
+		
+		int result = 0;
+		try {
+			logger.info("insertComment...");
+			con = getConnection();
+			
+			con.setAutoCommit(false);
+			PreparedStatement psmt1 = con.prepareStatement(Sql.INSERT_COMMENT);
+			PreparedStatement psmt2 = con.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT);
+			
+			psmt1.setInt(1, comment.getParent());
+			psmt1.setString(2, comment.getContent());
+			psmt1.setString(3, comment.getRegip());
+			
+			psmt2.setInt(1, comment.getCsNo());
+			
+			result = psmt1.executeUpdate();
+			psmt2.executeUpdate();
+			
+			con.commit();
+			
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	public CsVO viewArticle(int csNo) {
+		updateHit(csNo);
+		
 		CsVO cvo = null;
 		
 		try {
@@ -91,10 +126,11 @@ public class CsDAO extends DBHelper {
 			logger.info("viewArticles...");
 			con = getConnection();
 			psmt = con.prepareStatement(Sql.SELECT_CS_ARTICLE);
-			psmt.setString(1, csNo);
+			psmt.setInt(1, csNo);
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
+				
 				cvo = new CsVO();
 				cvo.setCsNo(rs.getInt("csNo"));
 				cvo.setUid(rs.getString("uid"));
@@ -105,8 +141,9 @@ public class CsDAO extends DBHelper {
 				cvo.setContent(rs.getString("content"));
 				cvo.setRegip(rs.getString("regip"));
 				cvo.setRdate(rs.getString("rdate"));
-				int hitCount = rs.getInt(10);
-				
+				cvo.setHit(rs.getInt("hit"));
+				cvo.setComment(rs.getInt("comment"));
+				cvo.setParent(rs.getInt("parent"));
 			}
 			
 			close();
@@ -257,6 +294,7 @@ public class CsDAO extends DBHelper {
 				cvo1.setContent(rs.getString("content"));
 				cvo1.setRegip(rs.getString("regip"));
 				cvo1.setRdate(rs.getString("rdate"));
+				cvo1.setHit(rs.getInt("hit"));
 				
 				faq.add(cvo1);
 			}
@@ -347,19 +385,24 @@ public class CsDAO extends DBHelper {
 	}
 	
 	public void updateHit(int csNo) {
+		int cnt = 0;
+		int rs = 0;
+		
 		try {
 			logger.info("updateHit...");
 			con = getConnection();
 			psmt = con.prepareStatement(Sql.UPDATE_HIT);
 			psmt.setInt(1, csNo);
-			psmt.executeUpdate();
 			
-			close();
+			rs = psmt.executeUpdate();
+			
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
+		
 	}
 	
+	/* 수정 */
 	public int updateArticle(String cate2, String type, String title, String content, String no) {
 		int result = 0;
 		try{
@@ -379,6 +422,8 @@ public class CsDAO extends DBHelper {
 		}
 		return result;
 	}
+	
+	
 	
 	
 	public int deleteArticle(String csNo) {

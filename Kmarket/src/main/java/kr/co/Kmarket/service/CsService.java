@@ -25,7 +25,11 @@ public class CsService {
 		return dao.insertAdminFaqArticle(cvo);
 	}
 	
-	public CsVO viewArticle(String csNo) {
+	public int insertComment(CsVO comment) {
+		return dao.insertComment(comment);
+	}
+	
+	public CsVO viewArticle(int csNo) {
 		return dao.viewArticle(csNo);
 	}
 	

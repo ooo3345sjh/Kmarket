@@ -32,7 +32,7 @@
                             <td>${notice.csNo}</td>
                             <td>${notice.type}</td>
                             <td><a href="<c:url value='/admin/cs/view.do?no=${notice.csNo}&cate1=${notice.cate1}'/>">[${notice.type}]${notice.title}</a></td>
-                            <td>${vo.hit}</td>
+                            <td>${notice.hit}</td>
                             
                             <c:set var="rdate"  value="${notice.rdate}"/>
                             <td>${fn:substring(rdate,2,10)}</td>
