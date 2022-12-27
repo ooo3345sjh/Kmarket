@@ -6,7 +6,7 @@ import kr.co.Kmarket.vo.ProductVO;
 public class Sql {
 	
 	/*** admin ***/
-	public static final String SELECT_LATEST = "SELECT `csNo`, `title`, `rdate` FROM `km_cs` "
+	public static final String SELECT_LATEST = "SELECT `csNo`, `title`, `rdate`, `type` FROM `km_cs` "
 											+ "WHERE `cate1`=? ORDER BY `csNo` DESC LIMIT 5 ";
 	
 	/*** admin-cs ***/
