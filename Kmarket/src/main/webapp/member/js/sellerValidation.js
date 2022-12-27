@@ -36,11 +36,11 @@ $(function(){
 			dataType: 'json',
 			success: function(data){
 				if(data.result == 0){
-					$('.msgId').css('color', 'green').text('사용 가능한 아이디입니다.').padStart(5, "0");
 					isUidOk = true;
+					$('.msgId').css('color', 'green').text('사용 가능한 아이디입니다.').padStart(5, "0");
 				} else {
-					$('.msgId').css('color', 'red').text('이미 사용중이거나 탈퇴한 아이디입니다.').padStart(5, "0");
 					isUidOk = false;
+					$('.msgId').css('color', 'red').text('이미 사용중이거나 탈퇴한 아이디입니다.').padStart(5, "0");
 				}
 			}
 		});	
@@ -101,6 +101,28 @@ $(function(){
 			isHpOk = false;
 			$('.msgHp').css('color', 'red').text('유효하지 않는 휴대폰 번호입니다.');
 		}
+	});
+	
+	
+	// 최종 폼 전송 전 검증
+	$('.register > form').submit(function(){
+		
+		// 아이디 검증
+		if(!isUidOk){
+			alert('아이디가 유효하지 않습니다.');
+			return false;
+		} if(!isPassOk){
+			alert('비밀번호가 유효하지 않습니다.');
+			return false;
+		} if(!isNameOk){
+			alert('유효한 담당자명을 입력해주세요.');
+			return false;
+		} if(!isHpOk){
+			alert('유효한 휴대폰 번호를 입력해주세요.');
+			return false;
+		}
+		return true;
+
 	});
 	
 	

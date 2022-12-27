@@ -33,9 +33,11 @@
 	});
 	
 	
+	
 	/** 상품 수정 **/
 	$(document).on('click', '.modify', function(e){
 		
+		e.preventDefault();
 		let tr  = $(this).parent().parent();
 		let td  = tr.children();
 		let txt = $(this).text();
@@ -93,7 +95,11 @@
 				}
 			});
 			
-			location.reload();
+			prodName.text(content1);
+			price.text(content2);
+			discount.text(content3);
+			point.text(content4);
+			stock.text(content5);
 
 		}
 		

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="./js/product.js"></script>
 <script src="./js/checkbox.js"></script>
@@ -11,11 +12,21 @@
                         <p>HOME > 상품관리 > <span>상품목록</span></p>
                     </nav>
                     <form>
-                    	<select name="searchField">
-                      	  <option value="prodName">상품명</option>
-                   	      <option value="prodNo">상품코드</option>
-                   	      <option value="seller">판매자</option>
-                    	</select>
+                    	<c:choose>
+                    		<c:when test="${sessMember.type eq 5}">
+		                    	<select name="searchField">
+		                      	  <option value="prodName">상품명</option>
+		                   	      <option value="prodNo">상품코드</option>
+		                   	      <option value="seller">판매자</option>
+		                    	</select>
+		                    </c:when>
+		                    <c:otherwise>
+		                    	<select name="searchField">
+		                      	  <option value="prodName">상품명</option>
+		                   	      <option value="prodNo">상품코드</option>
+		                    	</select>
+		                    </c:otherwise>
+                    	</c:choose>
                     	<input type="text" name="searchWord"/>
                     	<input type="submit" value="검색하기"/>
                     </form>   
@@ -33,26 +44,37 @@
                             <th>조회</th>
                             <th>관리</th>
                         </tr>
-                        <c:forEach var="vo" items="${map.products}">
-                        <tr>
-                            <td><input type="checkbox" name="check" value="${vo.prodNo}"></td>
-                            <td>
-                                <img src="<c:url value='${vo.thumb1}'/>" alt="thumb">
-                            </td>
-                            <td>${vo.prodNo}</td>
-                            <td>${vo.prodName}</td>
-                            <td>${vo.price}</td>
-                            <td>${vo.discount}</td>
-                            <td>${vo.point}</td>
-                            <td>${vo.stock}</td>
-                            <td>${vo.seller}</td>
-                            <td>${vo.hit}</td>
-                            <td>
-                                <a href="#" class="remove" data-no="${vo.prodNo}">[삭제]</a>
-                                <a href="#" class="modify" data-no="${vo.prodNo}">[수정]</a>
-                            </td>
-                        </tr>
-                        </c:forEach>
+                        <c:choose>
+                        	<c:when test="${fn:length(map.products) == 0}">
+                        	<tr>
+                        		<td colspan="11">등록된 상품이 없습니다.</td>
+                        	</tr>
+                        	</c:when>
+                        	<c:otherwise>
+		                        <c:forEach var="vo" items="${map.products}">
+		                        <tr>
+		                            <td><input type="checkbox" name="check" value="${vo.prodNo}"></td>
+		                            <td>
+		                            	<a href="<c:url value='/product/view.do?cate1=${vo.cate1}&cate2=${vo.cate2}&no=${vo.prodNo}'/>">
+		                                	<img src="<c:url value='${vo.thumb1}'/>" alt="thumb">
+		                                </a>
+		                            </td>
+		                            <td>${vo.prodNo}</td>
+		                            <td>${vo.prodName}</td>
+		                            <td>${vo.price}</td>
+		                            <td>${vo.discount}</td>
+		                            <td>${vo.point}</td>
+		                            <td>${vo.stock}</td>
+		                            <td>${vo.seller}</td>
+		                            <td>${vo.hit}</td>
+		                            <td>
+		                                <a href="#" class="remove" data-no="${vo.prodNo}">[삭제]</a>
+		                                <a href="#" class="modify" data-no="${vo.prodNo}">[수정]</a>
+		                            </td>
+		                        </tr>
+		                        </c:forEach>
+		                   </c:otherwise>
+		            </c:choose>
                     </table>
                     <input type="button" id="deleteButton" value="선택삭제" onclick="checkDelete()">
                     <input type="button" id="registerButton" value="등록하기" onclick="location.href='<c:url value='/admin/register.do'/>'">

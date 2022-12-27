@@ -114,7 +114,7 @@
 	                            </th>
 	                            <td>
 	                                <input type="text" name="zip" id="zip" placeholder="우편번호" readonly/>
-	                                <button type="button" class="AuthBtn" onclick="zipcode()">우편번호 찾기</button><br/>
+	                                <button type="button" class="authBtn" onclick="zipcode()">우편번호 찾기</button><br/>
 	                                <input type="text" name="addr1" id="addr1" placeholder="주소를 검색하세요."/><br/>
 	                                <input type="text" name="addr2" id="addr2" placeholder="상세주소를 입력하세요."/>
 	                            </td>
