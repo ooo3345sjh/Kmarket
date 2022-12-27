@@ -139,7 +139,8 @@
 		$('input[name=del]').click(function () {
 			let trTag = $('#cart > tr');
 			let checkbox = $("input[name=prodCheck]");
-			let arr = [];
+			let cartArr = [];
+			let prodArr = [];
 			
 			for(let i=0; i<checkbox.length; i++){
 				if(checkbox[i].checked){
@@ -154,16 +155,19 @@
 					}
 					
 					// 제거할 상품의 cartNo를 배열에 저장
-					arr.push(trTag[i].children[1].children[0].defaultValue);
+					cartArr.push(trTag[i].children[1].children[0].defaultValue);
+				
+					// 제거할 상품의 prodNo를 배열에 저장
+					prodArr.push(trTag[i].children[1].children[1].defaultValue);
 				}
 			}
 			
-			if(arr.length != 0){
+			if(cartArr.length != 0){
 				$.ajax({
 					url: contextRoot + '/product/deleteCart.do',
 					type: "post",
 					traditional: true,	// ajax 배열 넘기기 옵션!
-					data: {"cartNo" : arr},
+					data: {"cartNo" : cartArr, "prodNo" : prodArr},
 					dataType: "json",
 					success: function (data) {
 						console.log(data);
@@ -198,6 +202,11 @@
 			let checkbox = $("input[name=prodCheck]");
 			let list = [];
 			
+			if('${user.uid}'== ''){
+				alert('로그인 후에 주문가능합니다.');
+				location.href = contextRoot + "/member/login.do?cart=cart";
+				return;
+			};
 			let count = 0;
 			console.log(trTag);
 			for(let i=0; i<checkbox.length; i++){
