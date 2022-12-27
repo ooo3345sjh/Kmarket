@@ -5,7 +5,9 @@ import java.io.Writer;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -13,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +24,7 @@ import com.google.gson.JsonObject;
 
 import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.vo.CartVo;
+import kr.co.Kmarket.vo.MemberVO;
 import kr.co.Kmarket.vo.ProductVO;
 
 @WebServlet("/product/view.do")
@@ -76,6 +80,11 @@ public class ViewController_session extends HttpServlet {
 		String point = req.getParameter("point");
 		String delivery = req.getParameter("delivery");
 		String total = req.getParameter("total");
+		String thumbl = req.getParameter("thumb1");
+		String catel = req.getParameter("cate1");
+		String cate2 = req.getParameter("cate2");
+		String prodName = req.getParameter("prodName");
+		String descript = req.getParameter("descript");
 		
 		CartVo vo = new CartVo();
 		vo.setProdNo(prodNo);
@@ -86,11 +95,34 @@ public class ViewController_session extends HttpServlet {
 		vo.setPoint(point);
 		vo.setDelivery(delivery);
 		vo.setTotal(total);
+		vo.setThumb1(thumbl);
+		vo.setCate1(catel);
+		vo.setCate2(cate2);
+		vo.setProdName(prodName);
+		vo.setDescript(descript);
 		System.out.println(prodNo + " " + uid + " " + count + " " + price + " " + discount + " " + point + " " + delivery + " " + total);
 		
-		int result = service.insertProductInCart(vo); // 장바구니 테이블에 상품 추가
-		
+		HttpSession session = req.getSession();
+		MemberVO user = (MemberVO)session.getAttribute("sessMember");
 		JsonObject json = new JsonObject();
+		int result = 0;
+		if(user == null) {
+		
+			List<CartVo> cartList = (List<CartVo>)session.getAttribute("cartList");
+			if(cartList != null) {
+				cartList.add(vo);
+				session.setAttribute("cartList", cartList);
+			} else {
+				List<CartVo> list = new ArrayList<>();
+				list.add(vo);
+				session.setAttribute("cartList", list);
+			}
+			result = 1;
+		} else {
+			
+			result = service.insertProductInCart(vo); // 장바구니 테이블에 상품 추가
+		}
+		
 		json.addProperty("result", result);
 		
 		resp.setContentType("application/json;charset=UTF-8");
