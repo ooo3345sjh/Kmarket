@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
 <script src="./js/point.js"></script>
+
 <script>
 $(function(){
 	$('form').submit(function(){

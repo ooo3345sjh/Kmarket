@@ -103,13 +103,6 @@
 	        });
 		})
 
-		 function scroll_on() {
-	        $('body').on('scroll touchmove mousewheel', function(e) {
-	            e.preventDefault();
-	            e.stopPropagation();
-	            return false;
-	        });
-    	}
 		// 장바구니에 해당 상품을 추가하는 이벤트 함수		
 		$(document).on('click', '.cart', function () {
 			
@@ -118,6 +111,11 @@
 			let jsonData = {
 					"prodNo":'${vo.prodNo}', 
 					"uid":'${sessMember.uid}', 
+					"thumb1":'${vo.thumb1}', 
+					"prodName":'${vo.prodName}', 
+					"descript":'${vo.descript}', 
+					"cate1":'${vo.cate1}', 
+					"cate2":'${vo.cate2}', 
 					"count": num, 
 					"price":'${vo.price}',
 					"discount":'${vo.discount}',
@@ -131,13 +129,23 @@
 	        	if(data.result != 0){
 	        		$('#cartMove').show();
 	        		$('#background').show();
-	        		
-	        		return;
-	        		location.href = contextRoot + '/product/cart.do';
+	        		$('body').css("overflow", "hidden");
 	        	};
-	        	console.log(document.documentElement.scrollHeight);
 	        });
 		})
+		
+		$(document).on('click', '#cartMove > button', function () {
+			let value = $(this).text();
+			
+			if(value == '계속 쇼핑'){
+	        	$('#cartMove').hide();
+	        	$('#background').hide();
+	        	$('body').css("overflow", "auto");
+			} else{
+        		location.href = contextRoot + '/product/cart.do';
+			}
+		})
+		
 		// 구매하기 버튼 클릭시 바로 해당 상품을 주문하는 페이지로 이동하는 이벤트
 		$('.order').click(function () {
 			let num = $('input[name=num]').val(); // 주문 갯수
@@ -247,7 +255,7 @@
                             <em>총 상품금액</em>
                         </div>
                         <div class="button">
-                            <input type="button" class="cart" value="장바구니" onclick="return scroll_on();">
+                            <input type="button" class="cart" value="장바구니">
                             <input type="button" class="order" value="구매하기">
                         </div>
                     </div>
