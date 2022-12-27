@@ -21,12 +21,24 @@ public class CsService {
 		return dao.insertAdminNoticeArticle(cvo);
 	}
 	
-	public CsVO viewArticle(String csNo) {
+	public int insertAdminFaqArticle(CsVO cvo) {
+		return dao.insertAdminFaqArticle(cvo);
+	}
+	
+	public int insertComment(CsVO comment) {
+		return dao.insertComment(comment);
+	}
+	
+	public CsVO viewArticle(int csNo) {
 		return dao.viewArticle(csNo);
 	}
 	
 	public List<CsVO> selectNoticeAll() {
 		return dao.selectNoticeAll();
+	}
+	
+	public List<CsVO> selectFaqAll() {
+		return dao.selectFaqAll();
 	}
 	
 	public List<CsVO> selectQnaAll() {
@@ -45,8 +57,8 @@ public class CsService {
 		dao.countArticles(map);
 	}
 	
-	public int updateArticle(String type, String title, String content, String no) {
-		return dao.updateArticle(type, title, content, no);
+	public int updateArticle(String cate2, String type, String title, String content, String no) {
+		return dao.updateArticle(cate2, type, title, content, no);
 	}
 	public int deleteArticle(String csNo) {
 		return dao.deleteArticle(csNo);

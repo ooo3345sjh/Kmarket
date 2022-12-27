@@ -27,34 +27,7 @@
 			
 			if(check == false){ // 체크박스를 체크 했을때
 				$("input[name=prodCheck]").prop("checked", true).change();
-				/*
-				check = true;
-				let trTag = $('#cart > tr').get();
-				trTag.forEach(function (el, index) {
-					let count = Number(el.cells[2].innerHTML);
-					let price = Number(el.cells[3].innerHTML.replace(",", "")) * count;
-					let discount = Number(el.cells[4].innerHTML.replace("%", ""));
-					let discountPrice = Math.floor(price * discount * (0.01));
-					console.log("discountPrice : " + discountPrice);
-					let point = Number(el.cells[5].innerHTML.replace(",", ""));
-					let delivery = Number(el.cells[6].innerHTML.replace(",", ""));
-					let total = price + (discountPrice * -1);
-					
-					tCount.text(Number(tCount.text()) + count);
-					tPrice.text(Number(tPrice.text()) + price);
-					tDiscountPrice.text(Number(tDiscountPrice.text()) + (discountPrice * -1));
-					tPoint.text(Number(tPoint.text()) + point);
-					tDelivery.text(Number(tDelivery.text()) + delivery);
-					tTotalPrice.text(Number(tTotalPrice.text()) + total);
-				});
 				
-				// 천단위 ',' 처리
-				tPrice.text(tPrice.text().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
-				tDiscountPrice.text(tDiscountPrice.text().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
-				tPoint.text(tPoint.text().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
-				tDelivery.text(tDelivery.text().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
-				tTotalPrice.text(tTotalPrice.text().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
-				*/
 				check = true;
 			} else { // 체크박스를 체크 해제 했을때
 				$("input[name=prodCheck]").prop("checked", false).change();
@@ -218,6 +191,7 @@
 					let index = thumb1.indexOf("file");
 					thumb1 = thumb1.substring(index);
 					console.log(trTag[i]);
+					
 					// 체크된 상품 객체화해서 리스트에 저장
 					list.push({
 						"cartNo":trTag[i].children[1].children[0].defaultValue,
@@ -242,6 +216,13 @@
 			if(count == 0){
 				alert('주문하실 상품을 선택해주세요.');
 			} else {
+				
+				if('${user.uid}'== ''){
+					alert('로그인 후에 주문가능합니다.');
+					location.href = contextRoot + "/member/login.do?cart=cart";
+					return;
+				};
+				
 				location.href = contextRoot + '/product/order.do';
 			}
 		});

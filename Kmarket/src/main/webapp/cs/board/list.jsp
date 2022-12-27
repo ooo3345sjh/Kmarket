@@ -16,7 +16,7 @@
 			
 			$('.short'+i+'').click(function(e){
 				e.preventDefault();
-				$('#m_list:nth-child(n+4)').hide();
+				$('.ul'+i+' > #m_list:nth-child(n+4)').hide();
 				$('.short'+i+'').hide();
 				$('.more'+i+'').show();
 			})

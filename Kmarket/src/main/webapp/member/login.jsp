@@ -11,7 +11,28 @@
 		if(isCart == 'cart'){
 			$('input[name=cart]').val(isCart);
 		}
+<<<<<<< HEAD
 	})
+=======
+		
+		
+		// 비밀번호 보이기, 숨기기 기능
+		$('.login > form > table td > i').on('click', function(){
+			$('input').toggleClass('active');
+			if($('input').hasClass('active')){
+				// 비밀번호 보이기
+				$(this).attr('class', "fa fa-eye-slash fa-lg")
+				.prev('input').attr('type', 'text');
+			} else {
+				// 비밀번호 숨기기
+				$(this).attr('class', "fa fa-eye fa-lg")
+				.prev('input').attr('type', 'password');
+			}
+		});
+		
+	})
+
+>>>>>>> f9fd140eabd32af102009b0ed7dd3597b23f6778
 </script>
         <main id="member">
             <div class="login">
@@ -32,6 +53,7 @@
                             <td>비밀번호</td>
                             <td>
                                 <input type="password" name="pass" placeholder="비밀번호 입력">
+                                <i class="fa fa-eye fa-lg"></i>
                             </td>
                         </tr>
                     </table>

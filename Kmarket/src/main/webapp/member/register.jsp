@@ -74,10 +74,15 @@
 	                                EMAIL
 	                            </th>
 	                            <td>
-	                                <input type="email" name="km_email" placeholder="이메일 입력" required>
-	                                <span class="msgEmail"><span>
+	                                <input type="email" name="km_email" placeholder="이메일 입력" required/>
+	                                <button type="button" class="authBtn" id="btnCode">인증번호 전송</button>
+	                                <span class="msgEmail"></span><br/>
+	                                <div class="auth">
+	                                	<input type="text" name="km_code" id="code" placeholder="인증번호 입력"/>
+	                                	<button type="button" class="authBtn" id="btnConfirm">인증번호 확인</button>
+	                                	<span class="msgEmail2"></span>
+	                                </div>
 	                            </td>
-
 	                        </tr>
 	                        <tr>
 	                            <th>
@@ -86,7 +91,7 @@
 	                            </th>
 	                            <td>
 	                                <input type="tel" name="km_hp" placeholder="휴대폰 번호 입력" required>
-	                                <span class="msgHp">( - ) 포함 13자리를 입력하세요.<span>
+	                                <span class="msgHp">( - ) 포함 13자리를 입력하세요.</span>
 	                            </td>
 	                        </tr>
 	                        <tr class="addr">
@@ -96,7 +101,7 @@
 	                            </th>
 	                            <td>
 	                                <input type="text" name="zip" id="zip" placeholder="우편번호" readonly/>
-	                                <button type="button" class="AuthBtn" onclick="zipcode()">우편번호 찾기</button><br/>
+	                                <button type="button" class="authBtn" onclick="zipcode()">우편번호 찾기</button><br/>
 	                                <input type="text" name="addr1" id="addr1" placeholder="주소를 검색하세요."/><br/>
 	                                <input type="text" name="addr2" id="addr2" placeholder="상세주소를 입력하세요."/>
 	                            </td>

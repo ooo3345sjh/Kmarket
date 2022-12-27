@@ -28,12 +28,15 @@ public class _CsViewController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cate1 = req.getParameter("cate1");
-		String csNo = req.getParameter("no");
+		String cate2 = req.getParameter("cate2");
+		int csNo = Integer.parseInt(req.getParameter("no")); 
 		
 		CsVO cvo = service.viewArticle(csNo);
 		
 		req.setAttribute("cate1", cate1);
+		req.setAttribute("cate2", cate2);
 		req.setAttribute("cvo", cvo);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/view.jsp");
 		dispatcher.forward(req, resp);
 	}
