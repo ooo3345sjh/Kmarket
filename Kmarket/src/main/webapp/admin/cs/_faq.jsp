@@ -59,7 +59,6 @@
                     <div class="paging">
                        ${map.pageTag} 
                     </div>
-
                     <a href="<c:url value='/admin/cs/write.do?cate1=${cate1}'/>" class="btnWrite">작성하기</a>
                 </section>
             </div>

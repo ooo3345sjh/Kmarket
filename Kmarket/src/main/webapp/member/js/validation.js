@@ -15,6 +15,7 @@ let isUidOk 	  = false;
 let isPassOk 	  = false;
 let isNameOk 	  = false;
 let isNickOk  	  = false;
+let isEmailOk 	  = false;
 let isEmailAuthOk = false;
 let isHpOk 		  = false;
 
@@ -41,12 +42,11 @@ $(function(){
 			dataType: 'json',
 			success: function(data){
 				if(data.result == 0){
-					$('.msgId').css('color', 'green').text('사용 가능한 아이디입니다.').padStart(5, "0");
 					isUidOk = true;
+					$('.msgId').css('color', 'green').text('사용 가능한 아이디입니다.');
 				} else {
-					$('.msgId').css('color', 'red').text('이미 사용중이거나 탈퇴한 아이디입니다.').padStart(5, "0");
 					isUidOk = false;
-				}
+					$('.msgId').css('color', 'red').text('이미 사용중이거나 탈퇴한 아이디입니다.');				}
 			}
 		});	
 	});
@@ -103,6 +103,7 @@ $(function(){
 		
 		if(email.match(reEmail)){
 			let emailCode = 0;
+			isEmailOk = true;
 			
 			$('#btnCode').click(function(){
 				
@@ -132,7 +133,7 @@ $(function(){
 				let code = $('input[name=km_code]').val();
 				
 				if(code == emailCode){
-					isEmailOk = true;
+					isEmailAuthOk = true;
 					alert('이메일이 인증되었습니다.');
 					document.getElementById('code').readOnly = true;
 				} else {
@@ -163,5 +164,32 @@ $(function(){
 		}
 	});
 	
+	
+	// 최종 폼 전송 전 검증
+	$('.register > form').submit(function(){
+		
+		// 아이디 검증
+		if(!isUidOk){
+			alert('아이디가 유효하지 않습니다.');
+			return false;
+		} if(!isPassOk){
+			alert('비밀번호가 유효하지 않습니다.');
+			return false;
+		} if(!isNameOk){
+			alert('유효한 이름을 입력해주세요.');
+			return false;
+		} if(!isEmailOk){
+			alert('유효한 이메일을 입력해주세요.');
+			return false;
+		} if(!isEmailAuthOk){
+			alert('이메일을 인증해주세요.');
+			return false;
+		} if(!isHpOk){
+			alert('유효한 휴대폰 번호를 입력해주세요.');
+			return false;
+		}
+		return true;
+
+	});
 	
 });

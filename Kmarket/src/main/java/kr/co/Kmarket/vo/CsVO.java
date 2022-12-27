@@ -9,9 +9,12 @@ public class CsVO {
 	private String type;
 	private String title;
 	private String content;
-	private int hit;
 	private String regip;
 	private String rdate;
+	private int hit;
+	private int comment;
+	private int parent;
+	
 	
 	public int getCsNo() {
 		return csNo;
@@ -58,12 +61,7 @@ public class CsVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getHit() {
-		return hit;
-	}
-	public void setHit(int hit) {
-		this.hit = hit;
-	}
+	
 	public String getRegip() {
 		return regip;
 	}
@@ -76,6 +74,32 @@ public class CsVO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-	
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	public void setHit(String hit) {
+		this.hit = Integer.parseInt(hit);
+	}
+	public int getComment() {
+		return comment;
+	}
+	public void setComment(int comment) {
+		this.comment = comment;
+	}
+	public void setComment(String comment) {
+		this.comment = Integer.parseInt(comment);
+	}
+	public int getParent() {
+		return parent;
+	}
+	public void setParent(int parent) {
+		this.parent = parent;
+	}
+	public void setParent(String parent) {
+		this.parent = Integer.parseInt(parent);
+	}
 	
 }

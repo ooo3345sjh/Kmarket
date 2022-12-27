@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="./_header.jsp"/>
 
                 <section id="admin-index" class="admin">
@@ -189,35 +190,53 @@
                         <article>
                             <table border="0">
                                 <caption>공지사항</caption>
-                                	<c:forEach var="vo" items="${latest1}">
-	                                	<tr>
-	                                    	<td>
-		                                        <p>
-		                                            <span>
-		                                            	<a href="#">${vo.title}</a>
-		                                            </span>
-		                                            <span>${vo.rdate}</span>
-		                                        </p>
-	                                    	</td>
-	                                    </tr>
-                                    </c:forEach>
+                                <c:choose>
+                                	<c:when test="${fn:length(latest1) == 0}">
+                                		<tr>
+                                			<td colspan="2">등록된 게시물이 없습니다.</td>
+                                		</tr>
+                                	</c:when>
+                                	<c:otherwise>
+	                                	<c:forEach var="vo" items="${latest1}">
+		                                	<tr>
+		                                    	<td>
+			                                        <p>
+			                                            <span>
+			                                            	<a href="#">${vo.title}</a>
+			                                            </span>
+			                                            <span>${vo.rdate}</span>
+			                                        </p>
+		                                    	</td>
+		                                    </tr>
+	                                    </c:forEach>
+                                    </c:otherwise>
+                                 </c:choose>
                             </table>
                         </article>
                         <article>
                             <table>
                                 <caption>고객문의</caption>
-                                	<c:forEach var="vo" items="${latest2}">
-	                                	<tr>
-	                                    	<td>
-		                                        <p>
-		                                            <span>
-		                                            	<a href="#">${vo.title}</a>
-		                                            </span>
-		                                            <span>${vo.rdate}</span>
-		                                        </p>
-	                                    	</td>
-	                                    </tr>
-                                    </c:forEach>
+                                	<c:choose>
+                                	<c:when test="${fn:length(latest2) == 0}">
+                                		<tr>
+                                			<td colspan="2">등록된 게시물이 없습니다.</td>
+                                		</tr>
+                                	</c:when>
+                                	<c:otherwise>
+	                                	<c:forEach var="vo" items="${latest2}">
+		                                	<tr>
+		                                    	<td>
+			                                        <p>
+			                                            <span>
+			                                            	<a href="#">${vo.title}</a>
+			                                            </span>
+			                                            <span>${vo.rdate}</span>
+			                                        </p>
+		                                    	</td>
+		                                    </tr>
+	                                    </c:forEach>
+                                    </c:otherwise>
+                                 </c:choose>
                             </table>
                         </article>
                     </section>
