@@ -429,13 +429,23 @@ p.ico  {
 
 /*** 관리자 고객센터 ***/
 /*=== 목록 ===*/
-#cs-list > select {
-	margin-top: 10px;
-    width: 114px;
-    height: 40px;
+#cs-list > select:first-of-type {
+	margin-top: 13px;
+    width: 137px;
+    height: 30px;
     text-indent: 5px;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 13px;
+    text-align: center;
+}
+#cs-list > select:nth-of-type(2) {
+	margin-top: 13px;
+    width: 174px;
+    height: 30px;
+    text-indent: 5px;
+    box-sizing: border-box;
+    font-size: 13px;
+    text-align: center;
 }
 
 #cs-list > table {
@@ -445,6 +455,47 @@ p.ico  {
     border-spacing: 0;
     border-top: 2px solid #111;
 }
+/*** 관리자 CS 자주묻는질문 ***/
+#cs-list > .FAQth {
+	margin-top: 10px;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-top: 2px solid #111;
+}
+
+#cs-list > .FAQth tr:first-child > th {
+	background: #f6f6f6;
+    padding: 15px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+#cs-list > .FAQth tr:not(:first-child) > td:nth-child(4) {
+	width: 93px; text-align: center; white-space: nowrap;
+}
+/*========================*/
+/**************************/
+
+#cs-list > .QNAth {
+	margin-top: 10px;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-top: 2px solid #111;
+}
+
+#cs-list > .QNAth tr:first-child > th {
+	background: #f6f6f6;
+    padding: 15px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+#cs-list > .QNAth tr:not(:first-child) > td:nth-child(4) {
+	width: 93px;
+	white-space: nowrap;
+	text-align: center;
+}
+
 #cs-list > table tr:first-child > th {
     background: #f6f6f6;
     padding: 15px;
@@ -603,10 +654,20 @@ p.ico  {
 }
 #cs-view > table tr > .content > p {
     font-size: 16px;
-    line-height: 50px;
+    line-height: 30px;
 }
-#cs-view > input {
+#cs-view > div {
+	float: right;
     margin-top: 35px;   
+}
+#cs-view > div > .remove {
+	background-color: #c0c0c0;
+    border: 1px solid #c0c0c0;
+    border-radius: 2px;
+    padding: 5px 20px;
+    box-sizing: border-box;
+    font-size: 18px;
+    color: #fff;
 }
 
 /* 공지사항 글 쓰기 */
@@ -690,7 +751,7 @@ p.ico  {
     box-sizing: border-box;
 }
 #cs-modify > form > table select {
-    width: 150px;
+    width: 216px;
     height: 40px;
     text-indent: 5px;
     box-sizing: border-box;
@@ -709,13 +770,14 @@ p.ico  {
 }
 
 
-#cs-modify > input:nth-of-type(1) {
-    margin-top: 50px;
-    float: right;
+#cs-modify > form > .btnList {
+	margin-left: 926px;
+    display: inline-block;
+    margin-top: 5px;
 }
-#cs-modify > input:nth-of-type(2) {
+#cs-modify > form > .btnWrite {
     display: block;
-    margin-top: 50px;
+    margin-top: 5px;
     float: right;
 }
 

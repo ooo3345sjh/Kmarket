@@ -24,15 +24,15 @@ public class _CsDeleteController extends HttpServlet{
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String csNo = req.getParameter("csNo");
+		String csNo = req.getParameter("no");
 		
 		int result = service.deleteArticle(csNo);
 		
 		JsonObject json = new JsonObject();
 		json.addProperty("result", result);
+		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
-
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

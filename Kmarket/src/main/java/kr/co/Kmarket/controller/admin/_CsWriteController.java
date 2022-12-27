@@ -1,6 +1,7 @@
 package kr.co.Kmarket.controller.admin;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,7 +24,6 @@ public class _CsWriteController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cate1 = req.getParameter("cate1");
-		String cate2 = req.getParameter("cate2");
 		
 		req.setAttribute("cate1", cate1);
 		
@@ -36,21 +36,19 @@ public class _CsWriteController extends HttpServlet{
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
 		String type = req.getParameter("type");
-		switch(type){
-			case "고객서비스":
-				cate2 = "service";
-				break;
-			case "안전거래":
-				cate2 = "safeDeal";
-				break;
-			case "위해상품":
-				cate2 = "xproduct";
-				break;
-			case "이벤트당첨":
-				cate2 = "great";
-				break;
-			default:
-				break;
+		
+		if(cate1.equals("notice")) {
+			type.equals("고객서비스");
+			cate2 = "service";
+			
+			type.equals("안전거래");
+			cate2 = "safeDeal";
+			
+			type.equals("위해상품");
+			cate2 = "xproduct";
+			
+			type.equals("이벤트당첨");
+			cate2 = "great";
 		}
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
@@ -64,7 +62,13 @@ public class _CsWriteController extends HttpServlet{
 		cvo.setContent(content);
 		cvo.setRegip(regip);
 		
-		int result = service.insertAdminNoticeArticle(cvo);
+		int result = 0;
+		
+		if(cate1.equals("notice")) {
+			result = service.insertAdminNoticeArticle(cvo);
+		} else if(cate1.equals("faq")) {
+			result = service.insertAdminFaqArticle(cvo);
+		}
 		
 		if(result > 0) {
 			resp.sendRedirect("/Kmarket/admin/cs/list.do?cate1="+cate1);
