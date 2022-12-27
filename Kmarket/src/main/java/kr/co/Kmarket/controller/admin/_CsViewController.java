@@ -29,7 +29,7 @@ public class _CsViewController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
-		String csNo = req.getParameter("no");
+		int csNo = Integer.parseInt(req.getParameter("no")); 
 		
 		CsVO cvo = service.viewArticle(csNo);
 		
