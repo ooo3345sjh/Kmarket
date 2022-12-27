@@ -52,12 +52,19 @@ public class _CsListController extends HttpServlet{
 		Paging.paging(map);		     // 페이징 처리
 		service.selectArticles(map);
 		Paging.getPageTags(map);  	 // 페이징 처리된 정보를 토대로 태그 생성
+		service.selectFaqArticle(map); // cs 페이지전용 FAQ 글 목록 
 		
-		List<CsVO> cvo = service.selectNoticeAll();
-		req.setAttribute("cate1", cate1);
+		List<CsVO> noticelist = service.selectNoticeAll();
+		List<CsVO> faq = service.selectFaqAll();
+		List<CsVO> qnalist = service.selectQnaAll();
+		
+		req.setAttribute("noticelist", noticelist); // admin-cs notice 목록
+		req.setAttribute("faq", faq);	// admin-cs faq 목록
+		req.setAttribute("qnalist", qnalist); // admin-cs qna 목록
 		
 		req.setAttribute("map", map);
-		req.setAttribute("cvo", cvo);
+		req.setAttribute("cate1", cate1);
+		req.setAttribute("cate2", cate2);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/list.jsp");
 		dispatcher.forward(req, resp);
 	}
