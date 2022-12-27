@@ -16,9 +16,10 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.co.Kmarket.utils.JSFunction;
 import kr.co.Kmarket.vo.MemberVO;
 
-public class LoginCheckFilter1 implements Filter {
+public class AdminCheckFilter implements Filter {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -30,7 +31,7 @@ public class LoginCheckFilter1 implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		logger.info("LoginCheckFilter doFilter...");
+		logger.info("AdminCheck doFilter...");
 		
 		HttpServletRequest req = (HttpServletRequest) request;
 		
@@ -40,15 +41,10 @@ public class LoginCheckFilter1 implements Filter {
 		// 로그인을 하지 않았을 경우
 		if (sessMember == null) {
 			
-			((HttpServletResponse)response).setContentType("text/html; charset=utf-8");
-			PrintWriter writer = ((HttpServletResponse)response).getWriter();
+			String msg = "로그인 후 이용해주세요.";
+			String location = "/Kmarket/member/login.do";
 			
-			String script = ""
-					+ "<script>"
-					+ " alert('로그인 후 이용해주세요.'); "
-					+ " location.href='/Kmarket/member/login.do'; "
-					+ "</script>";
-			writer.print(script);
+			JSFunction.alertLocation(((HttpServletResponse)response), msg, location);
 			return;
 			
 			/*

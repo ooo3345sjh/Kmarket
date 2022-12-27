@@ -78,7 +78,7 @@
 	                                <button type="button" class="authBtn" id="btnCode">인증번호 전송</button>
 	                                <span class="msgEmail"></span><br/>
 	                                <div class="auth">
-	                                	<input type="text" name="km_code" id="code" placeholder="인증번호 입력" required/>
+	                                	<input type="text" name="km_code" id="code" placeholder="인증번호 입력"/>
 	                                	<button type="button" class="authBtn" id="btnConfirm">인증번호 확인</button>
 	                                	<span class="msgEmail2"></span>
 	                                </div>

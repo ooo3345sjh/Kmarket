@@ -82,7 +82,7 @@ public class MemberDAO extends DBHelper {
 			psmt1.setString(13, vo.getFax());
 			psmt1.setString(14, vo.getRegip());
 			psmt2.setString(1, vo.getUid());
-			psmt2.setInt(2, 5);
+			psmt2.setInt(2, 2);
 			psmt1.executeUpdate();
 			psmt2.executeUpdate();
 			con.commit();
@@ -146,14 +146,6 @@ public class MemberDAO extends DBHelper {
 				vo.setAddr2(rs.getString(12));
 				vo.setRegip(rs.getString(13));
 				vo.setRdate(rs.getString(15));
-				vo.setCompany(rs.getString(16));
-				vo.setCeo(rs.getString(17));
-				vo.setBizRegNum(rs.getString(18));
-				vo.setComRegNum(rs.getString(19));
-				vo.setTel(rs.getString(20));
-				vo.setManager(rs.getString(21));
-				vo.setManagerHp(rs.getString(22));
-				vo.setFax(rs.getString(23));
 			}
 			close();
 		} catch(Exception e) {

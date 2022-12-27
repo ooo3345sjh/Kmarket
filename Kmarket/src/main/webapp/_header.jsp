@@ -9,6 +9,7 @@
     <title>케이마켓:: 대한민국 1등 온라인 쇼핑몰</title>
     <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="<c:url value='/member/css/style.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/cs/css/style.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

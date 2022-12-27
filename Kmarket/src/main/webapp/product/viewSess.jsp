@@ -121,7 +121,7 @@
 					"discount":'${vo.discount}',
 					"point":'${vo.point}',
 					"delivery":'${vo.delivery}',
-					"total": total.replace(',', '')
+					"total": total.replaceAll(',', '')
 			};
 			
 	        $.post(contextRoot + '/product/view.do', jsonData, function(data){
