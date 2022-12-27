@@ -29,7 +29,7 @@
             $(window).scroll(function(){
 	            let best = $("aside > .best");
                 let t = $(this).scrollTop(); // 스크롤바 TOP 높이
-				console.log(t);
+				//console.log(t);
 				
                 if(t > 620){ 
                 	if(t > 3500){
@@ -104,6 +104,7 @@
 				
 			})
         });
+        
     </script>
 </head>
 <body>
