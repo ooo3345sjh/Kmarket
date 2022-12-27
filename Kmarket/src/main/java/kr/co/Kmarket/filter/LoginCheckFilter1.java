@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.co.Kmarket.utils.JSFunction;
 import kr.co.Kmarket.vo.MemberVO;
 
 public class LoginCheckFilter1 implements Filter {
@@ -36,7 +37,8 @@ public class LoginCheckFilter1 implements Filter {
 		
 		HttpSession sess = req.getSession();
 		MemberVO sessMember = (MemberVO)sess.getAttribute("sessMember");
-
+		
+		
 		// 로그인을 하지 않았을 경우
 		if (sessMember == null) {
 			

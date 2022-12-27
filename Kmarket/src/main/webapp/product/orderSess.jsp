@@ -74,13 +74,13 @@
  				
  				// 할인가격 계산
  				let discount = Number(orderList[i].discount.replace("%", ""));
- 				let cost = Number(orderList[i].price.replace(",", ""));
+ 				let cost = Number(orderList[i].price.replaceAll(",", ""));
  				let totalPrice = (cost - Math.floor(cost * discount * 0.01)) * Number(orderList[i].count); // 할인된 가격
  				
  				
  				// 숫자로 변형뒤 합산
  				count += Number(orderList[i].count);
- 				price += Number(orderList[i].price.replace(",", "")) * Number(orderList[i].count);
+ 				price += Number(orderList[i].price.replaceAll(",", "")) * Number(orderList[i].count);
  				savedPoint += Number(orderList[i].point);
  				discountPrice += Math.floor(cost * discount * 0.01);
  				delivery += Number(orderList[i].delivery.replace(",", ""));
