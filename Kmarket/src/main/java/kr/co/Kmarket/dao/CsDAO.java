@@ -61,6 +61,28 @@ public class CsDAO extends DBHelper {
 		return result;
 	}
 	
+	public int insertAdminFaqArticle(CsVO cvo) {
+		int result = 0;
+		try {
+			logger.info("insertAdminNoticeArticle...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.INSERT_ADMIN_FAQ);
+			psmt.setString(1, cvo.getUid());
+			psmt.setString(2, cvo.getCate2());
+			psmt.setString(3, cvo.getType());
+			psmt.setString(4, cvo.getTitle());
+			psmt.setString(5, cvo.getContent());
+			psmt.setString(6, cvo.getRegip());
+			
+			result = psmt.executeUpdate();
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
 	public CsVO viewArticle(String csNo) {
 		CsVO cvo = null;
 		
@@ -83,6 +105,8 @@ public class CsDAO extends DBHelper {
 				cvo.setContent(rs.getString("content"));
 				cvo.setRegip(rs.getString("regip"));
 				cvo.setRdate(rs.getString("rdate"));
+				int hitCount = rs.getInt(10);
+				
 			}
 			
 			close();
@@ -94,38 +118,40 @@ public class CsDAO extends DBHelper {
 	}
 	
 	
-	/* 자주묻는 질문 목록 */
+	/* cs 페이지 자주묻는 질문 목록 */
 	public void selectFaqArticle(Map<String, Object> map) {
 		List<CsVO> faqlist = null;
 		
 		String cate2 = (String)map.get("cate2");
-		
+		String group = (String)map.get("group");
 		StringBuffer sql = new StringBuffer();
 		
 		sql.append("SELECT DISTINCT `cate1`, `cate2`, `type`, `title` FROM `km_cs` WHERE `cate1` = 'faq'");
 		
+		if(group.equals("cs")) {
+			if(cate2.equals("user")) { // cate2가 'user' 라면 중복되지 않은 type들 나옴
+				sql.append("AND `cate2`= 'user'");
+			}
+			else if(cate2.equals("coupon")) {	// 
+				sql.append("AND `cate2`= 'coupon'");
+			}
+			else if(cate2.equals("order")) {
+				sql.append("AND `cate2`= 'order'");
+			}
+			else if(cate2.equals("delivery")) {
+				sql.append("AND `cate2`= 'delivery'");
+			}
+			else if(cate2.equals("cancel")) {
+				sql.append("AND `cate2`= 'cancel'");
+			}
+			else if(cate2.equals("travel")) {
+				sql.append("AND `cate2`= 'travel'");
+			}
+			else if(cate2.equals("safeDeal")) {
+				sql.append("AND `cate2`= 'safeDeal'");
+			}
+		}
 		// type 불러오기
-		if(cate2.equals("user")) { // cate2가 'user' 라면 중복되지 않은 type들 나옴
-			sql.append("AND `cate2`= 'user'");
-		}
-		else if(cate2.equals("coupon")) {	// 
-			sql.append("AND `cate2`= 'coupon'");
-		}
-		else if(cate2.equals("order")) {
-			sql.append("AND `cate2`= 'order'");
-		}
-		else if(cate2.equals("delivery")) {
-			sql.append("AND `cate2`= 'delivery'");
-		}
-		else if(cate2.equals("cancel")) {
-			sql.append("AND `cate2`= 'cancel'");
-		}
-		else if(cate2.equals("travel")) {
-			sql.append("AND `cate2`= 'travel'");
-		}
-		else if(cate2.equals("safeDeal")) {
-			sql.append("AND `cate2`= 'safeDeal'");
-		}
 		
 		try {
 			con = getConnection();
@@ -213,6 +239,36 @@ public class CsDAO extends DBHelper {
 		return list1;
 	}
 	
+	public List<CsVO> selectFaqAll() {
+		List<CsVO> faq = new ArrayList<>();
+		try {
+			logger.info("indexQnaArticles...");
+			con = getConnection();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(Sql.SELECT_FAQ_ALL);
+			while(rs.next()) {
+				CsVO cvo1 = new CsVO();
+				cvo1.setCsNo(rs.getString("csNo"));
+				cvo1.setUid(rs.getString("uid"));
+				cvo1.setCate1(rs.getString("cate1"));
+				cvo1.setCate2(rs.getString("cate2"));
+				cvo1.setType(rs.getString("type"));
+				cvo1.setTitle(rs.getString("title"));
+				cvo1.setContent(rs.getString("content"));
+				cvo1.setRegip(rs.getString("regip"));
+				cvo1.setRdate(rs.getString("rdate"));
+				
+				faq.add(cvo1);
+			}
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return faq;
+	}
+	
+	/* cs 페이지 cate1, cate2로 구분된 게시글 목록 */
 	public void selectArticles(Map<String, Object> map) {
 		List<CsVO> list = null;
 		
@@ -290,12 +346,12 @@ public class CsDAO extends DBHelper {
 		map.put("totalCount", totalCount);
 	}
 	
-	public void updateHit(String csNo) {
+	public void updateHit(int csNo) {
 		try {
 			logger.info("updateHit...");
 			con = getConnection();
 			psmt = con.prepareStatement(Sql.UPDATE_HIT);
-			psmt.setString(1, csNo);
+			psmt.setInt(1, csNo);
 			psmt.executeUpdate();
 			
 			close();
@@ -304,16 +360,17 @@ public class CsDAO extends DBHelper {
 		}
 	}
 	
-	public int updateArticle(String type, String title, String content, String no) {
+	public int updateArticle(String cate2, String type, String title, String content, String no) {
 		int result = 0;
 		try{
 			logger.info("updateArticle...");
 			con = getConnection();
 			psmt = con.prepareStatement(Sql.UPDATE_ARITLCE);
-			psmt.setString(1, type);
-			psmt.setString(2, title);
-			psmt.setString(3, content);
-			psmt.setString(4, no);
+			psmt.setString(1, cate2);
+			psmt.setString(2, type);
+			psmt.setString(3, title);
+			psmt.setString(4, content);
+			psmt.setString(5, no);
 			result = psmt.executeUpdate();
 			
 			close();

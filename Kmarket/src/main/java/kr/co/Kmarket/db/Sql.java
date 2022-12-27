@@ -12,6 +12,7 @@ public class Sql {
 	/*** admin-cs ***/
 	public static final String UPDATE_HIT = "UPDATE `km_cs` SET `hit` = `hit` + 1 WHERE `csNo`=?";
 	public static final String UPDATE_ARITLCE = "UPDATE `km_cs` SET "
+												+ "`cate2`=?,"
 												+ "`type`=?,"
 												+ "`title`=?,"
 												+ "`content`=?"
@@ -184,13 +185,25 @@ public class Sql {
 													+ "`content`=?, "
 													+ "`regip`=?, "
 													+ "`rdate`=NOW()";
-											
-													
-	public static final String SELECT_NOTICE_ALL = "SELECT * FROM `km_cs` WHERE `cate1`='notice' ORDER BY `rdate` DESC;";
+	public static final String INSERT_ADMIN_FAQ = "INSERT INTO `km_cs` SET "
+													+ "`uid`=?, "
+													+ "`cate1`='faq', "
+													+ "`cate2`=?, "
+													+ "`type`=?, "
+													+ "`title`=?, "
+													+ "`content`=?, "
+													+ "`regip`=?, "
+													+ "`rdate`=NOW()";										
+
+	public static final String SELECT_CS_ARTICLE = "SELECT * FROM `km_cs` WHERE `csNo`=?";		
 	
-	public static final String SELECT_CS_ARTICLE = "SELECT * FROM `km_cs` WHERE `csNo`=?";
+	public static final String SELECT_NOTICE_ALL = "SELECT * FROM `km_cs` "
+													+ "WHERE `cate1`='notice' "
+													+ "ORDER BY `csNo` DESC LIMIT 0,10";
 	
-	public static final String SELECT_QNA_ALL = "SELECT * FROM `km_cs` WHERE `cate1`='qna' ORDER BY `rdate` DESC;";
+	public static final String SELECT_QNA_ALL = "SELECT * FROM `km_cs` WHERE `cate1`='qna' ORDER BY `csNo` DESC LIMIT 0,10";
+	
+	public static final String SELECT_FAQ_ALL = "SELECT * FROM `km_cs` WHERE `cate1`='faq' ORDER BY `csNo` DESC LIMIT 0,10";
 	
 	public static final String DELECT_ARTICLE = "DELETE FROM `km_cs` WHERE `csNo`=?";
 }
