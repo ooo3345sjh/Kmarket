@@ -39,6 +39,7 @@ public class _CsReplyController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("replyPostController...");
 		
+
 		String no	 	 = req.getParameter("no");
 		String type		 = req.getParameter("type");
 		String title	 = req.getParameter("title");
@@ -53,11 +54,11 @@ public class _CsReplyController extends HttpServlet{
 		comment.setContent(content);
 		comment.setComment(reply);
 		comment.setUid(uid);
-		
-		
+	
 		int result = service.updateComment(comment);
 		
 		JsonObject json = new JsonObject();
+
 		json.addProperty("result", 1);
 		json.addProperty("uid", comment.getUid());
 		json.addProperty("type", comment.getType());
@@ -67,6 +68,5 @@ public class _CsReplyController extends HttpServlet{
 		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
-		
 	}
 }

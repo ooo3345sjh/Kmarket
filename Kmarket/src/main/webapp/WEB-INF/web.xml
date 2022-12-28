@@ -17,8 +17,7 @@
   	</auth-constraint>
   </security-constraint>-->
   
-
-    <filter>
+  <filter>
   	<filter-name>AdminCheckFilter</filter-name>
   	<filter-class>kr.co.Kmarket.filter.AdminCheckFilter</filter-class>
   </filter>

@@ -110,6 +110,9 @@
 		// 선택된 상품 제거하는 AJAX
 		let contextRoot = '${request.getContextPath()}';
 		$('input[name=del]').click(function () {
+			
+			if(!confirm('정말 삭제 하시겠습니까?')) return;
+			
 			let trTag = $('#cart > tr');
 			let checkbox = $("input[name=prodCheck]");
 			let cartArr = [];
@@ -175,6 +178,11 @@
 			let checkbox = $("input[name=prodCheck]");
 			let list = [];
 			
+			if('${user.uid}'== ''){
+				alert('로그인 후에 주문가능합니다.');
+				location.href = contextRoot + "/member/login.do?cart=cart";
+				return;
+			};
 			let count = 0;
 			console.log(trTag);
 			for(let i=0; i<checkbox.length; i++){

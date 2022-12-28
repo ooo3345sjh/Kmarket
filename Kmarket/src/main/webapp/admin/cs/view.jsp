@@ -104,6 +104,7 @@
 		                        <%-- 답변 --%>
 		                        <tr class="replyForm">
 		                        	<td>답변</td>
+
 		                        	<td id="rep">
 		                        	<c:choose>
 		                        	 <c:when test="${cvo.comment eq null}">

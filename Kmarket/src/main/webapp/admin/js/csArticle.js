@@ -58,6 +58,7 @@
 		
 	});
 	
+
 	$(document).on('submit','#cs-view > form',function(e){
 		
 		e.preventDefault();
@@ -66,6 +67,7 @@
 		let type = $(this).children('input[name=type]').val(); // 유형
 		let title = $(this).children('input[name=title]').val(); // 제목
 		let content = $(this).children('input[name=content]').val(); // 내용
+
 		let textarea = $('textarea[name=reply]');
 		let reply = textarea.val();
 		let uid = $(this).children('input[name=uid]').val();
@@ -91,6 +93,7 @@
 						
 						$('.reply').remove();
 						$('#rep').append(reply);
+
 				}
 				
 			}
