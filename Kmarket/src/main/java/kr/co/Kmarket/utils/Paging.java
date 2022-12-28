@@ -93,7 +93,7 @@ public class Paging {
 		/*** admin 변수 선언 end ***/
 		
 		/*** 그룹이 admin인 경우 첫페이지 tag 삽입 ***/
-		if(group.equals("admin")) {
+		if(group.contains("admin")) {
 			String uri = "<a href=\"" + contextPath + "/" + group + "/list.do?pg=1";
 			
 			if(searchWord != null) { // 검색어가 있다면
@@ -111,7 +111,7 @@ public class Paging {
 		
 		
 		// admin이 아니라면
-		if(!group.equals("admin")) {
+		if(!group.contains("admin")) {
 			uri += "&cate1=" + cate1 + "&cate2=" + cate2;
 
 			// 현재 그룹 번호가 2이상이면
@@ -179,7 +179,7 @@ public class Paging {
 		uri = "<a href=\"" + contextPath + "/"+ group + "/list.do?pg=" + nextPage;
 		
 		// admin이 아니라면
-		if(!group.equals("admin")) {
+		if(!group.contains("admin")) {
 			uri += "&cate1=" + cate1 + "&cate2=" + cate2;
 			
 			// product 라면
@@ -215,7 +215,7 @@ public class Paging {
 		
 		
 		// 그룹이 admin인 경우 마지막페이지 tag 삽입
-		if(group.equals("admin")) {
+		if(group.contains("admin")) {
 			uri = "<a href=\"" + contextPath + "/" + group + "/list.do?pg=" + lastPageNum;
 			
 			// 검색어가 있다면
