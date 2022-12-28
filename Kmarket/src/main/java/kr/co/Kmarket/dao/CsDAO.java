@@ -86,36 +86,25 @@ public class CsDAO extends DBHelper {
 	}
 	
 	/* Reply 답변 등록*/
-	public int insertComment(CsVO comment) {
+	public int updateComment(CsVO comment) {
 		
 		int result = 0;
 		try {
-			logger.info("insertComment...");
+			logger.info("updateComment...");
 			con = getConnection();
+
+			psmt = con.prepareStatement(Sql.UPDATE_QNA_COMMENT);
+			psmt.setString(1, comment.getComment());
+			psmt.setInt(2, comment.getCsNo());
 			
-			con.setAutoCommit(false);
-			PreparedStatement psmt1 = con.prepareStatement(Sql.INSERT_COMMENT);
-			PreparedStatement psmt2 = con.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT);
-			psmt1.setInt(1, comment.getParent());
-			psmt1.setString(2, comment.getType());
-			psmt1.setString(3, comment.getTitle());
-			psmt1.setString(4, comment.getContent());
-			psmt1.setString(5, comment.getRegip());
-			psmt1.setString(6, comment.getUid());
-			
-			psmt2.setInt(1, comment.getCsNo());
-			
-			result = psmt1.executeUpdate();
-			psmt2.executeUpdate();
-			
-			con.commit();
+			result = psmt.executeUpdate();
 			
 			close();
-			
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
 		return result;
+		
 	}
 	
 	public CsVO viewArticle(int csNo) {
@@ -144,8 +133,7 @@ public class CsDAO extends DBHelper {
 				cvo.setRegip(rs.getString("regip"));
 				cvo.setRdate(rs.getString("rdate"));
 				cvo.setHit(rs.getInt("hit"));
-				cvo.setComment(rs.getInt("comment"));
-				cvo.setParent(rs.getInt("parent"));
+				cvo.setComment(rs.getString("comment"));
 			}
 			
 			close();
@@ -267,6 +255,7 @@ public class CsDAO extends DBHelper {
 				cvo1.setContent(rs.getString("content"));
 				cvo1.setRegip(rs.getString("regip"));
 				cvo1.setRdate(rs.getString("rdate"));
+				cvo1.setComment(rs.getString("comment"));
 				
 				list1.add(cvo1);
 			}

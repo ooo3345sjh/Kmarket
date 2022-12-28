@@ -33,7 +33,7 @@ import kr.co.Kmarket.vo.OrderVO;
 import kr.co.Kmarket.vo.ProductVO;
 
 @WebServlet("/product/order.do")
-public class OrderController_session extends HttpServlet {
+public class OrderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private ProductService service = new ProductService();
@@ -49,7 +49,7 @@ public class OrderController_session extends HttpServlet {
 		
 		req.setAttribute("vo", vo);
 		req.setAttribute("request", req);
-		req.getRequestDispatcher("/product/orderSess.jsp").forward(req, resp);
+		req.getRequestDispatcher("/product/order.jsp").forward(req, resp);
 	}
 	
 	@Override

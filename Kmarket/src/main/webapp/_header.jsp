@@ -12,6 +12,7 @@
     <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="<c:url value='/member/css/style.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/cs/css/style.css'/>">
+    <link rel="stylesheet" href="<c:url value='/css/style.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
 </head>
