@@ -703,6 +703,7 @@
 #cs > .qna > .list > article > table td {
     padding: 16px;
     border-bottom: 1px solid #ccc;
+    white-space: nowrap;
 }
 #cs > .qna > .list > article > table td:last-child {
     text-align: center;
