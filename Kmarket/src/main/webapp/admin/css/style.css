@@ -746,8 +746,8 @@ p.ico  {
     font-size: 18px;
     color: #fff;
 }
-#cs-view > form > .btnList {
-	
+#cs-view > form > .btnWrite {
+	    margin-top: 2px;
 }
 
 /* 공지사항 글 쓰기 */

@@ -65,14 +65,20 @@
                             <td>${qna.type}</td>
                             
                             <td><a href="<c:url value='/admin/cs/view.do?no=${qna.csNo}&cate1=${qna.cate1}'/>">[${qna.type}]${qna.title}</a></td>
-                            <td>${fn:substring(sessMember.uid,0,3)}**</td>
+                            <td>${fn:substring(sessMesmber.uid,0,3)}**</td>
                             
                             <c:set var="rdate"  value="${qna.rdate}"/>
                             <td>${fn:substring(rdate,2,10)}</td>
-                            
-                            <td>
-                                검토중
+                            <c:if test="">
+                            <td class="comfirm">
+                               검토중
                             </td>
+                            </c:if>
+                            
+                            <td class="check">
+                               답변완료
+                            </td>
+                         
                         </tr>
                     </c:forEach>
                     </table>
