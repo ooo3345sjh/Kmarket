@@ -43,21 +43,10 @@ public class CartController extends HttpServlet {
 		logger.info("CartController doGet...");
 		HttpSession session = req.getSession();
 		MemberVO vo	= (MemberVO)session.getAttribute("sessMember");
-<<<<<<< HEAD:Kmarket/src/main/java/kr/co/Kmarket/controller/product/CartController_session.java
-<<<<<<< HEAD
-		if(vo == null) {
-			List<CartVo> list = (List<CartVo>)session.getAttribute("cartList");
-			if(list != null) {
-				Collections.reverse(list);
-=======
-		
-=======
->>>>>>> 736707a1b5a64bc483352e13f9415ed787564f9d:Kmarket/src/main/java/kr/co/Kmarket/controller/product/CartController.java
 		if(vo == null) {
 			List<CartVo> list = (List<CartVo>)session.getAttribute("cartList");
 			if(list != null) {
 				Collections.sort(list);
->>>>>>> f9fd140eabd32af102009b0ed7dd3597b23f6778
 			}
 			req.setAttribute("list", list);
 			

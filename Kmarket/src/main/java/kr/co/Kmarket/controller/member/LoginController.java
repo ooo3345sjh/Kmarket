@@ -94,11 +94,7 @@ public class LoginController extends HttpServlet {
 		}
 		
 		if("cart".equals(cart)) {
-<<<<<<< HEAD
-			resp.sendRedirect("/Kmarket/product/cart.do");
-=======
 			resp.sendRedirect("/Kmarket/product/order.do");
->>>>>>> f9fd140eabd32af102009b0ed7dd3597b23f6778
 		} else {
 			resp.sendRedirect("/Kmarket/");
 		}

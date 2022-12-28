@@ -40,7 +40,7 @@ public class RegisterController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("RegisterController doGet...");
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/register.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/product/register.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
@@ -145,7 +145,7 @@ public class RegisterController extends HttpServlet {
 		pv.setIp(ip);
 		
 		service.insertProduct(pv);
-		resp.sendRedirect("/Kmarket/admin/list.do");
+		resp.sendRedirect("/Kmarket/admin/product/list.do");
 	}
 
 }

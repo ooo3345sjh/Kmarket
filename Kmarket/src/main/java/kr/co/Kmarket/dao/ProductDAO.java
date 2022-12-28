@@ -294,7 +294,7 @@ public class ProductDAO extends DBHelper {
 			sql.append("SELECT COUNT(`prodNo`) FROM `km_product` ");
 			
 
-			if(!group.equals("admin")) {	// 그룹명이 admin이 아니라면
+			if(!group.contains("admin")) {	// 그룹명이 admin이 아니라면
 				sql.append("WHERE `cate1` = '" + cate1 + "' AND `cate2`= '" + cate2 + "' ORDER BY " + type + " DESC");
 			} 
 			
@@ -349,7 +349,7 @@ public class ProductDAO extends DBHelper {
 		
 		String sql = "SELECT p.*, s.`level` FROM `km_product` p JOIN `km_member_seller` s on p.`seller` = s.`uid` ";
 		
-		if(group.equals("admin")) {	// 그룹명이 admin이라면
+		if(group.contains("admin")) {	// 그룹명이 admin이라면
 			int types = (int)map.get("types");
 			// 최고 관리자 계정이 아닌 경우
 			if(types == 2) {
@@ -397,7 +397,7 @@ public class ProductDAO extends DBHelper {
 				logger.debug("price : " + price);				
 				vo.setDiscountPrice(discountPrice);
 				vo.setProdNo(rs.getInt("prodNo"));
-				if(group.equals("admin")) {
+				if(group.contains("admin")) {
 					String acate1 = rs.getString("cate1");
 					String acate2 = rs.getString("cate2");
 					path = "/file/" + acate1 + "/" + acate2 + "/"; // 이미지 저장경로
