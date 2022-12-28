@@ -11,9 +11,6 @@
 		if(isCart == 'cart'){
 			$('input[name=cart]').val(isCart);
 		}
-<<<<<<< HEAD
-	})
-=======
 		
 		
 		// 비밀번호 보이기, 숨기기 기능
@@ -32,7 +29,6 @@
 		
 	})
 
->>>>>>> f9fd140eabd32af102009b0ed7dd3597b23f6778
 </script>
         <main id="member">
             <div class="login">

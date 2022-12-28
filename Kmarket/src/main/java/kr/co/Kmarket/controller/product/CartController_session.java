@@ -43,18 +43,10 @@ public class CartController_session extends HttpServlet {
 		logger.info("CartController doGet...");
 		HttpSession session = req.getSession();
 		MemberVO vo	= (MemberVO)session.getAttribute("sessMember");
-<<<<<<< HEAD
-		if(vo == null) {
-			List<CartVo> list = (List<CartVo>)session.getAttribute("cartList");
-			if(list != null) {
-				Collections.reverse(list);
-=======
-		
 		if(vo == null) {
 			List<CartVo> list = (List<CartVo>)session.getAttribute("cartList");
 			if(list != null) {
 				Collections.sort(list);
->>>>>>> f9fd140eabd32af102009b0ed7dd3597b23f6778
 			}
 			req.setAttribute("list", list);
 			
