@@ -76,11 +76,17 @@
                     	<form action="#">
                     		<input type="hidden" name="no" value="${cvo.csNo}"/>
                     		<input type="hidden" name="cate1" value="${cvo.cate1}"/>
+                    		<input type="hidden" name="uid" value="${sessMember.uid}"/>
+                    		<input type="hidden" name="type" value="${cvo.type}"/>
+                    		<input type="hidden" name="title" value="${cvo.title}"/>
+                    		<input type="hidden" name="content" value="${cvo.content}"/>
                     		
 	                        <table class="qna">
 		                        <tr>
 		                            <td>유형</td>
-		                            <td class="type">${cvo.type}</td>
+		                            <td class="type">
+		                            	${cvo.type}
+		                            </td>
 		                        </tr>
 		                        <tr>
 		                            <td>제목</td>
@@ -88,7 +94,7 @@
 		                        </tr>
 		                        <tr>
 		                            <td>내용</td>
-		                            <td>
+		                            <td class="content">
 		                                <p>
 		                                    ${cvo.content} 
 		                                </p>
@@ -96,14 +102,11 @@
 		                        </tr>
 		                        
 		                        <%-- 답변 --%>
-		                        <tr>
+		                        <tr class="replyForm">
 		                        	<td>답변</td>
-<<<<<<< HEAD
-		                        	<td>
-		                        		<textarea name="content" class="content"></textarea>
-=======
 
 		                        	<td id="rep">
+		                        	
 		                        	<c:choose>
 		                        	 <c:when test="${cvo.comment eq null}">
 		                        	<textarea name="reply" class="reply"></textarea>
@@ -112,13 +115,13 @@
 			                        	 	${cvo.comment}
 			                        	 </c:otherwise>
 		                        	</c:choose>
->>>>>>> d7cbe9f0e163d1372ca92a0b7361256f1816bebd
 		                        	</td>
+		                        	
 		                        </tr>
 	                    	</table>
 	                    	
 	                    	<a href="#" class="remove" data-no="${cvo.csNo}">삭제</a>
-		                    <a href="#" id="reply" class="btnWrite">답변등록</a>
+		                    <input type="submit" value="답변등록" class="btnWrite"/>
 		                    <a href="<c:url value='/admin/cs/list.do?cate1=${cate1}'/>" class="btnList">목록</a>
                     	</form>
                     	
