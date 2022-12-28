@@ -2,9 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="./js/product.js"></script>
-<script src="./js/checkbox.js"></script>
-<jsp:include page="./_header.jsp"/>
+<script src="../js/product.js"></script>
+<script src="../js/checkbox.js"></script>
+<jsp:include page="../_header.jsp"/>
 
                 <section id="admin-product-list" class="admin">
                     <nav>
@@ -77,7 +77,7 @@
 		            </c:choose>
                     </table>
                     <input type="button" id="deleteButton" value="선택삭제" onclick="checkDelete()">
-                    <input type="button" id="registerButton" value="등록하기" onclick="location.href='<c:url value='/admin/register.do'/>'">
+                    <input type="button" id="registerButton" value="등록하기" onclick="location.href='<c:url value='/admin/product/register.do'/>'">
                     <div class="paging">
                     	${map.pageTag}
                     </div>
@@ -89,4 +89,4 @@
             </div>
         </main>
     </div>
-<jsp:include page="./_footer.jsp"/>
+<jsp:include page="../_footer.jsp"/>

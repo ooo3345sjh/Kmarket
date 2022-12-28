@@ -10,12 +10,6 @@ public class Sql {
 											+ "WHERE `cate1`=? ORDER BY `csNo` DESC LIMIT 5 ";
 	
 	/*** admin-cs ***/
-	public static final String INSERT_COMMENT = "INSERT INTO `km_cs` SET "
-											+ "`parent`=?,"
-											+ "`content`=?,"
-											+ "`regip`=?,"
-											+ "`rdate`=NOW()";
-	
 	public static final String UPDATE_HIT = "UPDATE `km_cs` SET `hit` = `hit` + 1 WHERE `csNo`=?";
 	
 	public static final String UPDATE_ARITLCE = "UPDATE `km_cs` SET "
@@ -24,8 +18,11 @@ public class Sql {
 												+ "`title`=?,"
 												+ "`content`=?"
 												+ "WHERE csNo=?";
-	public static final String UPDATE_ARTICLE_COMMENT = "UPDATE `km_cs` SET "
-												+ "`comment` = `comment` + 1 WHERE `csNo`=?";
+	
+	public static final String UPDATE_QNA_COMMENT = "UPDATE `km_cs` SET "
+													+ "`comment`=? "
+													+ "WHERE `csNo`=?";
+	
 	/*** member ***/
 	
 	// uid 등록

@@ -30,7 +30,7 @@ import kr.co.Kmarket.vo.MemberVO;
 import kr.co.Kmarket.vo.ProductVO;
 
 @WebServlet("/product/cart.do")
-public class CartController_session extends HttpServlet {
+public class CartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private ProductService service = new ProductService();
@@ -43,6 +43,7 @@ public class CartController_session extends HttpServlet {
 		logger.info("CartController doGet...");
 		HttpSession session = req.getSession();
 		MemberVO vo	= (MemberVO)session.getAttribute("sessMember");
+<<<<<<< HEAD:Kmarket/src/main/java/kr/co/Kmarket/controller/product/CartController_session.java
 <<<<<<< HEAD
 		if(vo == null) {
 			List<CartVo> list = (List<CartVo>)session.getAttribute("cartList");
@@ -50,6 +51,8 @@ public class CartController_session extends HttpServlet {
 				Collections.reverse(list);
 =======
 		
+=======
+>>>>>>> 736707a1b5a64bc483352e13f9415ed787564f9d:Kmarket/src/main/java/kr/co/Kmarket/controller/product/CartController.java
 		if(vo == null) {
 			List<CartVo> list = (List<CartVo>)session.getAttribute("cartList");
 			if(list != null) {
@@ -67,7 +70,7 @@ public class CartController_session extends HttpServlet {
 		
 		req.setAttribute("request", req);
 		req.setAttribute("session", session);
-		req.getRequestDispatcher("/product/cartSess.jsp").forward(req, resp);
+		req.getRequestDispatcher("/product/cart.jsp").forward(req, resp);
 	}
 	
 	@Override

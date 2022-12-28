@@ -32,7 +32,7 @@ $(function(){
 
 /*** 선택삭제 눌러서 삭제처리 ***/
 function checkDelete() {
-	let url = '/Kmarket/admin/productDelete.do';
+	let url = '/Kmarket/admin/product/productDelete.do';
 	let valueArr = new Array();
 	let list = $("input[name='check']");
 	
@@ -55,7 +55,7 @@ function checkDelete() {
 			success: function(data){
 				if(data.result > 0){
 					alert('삭제되었습니다.');
-					location.replace("/Kmarket/admin/list.do");
+					location.replace("/Kmarket/admin/product/list.do");
 				} else {
 					alert('삭제에 실패했습니다.');
 				}

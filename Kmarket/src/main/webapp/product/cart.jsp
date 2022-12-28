@@ -110,6 +110,9 @@
 		// 선택된 상품 제거하는 AJAX
 		let contextRoot = '${request.getContextPath()}';
 		$('input[name=del]').click(function () {
+			
+			if(!confirm('정말 삭제 하시겠습니까?')) return;
+			
 			let trTag = $('#cart > tr');
 			let checkbox = $("input[name=prodCheck]");
 			let cartArr = [];

@@ -28,7 +28,7 @@ import kr.co.Kmarket.vo.MemberVO;
 import kr.co.Kmarket.vo.ProductVO;
 
 @WebServlet("/product/view.do")
-public class ViewController_session extends HttpServlet {
+public class ViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private ProductService service = new ProductService();
@@ -66,7 +66,7 @@ public class ViewController_session extends HttpServlet {
 		req.setAttribute("date", sdf.format(Date.valueOf(date)));
 		req.setAttribute("yoil", yoil);
 		req.setAttribute("request", req);
-		req.getRequestDispatcher("/product/viewSess.jsp").forward(req, resp);
+		req.getRequestDispatcher("/product/view.jsp").forward(req, resp);
 	}
 	
 	@Override

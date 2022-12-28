@@ -17,7 +17,7 @@
 			let prodNo = $(this).attr('data-no');
 			
 			$.ajax({
-				url: '/Kmarket/admin/productDelete.do',
+				url: '/Kmarket/admin/product/productDelete.do',
 				type: 'get',
 				data: {'prodNo':prodNo},
 				dataType: 'json',
@@ -84,7 +84,7 @@
 			}
 			
 			$.ajax({
-				url: '/Kmarket/admin/productModify.do',
+				url: '/Kmarket/admin/product/productModify.do',
 				type: 'post',
 				data: jsonData,
 				dataType: 'json',

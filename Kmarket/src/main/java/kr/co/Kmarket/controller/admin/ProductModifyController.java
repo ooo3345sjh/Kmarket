@@ -14,7 +14,7 @@ import com.google.gson.JsonObject;
 import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.vo.ProductVO;
 
-@WebServlet("/admin/productModify.do")
+@WebServlet("/admin/product/productModify.do")
 public class ProductModifyController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
