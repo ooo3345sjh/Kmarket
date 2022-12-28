@@ -11,7 +11,7 @@
 		
 		$.ajax({
 			type:'GET',
-			url: '/Kmarket/admin/category.do',
+			url: '/Kmarket/admin/product/category.do',
 			data: {'cate1':cate1, 'cate2':cate2},
 			dataType: 'json'
 		});
