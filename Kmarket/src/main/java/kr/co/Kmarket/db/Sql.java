@@ -12,8 +12,11 @@ public class Sql {
 	/*** admin-cs ***/
 	public static final String INSERT_COMMENT = "INSERT INTO `km_cs` SET "
 											+ "`parent`=?,"
+											+ "`type`=?,"
+											+ "`title`=?,"
 											+ "`content`=?,"
 											+ "`regip`=?,"
+											+ "`uid`=?,"
 											+ "`rdate`=NOW()";
 	
 	public static final String UPDATE_HIT = "UPDATE `km_cs` SET `hit` = `hit` + 1 WHERE `csNo`=?";

@@ -96,10 +96,12 @@ public class CsDAO extends DBHelper {
 			con.setAutoCommit(false);
 			PreparedStatement psmt1 = con.prepareStatement(Sql.INSERT_COMMENT);
 			PreparedStatement psmt2 = con.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT);
-			
 			psmt1.setInt(1, comment.getParent());
-			psmt1.setString(2, comment.getContent());
-			psmt1.setString(3, comment.getRegip());
+			psmt1.setString(2, comment.getType());
+			psmt1.setString(3, comment.getTitle());
+			psmt1.setString(4, comment.getContent());
+			psmt1.setString(5, comment.getRegip());
+			psmt1.setString(6, comment.getUid());
 			
 			psmt2.setInt(1, comment.getCsNo());
 			
