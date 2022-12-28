@@ -25,7 +25,7 @@ import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.vo.MemberVO;
 import kr.co.Kmarket.vo.ProductVO;
 
-@WebServlet("/admin/register.do")
+@WebServlet("/admin/product/register.do")
 public class RegisterController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

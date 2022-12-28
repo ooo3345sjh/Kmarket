@@ -12,9 +12,7 @@ public class CsVO {
 	private String regip;
 	private String rdate;
 	private int hit;
-	private int comment;
-	private int parent;
-	
+	private String comment;
 	
 	public int getCsNo() {
 		return csNo;
@@ -83,23 +81,12 @@ public class CsVO {
 	public void setHit(String hit) {
 		this.hit = Integer.parseInt(hit);
 	}
-	public int getComment() {
+	public String getComment() {
 		return comment;
 	}
-	public void setComment(int comment) {
+	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	public void setComment(String comment) {
-		this.comment = Integer.parseInt(comment);
-	}
-	public int getParent() {
-		return parent;
-	}
-	public void setParent(int parent) {
-		this.parent = parent;
-	}
-	public void setParent(String parent) {
-		this.parent = Integer.parseInt(parent);
-	}
+	
 	
 }

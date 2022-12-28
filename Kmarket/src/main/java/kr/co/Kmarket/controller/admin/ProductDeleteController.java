@@ -13,7 +13,7 @@ import com.google.gson.JsonObject;
 
 import kr.co.Kmarket.service.ProductService;
 
-@WebServlet("/admin/productDelete.do")
+@WebServlet("/admin/product/productDelete.do")
 public class ProductDeleteController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

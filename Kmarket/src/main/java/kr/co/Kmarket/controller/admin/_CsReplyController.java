@@ -1,7 +1,10 @@
 package kr.co.Kmarket.controller.admin;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,35 +33,40 @@ public class _CsReplyController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("replyGetController...");
-		
+	
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("replyPostController...");
 		
-		String parent	 = req.getParameter("no");
+
+		String no	 	 = req.getParameter("no");
 		String type		 = req.getParameter("type");
 		String title	 = req.getParameter("title");
-		String reply	 = req.getParameter("content");
-		String regip	 = req.getRemoteAddr();
+		String content	 = req.getParameter("content");
+		String reply	 = req.getParameter("reply");
 		String uid		 = req.getParameter("uid");
 		
 		CsVO comment = new CsVO();
-		comment.setParent(parent);
+		comment.setCsNo(no);
 		comment.setType(type);
 		comment.setTitle(title);
-		comment.setContent(reply);
-		comment.setRegip(regip);
+		comment.setContent(content);
+		comment.setComment(reply);
 		comment.setUid(uid);
-		
-		int result = service.insertComment(comment);
+	
+		int result = service.updateComment(comment);
 		
 		JsonObject json = new JsonObject();
-		json.addProperty("result", result);
+
+		json.addProperty("result", 1);
 		json.addProperty("uid", comment.getUid());
 		json.addProperty("type", comment.getType());
 		json.addProperty("title", comment.getTitle());
-		json.addProperty("parent", comment.getParent());
 		json.addProperty("content", comment.getContent());
+		json.addProperty("reply", comment.getComment());
+		
+		PrintWriter writer = resp.getWriter();
+		writer.print(json.toString());
 	}
 }
