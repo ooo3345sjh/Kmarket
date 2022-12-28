@@ -58,7 +58,6 @@
 		
 	});
 	
-
 	$(document).on('submit','#cs-view > form',function(e){
 		
 		e.preventDefault();
@@ -71,14 +70,11 @@
 		let textarea = $('textarea[name=reply]');
 		let reply = textarea.val();
 		let uid = $(this).children('input[name=uid]').val();
+
 		
 		let jsonData = {
 			"no":no,
-			"type":type,
-			"title":title,
 			"content":content,
-			"reply":reply,
-			"uid":uid
 		}
 		
 		$.ajax({
@@ -88,6 +84,7 @@
 			dataType:'json',
 			success: function(data){
 				
+
 				if(data.result > 0){
 					let	reply  =  data.reply;
 						
@@ -95,6 +92,7 @@
 						$('#rep').append(reply);
 
 				}
+
 				
 			}
 			
