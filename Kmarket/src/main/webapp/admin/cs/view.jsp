@@ -104,8 +104,15 @@
 		                        <%-- 답변 --%>
 		                        <tr class="replyForm">
 		                        	<td>답변</td>
-		                        	<td>
-		                        		<textarea name="reply" class="reply"></textarea>
+		                        	<td id="rep">
+		                        	<c:choose>
+		                        	 <c:when test="${cvo.comment eq null}">
+		                        	<textarea name="reply" class="reply"></textarea>
+		                        	 </c:when>
+			                        	 <c:otherwise>
+			                        	 	${cvo.comment}
+			                        	 </c:otherwise>
+		                        	</c:choose>
 		                        	</td>
 		                        </tr>
 	                    	</table>
