@@ -16,20 +16,10 @@
   	</auth-constraint>
   </security-constraint>
   
-<<<<<<< HEAD
-<<<<<<< HEAD
-   <filter>
-  	<filter-name>LoginCheckFilter</filter-name>
-  	<filter-class>kr.co.Kmarket.filter.LoginCheckFilter</filter-class>
-=======
 
-    <filter>
-=======
   <filter>
->>>>>>> 736707a1b5a64bc483352e13f9415ed787564f9d
   	<filter-name>AdminCheckFilter</filter-name>
   	<filter-class>kr.co.Kmarket.filter.AdminCheckFilter</filter-class>
->>>>>>> f9fd140eabd32af102009b0ed7dd3597b23f6778
   </filter>
   <filter-mapping>
   	<filter-name>AdminCheckFilter</filter-name>
