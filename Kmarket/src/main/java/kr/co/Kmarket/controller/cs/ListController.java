@@ -53,8 +53,6 @@ public class ListController extends HttpServlet {
 		service.selectArticles(map); // 
 		Paging.getPageTags(map);  	 // 페이징 처리된 정보를 토대로 태그 생성
 		
-		service.selectFaqArticle(map);
-		
 		List<CsVO> nlist = service.selectNoticeAll(); // 공지사항 전체목록
 		
 		req.setAttribute("nlist", nlist);

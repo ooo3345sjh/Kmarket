@@ -10,10 +10,10 @@
 					
                     <select>
                         <option>유형선택</option>
-                        <option>고객서비스</option>
-                        <option>안전거래</option>
-                        <option>위해상품</option>
-                        <option>이벤트당첨</option>
+                        <option value="service">고객서비스</option>
+                        <option value="safeDeal">안전거래</option>
+                        <option value="xproduct">위해상품</option>
+                        <option value="great">이벤트당첨</option>
                     </select>
 					
                     <table>
