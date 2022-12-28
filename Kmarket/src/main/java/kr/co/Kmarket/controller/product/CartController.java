@@ -30,7 +30,7 @@ import kr.co.Kmarket.vo.MemberVO;
 import kr.co.Kmarket.vo.ProductVO;
 
 @WebServlet("/product/cart.do")
-public class CartController_session extends HttpServlet {
+public class CartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private ProductService service = new ProductService();
@@ -59,7 +59,7 @@ public class CartController_session extends HttpServlet {
 		
 		req.setAttribute("request", req);
 		req.setAttribute("session", session);
-		req.getRequestDispatcher("/product/cartSess.jsp").forward(req, resp);
+		req.getRequestDispatcher("/product/cart.jsp").forward(req, resp);
 	}
 	
 	@Override
