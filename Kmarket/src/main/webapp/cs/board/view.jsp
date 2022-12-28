@@ -28,9 +28,7 @@
                     	<%-- 문의하기 글 보기 --%>
                     	<c:when test="${cate1 eq 'qna'}">
                     		<aside>
-                        	<c:if test="${cvo.cate1 eq 'qna'}">
                         		<h2>문의하기</h2>
-                        	</c:if>	
                         	<ul>
 	                            <li class="${cate2 eq 'user' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=qna&cate2=user'/>">회원</a></li>
 	                            <li class="${cate2 eq 'coupon' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=qna&cate2=coupon'/>">쿠폰/이벤트</a></li>
@@ -60,6 +58,16 @@
 		                            <p>
 		                                ${cvo.content}
 		                            </p>
+		                        </div>
+		                        
+		                        <div class="reply">
+		                        	<nav>
+		                        		<h2 class="replyTitle">[답변] ${cvo.title}</h2>
+		                        	</nav>
+		                        	
+		                        	<div class="adminComment">
+		                        		<p>안녕하세요. 수정하세요. 이거.</p>
+		                        	</div>
 		                        </div>
                         		<a href="<c:url value='/cs/list.do?cate1=qna&cate2=${cvo.cate2}&pg=1'/>" class="btnList">목록보기</a>
                     		</article>

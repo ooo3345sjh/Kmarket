@@ -19,31 +19,32 @@ function qnaOption(){
 	
 	// cate2 select > option Value값 받아오기
 	let cate2 = $('.cate2').val();
+	
 	let type;	
 	
 	console.log(cate2)
 	switch(cate2){
-		case '회원':
+		case 'user':
 			type = user;
 			break;
 		
-		case '쿠폰/혜택/이벤트':
+		case 'coupon':
 			type = event;
 			break;
 			
-		case '주문/결제':
+		case 'order':
 			type = order;
 			break;
 			
-		case '배송':
+		case 'delivery':
 			type = delivery;
 			break;			
 		
-		case '취소/반품/교환':
+		case 'cancel':
 			type = cancel;
 			break;	
 			
-		case '여행/숙박/항공':
+		case 'travel':
 			type = travel;
 			break;	
 			
