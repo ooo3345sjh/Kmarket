@@ -175,6 +175,11 @@
 			let checkbox = $("input[name=prodCheck]");
 			let list = [];
 			
+			if('${user.uid}'== ''){
+				alert('로그인 후에 주문가능합니다.');
+				location.href = contextRoot + "/member/login.do?cart=cart";
+				return;
+			};
 			let count = 0;
 			console.log(trTag);
 			for(let i=0; i<checkbox.length; i++){
