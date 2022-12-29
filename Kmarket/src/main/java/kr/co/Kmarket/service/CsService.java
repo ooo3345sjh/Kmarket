@@ -53,6 +53,11 @@ public class CsService {
 		 dao.selectArticles(map);
 	}
 	
+	// cs_faq list를 가져오는 서비스 
+	public void selectFaqArticles(Map<String, Object> map) {
+		dao.selectFaqArticles(map);
+	}
+	
 	public void countArticles(Map<String, Object> map) {
 		dao.countArticles(map);
 	}

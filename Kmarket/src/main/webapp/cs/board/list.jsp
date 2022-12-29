@@ -75,8 +75,15 @@
                 		<tr>
                 			<!-- 타입, 제목 -->
                     		<td><a href="<c:url value='/cs/view.do?no=${vo.csNo}&pg=${map.pg}&cate1=${map.cate1}&cate2=${map.cate2}'/>">[${vo.type}]${vo.title}</a></td>
-                    		<td>검토중</td>
-                    
+                    		
+                    		<c:if test="${vo.comment eq '0'}">
+                    			<td>검토중</td>
+                    		</c:if>
+                    		
+                    		<c:if test="${vo.comment ne null}">
+                    			<td style="color: skyblue;">답변완료</td>
+                    		</c:if>
+                    		
                       <!-- 아이디 마스킹처리 -->
                       <c:if test="${vo.uid ne null}">
 					   <!-- 아이디의 앞 3자리까지 보여 주고 **로 처리 -->

@@ -48,7 +48,7 @@ function qnaOption(){
 			type = travel;
 			break;	
 			
-		case '안전거래':
+		case 'safeDeal':
 			type = safeDeal;
 			break;
 				

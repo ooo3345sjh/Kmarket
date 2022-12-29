@@ -10,13 +10,13 @@
 					
                     <select name="cate2" class="cate2" required onchange="qnaOption()">
                         <option value="none" disabled selected>1차 선택</option>
-                        <option value="user">회원</option>
-                        <option value="coupon">쿠폰/혜택/이벤트</option>
-                        <option value="order">주문/결제</option>
-                        <option value="delivery">배송</option>
-                        <option value="cancel">취소/반품/교환</option>
-                        <option value="travel">여행/숙박/항공</option>
-                        <option value="safeDeal">안전거래</option>
+                        <option>회원</option>
+                        <option>쿠폰/혜택/이벤트</option>
+                        <option>주문/결제</option>
+                        <option>배송</option>
+                        <option>취소/반품/교환</option>
+                        <option>여행/숙박/항공</option>
+                        <option>안전거래</option>
                     </select>
                     <select name="type" class="type">
                         <option value="0" disabled selected>2차 선택</option>
@@ -39,7 +39,8 @@
                             <td><input type="checkbox"></td>
                             <td>${faq1.csNo}</td>
                            	<td>${faq1.cate2}</td>
-                            <td>${faq1.type}</td>
+                           	<td>${faq1.type}</td>
+                           
                             <td><a href="<c:url value='/admin/cs/view.do?no=${faq1.csNo}&cate1=${faq1.cate1}'/>">[${faq1.type}]${faq1.title}</a></td>
                             <td>${faq1.hit}</td>
                             

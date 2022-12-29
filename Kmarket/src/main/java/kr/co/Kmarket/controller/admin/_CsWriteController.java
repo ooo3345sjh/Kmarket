@@ -36,20 +36,25 @@ public class _CsWriteController extends HttpServlet{
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
 		String type = req.getParameter("type");
+		// 공지사항 타입 선택시 Cate2 삽입
+		switch(type) {
+			case "고객서비스":
+				cate2 = "service";
+				break;
+			case "안전거래":
+				cate2 = "safeDeal";
+				break;
+			case "위해상품":
+				cate2 = "xproduct";
+				break;
+			case "이벤트당첨":
+				cate2 = "great";
+				break;
+			default:
+				break;
+		}
 		
-		//if(cate1.equals("notice")) {
-		//	type.equals("고객서비스");
-		//	cate2 = "service";
-		//	
-		//	type.equals("안전거래");
-		//	cate2 = "safeDeal";
-		//	
-		//	type.equals("위해상품");
-		//	cate2 = "xproduct";
-		//	
-		//	type.equals("이벤트당첨");
-		//	cate2 = "great";
-		//}
+		
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String regip = req.getRemoteAddr();
