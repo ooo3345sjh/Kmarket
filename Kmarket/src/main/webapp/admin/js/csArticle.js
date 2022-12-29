@@ -70,7 +70,6 @@
 		let textarea = $('textarea[name=reply]');
 		let reply = textarea.val();
 		let uid = $(this).children('input[name=uid]').val();
-
 		
 		let jsonData = {
 			"no":no,
