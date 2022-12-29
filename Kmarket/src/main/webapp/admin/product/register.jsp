@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="./_header.jsp"/>
-<script src="./js/point.js"></script>
-<script src="./js/category.js"></script>
+<jsp:include page="../_header.jsp"/>
+<script src="../js/point.js"></script>
+<script src="../js/category.js"></script>
                 <section id="admin-product-register" class="admin">
                     <nav>
                         <h1>상품등록</h1>
@@ -37,7 +37,7 @@
 	                            </td>
 	                        </tr>
 	                    </table>
-                     <form action='<c:url value="/admin/register.do"/>' name="form" method="post" enctype="multipart/form-data" onsubmit="return checkAll()">   
+                     <form action='<c:url value="/admin/product/register.do"/>' name="form" method="post" enctype="multipart/form-data" onsubmit="return checkAll()">   
                         <h2>기본정보</h2>
                         <p>기본정보는 반드시 입력해야 합니다.</p>
                         <table border="0">
@@ -164,4 +164,4 @@
             </div>
         </main>
     </div>
-<jsp:include page="./_footer.jsp"/>
+<jsp:include page="../_footer.jsp"/>

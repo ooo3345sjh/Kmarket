@@ -19,6 +19,7 @@ function qnaOption(){
 	
 	// cate2 select > option Value값 받아오기
 	let cate2 = $('.cate2').val();
+	
 	let type;	
 	
 	console.log(cate2)

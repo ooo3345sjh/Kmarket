@@ -10,8 +10,6 @@ public class Sql {
 											+ "WHERE `cate1`=? ORDER BY `csNo` DESC LIMIT 5 ";
 	
 	/*** admin-cs ***/
-	
-	
 	public static final String UPDATE_HIT = "UPDATE `km_cs` SET `hit` = `hit` + 1 WHERE `csNo`=?";
 	
 	public static final String UPDATE_ARITLCE = "UPDATE `km_cs` SET "
