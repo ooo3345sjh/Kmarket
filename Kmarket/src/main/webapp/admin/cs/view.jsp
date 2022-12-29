@@ -104,6 +104,7 @@
 =======
 
 		                        	<td id="rep">
+		                        	
 		                        	<c:choose>
 		                        	 <c:when test="${cvo.comment eq null}">
 		                        	<textarea name="reply" class="reply"></textarea>
@@ -114,6 +115,7 @@
 		                        	</c:choose>
 >>>>>>> d7cbe9f0e163d1372ca92a0b7361256f1816bebd
 		                        	</td>
+		                        	
 		                        </tr>
 	                    	</table>
 	                    	

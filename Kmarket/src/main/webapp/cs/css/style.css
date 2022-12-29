@@ -559,17 +559,49 @@ ul, ol {list-style: none;}
 
 /* faq - 글보기 */
 #cs > .faq > .view {}
-#cs > .faq > .view > article {}
-#cs > .faq > .view > article > div {
+#cs > .faq > .view > article > .head{
+	width: 100%;
+    height: 58px;
+    margin-bottom: 10px;
+}
+
+#cs > .faq > .view > article > .head > h2 {
+	font-size: 28px;
+    font-weight: bold;
+}
+#cs > .faq > .view > article > .head > p {
+	font-size: 16px;
+}
+
+#cs > .faq > .view > article > .reply {
+	width: 100%;
+    height: auto;
+    padding-left: 52px;
+    padding-bottom: 35px;
+    margin-top: 33px;
+    border-bottom: 1px solid #ccc;
+}
+#cs > .faq > .view > article > .reply > nav > h2{
+	margin-bottom: 6px;
+    font-size: 27px;
+    font-weight: bold;
+}
+#cs > .faq > .view > article > .reply > .adminComment > p{
+	font-size: 19px;
+    line-height: 32px;
+}
+
+#cs > .faq > .view > article > .reply > .adminComment > p span {
 	
 }
 #cs > .faq > .view > article > nav {
     width: 100%;
     height: auto;
     padding: 26px;
-    border-top: 2px solid #111;
+    border-top: 3px solid #111;
     border-bottom: 1px solid #e9e9e9;
     box-sizing: border-box;
+    margin-bottom: 0px;
 }
 #cs > .faq > .view > article > nav > .title {
     margin-bottom: 6px;
@@ -595,7 +627,7 @@ ul, ol {list-style: none;}
     box-sizing: border-box;
 }
 #cs > .faq > .view > article > .content *{
-    font-size: 16px;
+    font-size: 19px;
     line-height: 32px;
 }
 
@@ -763,8 +795,6 @@ ul, ol {list-style: none;}
 }
 
 /* qna - 글보기 */
-#cs > .qna > .view {}
-#cs > .qna > .view > article {}
 #cs > .qna > .view > article > nav{
     border-top: 2px solid #111;
     border-bottom: 1px solid #ccc;
@@ -779,8 +809,6 @@ ul, ol {list-style: none;}
     font-size: 32px;
     font-weight: bold;
 }
-#cs > .qna > .view > article > nav > p {
-}
 
 #cs > .qna > .view > article > .content{
     width: 100%;
@@ -794,6 +822,16 @@ ul, ol {list-style: none;}
     line-height: 30px;
 }
 
+#cs > .qna > .view > article > .reply {
+	
+}
+
+#cs > .qna > .view > article > .reply > nav {
+	
+}
+#cs > .qna > .view > article > .reply > nav > h2 {}
+#cs > .qna > .view > article > .reply > .adminComment {}
+#cs > .qna > .view > article > .reply > .adminComment > p {}
 /* qna - 글쓰기 */
 #cs > .qna > .write > article table {
     width: 100%;

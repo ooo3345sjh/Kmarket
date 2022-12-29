@@ -294,7 +294,7 @@ public class ProductDAO extends DBHelper {
 			sql.append("SELECT COUNT(`prodNo`) FROM `km_product` ");
 			
 
-			if(!group.equals("admin")) {	// 그룹명이 admin이 아니라면
+			if(!group.contains("admin")) {	// 그룹명이 admin이 아니라면
 				sql.append("WHERE `cate1` = '" + cate1 + "' AND `cate2`= '" + cate2 + "' ORDER BY " + type + " DESC");
 			} 
 			
@@ -349,7 +349,7 @@ public class ProductDAO extends DBHelper {
 		
 		String sql = "SELECT p.*, s.`level` FROM `km_product` p JOIN `km_member_seller` s on p.`seller` = s.`uid` ";
 		
-		if(group.equals("admin")) {	// 그룹명이 admin이라면
+		if(group.contains("admin")) {	// 그룹명이 admin이라면
 			int types = (int)map.get("types");
 			// 최고 관리자 계정이 아닌 경우
 			if(types == 2) {
@@ -397,7 +397,7 @@ public class ProductDAO extends DBHelper {
 				logger.debug("price : " + price);				
 				vo.setDiscountPrice(discountPrice);
 				vo.setProdNo(rs.getInt("prodNo"));
-				if(group.equals("admin")) {
+				if(group.contains("admin")) {
 					String acate1 = rs.getString("cate1");
 					String acate2 = rs.getString("cate2");
 					path = "/file/" + acate1 + "/" + acate2 + "/"; // 이미지 저장경로
@@ -743,6 +743,7 @@ public class ProductDAO extends DBHelper {
 		int result = 0;
 		
 		try {
+			logger.info("insertOrder...");
 			con = getConnection();
 			con.setAutoCommit(false);
 			
@@ -783,32 +784,34 @@ public class ProductDAO extends DBHelper {
 			}
 			
 			stmt = con.createStatement();
-			stmt.executeUpdate(sql);
+			result = stmt.executeUpdate(sql);
 			
 			// km_member_point 테이블에 사용한 포인트 추가하는 작업
-			psmt.close();
-			
-			psmt = con.prepareStatement(Sql.INSERT_POINT);
-			psmt.setString(1, vo.getUid());
-			psmt.setString(2, vo.getOrdNo());
-			psmt.setInt(3, vo.getUsedPoint() * -1);
-			
-			psmt.executeUpdate();
-			
-			// km_member 테이블에 사용한 포인트 삭감하는 작업
-			String mamberPointSql = "UPDATE ";
-			
-			if(user.getType() == 1) {
-				mamberPointSql += " `km_member_general` ";
-			} else {
-				mamberPointSql += " `km_member_seller` ";
+			if(vo.getUsedPoint() != 0) {
+				psmt.close();
+				
+				psmt = con.prepareStatement(Sql.INSERT_POINT);
+				psmt.setString(1, vo.getUid());
+				psmt.setString(2, vo.getOrdNo());
+				psmt.setInt(3, vo.getUsedPoint() * -1);
+				
+				psmt.executeUpdate();
+				
+				// km_member 테이블에 사용한 포인트 삭감하는 작업
+				String mamberPointSql = "UPDATE ";
+				
+				if(user.getType() == 1 || user.getType() == 3) {
+					mamberPointSql += " `km_member_general` ";
+				} else {
+					mamberPointSql += " `km_member_seller` ";
+				}
+				
+				mamberPointSql += "SET `point` = " +  (user.getPoint() - vo.getUsedPoint()) + " WHERE `uid`= '" + user.getUid() + "'";
+				
+				stmt.close();
+				stmt = con.createStatement();
+				result = stmt.executeUpdate(mamberPointSql);
 			}
-			
-			mamberPointSql += "SET `point` = " +  (user.getPoint() - vo.getUsedPoint()) + " WHERE `uid`= '" + user.getUid() + "'";
-			
-			stmt.close();
-			stmt = con.createStatement();
-			result = stmt.executeUpdate(mamberPointSql);
 			
 			con.commit();
 			

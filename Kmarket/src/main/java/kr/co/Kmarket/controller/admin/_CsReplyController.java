@@ -39,7 +39,6 @@ public class _CsReplyController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("replyPostController...");
 		
-
 		String no	 	 = req.getParameter("no");
 		String type		 = req.getParameter("type");
 		String title	 = req.getParameter("title");

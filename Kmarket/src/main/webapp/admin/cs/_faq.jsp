@@ -39,7 +39,10 @@
                             <td><input type="checkbox"></td>
                             <td>${faq1.csNo}</td>
                            	<td>${faq1.cate2}</td>
-                            <td>${faq1.type}</td>
+                           	<c:set var="type" value="${faq1.type}" />
+                           	<c:choose>
+                           	 <c:when test="${type eq 'coupon'}"><td>쿠폰/혜택/이벤트</td></c:when>
+                            </c:choose>
                             <td><a href="<c:url value='/admin/cs/view.do?no=${faq1.csNo}&cate1=${faq1.cate1}'/>">[${faq1.type}]${faq1.title}</a></td>
                             <td>${faq1.hit}</td>
                             

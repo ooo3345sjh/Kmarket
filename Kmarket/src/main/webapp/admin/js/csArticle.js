@@ -90,12 +90,8 @@
 						
 						$('.reply').remove();
 						$('#rep').append(reply);
-
 				}
-
-				
 			}
-			
 		})
 	})
 })

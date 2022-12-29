@@ -39,7 +39,7 @@ public class ListController extends HttpServlet {
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
 		String pg = req.getParameter("pg");
-		String group = "admin";
+		String group = "admin/product";
 		String searchField = req.getParameter("searchField");
 		String searchWord = req.getParameter("searchWord");
 		Map<String, Object> map = new HashMap<>();
@@ -60,7 +60,7 @@ public class ListController extends HttpServlet {
 		Paging.getPageTags(map);  	 // 페이징 처리된 정보를 토대로 태그 생성
 		
 		req.setAttribute("map", map);
-		req.getRequestDispatcher("/admin/list.jsp").forward(req, resp);
+		req.getRequestDispatcher("/admin/product/list.jsp").forward(req, resp);
 	}
 	
 	@Override
