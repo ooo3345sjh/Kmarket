@@ -31,7 +31,7 @@
             	<%-- 공지사항 전체 --%>
             	<c:when test="${map.cate1 eq 'notice' && map.cate2 eq 'all'}"> 
             	<table>
-             	<c:forEach var="nl" items="${nlist}">
+             	<c:forEach var="nl" items="${map.articles}">
                   <tr>
                       <td><a href="<c:url value='/cs/view.do?no=${nl.csNo}&cate1=${map.cate1}&cate2=${map.cate2}'/>">[${nl.type}]${nl.title}</a></td>
                       
@@ -51,20 +51,20 @@
             	
             	<%-- 자주묻는 질문 --%>
             	<c:when test="${map.cate1 eq 'faq'}">
-            	<div>
-	              	<c:forEach var="faqCate" items="${map.faqlist}" varStatus="i">
-	                    	<h3>${faqCate.type}</h3>
+	              	<c:forEach var="list"  items="${map.faqLists}" varStatus="i">
+   		  		       	<div>
+	                    	<h3>${list.get(0).type}</h3>
 	                    	
 	                    	<ul class="ul${i.count}">
-	                     		<c:forEach var="article" items="${map.articles}">
+	                     		<c:forEach var="article" items="${list}">
 
-	                         		<li id="m_list"><a href="<c:url value='/cs/view.do?no=${article.csNo}&cate1=${map.cate1}&cate2=${map.cate2}'/>"><span>Q.</span>${faqCate.title}</a></li>
+	                         		<li id="m_list"><a href="<c:url value='/cs/view.do?no=${article.csNo}&cate1=${map.cate1}&cate2=${map.cate2}'/>"><span>Q.</span>${article.title}</a></li>
 	                         	</c:forEach>
 	                         		<li class="more${i.count}"> <a href="#">더보기</a> </li>
 	                         		<li class="short${i.count}"> <a href="#">간단히 보기</a> </li>
 	                    	</ul>                              
+		              	</div>
 	              	</c:forEach>
-              	</div>
             	</c:when>
             	<%-- 자주묻는 질문 끝 --%>
             	

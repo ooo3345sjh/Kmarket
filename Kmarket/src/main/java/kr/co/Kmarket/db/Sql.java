@@ -199,7 +199,9 @@ public class Sql {
 													+ "`content`=?, "
 													+ "`regip`=?, "
 													+ "`rdate`=NOW()";										
-
+	
+	public static final String SELECT_ADMIN_LIST = "SELECT * FROM `km_cs` WHERE `cate1`='notice' AND `type`=?";
+	
 	public static final String SELECT_CS_ARTICLE = "SELECT * FROM `km_cs` WHERE `csNo`=?";		
 	
 	public static final String SELECT_NOTICE_ALL = "SELECT * FROM `km_cs` "

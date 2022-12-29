@@ -153,31 +153,8 @@ public class CsDAO extends DBHelper {
 		String group = (String)map.get("group");
 		StringBuffer sql = new StringBuffer();
 		
-		sql.append("SELECT DISTINCT `cate1`, `cate2`, `type`, `title` FROM `km_cs` WHERE `cate1` = 'faq'");
+		sql.append("SELECT DISTINCT `cate1`, `cate2`, `type`, `title` FROM `km_cs` WHERE `cate1` = 'faq' AND `cate2`="+cate2);
 		
-		if(group.equals("cs")) {
-			if(cate2.equals("user")) { // cate2가 'user' 라면 중복되지 않은 type들 나옴
-				sql.append("AND `cate2`= 'user'");
-			}
-			else if(cate2.equals("coupon")) {	// 
-				sql.append("AND `cate2`= 'coupon'");
-			}
-			else if(cate2.equals("order")) {
-				sql.append("AND `cate2`= 'order'");
-			}
-			else if(cate2.equals("delivery")) {
-				sql.append("AND `cate2`= 'delivery'");
-			}
-			else if(cate2.equals("cancel")) {
-				sql.append("AND `cate2`= 'cancel'");
-			}
-			else if(cate2.equals("travel")) {
-				sql.append("AND `cate2`= 'travel'");
-			}
-			else if(cate2.equals("safeDeal")) {
-				sql.append("AND `cate2`= 'safeDeal'");
-			}
-		}
 		// type 불러오기
 		
 		try {
@@ -297,6 +274,38 @@ public class CsDAO extends DBHelper {
 		return faq;
 	}
 	
+	public List<CsVO> searchList(String type) {
+		List<CsVO> search = new ArrayList<>();
+		try {
+			logger.info("searchList...");
+			con = getConnection();
+			psmt = con.prepareStatement(Sql.SELECT_ADMIN_LIST);
+			psmt.setString(1, type);
+			psmt.executeQuery();
+			
+			while(rs.next()) {
+				CsVO cvo = new CsVO();
+				cvo.setCsNo(rs.getInt("csNo"));
+				cvo.setUid(rs.getString("uid"));
+				cvo.setCate1(rs.getString("cate1"));
+				cvo.setCate2(rs.getString("cate2"));
+				cvo.setType(rs.getString("type"));
+				cvo.setTitle(rs.getString("title"));
+				cvo.setContent(rs.getString("content"));
+				cvo.setHit(rs.getInt("hit"));
+				cvo.setRegip(rs.getString("regip"));
+				cvo.setRdate(rs.getString("rdate"));
+				cvo.setComment(rs.getString("comment"));
+				
+				search.add(cvo);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return search;
+	}
+	
 	/* cs 페이지 cate1, cate2로 구분된 게시글 목록 */
 	public void selectArticles(Map<String, Object> map) {
 		List<CsVO> list = null;
@@ -307,11 +316,12 @@ public class CsDAO extends DBHelper {
 		String sql = "SELECT *, "
 				   + " ROW_NUMBER() OVER(ORDER BY `csNo` desc) rnum "
 			       + " FROM `km_cs` ";
-		
+		// 공지사항 전체 카테고리면은
 		if("all".equals(cate2)) {
 			
+			// notice만 넣어서 결과 알아온다
 			sql += " WHERE `cate1`='" + cate1 + "'";
-			
+			// 그게 아니라면 나머지 카테고리들을 알아온다
 		} else {
 			
 			sql += " WHERE `cate1`='" + cate1 + "' AND `cate2`='" + cate2 + "'";
@@ -319,7 +329,9 @@ public class CsDAO extends DBHelper {
 		}
 			       
 		sql += " LIMIT ?, 10"; // 게시물 구간을 인파라미터로 받기
-			  
+		
+		
+		
 		try {
 			
 			logger.info("selectArticles...");
@@ -427,9 +439,6 @@ public class CsDAO extends DBHelper {
 		}
 		return result;
 	}
-	
-	
-	
 	
 	public int deleteArticle(String csNo) {
 		int result = 0;

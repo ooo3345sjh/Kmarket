@@ -517,7 +517,7 @@ p.ico  {
     border-bottom: 1px solid #e6e6e6;
 }
 #cs-list > table tr:first-child > th > input[type=checkbox] {margin-top: 1.5px;}
-#cs-list > table tr > td {padding: 10px;}
+#cs-list > table tr > td {padding: 10px; white-space: nowrap; }
 #cs-list > table tr:not(:first-child) > td:nth-child(4) {width: 300px; text-align: left;}
 #cs-list > table td {
     border-bottom: 1px solid #e6e6e6;

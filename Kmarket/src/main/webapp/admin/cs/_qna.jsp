@@ -24,7 +24,7 @@
 					
                     <table class="QNAth">
                         <tr>
-                            <th><input type="checkbox"></th>
+                            <th><input type="checkbox" class="all"></th>
                             <th>번호</th>
                             <th>1차유형</th>
                             <th>2차유형</th>
@@ -36,7 +36,7 @@
                         
 					<c:forEach var="qna" items="${qnalist}">
                         <tr>
-                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox" name="check" value="${qna.csNo}"></td>
                             <td>${qna.csNo}</td>
                             
                             <%-- 목록) 2차유형 --%>
@@ -82,7 +82,7 @@
                         </tr>
                     </c:forEach>
                     </table>
-                    <input type="button" value="선택삭제">
+                    <input type="button" value="선택삭제" class="delete">
                     
                     <div class="paging">
                        ${map.pageTag} 

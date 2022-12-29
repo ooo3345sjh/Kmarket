@@ -24,7 +24,7 @@
 					
                     <table class="FAQth">
                         <tr>
-                            <th><input type="checkbox"></th>
+                            <th><input type="checkbox" class="all"></th>
                             <th>번호</th>
                             <th>1차유형</th>
                             <th>2차유형</th>
@@ -36,7 +36,7 @@
                     
 					<c:forEach var="faq1" items="${faq}">
                         <tr>
-                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox" name="check" value="${faq1.csNo}"></td>
                             <td>${faq1.csNo}</td>
                            	<td>${faq1.cate2}</td>
                            	<td>${faq1.type}</td>
@@ -55,7 +55,7 @@
                     </c:forEach>
                     
                     </table>
-                    <input type="button" value="선택삭제">
+                    <input type="button" value="선택삭제" class="delete">
                     
                     <div class="paging">
                        ${map.pageTag} 
