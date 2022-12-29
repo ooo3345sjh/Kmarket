@@ -334,7 +334,7 @@ public class CsDAO extends DBHelper {
 				cvo.setHit(rs.getInt("hit"));
 				cvo.setRegip(rs.getString("regip"));
 				cvo.setRdate(rs.getString("rdate"));
-				
+				cvo.setComment(rs.getString("comment"));
 				list.add(cvo);
 			}
 			
