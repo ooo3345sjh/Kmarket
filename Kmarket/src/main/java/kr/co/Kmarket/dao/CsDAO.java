@@ -92,14 +92,12 @@ public class CsDAO extends DBHelper {
 		try {
 			logger.info("updateComment...");
 			con = getConnection();
-			
 
 			psmt = con.prepareStatement(Sql.UPDATE_QNA_COMMENT);
 			psmt.setString(1, comment.getComment());
 			psmt.setInt(2, comment.getCsNo());
 			
 			result = psmt.executeUpdate();
-
 			
 			close();
 		}catch(Exception e) {
@@ -336,7 +334,7 @@ public class CsDAO extends DBHelper {
 				cvo.setHit(rs.getInt("hit"));
 				cvo.setRegip(rs.getString("regip"));
 				cvo.setRdate(rs.getString("rdate"));
-				
+				cvo.setComment(rs.getString("comment"));
 				list.add(cvo);
 			}
 			

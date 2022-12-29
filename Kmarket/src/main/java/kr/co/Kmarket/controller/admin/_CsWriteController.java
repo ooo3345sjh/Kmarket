@@ -36,19 +36,46 @@ public class _CsWriteController extends HttpServlet{
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
 		String type = req.getParameter("type");
+		// 공지사항 타입 선택시 Cate2 삽입
+		switch(type) {
+			case "고객서비스":
+				cate2 = "service";
+				break;
+			case "안전거래":
+				cate2 = "safeDeal";
+				break;
+			case "위해상품":
+				cate2 = "xproduct";
+				break;
+			case "이벤트당첨":
+				cate2 = "great";
+				break;
+		}
 		
-		if(cate1.equals("notice")) {
-			type.equals("고객서비스");
-			cate2 = "service";
-			
-			type.equals("안전거래");
-			cate2 = "safeDeal";
-			
-			type.equals("위해상품");
-			cate2 = "xproduct";
-			
-			type.equals("이벤트당첨");
-			cate2 = "great";
+		// 자주묻는질문
+		switch(cate2) {
+			case "회원":
+				cate2 = "user";
+				break;
+			case "쿠폰/혜택/이벤트":
+				cate2 = "coupon";
+				break;
+			case "주문/결제":
+				cate2 = "order";
+				break;
+			case "배송":
+				cate2 = "delivery";
+				break;
+			case "취소/반품/교환":
+				cate2 = "cancel";
+				break;
+			case "여행/숙박/항공":
+				cate2 = "travel";
+				break;
+			case "안전거래":
+				cate2 = "safeDeal";
+				break;
+				
 		}
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");

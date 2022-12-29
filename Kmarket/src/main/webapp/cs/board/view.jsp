@@ -28,9 +28,7 @@
                     	<%-- 문의하기 글 보기 --%>
                     	<c:when test="${cate1 eq 'qna'}">
                     		<aside>
-                        	<c:if test="${cvo.cate1 eq 'qna'}">
                         		<h2>문의하기</h2>
-                        	</c:if>	
                         	<ul>
 	                            <li class="${cate2 eq 'user' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=qna&cate2=user'/>">회원</a></li>
 	                            <li class="${cate2 eq 'coupon' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=qna&cate2=coupon'/>">쿠폰/이벤트</a></li>
@@ -42,6 +40,51 @@
                         	</ul>
                     		</aside>
                     		<article>
+                    		
+                    		<c:if test="${cate2 eq 'user'}">
+	                    		<div class="head">
+	                    			<h2>회원</h2>
+	                    			<p>회원 관련 문의내용입니다.</p>
+	                    		</div>
+                    		</c:if>
+                    		<c:if test="${cate2 eq 'coupon'}">
+	                    		<div class="head">
+	                    			<h2>쿠폰/이벤트</h2>
+	                    			<p>쿠폰/이벤트 관련 문의내용입니다.</p>
+	                    		</div>
+                    		</c:if>
+                    		<c:if test="${cate2 eq 'order'}">
+	                    		<div class="head">
+	                    			<h2>주문/결제</h2>
+	                    			<p>주문/결제 관련 문의내용입니다.</p>
+	                    		</div>
+                    		</c:if>
+                    		<c:if test="${cate2 eq 'delivery'}">
+	                    		<div class="head">
+	                    			<h2>배송</h2>
+	                    			<p>배송 관련 문의내용입니다.</p>
+	                    		</div>
+                    		</c:if>
+                    		<c:if test="${cate2 eq 'cancel'}">
+	                    		<div class="head">
+	                    			<h2>취소/반품/교환</h2>
+	                    			<p>취소/반품/교환 관련 문의내용입니다.</p>
+	                    		</div>
+                    		</c:if>
+                    		<c:if test="${cate2 eq 'travel'}">
+	                    		<div class="head">
+	                    			<h2>여행/숙박/항공</h2>
+	                    			<p>여행/숙박/항공 관련 문의내용입니다.</p>
+	                    		</div>
+                    		</c:if>
+                    		<c:if test="${cate2 eq 'safeDeal'}">
+	                    		<div class="head">
+	                    			<h2>안전거래</h2>
+	                    			<p>안전거래 관련 문의내용입니다.</p>
+	                    		</div>
+                    		</c:if>
+                    		
+                    		
                         		<nav>
                             		<h2 class="title">[${cvo.type}]${cvo.title}</h2>
                             
@@ -60,6 +103,25 @@
 		                            <p>
 		                                ${cvo.content}
 		                            </p>
+		                        </div>
+		                        
+		                        <div class="reply">
+		                         <c:if test="${cvo.comment eq '0'}">
+		                        	
+		                        	<div class="adminComment">
+		                        		<p><span>A.</span> 등록된 답변이 없습니다.</p>
+		                        	</div>
+		                        </c:if>
+		                        
+		                         <c:if test="${cvo.comment ne '0'}">
+		                         	<nav>
+		                        		<h2 class="replyTitle">▶ [답변] ${cvo.title}</h2>
+		                        	</nav>
+	                        	 	<div class="adminComment">
+			                        	<p>${cvo.comment}</p>
+			                        </div>
+		                         </c:if>
+		                        	
 		                        </div>
                         		<a href="<c:url value='/cs/list.do?cate1=qna&cate2=${cvo.cate2}&pg=1'/>" class="btnList">목록보기</a>
                     		</article>
