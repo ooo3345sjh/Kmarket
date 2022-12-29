@@ -674,6 +674,15 @@ p.ico  {
 	float: right;
     margin-top: 35px;   
 }
+#cs-view > div > .remove {
+	background-color: #c0c0c0;
+    border: 1px solid #c0c0c0;
+    border-radius: 2px;
+    padding: 5px 20px;
+    box-sizing: border-box;
+    font-size: 18px;
+    color: #fff;
+}
 
 #cs-view > table tr > td > .reply {
 	width: 510px;

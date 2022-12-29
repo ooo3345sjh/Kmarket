@@ -24,27 +24,27 @@ function qnaOption(){
 	
 	console.log(cate2)
 	switch(cate2){
-		case 'user':
+		case '회원':
 			type = user;
 			break;
 		
-		case 'coupon':
+		case '쿠폰/혜택/이벤트':
 			type = event;
 			break;
 			
-		case 'order':
+		case '주문/결제':
 			type = order;
 			break;
 			
-		case 'delivery':
+		case '배송':
 			type = delivery;
 			break;			
 		
-		case 'cancel':
+		case '취소/반품/교환':
 			type = cancel;
 			break;	
 			
-		case 'travel':
+		case '여행/숙박/항공':
 			type = travel;
 			break;	
 			

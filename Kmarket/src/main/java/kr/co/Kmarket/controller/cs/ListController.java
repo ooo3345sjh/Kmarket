@@ -53,8 +53,10 @@ public class ListController extends HttpServlet {
 		service.selectArticles(map); // 
 		Paging.getPageTags(map);  	 // 페이징 처리된 정보를 토대로 태그 생성
 		
+		List<CsVO> faqlist = service.selectFaqAll();
 		List<CsVO> nlist = service.selectNoticeAll(); // 공지사항 전체목록
 		
+		req.setAttribute("faqlist", faqlist);
 		req.setAttribute("nlist", nlist);
 		req.setAttribute("map", map);
 		req.getRequestDispatcher("/cs/board/list.jsp").forward(req, resp);
