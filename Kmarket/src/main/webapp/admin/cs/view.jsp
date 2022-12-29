@@ -98,10 +98,8 @@
 		                        <%-- 답변 --%>
 		                        <tr>
 		                        	<td>답변</td>
-<<<<<<< HEAD
 		                        	<td>
 		                        		<textarea name="content" class="content"></textarea>
-=======
 
 		                        	<td id="rep">
 		                        	
@@ -113,7 +111,6 @@
 			                        	 	${cvo.comment}
 			                        	 </c:otherwise>
 		                        	</c:choose>
->>>>>>> d7cbe9f0e163d1372ca92a0b7361256f1816bebd
 		                        	</td>
 		                        	
 		                        </tr>
