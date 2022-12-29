@@ -34,12 +34,12 @@
 				check = false;
 				
 				// 0으로 초기화
-				tCount.text("0");
-				tPrice.text("0");
-				tDiscountPrice.text("0");
-				tPoint.text("0");
-				tDelivery.text("0");
-				tTotalPrice.text("0");
+				tCount.text("0원");
+				tPrice.text("0개");
+				tDiscountPrice.text("0원");
+				tPoint.text("0점");
+				tDelivery.text("0원");
+				tTotalPrice.text("0원");
 			}
 		})
 		
@@ -70,20 +70,20 @@
 			console.log("checked? : " + checked);
 			
 			if(checked){
-				price = Number(tPrice.text().replace(",", "")) + (Number(price) * Number(count));
-				count = Number(tCount.text()) + Number(count);
-				discountPrice = -(Number(tdiscountPrice.text().replace(/-|,/g , '')) + Number(discountPrice));
-				point = Number(tPoint.text().replace(",", "")) + Number(point);
-				delivery = Number(tDelivery.text().replace(",", "")) + Number(delivery);
-				total = Number(tTotalPrice.text().replace(",", "")) + Number(total);
+				price = Number(tPrice.text().replaceAll(/[^0-9]/g, "")) + (Number(price) * Number(count));
+				count = Number(tCount.text().replaceAll(/[^0-9]/g, "")) + Number(count);
+				discountPrice = -(Number(tdiscountPrice.text().replaceAll(/[^0-9]/g, "")) + Number(discountPrice));
+				point = Number(tPoint.text().replaceAll(/[^0-9]/g, "")) + Number(point);
+				delivery = Number(tDelivery.text().replaceAll(/[^0-9]/g, "")) + Number(delivery);
+				total = Number(tTotalPrice.text().replaceAll(/[^0-9]/g, "")) + Number(total);
 			} else {
 				if(tCount.text() != 0){
-					price = Number(tPrice.text().replace(",", "")) - (Number(price) * Number(count));
-					count = Number(tCount.text()) - Number(count);
-					discountPrice = -(Number(tdiscountPrice.text().replace(/-|,/g , '')) - Number(discountPrice));
-					point = Number(tPoint.text().replace(",", "")) - Number(point);
-					delivery = Number(tDelivery.text().replace(",", "")) - Number(delivery);
-					total = Number(tTotalPrice.text().replace(",", "")) - Number(total);
+					price = Number(tPrice.text().replaceAll(/[^0-9]/g, "")) - (Number(price) * Number(count));
+					count = Number(tCount.text().replaceAll(/[^0-9]/g, "")) - Number(count);
+					discountPrice = -(Number(tdiscountPrice.text().replaceAll(/[^0-9]/g, "")) - Number(discountPrice));
+					point = Number(tPoint.text().replaceAll(/[^0-9]/g, "")) - Number(point);
+					delivery = Number(tDelivery.text().replaceAll(/[^0-9]/g, "")) - Number(delivery);
+					total = Number(tTotalPrice.text().replaceAll(/[^0-9]/g, "")) - Number(total);
 				} else {
 					return;
 				}
@@ -98,12 +98,12 @@
 			total = String(total).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 			
 			// 전체 합계에 대입
-			tCount.text(count);
-			tPrice.text(price);
-			tdiscountPrice.text(discountPrice);
-			tPoint.text(point);
-			tDelivery.text(delivery);
-			tTotalPrice.text(total);
+			tCount.text(count + '개');
+			tPrice.text(price + '원');
+			tdiscountPrice.text(discountPrice + '원');
+			tPoint.text(point + '점');
+			tDelivery.text(delivery + '원');
+			tTotalPrice.text(total + '원');
 		});
 		
 		
@@ -178,11 +178,6 @@
 			let checkbox = $("input[name=prodCheck]");
 			let list = [];
 			
-			if('${user.uid}'== ''){
-				alert('로그인 후에 주문가능합니다.');
-				location.href = contextRoot + "/member/login.do?cart=cart";
-				return;
-			};
 			let count = 0;
 			console.log(trTag);
 			for(let i=0; i<checkbox.length; i++){
@@ -212,7 +207,6 @@
 					
 				}
 			}
-			
 			// 세션 처리
 			sessionStorage.setItem("orderList", JSON.stringify(list)); // 세션 저장
 			
@@ -314,27 +308,27 @@
                             <tbody>
                                 <tr>
                                     <td>상품수</td>
-                                    <td id='count'>0</td>
+                                    <td id='count'>0개</td>
                                 </tr>
                                 <tr>
                                     <td>상품금액</td>
-                                    <td id='price'>0</td>
+                                    <td id='price'>0원</td>
                                 </tr>
                                 <tr>
                                     <td>할인금액</td>
-                                    <td id='discountPrice'>0</td>
+                                    <td id='discountPrice'>0원</td>
                                 </tr>
                                 <tr>
                                     <td>배송비</td>
-                                    <td id='delivery'>0</td>
+                                    <td id='delivery'>0원</td>
                                 </tr>
                                 <tr>
                                     <td>포인트</td>
-                                    <td id='point'>0</td>
+                                    <td id='point'>0점</td>
                                 </tr>
                                 <tr>
                                     <td>전체주문금액</td>
-                                    <td id='totalPrice'>0</td>
+                                    <td id='totalPrice'>0원</td>
                                 </tr>
                             </tbody>
                         </table>

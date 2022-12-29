@@ -68,7 +68,7 @@
 			}
 			
 			$('#ordPayment').text(payment);       		  						   // 결제방법
-			$('#orderName').text(payment);        		  						   // 수취인 이름
+			$('#orderName').text(orderinfo.recipName);        		  			   // 수취인 이름
 			$('#orderHp').text(orderinfo.recipHp);        					       // 수취인 연락처
 			$('#ordTotPrice').text(orderinfo.ordTotPrice.toLocaleString('ko-KR')); // 총 결제금액
 			$('#orderAddress').text(orderinfo.recipAddr1 + orderinfo.recipAddr2);  // 배송지 주소

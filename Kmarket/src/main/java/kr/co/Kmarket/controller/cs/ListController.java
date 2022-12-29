@@ -18,7 +18,7 @@ import kr.co.Kmarket.service.CsService;
 import kr.co.Kmarket.utils.Paging;
 import kr.co.Kmarket.vo.CsVO;
 
-@WebServlet("/cs/list.do")
+//@WebServlet("/cs/list.do")
 public class ListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -53,10 +53,10 @@ public class ListController extends HttpServlet {
 		service.selectArticles(map); // 
 		Paging.getPageTags(map);  	 // 페이징 처리된 정보를 토대로 태그 생성
 		
-		List<CsVO> faqlist = service.selectFaqAll();
+		service.selectFaqArticle(map);
+		
 		List<CsVO> nlist = service.selectNoticeAll(); // 공지사항 전체목록
 		
-		req.setAttribute("faqlist", faqlist);
 		req.setAttribute("nlist", nlist);
 		req.setAttribute("map", map);
 		req.getRequestDispatcher("/cs/board/list.jsp").forward(req, resp);

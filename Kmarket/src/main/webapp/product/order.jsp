@@ -101,10 +101,10 @@
 			
 			// 최종결제 정보에 값 넣기
 			tCount.text(count);
-			tPrice.text(price);
-			tDiscountPrice.text(discountPrice);
-			tDelivery.text(delivery);
-			tTotalPrice.text(total);
+			tPrice.text(price + '원');
+			tDiscountPrice.text(discountPrice + '원');
+			tDelivery.text(delivery + '원');
+			tTotalPrice.text(total + '원');
 			
 			currentTotal = total.replaceAll(",", ""); // 전제 가격
 		})
@@ -133,7 +133,7 @@
 		$('input[name=pointBtn]').click(function () {
 			
 			if(!apply){
-				let point = $('input[name=point]').val().replaceAll(",", "");
+				let point = $('input[name=point]').val().replaceAll(/[^0-9]/g, "");
 				
 				console.log(point);
 				if(Number(point) < 5000){
@@ -141,10 +141,10 @@
 					return;
 				}
 				
-				usedPoint.text((Number(point)*-1).toLocaleString('ko-KR')); // 사용할 포인트 입력
+				usedPoint.text((Number(point)*-1).toLocaleString('ko-KR') + '점'); // 사용할 포인트 입력
 				currentPoint.text((Number(userPoint)- Number(point)).toLocaleString('ko-KR')); // 현재 포인트에 사용할 포인트를 뺀다.
 				let totalPrice = Number(currentTotal) - Number(point);  // 현재 전체 주문금액에서 포인트를 뺀다.
-				tTotalPrice.text(totalPrice.toLocaleString('ko-KR'));   // 사용한 포인트를 뺀 주문금액 입력
+				tTotalPrice.text(totalPrice.toLocaleString('ko-KR') + '원');   // 사용한 포인트를 뺀 주문금액 입력
 				
 				$(this).val('취소');
 				
@@ -155,8 +155,8 @@
 				});
 				apply = true;
 			} else {
-				tTotalPrice.text(Number(currentTotal).toLocaleString('ko-KR'));
-				usedPoint.text('0');
+				tTotalPrice.text(Number(currentTotal).toLocaleString('ko-KR') + '원');
+				usedPoint.text('0' + '점');
 				currentPoint.text(Number(userPoint).toLocaleString('ko-KR'));
 				
 				$(this).val('적용');
@@ -318,7 +318,7 @@
                                 </tr>
                                 <tr>
                                     <td>포인트 할인</td>
-                                    <td id='point'>0</td>
+                                    <td id='point'>0점</td>
                                 </tr>
                                 <tr>
                                     <td>전체주문금액</td>
