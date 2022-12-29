@@ -18,8 +18,8 @@ import kr.co.Kmarket.service.CsService;
 import kr.co.Kmarket.utils.Paging;
 import kr.co.Kmarket.vo.CsVO;
 
-//@WebServlet("/cs/list.do")
-public class ListController extends HttpServlet {
+@WebServlet("/cs/list.do")
+public class ListController_sjh extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private CsService service = new CsService();
@@ -48,18 +48,20 @@ public class ListController extends HttpServlet {
 		map.put("pg", pg);
 		map.put("req", req);
 		
-		service.countArticles(map);  // 조건에 해당하는 전체 상품 목록의 갯수를 가져오는 서비스
-		Paging.paging(map);		     // 페이징 처리
-		service.selectArticles(map); // 
-		Paging.getPageTags(map);  	 // 페이징 처리된 정보를 토대로 태그 생성
+		if(!"faq".equals(cate1)) { // cate1이 자주묻는 질문이 아닌 경우
+			
+			
+			service.countArticles(map);  // 조건에 해당하는 전체 상품 목록의 갯수를 가져오는 서비스
+			Paging.paging(map);		     // 페이징 처리
+			service.selectArticles(map); // 조건에 해당하는 게시물을 가져오는 서비스
+			Paging.getPageTags(map);  	 // 페이징 처리된 정보를 토대로 태그 생성
+			
+		} else { // cate1이 자주묻는 질문인 경우
+			service.selectFaqArticles(map); // 조건에 해당하는 게시물을 가져오는 서비스
+		}
 		
-		service.selectFaqArticle(map);
-		
-		List<CsVO> nlist = service.selectNoticeAll(); // 공지사항 전체목록
-		
-		req.setAttribute("nlist", nlist);
 		req.setAttribute("map", map);
-		req.getRequestDispatcher("/cs/board/list.jsp").forward(req, resp);
+		req.getRequestDispatcher("/cs/board/list_sjh.jsp").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

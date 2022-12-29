@@ -73,11 +73,7 @@
 		
 		let jsonData = {
 			"no":no,
-			"type":type,
-			"title":title,
 			"content":content,
-			"reply":reply,
-			"uid":uid
 		}
 		
 		$.ajax({
@@ -87,6 +83,7 @@
 			dataType:'json',
 			success: function(data){
 				
+
 				if(data.result > 0){
 					let	reply  =  data.reply;
 						

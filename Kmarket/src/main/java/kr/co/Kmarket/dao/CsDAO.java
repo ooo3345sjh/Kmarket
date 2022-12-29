@@ -306,10 +306,20 @@ public class CsDAO extends DBHelper {
 		
 		String sql = "SELECT *, "
 				   + " ROW_NUMBER() OVER(ORDER BY `csNo` desc) rnum "
-			       + " FROM `km_cs` "
-			       + " WHERE `cate1`='" + cate1 + "' AND `cate2`='" + cate2 + "'"
-			       + " LIMIT ?, 10"; // 게시물 구간을 인파라미터로 받기
-		  
+			       + " FROM `km_cs` ";
+		
+		if("all".equals(cate2)) {
+			
+			sql += " WHERE `cate1`='" + cate1 + "'";
+			
+		} else {
+			
+			sql += " WHERE `cate1`='" + cate1 + "' AND `cate2`='" + cate2 + "'";
+			
+		}
+			       
+		sql += " LIMIT ?, 10"; // 게시물 구간을 인파라미터로 받기
+			  
 		try {
 			
 			logger.info("selectArticles...");
@@ -351,13 +361,17 @@ public class CsDAO extends DBHelper {
 		int totalCount = 0;
 		try {
 			
-			logger.info("selectCountTotal...");
+			logger.info("countArticles...");
 			
 			String cate1 = (String)map.get("cate1");
 			String cate2 = (String)map.get("cate2");
 			
 			StringBuffer sql = new StringBuffer();
-			sql.append("SELECT COUNT(`csNo`)FROM `km_cs` WHERE `cate1` = '" + cate1 + "' AND `cate2`='" + cate2 + "'");
+			if("all".equals(cate2)) {
+				sql.append("SELECT COUNT(`csNo`)FROM `km_cs` WHERE `cate1` = '" + cate1 + "'");
+			} else {
+				sql.append("SELECT COUNT(`csNo`)FROM `km_cs` WHERE `cate1` = '" + cate1 + "' AND `cate2`='" + cate2 + "'");
+			}
 			
 			con = getConnection();
 			stmt = con.createStatement();
@@ -460,6 +474,64 @@ public class CsDAO extends DBHelper {
 			logger.error(e.getMessage());
 		}
 		return latests;
+	}
+	
+	
+	// cs_faq_list_sjh
+	public void selectFaqArticles(Map<String, Object> map) {
+		
+		String cate2 = (String)map.get("cate2");
+		
+		String sql = "SELECT a.*, sum(a.`count`) "
+				+ "FROM (SELECT * , Count(*) OVER (PARTITION BY `type`) AS count  "
+				+ "FROM `km_cs`WHERE `cate1`='faq' AND	`cate2`='" + cate2 + "') AS a "
+				+ "GROUP BY a.`type`, a.`csNo` "
+				+ "WITH ROLLUP ";
+		
+		List<List<CsVO>> lists = new ArrayList<>();
+		List<CsVO> list = new ArrayList<>();
+		int count = 0;
+		
+		try {
+			con = getConnection();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				CsVO cvo = new CsVO();
+				cvo.setCsNo(rs.getInt("csNo"));
+				cvo.setUid(rs.getString("uid"));
+				cvo.setCate1(rs.getString("cate1"));
+				cvo.setCate2(rs.getString("cate2"));
+				cvo.setType(rs.getString("type"));
+				cvo.setTitle(rs.getString("title"));
+				cvo.setContent(rs.getString("content"));
+				cvo.setHit(rs.getInt("hit"));
+				cvo.setRegip(rs.getString("regip"));
+				cvo.setRdate(rs.getString("rdate"));
+				cvo.setComment(rs.getString("comment"));
+				
+				if(cvo.getCsNo() == 0) {
+					
+					if(cvo.getType() == null) {
+						break;
+					}
+					
+					logger.debug("list : " + list);
+					lists.add(list);
+					list = new ArrayList<>();					
+				
+				} else {
+					list.add(cvo);
+				}
+			}
+			close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		map.put("faqLists", lists);
+		logger.debug("map : " + map);
 	}
 	
 	
