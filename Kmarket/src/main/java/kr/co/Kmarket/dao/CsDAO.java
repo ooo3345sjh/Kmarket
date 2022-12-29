@@ -482,7 +482,9 @@ public class CsDAO extends DBHelper {
 		
 		String cate2 = (String)map.get("cate2");
 		
-		String sql = "SELECT a.*, sum(a.`count`) "
+		String sql = "SELECT a.`csNo`, ANY_VALUE(a.`uid`) AS 'uid', ANY_VALUE(a.`cate1`) AS 'cate1', ANY_VALUE(a.`cate2`) AS 'cate2', a.`type`, "
+				+ "ANY_VALUE(a.`title`) AS 'title', ANY_VALUE(a.`content`) AS 'content', ANY_VALUE(a.`regip`) AS 'regip', ANY_VALUE(a.`rdate`) AS 'rdate', "
+				+ "ANY_VALUE(a.`hit`) AS 'hit', ANY_VALUE(a.`comment`) AS 'comment', sum(a.`count`)  "
 				+ "FROM (SELECT * , Count(*) OVER (PARTITION BY `type`) AS count  "
 				+ "FROM `km_cs`WHERE `cate1`='faq' AND	`cate2`='" + cate2 + "') AS a "
 				+ "GROUP BY a.`type`, a.`csNo` "
