@@ -34,7 +34,7 @@
                             <th>관리</th>
                         </tr>
                     
-					<c:forEach var="faq1" items="${faq}">
+					<c:forEach var="faq1" items="${map.articles}">
                         <tr>
                             <td><input type="checkbox"></td>
                             <td>${faq1.csNo}</td>

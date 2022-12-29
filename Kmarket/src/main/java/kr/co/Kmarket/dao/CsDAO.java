@@ -357,6 +357,56 @@ public class CsDAO extends DBHelper {
 		logger.debug(" map : " + map);
 	}
 	
+	/* admin_cs 페이지 cate1, cate2로 구분된 게시글 목록 */
+	public void selectAdminArticles(Map<String, Object> map) {
+		List<CsVO> list = null;
+		
+		String cate1 = (String)map.get("cate1");
+		String cate2 = (String)map.get("cate2");
+		
+		String sql = "SELECT *, "
+				+ " ROW_NUMBER() OVER(ORDER BY `csNo` desc) rnum "
+				+ " FROM `km_cs` "
+				+ " WHERE `cate1`='" + cate1 + "' "
+				+ " LIMIT ?, 10"; // 게시물 구간을 인파라미터로 받기
+		
+		try {
+			
+			logger.info("selectAdminArticles...");
+			con = getConnection();
+			psmt = con.prepareStatement(sql);
+			psmt.setInt(1, (int)map.get("limitStart"));
+			System.out.println((int)map.get("limitStart"));
+			list = new ArrayList<>();
+			
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				CsVO cvo = new CsVO();
+				cvo.setCsNo(rs.getInt("csNo"));
+				cvo.setUid(rs.getString("uid"));
+				cvo.setCate1(rs.getString("cate1"));
+				cvo.setCate2(rs.getString("cate2"));
+				cvo.setType(rs.getString("type"));
+				cvo.setTitle(rs.getString("title"));
+				cvo.setContent(rs.getString("content"));
+				cvo.setHit(rs.getInt("hit"));
+				cvo.setRegip(rs.getString("regip"));
+				cvo.setRdate(rs.getString("rdate"));
+				cvo.setComment(rs.getString("comment"));
+				list.add(cvo);
+			}
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		map.put("articles", list);
+		logger.debug(" list : " + list);
+		logger.debug(" map : " + map);
+	}
+	
 	public void countArticles(Map<String, Object> map) {
 		int totalCount = 0;
 		try {
@@ -389,6 +439,35 @@ public class CsDAO extends DBHelper {
 		map.put("totalCount", totalCount);
 	}
 	
+	// admin_cs
+	public void countAdminArticles(Map<String, Object> map) {
+		int totalCount = 0;
+		try {
+			
+			logger.info("countAdminArticles...");
+			
+			String cate1 = (String)map.get("cate1");
+			String cate2 = (String)map.get("cate2");
+			
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT COUNT(`csNo`)FROM `km_cs` WHERE `cate1` = '" + cate1 + "'");
+			
+			con = getConnection();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql.toString());
+			if(rs.next()) {
+				totalCount = rs.getInt(1);
+			}
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("totalCount : "+totalCount);
+		
+		map.put("totalCount", totalCount);
+	}
+	
 	public void updateHit(int csNo) {
 		int cnt = 0;
 		int rs = 0;
@@ -401,6 +480,7 @@ public class CsDAO extends DBHelper {
 			
 			rs = psmt.executeUpdate();
 			
+			close();
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -482,17 +562,14 @@ public class CsDAO extends DBHelper {
 		
 		String cate2 = (String)map.get("cate2");
 		
-		String sql = "SELECT a.`csNo`, ANY_VALUE(a.`uid`) AS 'uid', ANY_VALUE(a.`cate1`) AS 'cate1', ANY_VALUE(a.`cate2`) AS 'cate2', a.`type`, "
-				+ "ANY_VALUE(a.`title`) AS 'title', ANY_VALUE(a.`content`) AS 'content', ANY_VALUE(a.`regip`) AS 'regip', ANY_VALUE(a.`rdate`) AS 'rdate', "
-				+ "ANY_VALUE(a.`hit`) AS 'hit', ANY_VALUE(a.`comment`) AS 'comment', sum(a.`count`)  "
-				+ "FROM (SELECT * , Count(*) OVER (PARTITION BY `type`) AS count  "
-				+ "FROM `km_cs`WHERE `cate1`='faq' AND	`cate2`='" + cate2 + "') AS a "
-				+ "GROUP BY a.`type`, a.`csNo` "
-				+ "WITH ROLLUP ";
+		String sql = "SELECT a.* FROM ( "
+			       + "SELECT *, ROW_NUMBER() OVER (PARTITION BY `type` ORDER BY `rdate` desc) AS 'rank' "
+				   + "FROM `km_cs`WHERE `cate1`='faq' AND	`cate2`='user') a "
+				   + "WHERE	a.`rank` <= 10 ";
 		
 		List<List<CsVO>> lists = new ArrayList<>();
 		List<CsVO> list = new ArrayList<>();
-		int count = 0;
+		String type = null;
 		
 		try {
 			con = getConnection();
@@ -513,18 +590,19 @@ public class CsDAO extends DBHelper {
 				cvo.setRdate(rs.getString("rdate"));
 				cvo.setComment(rs.getString("comment"));
 				
-				if(cvo.getCsNo() == 0) {
+				if(type == null) { // type가 Null 이면
+
+					type = cvo.getType();
 					
-					if(cvo.getType() == null) {
-						break;
-					}
-					
+				} else if (type.equals(cvo.getType())) { // type과 cvo.getType이 같다면
+	
+					list.add(cvo);
+				
+				} else { // type이 Null이 아니고 cvo.getType과 같지 않다면
 					logger.debug("list : " + list);
+					type = cvo.getType();
 					lists.add(list);
 					list = new ArrayList<>();					
-				
-				} else {
-					list.add(cvo);
 				}
 			}
 			close();

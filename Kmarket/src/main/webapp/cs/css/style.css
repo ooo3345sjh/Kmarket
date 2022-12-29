@@ -254,6 +254,7 @@ ul, ol {list-style: none;}
     font-weight: bold;
 }
 #cs > div > section > article > nav > h2 {
+	margin-top: 10px;
     font-size: 20px;
 }
 
@@ -370,27 +371,27 @@ ul, ol {list-style: none;}
     vertical-align: bottom;
 }
 #cs > .notice > .list > article > .page > .prevon {
-    font-size: 0;
+    font-size: 0 !important;
     background-image: url("../img/cs_sprites.png");
     background-position: -706px -652px;
 }
 
 #cs > .notice > .list > article > .page > .prevoff {
-    font-size: 0;
+    font-size: 0 !important;
     background-image: url("../img/cs_sprites.png");
     background-position: -706px -652px;
 }
 
 #cs > .notice > .list > article > .page > .nexton {
-    font-size: 0;
+    font-size: 0 !important;
     background-image: url("../img/cs_sprites.png");
     background-position: -628px -652px;
 }
 
 #cs > .notice > .list > article > .page > .nextoff {
-    font-size: 0;
+    font-size: 0 !important;
     background-image: url("../img/cs_sprites.png");
-    background-position: -628px -652px;
+    background-position: -764px -652px;
 }
 
 #cs > .notice > .list > article > .page > .num {}
@@ -399,6 +400,7 @@ ul, ol {list-style: none;}
     border-radius: 17px;
     color: #fff;
 }
+#cs > .notice > .list > article > .page > a > span {font-size: 0;}
 
 /* notice - 글보기 */
 #cs > .notice > .view {}
@@ -571,6 +573,7 @@ ul, ol {list-style: none;}
     font-weight: bold;
 }
 #cs > .faq > .view > article > .head > p {
+	margin-top: 5px;
 	font-size: 16px;
 }
 
@@ -590,6 +593,7 @@ ul, ol {list-style: none;}
 #cs > .faq > .view > article > .reply > .adminComment > p{
 	font-size: 19px;
     line-height: 32px;
+	padding-left: 37px;
 }
 
 #cs > .faq > .view > article > .reply > .adminComment > p span {
@@ -766,23 +770,23 @@ ul, ol {list-style: none;}
 }
 
 #cs > .qna > .list > article > .page > .prevon{
-    font-size: 0;
+    font-size: 0 !important;
     background-image: url("../img/cs_sprites.png");
     background-position: -566px -652px;
 }
 #cs  .list > article > .page > .prevoff{
-    font-size: 0;
+    font-size: 0 !important;
     background-image: url("../img/cs_sprites.png");
     background-position: -696px -652px;
     pointer-events: none;
 }
 #cs > .qna > .list > article > .page > .nexton{
-    font-size: 0;
+    font-size: 0 !important;
     background-image: url("../img/cs_sprites.png");
     background-position: -628px -652px;
 }
 #cs .list > article > .page > .nextoff{
-    font-size: 0;
+    font-size: 0 !important;
     background-image: url("../img/cs_sprites.png");
     background-position:-769px -652px;
     pointer-events: none;

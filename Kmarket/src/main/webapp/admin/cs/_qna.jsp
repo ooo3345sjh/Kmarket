@@ -34,48 +34,49 @@
                             <th>상태</th>
                         </tr>
                         
-					<c:forEach var="qna" items="${qnalist}">
+					<c:forEach var="qna" items="${map.articles}" varStatus="loop">
                         <tr>
                             <td><input type="checkbox"></td>
-                            <td>${qna.csNo}</td>
+                            <td width="40px">${map.totalCount - map.limitStart - loop.index}</td>
                             
                             <%-- 목록) 2차유형 --%>
+                            <td width="100px">
                            	<c:if test="${qna.cate2 eq 'user'}">
-                           		<td>회원</td>
+                           		회원
                            	</c:if>
                            	<c:if test="${qna.cate2 eq 'coupon'}">
-                           		<td>쿠폰/혜택/이벤트</td>
+                           		쿠폰/혜택/이벤트
                            	</c:if>
                            	<c:if test="${qna.cate2 eq 'order'}">
-                           		<td>주문/결제</td>
+                           		주문/결제
                            	</c:if>
                            	<c:if test="${qna.cate2 eq 'delivery'}">
-                           		<td>배송</td>
+                           		배송
                            	</c:if>
                            	<c:if test="${qna.cate2 eq 'cancel'}">
-                           		<td>취소/반품/교환</td>
+                           		취소/반품/교환
                            	</c:if>
                            	<c:if test="${qna.cate2 eq 'travel'}">
-                           		<td>여행/숙박/항공</td>
+                           		여행/숙박/항공
                            	</c:if>
                            	<c:if test="${qna.cate2 eq 'safeDeal'}">
-                           		<td>안전거래</td>
+                           		안전거래
                            	</c:if>
-                           	
+                           	</td>
                             <td>${qna.type}</td>
                             
-                            <td><a href="<c:url value='/admin/cs/view.do?no=${qna.csNo}&cate1=${qna.cate1}'/>">[${qna.type}]${qna.title}</a></td>
-                            <td>${fn:substring(sessMesmber.uid,0,3)}**</td>
+                            <td style='text-align: left;'><a href="<c:url value='/admin/cs/view.do?no=${qna.csNo}&cate1=${qna.cate1}'/>">[${qna.type}]${qna.title}</a></td>
+                            <td width="60px">${fn:substring(sessMember.uid,0,3)}**</td>
                             
                             <c:set var="rdate"  value="${qna.rdate}"/>
-                            <td>${fn:substring(rdate,2,10)}</td>
+                            <td width="60px">${fn:substring(rdate,2,10)}</td>
                             <c:if test="">
                             <td class="comfirm">
                                검토중
                             </td>
                             </c:if>
                             
-                            <td class="check">
+                            <td class="check" width="50px">
                                답변완료
                             </td>
                          
