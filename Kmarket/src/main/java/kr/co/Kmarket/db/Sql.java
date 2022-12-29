@@ -72,7 +72,7 @@ public class Sql {
 	// 판매자 회원 로그인
 	public static final String SELECT_SELLER = "SELECT * FROM `km_member_seller` WHERE `uid`=? AND `pass`=SHA2(?, 256)";
 	
-	/*** product ***/
+	/*** admin_product ***/
 	// 상품 등록
 	public static final String INSERT_PRODUCT = "INSERT INTO `km_product` SET "
 												+ "`cate1`=?, "
@@ -211,4 +211,5 @@ public class Sql {
 	public static final String SELECT_FAQ_ALL = "SELECT * FROM `km_cs` WHERE `cate1`='faq' ORDER BY `csNo` DESC LIMIT 0,10";
 	
 	public static final String DELECT_ARTICLE = "DELETE FROM `km_cs` WHERE `csNo`=?";
+	
 }
