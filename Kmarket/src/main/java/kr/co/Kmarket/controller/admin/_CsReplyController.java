@@ -33,6 +33,8 @@ public class _CsReplyController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("replyGetController...");
+		
+		
 	
 	}
 	@Override
@@ -53,11 +55,10 @@ public class _CsReplyController extends HttpServlet{
 		comment.setContent(content);
 		comment.setComment(reply);
 		comment.setUid(uid);
-	
+
 		int result = service.updateComment(comment);
 		
 		JsonObject json = new JsonObject();
-
 		json.addProperty("result", 1);
 		json.addProperty("uid", comment.getUid());
 		json.addProperty("type", comment.getType());
