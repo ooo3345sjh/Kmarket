@@ -309,7 +309,7 @@ public class CsDAO extends DBHelper {
 			       + " FROM `km_cs` "
 			       + " WHERE `cate1`='" + cate1 + "' AND `cate2`='" + cate2 + "'"
 			       + " LIMIT ?, 10"; // 게시물 구간을 인파라미터로 받기
-			  
+		  
 		try {
 			
 			logger.info("selectArticles...");

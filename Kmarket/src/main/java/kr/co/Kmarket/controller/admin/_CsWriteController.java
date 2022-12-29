@@ -50,33 +50,11 @@ public class _CsWriteController extends HttpServlet{
 			case "이벤트당첨":
 				cate2 = "great";
 				break;
+			default:
+				break;
 		}
 		
-		// 자주묻는질문
-		switch(cate2) {
-			case "회원":
-				cate2 = "user";
-				break;
-			case "쿠폰/혜택/이벤트":
-				cate2 = "coupon";
-				break;
-			case "주문/결제":
-				cate2 = "order";
-				break;
-			case "배송":
-				cate2 = "delivery";
-				break;
-			case "취소/반품/교환":
-				cate2 = "cancel";
-				break;
-			case "여행/숙박/항공":
-				cate2 = "travel";
-				break;
-			case "안전거래":
-				cate2 = "safeDeal";
-				break;
-				
-		}
+		
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String regip = req.getRemoteAddr();
