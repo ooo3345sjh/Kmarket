@@ -13,7 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.service.CsService;
+import kr.co.Kmarket.utils.JSFunction;
 import kr.co.Kmarket.vo.CsVO;
+import kr.co.Kmarket.vo.MemberVO;
 
 @WebServlet("/cs/write.do")
 public class WriteController extends HttpServlet{
@@ -30,8 +32,16 @@ public class WriteController extends HttpServlet{
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
 		
+		MemberVO user = (MemberVO)req.getSession().getAttribute("sessMember");
+		
+		if(user == null) {
+			JSFunction.alertLocation(resp, "로그인 후에 문의 가능합니다.", req.getContextPath() + "/member/login.do");
+			return;
+		}
+		
 		req.setAttribute("cate1", cate1);
 		req.setAttribute("cate2", cate2);
+		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/board/write.jsp");
 		dispatcher.forward(req, resp);

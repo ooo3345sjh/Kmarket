@@ -35,7 +35,7 @@ public class _CsListController extends HttpServlet{
 		String cate1	 = req.getParameter("cate1");
 		String cate2	 = req.getParameter("cate2");
 		String pg		 = req.getParameter("pg");
-		String group	 = "admin";
+		String group	 = "admin/cs";
 		String searchField = req.getParameter("searchField");
 		String searchWord = req.getParameter("searchWord");
 		Map<String, Object> map = new HashMap<>();
@@ -48,19 +48,19 @@ public class _CsListController extends HttpServlet{
 		map.put("pg", pg);
 		map.put("req", req);
 		
-		service.countArticles(map);  // 조건에 해당하는 전체 상품 목록의 갯수를 가져오는 서비스
+		service.countAdminArticles(map);  // 조건에 해당하는 전체 상품 목록의 갯수를 가져오는 서비스
 		Paging.paging(map);		     // 페이징 처리
-		service.selectArticles(map);
+		service.selectAdminArticles(map);
 		Paging.getPageTags(map);  	 // 페이징 처리된 정보를 토대로 태그 생성
 		service.selectFaqArticle(map); // cs 페이지전용 FAQ 글 목록 
 		
-		List<CsVO> noticelist = service.selectNoticeAll();
-		List<CsVO> faq = service.selectFaqAll();
-		List<CsVO> qnalist = service.selectQnaAll();
+		//List<CsVO> noticelist = service.selectNoticeAll();
+		//List<CsVO> faq = service.selectFaqAll();
+		//List<CsVO> qnalist = service.selectQnaAll();
 		
-		req.setAttribute("noticelist", noticelist); // admin-cs notice 목록
-		req.setAttribute("faq", faq);	// admin-cs faq 목록
-		req.setAttribute("qnalist", qnalist); // admin-cs qna 목록
+		//req.setAttribute("noticelist", noticelist); // admin-cs notice 목록
+		//req.setAttribute("faq", faq);	// admin-cs faq 목록
+		//req.setAttribute("qnalist", qnalist); // admin-cs qna 목록
 		
 		req.setAttribute("map", map);
 		req.setAttribute("cate1", cate1);

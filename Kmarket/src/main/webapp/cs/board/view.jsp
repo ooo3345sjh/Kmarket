@@ -86,7 +86,7 @@
                     		
                     		
                         		<nav>
-                            		<h2 class="title">[${cvo.type}]${cvo.title}</h2>
+                            		<h2 class="title" style="font-size: 22px;">[${cvo.type}]${cvo.title}</h2>
                             
                             		<!-- id -->
                             		<c:if test="${cvo.uid ne null}">
@@ -115,15 +115,15 @@
 		                        
 		                         <c:if test="${cvo.comment ne '0'}">
 		                         	<nav>
-		                        		<h2 class="replyTitle">▶ [답변] ${cvo.title}</h2>
+		                        		<h2 class="replyTitle" style="font-size: 22px;">▶ [답변] ${cvo.title}</h2>
 		                        	</nav>
 	                        	 	<div class="adminComment">
-			                        	<p>${cvo.comment}</p>
+			                        	<p>${cvo.comment}asdasdsadasdad</p>
 			                        </div>
 		                         </c:if>
 		                        	
 		                        </div>
-                        		<a href="<c:url value='/cs/list.do?cate1=qna&cate2=${cvo.cate2}&pg=1'/>" class="btnList">목록보기</a>
+                        		<a href="<c:url value='/cs/list.do?cate1=qna&cate2=${cvo.cate2}&pg=${pg}'/>" class="btnList">목록보기</a>
                     		</article>
                     	</c:when>
                     	<%-- 문의하기 글 보기 종료 --%>
@@ -135,11 +135,11 @@
                         		<h2>공지사항</h2>
                         	</c:if>	
                         	<ul>
-	                           <li class="${map.cate2 eq 'all' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=notice&cate2=all'/>">전체</a></li>
-			                    <li class="${map.cate2 eq 'service' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=notice&cate2=service'/>">고객서비스</a></li>
-			                    <li class="${map.cate2 eq 'safeDeal' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=notice&cate2=safeDeal'/>">안전거래</a></li>
-			                    <li class="${map.cate2 eq 'xproduct' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=notice&cate2=xproduct'/>">위해상품</a></li>
-			                    <li class="${map.cate2 eq 'great' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=notice&cate2=great'/>">이벤트당첨</a></li>
+	                           <li class="${cate2 eq 'all' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=notice&cate2=all'/>">전체</a></li>
+			                    <li class="${cate2 eq 'service' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=notice&cate2=service'/>">고객서비스</a></li>
+			                    <li class="${cate2 eq 'safeDeal' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=notice&cate2=safeDeal'/>">안전거래</a></li>
+			                    <li class="${cate2 eq 'xproduct' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=notice&cate2=xproduct'/>">위해상품</a></li>
+			                    <li class="${cate2 eq 'great' ? 'on':'off'}"><a href="<c:url value='/cs/list.do?cate1=notice&cate2=great'/>">이벤트당첨</a></li>
                         	</ul>
                     		</aside>
                     		<article>
@@ -163,7 +163,7 @@
 		                                ${cvo.content}
 		                            </p>
 		                        </div>
-                        		<a href="<c:url value='/cs/list.do?cate1=notice&cate2=${cvo.cate2}&pg=1'/>" class="btnList">목록보기</a>
+                        		<a href="<c:url value='/cs/list.do?cate1=notice&cate2=${cate2}&pg=${pg}'/>" class="btnList">목록보기</a>
                     		</article>
                     	</c:when>
                     	<%-- 공지사항 글 보기 종료 --%>
@@ -197,7 +197,7 @@
 		                                ${cvo.content}
 		                            </p>
 		                        </div>
-                        		<a href="<c:url value='/cs/list.do?cate1=faq&cate2=${cvo.cate2}&pg=1'/>" class="btnList">목록보기</a>
+                        		<a href="<c:url value='/cs/list.do?cate1=faq&cate2=${cate2}&pg=1'/>" class="btnList">목록보기</a>
                     		</article>
                     	</c:when>
                     	<%-- 자주묻는 질문 글 보기 종료 --%>

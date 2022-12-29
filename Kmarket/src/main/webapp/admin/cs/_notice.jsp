@@ -26,18 +26,18 @@
                             <th>날짜</th>
                             <th>관리</th>
                         </tr>
-					<c:forEach var="notice" items="${noticelist}">
+					<c:forEach var="notice" items="${map.articles}">
                         <tr>
-                            <td><input type="checkbox"></td>
-                            <td>${notice.csNo}</td>
-                            <td>${notice.type}</td>
+                            <td width="20px"><input type="checkbox"></td>
+                            <td width="50px">${notice.csNo}</td>
+                            <td width="60px">${notice.type}</td>
                             <td><a href="<c:url value='/admin/cs/view.do?no=${notice.csNo}&cate1=${notice.cate1}'/>">[${notice.type}]${notice.title}</a></td>
-                            <td>${notice.hit}</td>
+                            <td width="30px">${notice.hit}</td>
                             
                             <c:set var="rdate"  value="${notice.rdate}"/>
-                            <td>${fn:substring(rdate,2,10)}</td>
+                            <td width="50px">${fn:substring(rdate,2,10)}</td>
                             
-                            <td>
+                            <td width="70px">
                                 <a href="#" class="remove" data-no="${notice.csNo}">[삭제]</a>
                                 <a href="<c:url value='/admin/cs/modify.do?no=${notice.csNo}'/>" class="modify">[수정]</a>
                             </td>

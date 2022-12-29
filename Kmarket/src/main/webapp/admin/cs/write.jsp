@@ -3,6 +3,10 @@
 <jsp:include page="../_header.jsp"/>
 <script src="<c:url value='/admin/js/csArticle.js'/>"></script>
 <script src="<c:url value='/cs/js/cs.js'/>"></script> <%-- 자주묻는 질문 1,2차 카테고리 --%>
+<script>
+	$(function () {
+	})
+</script>
 
                 <section id="cs-write" class="admin">
                     <nav>
@@ -53,8 +57,8 @@
 	                            </tr>
 	                        </table>
 	                        
-	                        <input type="button" class="btnList" value="취소">
-	                    	<input type="submit" class="btnWrite" value="등록">
+	                        <input type="button" class="btnList" value="취소하기">
+	                    	<input type="submit" class="btnWrite" value="등록하기">
 	                    </form>
                     </c:if>
                     
@@ -95,8 +99,8 @@
 	                            </tr>
 	                        </table>
 	                        
-	                        <input type="button" class="btnList" value="취소">
-	                    	<input type="submit" class="btnWrite" value="등록">
+	                        <input type="button" class="btnList" value="취소하기">
+	                    	<input type="submit" class="btnWrite" value="등록하기">
 	                    </form>
                     </c:if>
                     
@@ -130,8 +134,8 @@
 	                            </tr>
 	                        </table>
 	                        
-	                        <input type="button" class="btnList" value="취소">
-	                    	<input type="submit" class="btnWrite" value="등록">
+	                        <input type="button" class="btnList" value="취소하기">
+	                    	<input type="submit" class="btnWrite" value="등록하기">
 	                    </form>
                     </c:if>
                 </section>

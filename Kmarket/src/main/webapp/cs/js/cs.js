@@ -5,6 +5,35 @@ $(function(){
 		$('select[name=type]').change(function(){
 			console.log($('select[name=type] option:selected').text());
 		})
+		
+		$('#csForm').submit(function(){
+			let cate2 = $('select[name=cate2]').val();
+			let type = $('select[name=type]').val();
+			let title = $('input[name=title]').val();
+			let content = $('textarea[name=content]').val();
+			
+			if(cate2 == null){
+				alert('1차 선택 문의 유형을 선택해주세요.');
+				return;
+			}
+			
+			if(type == null){
+				alert('2차 선택 유형을 선택해주세요.');
+				return;
+			}
+			
+			if(title == ''){
+				alert('문의 제목을 입력해주세요.');
+				return;
+			}
+			
+			if(content == ''){
+				alert('문의 내용을 입력해주세요.');
+				return;
+			}
+			
+			
+		});
 })
 	// select box 동적추가
 function qnaOption(){
@@ -55,6 +84,7 @@ function qnaOption(){
 	}
 	// select box 비워주기
 	$('.type').empty();
+	$('.type').append("<option value='none' disabled selected>2차 선택</option>");
 	
 	for(let i = 0; i < type.length; i++){
 		let option = $("<option>"+type[i]+"</option>");
