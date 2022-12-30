@@ -98,6 +98,7 @@ public class Paging {
 			String uri = "<a href=\"" + contextPath + "/" + group + "/list.do?pg=1";
 			
 			if("admin/cs".equals(group)) {
+
 				if(cate2 == null) {
 					uri += "&cate1=" + cate1;
 				} else {
@@ -145,6 +146,7 @@ public class Paging {
 		else {
 			
 			if("admin/cs".equals(group)) {
+
 				if(cate2 == null) {
 					uri += "&cate1=" + cate1;
 				} else {
@@ -154,6 +156,7 @@ public class Paging {
 				if(type != null) {
 					uri += "&type=" + type;
 				}
+
 			}
 			
 			// 검색어가 있다면
@@ -241,6 +244,7 @@ public class Paging {
 		// admin이라면
 		else {
 			if("admin/cs".equals(group)) {
+
 				if(cate2 == null) {
 					uri += "&cate1=" + cate1;
 				} else {
@@ -250,6 +254,7 @@ public class Paging {
 				if(type != null) {
 					uri += "&type=" + type;
 				}
+
 			}
 			
 			// 검색어가 있다면
@@ -268,6 +273,7 @@ public class Paging {
 			uri = "<a href=\"" + contextPath + "/" + group + "/list.do?pg=" + lastPageNum;
 			
 			if("admin/cs".equals(group)) {
+
 				if(cate2 == null) {
 					uri += "&cate1=" + cate1;
 				} else {
@@ -277,6 +283,7 @@ public class Paging {
 				if(type != null) {
 					uri += "&type=" + type;
 				}
+
 			}
 			
 			// 검색어가 있다면

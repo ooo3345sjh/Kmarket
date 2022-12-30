@@ -5,6 +5,7 @@
 <script src="<c:url value='/cs/js/cs.js'/>"></script> <%-- 자주묻는 질문 1,2차 카테고리 --%>
 <script>
 	$(function () {
+
 		const url = new URL(window.location.href); // URL 객체 생성
 		const urlParams = url.searchParams; // URLSearchParams 객체
 		cate1 = urlParams.get('cate1') // type value 값을 가져온다.
@@ -35,6 +36,7 @@
 			}
 			
 		})
+
 	})
 </script>
 
@@ -87,7 +89,9 @@
 	                            </tr>
 	                        </table>
 	                        
+
 	                        <input type="button"  name='cancel' class="btnList" value="취소하기">
+
 	                    	<input type="submit" class="btnWrite" value="등록하기">
 	                    </form>
                     </c:if>
@@ -129,7 +133,9 @@
 	                            </tr>
 	                        </table>
 	                        
+
 	                        <input type="button" name='cancel' class="btnList" value="취소하기">
+
 	                    	<input type="submit" class="btnWrite" value="등록하기">
 	                    </form>
                     </c:if>
@@ -164,7 +170,9 @@
 	                            </tr>
 	                        </table>
 	                        
+
 	                        <input type="button" name='cancel' class="btnList" value="취소하기">
+
 	                    	<input type="submit" class="btnWrite" value="등록하기">
 	                    </form>
                     </c:if>
