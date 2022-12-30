@@ -99,6 +99,7 @@ main > div > aside > #gnb ol > li > a {
     height: 100%;
     box-sizing: border-box;
     padding: 20px;
+    position: relative;
 }
 .admin > nav {
     box-sizing: border-box;
@@ -251,7 +252,7 @@ main > div > aside > #gnb ol > li > a {
     display: block;
     width: auto;
     height: 32px;
-    margin-top: 28px;
+    margin-top: 15px;
     text-align: center;
     padding-right: 90px;
 }
@@ -547,7 +548,7 @@ p.ico  {
     display: block;
     width: auto;
     height: 32px;
-    margin-top: 28px;
+    margin-top: 15px;
     text-align: center;
     padding-right: 90px;
 }
@@ -860,14 +861,32 @@ p.ico  {
 
 
 #cs-modify > form > .btnList {
-	margin-left: 926px;
+	margin-left: 899px;
     display: inline-block;
     margin-top: 5px;
 }
 #cs-modify > form > .btnWrite {
     display: block;
-    margin-top: 5px;
+    margin-top: 70.5px;
+    margin-right: 5px;
+    height: 36px;
+    font-size: 18px;
     float: right;
+    box-sizing: border-box;
+}
+
+#cs-write .btnList{
+	position: relative;
+    top: 10px;
+    left: 470px;
+}
+#cs-write .btnWrite{
+	top: 609px;
+    right: 384px;
+    font-size: 18px;
+    width: 114px;
+    height: 36px;
+    box-sizing: border-box;
 }
 
 .btnList{
@@ -878,6 +897,7 @@ p.ico  {
     box-sizing: border-box;
     font-size: 18px;
     color: #fff;
+    cursor: pointer;
 }
 .btnDelete{
     background-color: #c0c0c0;
@@ -887,6 +907,7 @@ p.ico  {
     box-sizing: border-box;
     font-size: 18px;
     color: #fff;
+    cursor: pointer;
 }
 .btnModify{
     background-color: #c0c0c0;
@@ -896,17 +917,46 @@ p.ico  {
     box-sizing: border-box;
     font-size: 18px;
     color: #fff;
+    cursor: pointer;
 }
 
 .btnWrite{
-	float: right;
+	position: absolute;
+    bottom: 20px;
+    right: 28px;
     border-radius: 2px;
-    padding: 5px 20px;
+    /* padding: 5px 20px; */
+    line-height: 38px;
     box-sizing: border-box;
-    font-size: 18px;
+    font-size: 13px;
     color: #fff;
     background-color: #067dfd;
     border: 1px solid #0063ce;
+    height: 38px;
+    width: 81px;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+#qnaRemove{
+    position: relative;
+    right: 201px;
+    top: 5px;
+}
+#reply{
+	position: relative;
+    top: 5px;
+    height: 36px;
+    left: 896px;
+    font-size: 18px;
+    width: 90px;
+}
+#qnaList{
+	position: relative;
+    top: 5px;
+    right: -66px;
+
 }
 
 /*** 푸터 ***/

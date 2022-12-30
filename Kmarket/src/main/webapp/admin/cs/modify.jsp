@@ -3,6 +3,33 @@
 <jsp:include page="../_header.jsp"/>
 <script src="<c:url value='/admin/js/csArticle.js'/>"></script>
 <script src="<c:url value='/cs/js/cs.js'/>"></script>
+<script>
+	$(function () {
+		$('form').submit(function (e) {
+			let selectVal = $('select[name=type]').val();
+			let title = $('input[name=title]').val();
+			let content = $('textarea[name=content]').val();
+			
+			if(selectVal == null){
+				alert('유형을 선택해주세요.');
+				e.preventDefault();
+				return;
+			}
+			if(title == ''){
+				alert('제목을 입력해주세요.');
+				e.preventDefault();
+				return;
+			}
+			if(content == ''){
+				alert('내용을 입력해주세요.');
+				e.preventDefault();
+				return;
+			}
+			
+		})
+		
+	})
+</script>
                 <section id="cs-modify" class="admin">
                     <nav>
                     
@@ -66,7 +93,7 @@
 	                            </tr>
 	                        </table>
 	                        
-	                        <a href="<c:url value=''/>" class="btnList">취소</a>
+	                        <a href="javascript:history.back()" class="btnList">취소</a>
 	                    	<input type="submit" class="btnWrite" value="등록">
 	                    </form>
                     </c:if>
@@ -217,7 +244,7 @@
 	                            </tr>
 	                        </table>
 	                        
-	                        <input type="button" class="btnList" value="취소">
+	                        <input type="button" name='cancel' class="btnList" value="취소">
 	                    	<input type="submit" class="btnWrite" value="등록">
 	                    </form>
                     </c:if>

@@ -62,11 +62,21 @@ public class CsService {
 		dao.countArticles(map);
 	}
 	
+	/*** admin_cs start ***/
+	public void countAdminArticles(Map<String, Object> map) {
+		dao.countAdminArticles(map);
+	}
+	
+	public void selectAdminArticles(Map<String, Object> map) {
+		dao.selectAdminArticles(map);
+	}
+	/*** admin_cs end ***/
+	
 	public int updateArticle(String cate2, String type, String title, String content, String no) {
 		return dao.updateArticle(cate2, type, title, content, no);
 	}
-	public int deleteArticle(String csNo) {
-		return dao.deleteArticle(csNo);
+	public int deleteArticle(String[] csNoArr) {
+		return dao.deleteArticle(csNoArr);
 	}
 	
 	
