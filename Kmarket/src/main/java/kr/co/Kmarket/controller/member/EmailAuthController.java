@@ -34,6 +34,7 @@ public class EmailAuthController extends HttpServlet {
 		json.addProperty("status", result[0]);
 		json.addProperty("code", result[1]);
 		
+		resp.setContentType("application/json;charset=UTF-8");
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
 	
