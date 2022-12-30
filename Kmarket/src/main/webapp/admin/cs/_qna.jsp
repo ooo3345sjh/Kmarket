@@ -38,6 +38,7 @@
                             <th>날짜</th>
                             <th>상태</th>
                         </tr>
+
                         <tbody id='article'>
 					<c:forEach var="qna" items="${map.articles}" varStatus="loop">
                         <tr>
@@ -46,6 +47,7 @@
 	                            <input type="hidden" name='csNo' value="${qna.csNo}">
                             	${map.totalCount - map.limitStart - loop.index}
                             </td>
+
                             
                             <%-- 목록) 2차유형 --%>
                             <td width="100px">
@@ -78,6 +80,7 @@
                             
                             <c:set var="rdate"  value="${qna.rdate}"/>
                             <td width="60px">${fn:substring(rdate,2,10)}</td>
+
                             
                             <c:choose>
                             	<c:when test="${qna.comment eq null }">

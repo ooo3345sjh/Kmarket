@@ -25,6 +25,7 @@
                             <th>날짜</th>
                             <th>관리</th>
                         </tr>
+
                         <tbody id=article>
 					<c:forEach var="notice" items="${map.articles}" varStatus="loop">
                         <tr>
@@ -35,6 +36,7 @@
                             </td>
                             <td width="60px">${notice.type}</td>
                             <td style="text-align: left;"><a href="<c:url value='/admin/cs/view.do?no=${notice.csNo}&cate1=${notice.cate1}'/>">[${notice.type}]${notice.title}</a></td>
+
                             <td width="30px">${notice.hit}</td>
                             
                             <c:set var="rdate"  value="${notice.rdate}"/>
