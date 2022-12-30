@@ -598,7 +598,7 @@ public class CsDAO extends DBHelper {
 		
 		String sql = "SELECT a.* FROM ( "
 			       + "SELECT *, ROW_NUMBER() OVER (PARTITION BY `type` ORDER BY `rdate` desc) AS 'rank' "
-				   + "FROM `km_cs`WHERE `cate1`='faq' AND	`cate2`='user') a "
+				   + "FROM `km_cs`WHERE `cate1`='faq' AND	`cate2`='" + cate2 + "') a "
 				   + "WHERE	a.`rank` <= 10 ";
 		
 		List<List<CsVO>> lists = new ArrayList<>();
