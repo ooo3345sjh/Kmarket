@@ -118,7 +118,7 @@
 		                        		<h2 class="replyTitle" style="font-size: 22px;">▶ [답변] ${cvo.title}</h2>
 		                        	</nav>
 	                        	 	<div class="adminComment">
-			                        	<p>${cvo.comment}</p>
+			                        	<p>${cvo.comment}asdasdsadasdad</p>
 			                        </div>
 		                         </c:if>
 		                        	

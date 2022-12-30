@@ -39,8 +39,10 @@
                             <th>관리</th>
                         </tr>
                     
+
                     <tbody id=article>
 					<c:forEach var="faq1" items="${map.articles}" varStatus="loop">
+
                         <tr>
                             <td><input type="checkbox" name='prodCheck'></td>
                             <td>
