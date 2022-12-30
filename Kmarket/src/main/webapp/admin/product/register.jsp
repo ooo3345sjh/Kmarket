@@ -10,6 +10,7 @@
                     </nav>
                     <h2>상품분류</h2>
                     <p>기본분류는 반드시 선택하셔야 합니다. 하나의 상품에 1개의 분류를 지정 합니다.</p>
+                     <form action='<c:url value="/admin/product/register.do"/>' name="form" method="post" enctype="multipart/form-data" onsubmit="return checkAll()">   
 	                    <table border="0">
 	                        <tr>
 	                            <th>1차 분류</th>
@@ -37,7 +38,6 @@
 	                            </td>
 	                        </tr>
 	                    </table>
-                     <form action='<c:url value="/admin/product/register.do"/>' name="form" method="post" enctype="multipart/form-data" onsubmit="return checkAll()">   
                         <h2>기본정보</h2>
                         <p>기본정보는 반드시 입력해야 합니다.</p>
                         <table border="0">

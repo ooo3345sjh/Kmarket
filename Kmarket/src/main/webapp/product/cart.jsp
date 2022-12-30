@@ -52,12 +52,12 @@
 			// 해당 상품관련 변수 선언
 			let checked = $(this).is(':checked'); // 해당 체크박스 체크 여부
 			let tdTag = $(this).closest('tr').children('td'); // 해당 체크박스 상품의 td태그 모음
-			let count = tdTag.eq(2).text(); // 상품 수량 
-			let price = tdTag.eq(3).text().replace(",", ""); // 상품 가격 
-			let discount = tdTag.eq(4).text().replace("%", ""); // 상품 할인율
+			let count = tdTag.eq(2).text().replaceAll(/[^0-9]/g, ""); // 상품 수량 
+			let price = tdTag.eq(3).text().replaceAll(/[^0-9]/g, ""); // 상품 가격 
+			let discount = tdTag.eq(4).text().replaceAll(/[^0-9]/g, ""); // 상품 할인율
 			let discountPrice = Math.floor((price * count) * discount * 0.01); // 상품 할인 가격
-			let point = tdTag.eq(5).text(); // 적립 포인트
-			let delivery = tdTag.eq(6).text() == '무료배송'? 0 : tdTag.eq(6).text().replace(",", ""); // 배송비
+			let point = tdTag.eq(5).text().replaceAll(/[^0-9]/g, ""); // 적립 포인트
+			let delivery = tdTag.eq(6).text() == '무료배송'? 0 : tdTag.eq(6).text().replaceAll(/[^0-9]/g, ""); // 배송비
 			let total = (Number(price) * count) - Number(discountPrice); // 전체 가격
 			
 			// 전체 합계 변수 선언

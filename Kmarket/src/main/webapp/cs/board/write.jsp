@@ -58,7 +58,7 @@
                             </c:if>
                              -->
                     	</nav>
-                        <form action="<c:url value='/cs/write.do?cate1=${cate1}&cate2=${cate2}&pg=1'/>" method="post" id='csForm'>
+                        <form action="<c:url value='/cs/write.do?cate1=${cate1}&pg=1'/>" method="post" id='csForm'>
                         	<input type="hidden" name="uid" value="${sessMember.uid}">
                             <table>
                                 <tr>

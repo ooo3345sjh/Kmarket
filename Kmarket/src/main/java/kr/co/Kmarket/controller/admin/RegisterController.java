@@ -101,7 +101,7 @@ public class RegisterController extends HttpServlet {
 		String ext2 = thumb2.substring(i2);
 		String newName2 = UUID.randomUUID()+ext2;
 		
-		File f3 = new File(path+"/"+thumb2);
+		File f3 = new File(newPath+"/"+thumb2);
 		File f4 = new File(newPath+"/"+newName2);
 		f3.renameTo(f4);
 		
@@ -109,7 +109,7 @@ public class RegisterController extends HttpServlet {
 		String ext3 = thumb3.substring(i3);
 		String newName3 = UUID.randomUUID()+ext3;
 		
-		File f5 = new File(path+"/"+thumb3);
+		File f5 = new File(newPath+"/"+thumb3);
 		File f6 = new File(newPath+"/"+newName3);
 		f5.renameTo(f6);
 		
@@ -117,7 +117,7 @@ public class RegisterController extends HttpServlet {
 		String ext4 = detail.substring(i4);
 		String newName4 = UUID.randomUUID()+ext4;
 		
-		File f7 = new File(path+"/"+detail);
+		File f7 = new File(newPath+"/"+detail);
 		File f8 = new File(newPath+"/"+newName4);
 		f7.renameTo(f8);
 		
