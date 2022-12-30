@@ -938,6 +938,25 @@ p.ico  {
     cursor: pointer;
 }
 
+#qnaRemove{
+    position: relative;
+    right: 201px;
+    top: 5px;
+}
+#reply{
+	position: relative;
+    top: 5px;
+    height: 36px;
+    left: 896px;
+    font-size: 18px;
+    width: 90px;
+}
+#qnaList{
+	position: relative;
+    top: 5px;
+    right: -66px;
+}
+
 /*** 푸터 ***/
 footer {
     min-width: 1400px;

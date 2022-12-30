@@ -106,19 +106,19 @@
 		                        </div>
 		                        
 		                        <div class="reply">
-		                         <c:if test="${cvo.comment eq '0'}">
+		                         <c:if test="${cvo.comment eq null}">
 		                        	
 		                        	<div class="adminComment">
-		                        		<p><span>A.</span> 등록된 답변이 없습니다.</p>
+		                        		<p><span style="font-size: 21px; font-weight: bold;">A.</span> 등록된 답변이 없습니다.</p>
 		                        	</div>
 		                        </c:if>
 		                        
-		                         <c:if test="${cvo.comment ne '0'}">
+		                         <c:if test="${cvo.comment ne null}">
 		                         	<nav>
 		                        		<h2 class="replyTitle" style="font-size: 22px;">▶ [답변] ${cvo.title}</h2>
 		                        	</nav>
 	                        	 	<div class="adminComment">
-			                        	<p>${cvo.comment}asdasdsadasdad</p>
+			                        	<p>${cvo.comment}</p>
 			                        </div>
 		                         </c:if>
 		                        	

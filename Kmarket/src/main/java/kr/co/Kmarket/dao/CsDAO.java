@@ -363,12 +363,26 @@ public class CsDAO extends DBHelper {
 		
 		String cate1 = (String)map.get("cate1");
 		String cate2 = (String)map.get("cate2");
+		String type = (String)map.get("type");
 		
 		String sql = "SELECT *, "
 				+ " ROW_NUMBER() OVER(ORDER BY `csNo` desc) rnum "
-				+ " FROM `km_cs` "
-				+ " WHERE `cate1`='" + cate1 + "' "
-				+ " LIMIT ?, 10"; // 게시물 구간을 인파라미터로 받기
+				+ " FROM `km_cs` ";
+		if(cate2 == null) {
+			
+			sql += " WHERE `cate1`='" + cate1 + "' ";
+		
+		} else {
+
+			sql += " WHERE `cate1`='" + cate1 + "' AND `cate2` = '" + cate2 + "'";
+			
+		}
+		
+		if(type != null) {
+			sql += " AND `type`='" + type + "'";
+		}
+		
+		sql += " LIMIT ?, 10"; // 게시물 구간을 인파라미터로 받기
 		
 		try {
 			
@@ -448,9 +462,18 @@ public class CsDAO extends DBHelper {
 			
 			String cate1 = (String)map.get("cate1");
 			String cate2 = (String)map.get("cate2");
+			String type = (String)map.get("type");
 			
 			StringBuffer sql = new StringBuffer();
-			sql.append("SELECT COUNT(`csNo`)FROM `km_cs` WHERE `cate1` = '" + cate1 + "'");
+			if(cate2 == null) {
+				sql.append("SELECT COUNT(`csNo`)FROM `km_cs` WHERE `cate1` = '" + cate1 + "'");
+			} else {
+				sql.append("SELECT COUNT(`csNo`)FROM `km_cs` WHERE `cate1` = '" + cate1 + "' AND cate2='" + cate2 + "'");
+			}
+			
+			if(type != null) {
+				sql.append(" AND `type`='" + type + "'");
+			}
 			
 			con = getConnection();
 			stmt = con.createStatement();
@@ -511,18 +534,29 @@ public class CsDAO extends DBHelper {
 	
 	
 	
-	public int deleteArticle(String csNo) {
+	public int deleteArticle(String[] csNoArr) {
+		String sql = "DELETE FROM `km_cs` WHERE `csNo` IN (";
+		
+		for(int i=0; i<csNoArr.length; i++) {
+			if(i == csNoArr.length-1) {
+				sql += csNoArr[i] + ")";
+				break;
+			}
+			
+			sql += csNoArr[i] + ", ";
+		}
+		
 		int result = 0;
 		try {
 			con = getConnection();
-			psmt = con.prepareStatement(Sql.DELECT_ARTICLE);
-			psmt.setString(1, csNo);
-			result = psmt.executeUpdate();
+			stmt = con.createStatement();
+			result = stmt.executeUpdate(sql);
 			
 			close();
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
+		logger.debug("result : " + result);
 		return result;
 	}
 	

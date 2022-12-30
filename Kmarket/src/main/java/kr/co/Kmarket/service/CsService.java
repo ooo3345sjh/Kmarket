@@ -75,8 +75,8 @@ public class CsService {
 	public int updateArticle(String cate2, String type, String title, String content, String no) {
 		return dao.updateArticle(cate2, type, title, content, no);
 	}
-	public int deleteArticle(String csNo) {
-		return dao.deleteArticle(csNo);
+	public int deleteArticle(String[] csNoArr) {
+		return dao.deleteArticle(csNoArr);
 	}
 	
 	

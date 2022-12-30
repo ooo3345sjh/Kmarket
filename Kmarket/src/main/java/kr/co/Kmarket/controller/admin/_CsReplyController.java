@@ -2,6 +2,7 @@ package kr.co.Kmarket.controller.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -34,39 +35,25 @@ public class _CsReplyController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("replyGetController...");
 		
-		
+	}	
 	
-	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		logger.info("replyPostController...");
-		
+		logger.info("replyGetController doPost...");
 		String no	 	 = req.getParameter("no");
-		String type		 = req.getParameter("type");
-		String title	 = req.getParameter("title");
-		String content	 = req.getParameter("content");
-		String reply	 = req.getParameter("reply");
-		String uid		 = req.getParameter("uid");
+		String comment	 = req.getParameter("comment");
 		
-		CsVO comment = new CsVO();
-		comment.setCsNo(no);
-		comment.setType(type);
-		comment.setTitle(title);
-		comment.setContent(content);
-		comment.setComment(reply);
-		comment.setUid(uid);
-
-		int result = service.updateComment(comment);
+		CsVO csVo = new CsVO();
+		csVo.setCsNo(no);
+		csVo.setComment(comment);
+		
+		int result = service.updateComment(csVo);
 		
 		JsonObject json = new JsonObject();
-		json.addProperty("result", 1);
-		json.addProperty("uid", comment.getUid());
-		json.addProperty("type", comment.getType());
-		json.addProperty("title", comment.getTitle());
-		json.addProperty("content", comment.getContent());
-		json.addProperty("reply", comment.getComment());
-		
-		PrintWriter writer = resp.getWriter();
-		writer.print(json.toString());
+		resp.setContentType("application/json;charset=UTF-8");
+		json.addProperty("result", result);
+		Writer writer = resp.getWriter();
+		writer.write(json.toString());
 	}
+	
 }

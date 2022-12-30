@@ -81,6 +81,7 @@ public class Paging {
 		String group = (String)map.get("group");
 		String cate1 = (String)map.get("cate1");
 		String cate2 = (String)map.get("cate2");
+		String type = (String)map.get("type");
 		
 		/*** admin 변수 선언 start ***/
 		
@@ -97,7 +98,15 @@ public class Paging {
 			String uri = "<a href=\"" + contextPath + "/" + group + "/list.do?pg=1";
 			
 			if("admin/cs".equals(group)) {
-				uri += "&cate1=" + cate1 + "&cate2=" + cate2;
+				if(cate2 == null) {
+					uri += "&cate1=" + cate1;
+				} else {
+					uri += "&cate1=" + cate1 + "&cate2=" + cate2;
+				}
+				
+				if(type != null) {
+					uri += "&type=" + type;
+				}
 			}
 			
 			if(searchWord != null) { // 검색어가 있다면
@@ -136,7 +145,15 @@ public class Paging {
 		else {
 			
 			if("admin/cs".equals(group)) {
-				uri += "&cate1=" + cate1 + "&cate2=" + cate2;
+				if(cate2 == null) {
+					uri += "&cate1=" + cate1;
+				} else {
+					uri += "&cate1=" + cate1 + "&cate2=" + cate2;
+				}
+				
+				if(type != null) {
+					uri += "&type=" + type;
+				}
 			}
 			
 			// 검색어가 있다면
@@ -162,13 +179,25 @@ public class Paging {
 				uri = "<a href=\"" + contextPath + "/"+ group + "/list.do?pg=" + i;
 				
 				// admin이 아니라면
-				if(!group.equals("admin")) {
+				if(!group.contains("admin")) {
 					uri += "&cate1=" + cate1 + "&cate2=" + cate2;
 		
 				} 
 				
 				// admin이라면
 				else {
+					
+					if("admin/cs".equals(group)) {
+						if(cate2 == null) {
+							uri += "&cate1=" + cate1;
+						} else {
+							uri += "&cate1=" + cate1 + "&cate2=" + cate2;
+						}
+						
+						if(type != null) {
+							uri += "&type=" + type;
+						}
+					}
 					
 					// 검색어가 있다면
 					if(searchWord != null) {
@@ -212,7 +241,15 @@ public class Paging {
 		// admin이라면
 		else {
 			if("admin/cs".equals(group)) {
-				uri += "&cate1=" + cate1 + "&cate2=" + cate2;
+				if(cate2 == null) {
+					uri += "&cate1=" + cate1;
+				} else {
+					uri += "&cate1=" + cate1 + "&cate2=" + cate2;
+				}
+				
+				if(type != null) {
+					uri += "&type=" + type;
+				}
 			}
 			
 			// 검색어가 있다면
@@ -231,7 +268,15 @@ public class Paging {
 			uri = "<a href=\"" + contextPath + "/" + group + "/list.do?pg=" + lastPageNum;
 			
 			if("admin/cs".equals(group)) {
-				uri += "&cate1=" + cate1 + "&cate2=" + cate2;
+				if(cate2 == null) {
+					uri += "&cate1=" + cate1;
+				} else {
+					uri += "&cate1=" + cate1 + "&cate2=" + cate2;
+				}
+				
+				if(type != null) {
+					uri += "&type=" + type;
+				}
 			}
 			
 			// 검색어가 있다면

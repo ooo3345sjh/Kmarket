@@ -1,15 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-			
 			<section id="cs-list" class="admin">
                     <nav>
                         	<h1>공지사항 목록</h1>
                         	<p>HOME > 고객센터 > <span>공지사항</span></p>
                     </nav>
 					
-                    <select>
-                        <option>유형선택</option>
+                    <select name="noticeType">
+                        <option value="none">유형선택</option>
                         <option value="service">고객서비스</option>
                         <option value="safeDeal">안전거래</option>
                         <option value="xproduct">위해상품</option>
@@ -18,7 +17,7 @@
 					
                     <table>
                         <tr>
-                            <th><input type="checkbox"></th>
+                            <th><input type="checkbox" name="prodAllCheck"></th>
                             <th>번호</th>
                             <th>유형</th>
                             <th>제목</th>
@@ -26,12 +25,16 @@
                             <th>날짜</th>
                             <th>관리</th>
                         </tr>
-					<c:forEach var="notice" items="${map.articles}">
+                        <tbody id=article>
+					<c:forEach var="notice" items="${map.articles}" varStatus="loop">
                         <tr>
-                            <td width="20px"><input type="checkbox"></td>
-                            <td width="50px">${notice.csNo}</td>
+                            <td width="20px"><input type="checkbox" name='prodCheck'></td>
+                            <td width="50px">
+                            	<input type="hidden" name='csNo' value="${notice.csNo}">
+                            	${map.totalCount - map.limitStart - loop.index}
+                            </td>
                             <td width="60px">${notice.type}</td>
-                            <td><a href="<c:url value='/admin/cs/view.do?no=${notice.csNo}&cate1=${notice.cate1}'/>">[${notice.type}]${notice.title}</a></td>
+                            <td style="text-align: left;"><a href="<c:url value='/admin/cs/view.do?no=${notice.csNo}&cate1=${notice.cate1}'/>">[${notice.type}]${notice.title}</a></td>
                             <td width="30px">${notice.hit}</td>
                             
                             <c:set var="rdate"  value="${notice.rdate}"/>
@@ -43,8 +46,9 @@
                             </td>
                         </tr>
                     </c:forEach>
+                    </tbody>
                     </table>
-                    <input type="button" value="선택삭제">
+                    <input type="button" name=del value="선택삭제">
                     
                     <div class="paging">
                        ${map.pageTag} 
