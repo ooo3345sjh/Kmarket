@@ -25,7 +25,7 @@
   	<filter-name>AdminCheckFilter</filter-name>
   	<url-pattern>/admin/*</url-pattern>
   </filter-mapping>
-  
+  <!-- 
       <filter>
   	<filter-name>MemberCheckFilter</filter-name>
   	<filter-class>kr.co.Kmarket.filter.MemberCheckFilter</filter-class>
@@ -34,7 +34,7 @@
   	<filter-name>MemberCheckFilter</filter-name>
   	<url-pattern>/member/*</url-pattern>
   </filter-mapping>
-  
+   -->
    <!-- 인코딩 설정 --> 
    
   <filter>

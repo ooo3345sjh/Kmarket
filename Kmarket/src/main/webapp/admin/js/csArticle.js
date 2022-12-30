@@ -22,15 +22,17 @@
 		
 		if(isDeleteOk){
 			let article = $(this).closest('tr');
-			let no = $(this).attr('data-no');
+			let no = [];
+			no.push($(this).attr('data-no'));
 			
 			$.ajax({
 				url: '/Kmarket/admin/cs/delete.do',
 				type: 'get',
-				data: {'no':no},
+				traditional: true,	// ajax 배열 넘기기 옵션!
+				data: {'articleArr':no},
 				dataType: 'json',
 				success: function(data){
-					if(data.rs > 0){
+					if(data.result > 0){
 						alert('게시글이 삭제되었습니다.');
 						if(pathname.includes('list.do')){
 							article.hide();

@@ -6,7 +6,7 @@ $(function(){
 			console.log($('select[name=type] option:selected').text());
 		})
 		
-		$('#csForm').submit(function(){
+		$('#csForm').submit(function(e){
 			let cate2 = $('select[name=cate2]').val();
 			let type = $('select[name=type]').val();
 			let title = $('input[name=title]').val();
@@ -14,21 +14,25 @@ $(function(){
 			
 			if(cate2 == null){
 				alert('1차 선택 문의 유형을 선택해주세요.');
+				e.preventDefault();
 				return;
 			}
 			
 			if(type == null){
 				alert('2차 선택 유형을 선택해주세요.');
+				e.preventDefault();
 				return;
 			}
 			
 			if(title == ''){
 				alert('문의 제목을 입력해주세요.');
+				e.preventDefault();
 				return;
 			}
 			
 			if(content == ''){
 				alert('문의 내용을 입력해주세요.');
+				e.preventDefault();
 				return;
 			}
 			
