@@ -13,7 +13,7 @@
                     
                     	<c:forEach var="idx" items="${noticList}" end="4">
 	                        <li>
-	                           <a href="<c:url value='/cs/view.do?no=${idx.csNo}'/>" class="title">[${idx.type}] ${idx.title}</a>
+	                           <a href="<c:url value='/cs/view.do?cate1=notice&cate2=${idx.cate2}&no=${idx.csNo}'/>" class="title">[${idx.type}] ${idx.title}</a>
 	                           
 	                           <c:set var="rdate"  value="${idx.rdate}"/>
 	                           <span class="date">${fn:substring(rdate,2,10)}</span> 
@@ -58,7 +58,7 @@
                     <ul>
                         <c:forEach var="idx" items="${qnaList}" end="4">
 	                        <li>
-	                           <a href="#" class="title">[${idx.type}] ${idx.title}</a>
+	                           <a href="<c:url value='/cs/view.do?cate1=qna&cate2=${idx.cate2}&no=${idx.csNo}'/>" class="title">[${idx.type}] ${idx.title}</a>
 	                           
 	                           <!-- id -->
 	                           <span style="margin-right: 10px;">${fn:substring(idx.uid,0,3)}**</span>

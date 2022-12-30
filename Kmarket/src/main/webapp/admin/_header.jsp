@@ -32,7 +32,7 @@
                     </c:choose>
                     <a href='<c:url value='/index.do'/>'>HOME</a>
                     <a href='<c:url value='/member/logout.do'/>'>로그아웃</a>
-                    <a href="#">고객센터</a>
+                    <a href='<c:url value='/cs/index.do'/>'>고객센터</a>
                 </nav>
             </div>
         </header>

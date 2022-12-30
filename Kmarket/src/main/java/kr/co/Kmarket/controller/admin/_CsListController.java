@@ -31,9 +31,10 @@ public class _CsListController extends HttpServlet{
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		logger.info("CsListController...");
+		logger.info("CsListController doGet...");
 		String cate1	 = req.getParameter("cate1");
 		String cate2	 = req.getParameter("cate2");
+		String type	 = req.getParameter("type");
 		String pg		 = req.getParameter("pg");
 		String group	 = "admin/cs";
 		String searchField = req.getParameter("searchField");
@@ -44,6 +45,7 @@ public class _CsListController extends HttpServlet{
 		map.put("searchWord", searchWord);
 		map.put("cate1", cate1);
 		map.put("cate2", cate2);
+		map.put("type", type);
 		map.put("group", group);
 		map.put("pg", pg);
 		map.put("req", req);
@@ -65,10 +67,12 @@ public class _CsListController extends HttpServlet{
 		req.setAttribute("map", map);
 		req.setAttribute("cate1", cate1);
 		req.setAttribute("cate2", cate2);
+		req.setAttribute("request", req);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/list.jsp");
 		dispatcher.forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 	}
 }
